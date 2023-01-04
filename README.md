@@ -1,5 +1,5 @@
-# Context.
-The addiction severity index. Created by Thomas McLellan, Ph. D. and colleagues at the University of Pennsylvania in 1980. It is an instrument used to realise a multidimensional analysis of a patient, this is done through a semi structured interview where multiple areas are evaluated. It is a very useful tool when it comes to addiction treatment planification.
+# Context
+The addiction severity index. Created by Thomas McLellan, Ph. D. and colleagues at the University of Pennsylvania in 1980. It is an instrument used to realise a multidimensional analysis of a patient, this is done through a semi structured interview where multiple areas are evaluated. It is a very useful tool when it comes to addiction treatment planification
 
 # Is it useful?
 Multiple researchers have proven the addiction severity index is both effective on its results and its usefulness on scientific research as well as treatment follow-up. There is a full investigation where I collected this data (Sadly, in Spanish)
