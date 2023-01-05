@@ -19,3 +19,7 @@ In an attempt to create a better software product, there was a prior analysis of
 
 # Diagrams
 Some diagrams were created in order to understand the form and its structure, they should be available in the "modelling" directory
+
+# Architecture
+There was an attempt to model the architecture I planned for this prototype
+![alt-text](/modelling/implementation-architecture.png?raw=true)
