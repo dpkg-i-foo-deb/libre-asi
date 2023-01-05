@@ -153,14 +153,6 @@ CREATE TABLE IF NOT EXISTS public.patient
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public.status
-(
-    status character varying(20),
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    PRIMARY KEY (status)
-);
-
 CREATE TABLE IF NOT EXISTS public.race
 (
     race character varying(15),
@@ -420,6 +412,13 @@ CREATE TABLE IF NOT EXISTS public.interview
     interviewer integer NOT NULL,
     asi_form integer NOT NULL,
     language character varying(8) NOT NULL,
+    legal_severity smallint,
+    drug_severity smallint,
+    alcohol_severity smallint,
+    employment_severity smallint,
+    medical_severity smallint,
+    family_severity smallint,
+    psychological_severity smallint,
     PRIMARY KEY (id)
 );
 
@@ -565,6 +564,27 @@ CREATE TABLE IF NOT EXISTS public.interview_answer
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
     PRIMARY KEY (interview)
+);
+
+CREATE TABLE IF NOT EXISTS public.interview_interpretation
+(
+    interview bigint,
+    interviewer integer,
+    interpretation text NOT NULL,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    PRIMARY KEY (interviewer)
+);
+
+CREATE TABLE IF NOT EXISTS public.interview_report
+(
+    id bigint,
+    interview bigint NOT NULL,
+    interviewer integer NOT NULL,
+    text text NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    PRIMARY KEY (interviewer, id)
 );
 
 ALTER TABLE IF EXISTS public.address
@@ -968,6 +988,38 @@ ALTER TABLE IF EXISTS public.interview_answer
 ALTER TABLE IF EXISTS public.interview_answer
     ADD CONSTRAINT option_fk FOREIGN KEY (question, language, "order")
     REFERENCES public.option (question, language, "order") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.interview_interpretation
+    ADD CONSTRAINT interview_fk FOREIGN KEY (interview)
+    REFERENCES public.interview (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.interview_interpretation
+    ADD CONSTRAINT interviewer_fk FOREIGN KEY (interviewer)
+    REFERENCES public.interviewer (person) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.interview_report
+    ADD CONSTRAINT interview_fk FOREIGN KEY (interview)
+    REFERENCES public.interview (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.interview_report
+    ADD CONSTRAINT interviewer_fk FOREIGN KEY (interviewer)
+    REFERENCES public.interviewer (person) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
