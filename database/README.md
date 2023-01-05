@@ -2,6 +2,8 @@
 
 ## Entity relationship diagram 
 
+Built using EERCASE
+
 Before creating any real database, the domain analysis was detailed in an entity relationship diagram. It can be useful to create a database using any desired relational database engine
 
 ![alt-text](/database/models/entity-relationship.png?raw=true)
