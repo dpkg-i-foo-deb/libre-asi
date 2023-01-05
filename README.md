@@ -18,4 +18,4 @@ In an attempt to create a better software product, there was a prior analysis of
 [Prior Analysis](https://docs.google.com/presentation/d/1uWkd9zNe-1szy-oD4znx4RvaW2MHmYDQKHPTH6Emj-o/edit?usp=share_link)
 
 # Diagrams
-Some diagrams were created in order to understand the form and its structure
+Some diagrams were created in order to understand the form and its structure, they should be available in the "modelling" directory
