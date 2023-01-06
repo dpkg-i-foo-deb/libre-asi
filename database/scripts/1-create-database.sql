@@ -1024,4 +1024,11 @@ ALTER TABLE IF EXISTS public.interview_report
     ON DELETE NO ACTION
     NOT VALID;
 
+--Corrections 
+
+CREATE TABLE public.jwt_blacklist (
+	"token" text NULL,
+	CONSTRAINT jwt_blacklist_pk PRIMARY KEY ("token")
+);
+
 END;
