@@ -13,6 +13,4 @@ podman cp ../../database/scripts/1-create-database.sql libre-asi-database:/1-cre
 
 podman exec -it libre-asi-database psql -U libre_asi -d libre_asi -f 1-create-database.sql
 
-podman stop libre-asi-database
-
-podman rm libre-asi-database
+#More stuffies will be added here later
