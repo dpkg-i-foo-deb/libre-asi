@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"libre-asi-api/app"
+)
 
 func main() {
-	fmt.Println("Holis!")
+	app.Start()
 }
