@@ -1,4 +1,8 @@
 #!/bin/bash
+podman stop libre-asi-database
+
+podman rm libre-asi-database
+
 podman pull docker.io/postgres
 
 podman run -it --network libre-asi -d -p 5432:5432 --name libre-asi-database -e POSTGRES_PASSWORD="postgres" postgres
