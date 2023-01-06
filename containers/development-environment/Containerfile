@@ -1,0 +1,24 @@
+FROM docker.io/library/alpine
+
+WORKDIR /
+
+RUN wget "https://github.com/coder/code-server/releases/download/v4.9.1/code-server-4.9.1-linux-amd64.tar.gz"
+RUN tar -xvf code-server-4.9.1-linux-amd64.tar.gz
+RUN mv code-server-4.9.1-linux-amd64 code-server
+RUN apk update
+RUN apk add go libc6-compat libstdc++ gcompat git
+RUN apk add nodejs npm
+RUN ln -s /code-server/bin/code-server /bin/code-server
+RUN mkdir /workspace
+RUN code-server --install-extension golang.Go
+RUN code-server --install-extension svelte.svelte-vscode
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+RUN go install github.com/ramya-rao-a/go-outline@latest
+RUN go install github.com/haya14busa/goplay/cmd/goplay@latest
+RUN go install github.com/fatih/gomodifytags@latest
+RUN go install github.com/josharian/impl@latest
+RUN go install github.com/cweill/gotests/gotests@latest
+RUN go install honnef.co/go/tools/cmd/staticcheck@latest
+RUN go install golang.org/x/tools/gopls@latest
+
+CMD ["code-server","--bind-addr","0.0.0.0:8080","--auth","password"]
