@@ -1,0 +1,3 @@
+CREATE DATABASE libre-asi;
+CREATE USER libre-asi WITH ENCRYPTED PASSWORD 'libre-asi';
+GRANT ALL PRIVILIEGES ON DATABASE libre-asi TO libre-asi;
