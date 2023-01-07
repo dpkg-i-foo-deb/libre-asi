@@ -2,6 +2,7 @@ package gorm
 
 import (
 	"libre-asi-api/util"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -10,7 +11,7 @@ import (
 var db *gorm.DB
 
 func Start() {
-	dsn := "host=libre-asi-database user=libre_asi password=libre_asi dbname=libre_asi port=5432 sslmode=disable TimeZone=America/Bogota"
+	dsn := os.Getenv("DB_CONNECTION")
 	var err error
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
