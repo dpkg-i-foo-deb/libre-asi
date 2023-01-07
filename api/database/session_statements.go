@@ -5,16 +5,17 @@ import (
 	"libre-asi-api/util"
 )
 
-var LoginStatement *sql.Stmt
+var LoginAdminStatement *sql.Stmt
 var CheckAdminStatement *sql.Stmt
 var CreateUserAdminStatement *sql.Stmt
 var CreateAdminStatement *sql.Stmt
 var err error
 
 func prepareSessionStatements() {
-	LoginStatement, err = DB.Prepare(`SELECT email,"password" 
-											FROM "user" u 
-												WHERE email = $1`)
+	LoginAdminStatement, err = DB.Prepare(`select u.email , u."password" 
+												from administrator a 
+													join "user" u on u.id = a.id 
+														where u.email = $1`)
 
 	util.HandleErrorStop(err)
 

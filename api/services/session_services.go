@@ -24,7 +24,7 @@ func LoginAdminService(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(response)
 	}
 
-	err = database.LoginStatement.QueryRow(user.Email).Scan(&queriedUser.Email, &queriedUser.Password)
+	err = database.LoginAdminStatement.QueryRow(user.Email).Scan(&queriedUser.Email, &queriedUser.Password)
 
 	if err != nil && err != sql.ErrNoRows {
 		response.Status = string(models.STATUS_ERROR)
