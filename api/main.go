@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	app.Start()
 	gorm.Start()
+	app.Start()
 }
