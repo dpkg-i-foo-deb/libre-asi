@@ -1,7 +1,20 @@
 package services
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"libre-asi-api/models"
+
+	"github.com/gofiber/fiber/v2"
+)
+
+var response models.Response = models.Response{
+	Status:  "",
+	Message: "",
+}
 
 func IndexService(c *fiber.Ctx) error {
-	return c.SendString("Welcome to Libre-ASI API")
+
+	response.Status = "OK"
+	response.Message = "Welcome to Libre-ASI API"
+
+	return c.Status(200).JSON(response)
 }
