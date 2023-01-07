@@ -148,7 +148,7 @@ func SignOutService(c *fiber.Ctx) error {
 	response.Status = string(models.STATUS_OK)
 	response.Message = "Signed Out..."
 
-	var newRefreshCookie *fiber.Cookie = auth.GenerateRefreshCookie()
+	var newRefreshCookie *fiber.Cookie = auth.GenerateFakeRefreshCookie()
 	var newAcessCookie *fiber.Cookie = auth.GenerateFakeAccessCookie()
 
 	//Set the new cookies
