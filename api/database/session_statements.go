@@ -6,6 +6,7 @@ import (
 )
 
 var LoginAdminStatement *sql.Stmt
+var LoginInterviewerStatement *sql.Stmt
 var CheckAdminStatement *sql.Stmt
 var CreateUserAdminStatement *sql.Stmt
 var CreateAdminStatement *sql.Stmt
@@ -17,6 +18,13 @@ func prepareSessionStatements() {
 													join "user" u on u.id = a.id 
 														where u.email = $1`)
 
+	util.HandleErrorStop(err)
+
+	LoginInterviewerStatement, err = DB.Prepare(`select u.email , u."password"
+													from "user" u
+														join interviewer i on i.person  = u.id 
+															where u.email = $1
+													`)
 	util.HandleErrorStop(err)
 
 	CheckAdminStatement, err = DB.Prepare(`SELECT id
