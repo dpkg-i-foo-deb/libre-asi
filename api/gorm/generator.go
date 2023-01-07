@@ -11,7 +11,7 @@ func GenerateStructs() {
 		Mode:         gen.WithoutContext,
 	})
 
-	g.UseDB(db)
+	g.UseDB(DB)
 
 	g.ApplyBasic(g.GenerateAllTable()...)
 

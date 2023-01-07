@@ -8,12 +8,13 @@ import (
 	"gorm.io/gorm"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 func Start() {
 	dsn := os.Getenv("DB_CONNECTION")
 	var err error
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	util.HandleErrorStop(err)
+
 }
