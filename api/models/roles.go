@@ -1,9 +1,8 @@
 package models
 
-type Role string
+type role string
 
 const (
-	ADMINISTRATOR   Role = "ADMIN"
-	INTERVIEWER     Role = "INTERVIEWER"
-	PATIENT_MANAGER Role = "PATIENT_MGR"
+	ADMINISTRATOR role = "ADMIN"
+	INTERVIEWER   role = "INTERVIEWER"
 )
