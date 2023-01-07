@@ -14,7 +14,7 @@ func CheckAdmin() {
 	var id int64
 	var newAdmin models.Administrator
 
-	err := CheckAdminStatement.QueryRow().Scan(&newUser)
+	err := CheckAdminStatement.QueryRow().Err()
 
 	if err != nil && err != sql.ErrNoRows {
 		util.HandleErrorStop(err)
@@ -66,4 +66,6 @@ func CheckAdmin() {
 
 		log.Println("The Admin login password is: " + os.Getenv("ADMIN_PASSWORD"))
 	}
+
+	log.Println("The admin account already exists")
 }
