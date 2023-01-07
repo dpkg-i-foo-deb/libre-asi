@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
+	"log"
 	"os"
 	"time"
 )
@@ -63,5 +64,6 @@ func CheckAdmin() {
 
 		transaction.Commit()
 
+		log.Println("The Admin login password is: " + os.Getenv("ADMIN_PASSWORD"))
 	}
 }
