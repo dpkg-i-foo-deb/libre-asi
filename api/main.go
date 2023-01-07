@@ -2,11 +2,11 @@ package main
 
 import (
 	"libre-asi-api/app"
-	"libre-asi-api/gorm"
+	"libre-asi-api/orm"
 	_ "libre-asi-api/routes"
 )
 
 func main() {
-	gorm.Start()
+	orm.Start()
 	app.Start()
 }

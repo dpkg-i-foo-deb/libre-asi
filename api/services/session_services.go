@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"libre-asi-api/gorm"
 	"libre-asi-api/models"
+	"libre-asi-api/orm"
 
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
@@ -37,7 +37,7 @@ func SignUpService(connection *fiber.Ctx) error {
 		return errors.New("failed to hash password")
 	}
 
-	err = gorm.DB.Create(&user).Error
+	err = orm.DB.Create(&user).Error
 
 	if err != nil {
 		connection.Status(fiber.StatusInternalServerError).SendString("Failed to sign up, try again later")
