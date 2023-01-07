@@ -148,13 +148,8 @@ func SignOutService(c *fiber.Ctx) error {
 	response.Status = string(models.STATUS_OK)
 	response.Message = "Signed Out..."
 
-	var newRefreshCookie *fiber.Cookie
-	var newAcessCookie *fiber.Cookie
-
-	//Create the new cookies
-
-	newAcessCookie = auth.GenerateFakeAccessCookie()
-	newRefreshCookie = auth.GenerateFakeRefreshCookie()
+	var newRefreshCookie *fiber.Cookie = auth.GenerateRefreshCookie()
+	var newAcessCookie *fiber.Cookie = auth.GenerateFakeAccessCookie()
 
 	//Set the new cookies
 
@@ -162,4 +157,22 @@ func SignOutService(c *fiber.Ctx) error {
 	c.Cookie(newRefreshCookie)
 
 	return c.Status(fiber.StatusOK).JSON(response)
+}
+
+func RegisterService(c *fiber.Ctx) error {
+
+	switch c.Params("role") {
+	case "admin":
+	case "interviewer":
+	case "patient":
+
+	default:
+		response.Status = string(models.STATUS_DENIED)
+		response.Message = "Bad Route"
+		return c.Status(fiber.StatusBadRequest).JSON(response)
+	}
+
+	response.Status = string(models.STATUS_OK)
+	response.Message = "Registered correctly"
+	return c.Status(fiber.StatusCreated).JSON(response)
 }
