@@ -32,3 +32,33 @@ func init() {
 func Start() {
 	log.Fatal(app.Listen(os.Getenv("API_PORT")))
 }
+
+func AddGet(route string, handlers ...fiber.Handler) {
+
+	app.Get(route, handlers...)
+
+}
+
+func AddPost(route string, handlers ...fiber.Handler) {
+
+	app.Post(route, handlers...)
+
+}
+
+func AddPut(route string, handlers ...fiber.Handler) {
+
+	app.Put(route, handlers...)
+
+}
+
+func AddPatch(route string, handlers ...fiber.Handler) {
+
+	app.Patch(route, handlers...)
+
+}
+
+func AddDelete(route string, handlers ...fiber.Handler) {
+
+	app.Delete(route, handlers...)
+
+}
