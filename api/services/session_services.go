@@ -143,3 +143,23 @@ func RefreshTokenService(c *fiber.Ctx) error {
 	}
 
 }
+
+func SignOutService(c *fiber.Ctx) error {
+	response.Status = string(models.STATUS_OK)
+	response.Message = "Signed Out..."
+
+	var newRefreshCookie *fiber.Cookie
+	var newAcessCookie *fiber.Cookie
+
+	//Create the new cookies
+
+	newAcessCookie = auth.GenerateFakeAccessCookie()
+	newRefreshCookie = auth.GenerateFakeRefreshCookie()
+
+	//Set the new cookies
+
+	c.Cookie(newAcessCookie)
+	c.Cookie(newRefreshCookie)
+
+	return c.Status(fiber.StatusOK).JSON(response)
+}

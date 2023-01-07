@@ -12,3 +12,7 @@ func loginRoute() {
 func refreshRoute() {
 	app.AddGet("/refresh", services.RefreshTokenService)
 }
+
+func signOutRoute() {
+	app.AddPost("/sign-out", services.SignOutService)
+}
