@@ -6,7 +6,9 @@ import (
 )
 
 var LoginStatement *sql.Stmt
-var SignUpStatement *sql.Stmt
+var CheckAdminStatement *sql.Stmt
+var CreateUserAdminStatement *sql.Stmt
+var CreateAdminStatement *sql.Stmt
 var err error
 
 func prepareSessionStatements() {
@@ -16,4 +18,20 @@ func prepareSessionStatements() {
 
 	util.HandleErrorStop(err)
 
+	CheckAdminStatement, err = DB.Prepare(`SELECT id
+												FROM administrator`)
+
+	util.HandleErrorStop(err)
+
+	CreateUserAdminStatement, err = DB.Prepare(`INSERT INTO public."user"
+													(email, username, "password", created_at, updated_at)
+													VALUES($1, $2, $3, $4, $5) RETURNING id`)
+
+	util.HandleErrorStop(err)
+
+	CreateAdminStatement, err = DB.Prepare(`INSERT INTO public.administrator
+												(id, created_at, updated_at)
+												VALUES($1, $2, $3);
+												`)
+	util.HandleErrorStop(err)
 }

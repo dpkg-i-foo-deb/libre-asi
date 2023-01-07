@@ -8,8 +8,13 @@
             "name": "Launch Package",
             "type": "go",
             "request": "launch",
-            "mode": "auto",
-            "program": "."
+            "mode": "debug",
+            "program": "main.go", 
+            "env":{
+                "CONNECTION_STRING":"postgresql://libre_asi:libre_asi@localhost?sslmode=disable",
+                "ADMIN_EMAIL":"admin@example.com",
+                "ADMIN_PASSWORD":"admin"
+            }
         }
     ]
 }
