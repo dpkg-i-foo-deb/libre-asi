@@ -5,6 +5,6 @@ import (
 	"libre-asi-api/services"
 )
 
-func loginAdminRoute() {
-	app.AddPost("/login/admin", services.LoginAdminService)
+func loginRoute() {
+	app.AddPost("/login/:role", services.LoginService)
 }
