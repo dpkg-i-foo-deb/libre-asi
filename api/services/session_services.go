@@ -81,3 +81,65 @@ func LoginService(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(response)
 }
+
+func RefreshTokenService(c *fiber.Ctx) error {
+
+	refreshToken := c.Cookies("refresh-token")
+	var newPair models.JWTPair
+	var userEmail string
+	var role string
+	var newAccessCookie *fiber.Cookie
+	var newRefreshCookie *fiber.Cookie
+
+	response.Status = string(models.STATUS_DENIED)
+	response.Message = "The refresh token was not present"
+
+	if refreshToken == "" {
+
+		c.Status(fiber.StatusUnauthorized).JSON(response)
+		return nil
+	}
+
+	isValid, err := auth.ValidateToken(refreshToken)
+
+	if isValid && err == nil {
+
+		userEmail, err = auth.EmailFromToken(refreshToken)
+
+		response.Status = string(models.STATUS_ERROR)
+		response.Message = "Failed to generate the refresh token"
+
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(response)
+		}
+
+		role, err = auth.RoleFromToken(refreshToken)
+
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(response)
+		}
+
+		newPair, err = auth.GenerateJWTPair(userEmail, role)
+
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(response)
+		}
+
+		newAccessCookie = auth.GenerateAccessCookie(newPair.Token)
+		newRefreshCookie = auth.GenerateRefreshCookie(newPair.RefreshToken)
+
+		c.Cookie(newAccessCookie)
+		c.Cookie(newRefreshCookie)
+
+		response.Status = string(models.STATUS_OK)
+		response.Message = "Refreshed"
+
+		return c.Status(200).JSON(response)
+
+	} else {
+		response.Status = string(models.STATUS_DENIED)
+		response.Message = "The refresh token has expired or wasn't present"
+		return c.Status(fiber.StatusUnauthorized).JSON(response)
+	}
+
+}
