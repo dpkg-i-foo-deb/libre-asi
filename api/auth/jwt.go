@@ -14,15 +14,17 @@ import (
 
 type CustomClaims struct {
 	Email string `json:"email"`
+	Role  string `json:"role"`
 	jwt.StandardClaims
 }
 
-func GenerateJWTPair(email string) (models.JWTPair, error) {
+func GenerateJWTPair(email string, role string) (models.JWTPair, error) {
 
 	var pair models.JWTPair
 
 	claims := CustomClaims{
 		email,
+		role,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
 		},
@@ -38,6 +40,7 @@ func GenerateJWTPair(email string) (models.JWTPair, error) {
 
 	claims = CustomClaims{
 		email,
+		role,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -125,4 +128,14 @@ func EmailFromToken(tokeString string) (string, error) {
 	}
 
 	return claims.Email, nil
+}
+
+func RoleFromToken(tokeString string) (string, error) {
+	claims, err := GetTokenClaims(tokeString)
+
+	if err != nil {
+		return "", err
+	}
+
+	return claims.Role, nil
 }
