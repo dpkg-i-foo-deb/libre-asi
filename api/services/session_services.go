@@ -275,13 +275,23 @@ func RegisterService(c *fiber.Ctx) error {
 				patient.Race,
 				patient.ReligiousPreference,
 			)
+		}
 
-			if err != nil {
-				log.Println(err.Error())
-				transaction.Rollback()
-				sendAPIError(c, "Something went wrong", fiber.StatusInternalServerError)
-				return nil
-			}
+		if c.Params("role") == "interviewer" {
+			_, err = transaction.Stmt(stmt).Exec(
+				id,
+				interviewer.RMA,
+				time.Now(),
+				time.Now(),
+				interviewer.Profession,
+			)
+		}
+
+		if err != nil {
+			log.Println(err.Error())
+			transaction.Rollback()
+			sendAPIError(c, "Something went wrong", fiber.StatusInternalServerError)
+			return nil
 		}
 
 		transaction.Commit()
