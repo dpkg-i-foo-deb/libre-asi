@@ -156,20 +156,34 @@ func RegisterService(c *fiber.Ctx) error {
 			return nil
 		}
 
-		transaction.Commit()
-		response.Status = string(models.STATUS_OK)
-		response.Message = "Registered correctly"
-		return c.Status(fiber.StatusCreated).JSON(response)
-
 	}
 
 	if c.Params("role") == "admin" {
+		if !isAdmin(c) {
+			transaction.Rollback()
+			sendAPIError(c, "You cannot do this", fiber.StatusUnauthorized)
+			return nil
+		}
+
+		_, err = transaction.Stmt(stmt).Exec(
+			id,
+			time.Now(),
+			time.Now(),
+		)
+
+		if err != nil {
+			log.Println(err)
+			sendAPIError(c, "Something went wrong", fiber.StatusInternalServerError)
+			return nil
+		}
 
 	}
 
+	transaction.Commit()
 	response.Status = string(models.STATUS_OK)
 	response.Message = "Registered correctly"
 	return c.Status(fiber.StatusCreated).JSON(response)
+
 }
 
 func isAdmin(c *fiber.Ctx) bool {
