@@ -16,7 +16,3 @@ func refreshRoute() {
 func signOutRoute() {
 	app.AddPost("/sign-out", services.SignOutService)
 }
-
-func registerRoute() {
-	app.AddPost("/register/:role", services.RegisterService)
-}
