@@ -8,6 +8,8 @@ import (
 var CreatePersonStatement *sql.Stmt
 var CreateInterviewerStatement *sql.Stmt
 var CreatePatientStatement *sql.Stmt
+var GetAdminCountStatement *sql.Stmt
+var GetInterviewerCountStatement *sql.Stmt
 
 func preparePersonStatements() {
 	CreatePersonStatement, err = DB.Prepare(`INSERT INTO person
@@ -26,6 +28,21 @@ func preparePersonStatements() {
 	CreatePatientStatement, err = DB.Prepare(`INSERT INTO public.patient
 												(id, created_at, updated_at, social_security_number, race, religious_preference)
 													VALUES($1, $2, $3, $4, $5, $6);
+	`)
+
+	util.HandleErrorStop(err)
+
+	GetAdminCountStatement, err = DB.Prepare(`select count(u.id)
+												from "user" u
+													join administrator a on a.id = u.id 
+												where u.email = $1`)
+
+	util.HandleErrorStop(err)
+
+	GetInterviewerCountStatement, err = DB.Prepare(`select count(u.id)
+														from "user" u
+															join interviewer i on i.person = u.id  
+														where u.email = $1;
 	`)
 
 	util.HandleErrorStop(err)

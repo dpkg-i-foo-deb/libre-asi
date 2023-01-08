@@ -2,6 +2,7 @@ package services
 
 import (
 	"database/sql"
+	"libre-asi-api/auth"
 	"libre-asi-api/database"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
@@ -13,11 +14,12 @@ import (
 
 func RegisterService(c *fiber.Ctx) error {
 
+	var err error
 	var stmt *sql.Stmt
 	var person models.Person
 	var user models.User
 	var hashedPassword string
-	//var administrator models.Administrator
+	var administrator models.Administrator
 	var interviewer models.Interviewer
 	var patient models.Patient
 	var id int64
@@ -25,29 +27,26 @@ func RegisterService(c *fiber.Ctx) error {
 	switch c.Params("role") {
 	case "admin":
 		stmt = database.CreateAdminStatement
+		err = c.BodyParser(&administrator)
 	case "interviewer":
 		stmt = database.CreateInterviewerStatement
-		err := c.BodyParser(&interviewer)
-		if err != nil {
-			sendAPIError(c, err.Error(), fiber.StatusBadRequest)
-			log.Println(err.Error())
-			return nil
-		}
+		err = c.BodyParser(&interviewer)
 	case "patient":
 		stmt = database.CreatePatientStatement
-		err := c.BodyParser(&patient)
-		if err != nil {
-			log.Println(err.Error())
-			sendAPIError(c, err.Error(), fiber.StatusBadRequest)
-			return nil
-		}
+		err = c.BodyParser(&patient)
 
 	default:
 		sendAPIError(c, "Bad Route", fiber.StatusBadRequest)
 		return nil
 	}
 
-	err := c.BodyParser(&user)
+	if err != nil {
+		sendAPIError(c, err.Error(), fiber.StatusBadRequest)
+		log.Println(err.Error())
+		return nil
+	}
+
+	err = c.BodyParser(&user)
 
 	if err != nil {
 		log.Println(err.Error())
@@ -116,6 +115,13 @@ func RegisterService(c *fiber.Ctx) error {
 		}
 
 		if c.Params("role") == "patient" {
+
+			if !isAdmin(c) || !isInterviewer(c) {
+				transaction.Rollback()
+				sendAPIError(c, "You cannot do this", fiber.StatusUnauthorized)
+				return nil
+			}
+
 			_, err = transaction.Stmt(stmt).Exec(
 				id,
 				time.Now(),
@@ -127,6 +133,13 @@ func RegisterService(c *fiber.Ctx) error {
 		}
 
 		if c.Params("role") == "interviewer" {
+
+			if !isAdmin(c) {
+				transaction.Rollback()
+				sendAPIError(c, "You cannot do this", fiber.StatusUnauthorized)
+				return nil
+			}
+
 			_, err = transaction.Stmt(stmt).Exec(
 				id,
 				interviewer.RMA,
@@ -144,10 +157,60 @@ func RegisterService(c *fiber.Ctx) error {
 		}
 
 		transaction.Commit()
+		response.Status = string(models.STATUS_OK)
+		response.Message = "Registered correctly"
+		return c.Status(fiber.StatusCreated).JSON(response)
+
+	}
+
+	if c.Params("role") == "admin" {
 
 	}
 
 	response.Status = string(models.STATUS_OK)
 	response.Message = "Registered correctly"
 	return c.Status(fiber.StatusCreated).JSON(response)
+}
+
+func isAdmin(c *fiber.Ctx) bool {
+	var count int
+	email, err := auth.EmailFromToken(c.Cookies("access-token"))
+
+	if err != nil {
+		return false
+	}
+
+	err = database.GetAdminCountStatement.QueryRow(email).Scan(&count)
+
+	if err != nil {
+		return false
+	}
+
+	if count == 0 || count > 1 {
+		return false
+	}
+
+	return true
+}
+
+func isInterviewer(c *fiber.Ctx) bool {
+
+	var count int
+	email, err := auth.EmailFromToken(c.Cookies("access-token"))
+
+	if err != nil {
+		return false
+	}
+
+	err = database.GetInterviewerCountStatement.QueryRow(email).Scan(&count)
+
+	if err != nil {
+		return false
+	}
+
+	if count == 0 || count > 1 {
+		return false
+	}
+
+	return true
 }

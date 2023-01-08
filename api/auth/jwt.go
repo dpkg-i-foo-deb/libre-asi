@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -83,26 +82,6 @@ func ValidateToken(tokenString string) (bool, error) {
 	}
 
 	return false, errors.New("token is not valid")
-}
-
-func ValidateAndContinue(c *fiber.Ctx) error {
-
-	accessToken := c.Cookies("access-token")
-
-	if accessToken == "" {
-		c.Status(fiber.StatusUnauthorized).WriteString("Unauthorized")
-		return nil
-	}
-
-	isValid, err := ValidateToken(accessToken)
-
-	if isValid && err == nil {
-		c.Next()
-		return nil
-	}
-	c.Status(fiber.StatusUnauthorized).WriteString("Unauthorized")
-	return nil
-
 }
 
 func GetTokenClaims(tokenString string) (*CustomClaims, error) {
