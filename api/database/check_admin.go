@@ -26,9 +26,12 @@ func CheckAdmin() {
 
 		util.HandleErrorStop(err)
 
-		newUser.Email = os.Getenv("ADMIN_EMAIL")
-		newUser.Username = "ADMIN"
-		newUser.Password = hashedPassword
+		email := os.Getenv("ADMIN_EMAIL")
+		username := "ADMIN"
+
+		newUser.Email = &email
+		newUser.Username = &username
+		newUser.Password = &hashedPassword
 		newUser.CreatedAt = time.Now()
 		newUser.UpdatedAt = time.Now()
 
@@ -36,7 +39,7 @@ func CheckAdmin() {
 
 		util.HandleErrorStop(err)
 
-		err = transaction.Stmt(CreateUserAdminStatement).QueryRow(
+		err = transaction.Stmt(CreateUserStatement).QueryRow(
 			newUser.Email,
 			newUser.Username,
 			newUser.Password,

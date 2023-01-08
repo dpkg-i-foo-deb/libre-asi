@@ -8,7 +8,7 @@ import (
 var LoginAdminStatement *sql.Stmt
 var LoginInterviewerStatement *sql.Stmt
 var CheckAdminStatement *sql.Stmt
-var CreateUserAdminStatement *sql.Stmt
+var CreateUserStatement *sql.Stmt
 var CreateAdminStatement *sql.Stmt
 var err error
 
@@ -32,7 +32,7 @@ func prepareSessionStatements() {
 
 	util.HandleErrorStop(err)
 
-	CreateUserAdminStatement, err = DB.Prepare(`INSERT INTO public."user"
+	CreateUserStatement, err = DB.Prepare(`INSERT INTO public."user"
 													(email, username, "password", created_at, updated_at)
 													VALUES($1, $2, $3, $4, $5) RETURNING id`)
 

@@ -18,4 +18,5 @@ func init() {
 	util.HandleErrorStop(err)
 
 	prepareSessionStatements()
+	preparePersonStatements()
 }
