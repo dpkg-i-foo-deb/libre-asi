@@ -1,7 +1,7 @@
 <div class="container">
   <div class="form-container">
     <form>
-      <h1 class="form-title">Log In to LibreASI</h1>
+      <h1 class="form-title">Log in to LibreASI</h1>
 
       <div class="form-element">
         <label for="username">Email</label>
@@ -11,6 +11,17 @@
       <div class="form-element">
         <label for="password">Password</label>
         <input id="password" type="password" />
+      </div>
+
+      <div class="form-element">
+        <p class="choose">Choose Account Type</p>
+      </div>
+
+      <div class="user-selection">
+        <input type="radio" id="administrator" name="role" value="admin" />
+        <label for="administrator">Admin</label>
+        <input type="radio" id="interviewer" name="role" value="interviewer" />
+        <label for="interviewer">Interviewer</label>
       </div>
 
       <div class="button-container">
