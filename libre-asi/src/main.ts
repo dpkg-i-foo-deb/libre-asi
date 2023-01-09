@@ -1,8 +1,7 @@
-import './app.css'
-import App from './App.svelte'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-const app = new App({
-  target: document.getElementById('app'),
-})
+import { AppModule } from './app/app.module';
 
-export default app
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
