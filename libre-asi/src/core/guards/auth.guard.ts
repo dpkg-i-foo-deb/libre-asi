@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
         return of(false);
       },
       complete: () => {
-        return of(false);
+        return of(true);
       },
     });
 
