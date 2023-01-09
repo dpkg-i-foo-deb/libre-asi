@@ -1,0 +1,13 @@
+@font-face {
+    font-family:'Cantarell';
+    src:url('/src/assets/fonts/Cantarell-Regular.ttf') format('ttf')
+}
+
+@font-face {
+    font-family:'Cantarell-Bold';
+    src:url('/src/assets/fonts/Cantarell-Bold.ttf') format('ttf')
+}
+
+body {
+    font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+}
