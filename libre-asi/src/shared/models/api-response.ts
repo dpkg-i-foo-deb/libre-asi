@@ -1,4 +1,4 @@
 export interface ApiResponse {
-    status:string,
-    response:string,
+  status: string;
+  response: string;
 }
