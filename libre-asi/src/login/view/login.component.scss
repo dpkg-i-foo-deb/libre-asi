@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -7,7 +8,7 @@
 }
 
 .form-container {
-  background-color: #eeede7;
+  background-color: white;
   border-radius: 15px;
   padding: 50px;
 }
@@ -32,19 +33,27 @@ input {
   border: 0;
   outline: 0;
   border-bottom: 1px solid black;
+  border-top: 1px solid rgb(235, 235, 235);
+  border-left: 1px solid rgb(235, 235, 235);
+  border-right: 1px solid rgb(235, 235, 235);
+}
+
+input:focus {
+  border: 1px solid black;
+  transition: 0.5s;
 }
 
 .submit-button {
   float: center;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 25px;
   margin-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 8px;
   padding-bottom: 8px;
   cursor: pointer;
-  background-color: #78bcff;
+  background-color: #55aaff;
   border: none;
   border-radius: 5px;
 }
@@ -55,6 +64,15 @@ input {
 }
 
 .submit-button:hover {
-  background-color: #56abff;
+  background-color: #2291ff;
   transition: 0.4s;
+}
+
+.form-title {
+  float: left;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  margin-top: -4px;
+  font-weight: bold;
+  font-size: large;
 }
