@@ -1026,9 +1026,14 @@ ALTER TABLE IF EXISTS public.interview_report
 
 --Corrections 
 
+-- Used to blacklist tokens
+
 CREATE TABLE public.jwt_blacklist (
 	"token" text NULL,
 	CONSTRAINT jwt_blacklist_pk PRIMARY KEY ("token")
 );
+
+--Add personal ID to a person (optional)
+ALTER TABLE public.person ADD personal_id varchar(255) NULL;
 
 END;
