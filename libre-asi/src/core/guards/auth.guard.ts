@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
     response.subscribe({
       error: (err) => {
         console.error(err);
+        this.router.navigateByUrl('/login');
         return of(false);
       },
       complete: () => {
