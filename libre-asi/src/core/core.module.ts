@@ -1,18 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StatusbarComponent } from './statusbar/statusbar.component';
-
-
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
-  declarations: [
-    StatusbarComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports:[
-    StatusbarComponent
-  ]
+  declarations: [],
+  imports: [CommonModule, SharedModule],
+  exports: [],
 })
-export class CoreModule { }
+export class CoreModule {}
