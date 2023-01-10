@@ -11,4 +11,5 @@ type Language struct {
 	StateTranslations               []StateTranslations
 	ReligiousPreferenceTranslations []ReligiousPreferenceTranslations
 	RaceTranslations                []RaceTranslations
+	ProfessionTranslations          []ProfessionTranslations
 }
