@@ -6,6 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -17,6 +20,9 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     MatInputModule,
     MatRadioModule,
+    MatIconModule,
+    HttpClientModule,
+    SharedModule,
   ],
   exports: [LoginComponent],
 })

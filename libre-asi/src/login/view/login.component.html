@@ -2,7 +2,6 @@
   <div class="form-container">
     <form>
       <h1 class="form-title">Log in to LibreASI</h1>
-
       <div class="form-element">
         <mat-form-field appearance="fill">
           <mat-label>Email or Username</mat-label>
@@ -13,13 +12,28 @@
             [formControl]="email"
             required
           />
+          <mat-error *ngIf="email.invalid">{{
+            getEmailErrorMessage()
+          }}</mat-error>
         </mat-form-field>
       </div>
 
       <div class="form-element">
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput [formControl]="password" type="password" required />
+          <input matInput [type]="hidePassword ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="toggleHidePassword()"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword"
+          >
+            <mat-icon svgIcon="{{ iconName }}"></mat-icon>
+          </button>
+          <mat-error *ngIf="password.invalid">{{
+            getPasswordErrorMessage()
+          }}</mat-error>
         </mat-form-field>
       </div>
 
