@@ -13,5 +13,8 @@ func migrateModels() {
 		&models.StateTranslations{},
 		&models.City{},
 		&models.AddressType{},
-		&models.Address{})
+		&models.Address{},
+		&models.Administrator{},
+		&models.Person{},
+		&models.Phone{})
 }

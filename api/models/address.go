@@ -8,4 +8,5 @@ type Address struct {
 	PostalCode    string `json:"postalCode"`
 	AddressTypeID uint   `json:"type"`
 	CityID        uint   `json:"city"`
+	PersonID      uint   `json:"person"`
 }
