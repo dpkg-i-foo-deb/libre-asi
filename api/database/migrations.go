@@ -27,5 +27,7 @@ func migrateModels() {
 		&models.Interviewer{},
 		&models.Attendant{},
 		&models.AsiForm{},
-		&models.AsiFormTranslations{})
+		&models.AsiFormTranslations{},
+		&models.QuestionCategory{},
+		&models.QuestionCategoryTranslations{})
 }
