@@ -19,4 +19,6 @@ type Person struct {
 	Addresses    []Address `json:"addresses"`
 	Phones       []Phone   `json:"phones"`
 	Patients     []Patient
+	Interviewers []Interviewer
+	Attendants   []Attendant
 }

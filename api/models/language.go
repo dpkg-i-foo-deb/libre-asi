@@ -12,4 +12,5 @@ type Language struct {
 	ReligiousPreferenceTranslations []ReligiousPreferenceTranslations
 	RaceTranslations                []RaceTranslations
 	ProfessionTranslations          []ProfessionTranslations
+	AsiFormTranslations             []AsiFormTranslations
 }
