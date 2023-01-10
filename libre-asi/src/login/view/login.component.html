@@ -4,13 +4,23 @@
       <h1 class="form-title">Log in to LibreASI</h1>
 
       <div class="form-element">
-        <label for="username">Email</label>
-        <input id="username" type="email" />
+        <mat-form-field appearance="fill">
+          <mat-label>Email or Username</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="someone@example.com"
+            [formControl]="email"
+            required
+          />
+        </mat-form-field>
       </div>
 
       <div class="form-element">
-        <label for="password">Password</label>
-        <input id="password" type="password" />
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [formControl]="password" type="password" required />
+        </mat-form-field>
       </div>
 
       <div class="form-element">
@@ -18,14 +28,19 @@
       </div>
 
       <div class="user-selection">
-        <input type="radio" id="administrator" name="role" value="admin" />
-        <label for="administrator">Admin</label>
-        <input type="radio" id="interviewer" name="role" value="interviewer" />
-        <label for="interviewer">Interviewer</label>
+        <mat-radio-group>
+          <mat-radio-button value="admin">Administrator</mat-radio-button>
+          <mat-radio-button value="interviewer">Interviewer</mat-radio-button>
+        </mat-radio-group>
       </div>
 
       <div class="button-container">
-        <button type="submit" class="submit-button">
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          class="submit-button"
+        >
           <div class="submit-button-text">Log In</div>
         </button>
       </div>

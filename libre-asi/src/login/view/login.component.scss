@@ -8,40 +8,20 @@
 }
 
 .form-container {
-  background-color: white;
   border-radius: 15px;
-  padding: 50px;
 }
 
-label,
-input {
-  margin-left: 3px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 10px;
-  padding: 4px;
+.form-element,
+mat-form-field {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 350px;
 }
 
 label {
   float: left;
   clear: left;
   text-align: right;
-}
-
-input[type="email"],
-input[type="password"] {
-  float: right;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid black;
-  border-top: 1px solid rgb(235, 235, 235);
-  border-left: 1px solid rgb(235, 235, 235);
-  border-right: 1px solid rgb(235, 235, 235);
-}
-
-input:focus {
-  border: 1px solid black;
-  transition: 0.5s;
 }
 
 .submit-button {
@@ -51,10 +31,9 @@ input:focus {
   margin-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   cursor: pointer;
-  background-color: #55aaff;
   border: none;
   border-radius: 5px;
 }
@@ -62,11 +41,6 @@ input:focus {
 .submit-button-text {
   color: white;
   font-weight: 600;
-}
-
-.submit-button:hover {
-  background-color: #2291ff;
-  transition: 0.4s;
 }
 
 .form-title {
