@@ -15,6 +15,8 @@ type Person struct {
 	Birthdate    time.Time `json:"birthdate"`
 	Age          int       `json:"age"`
 	UserID       uint      `json:"user"`
+	PersonalID   string    `json:"personalID"`
 	Addresses    []Address `json:"addresses"`
 	Phones       []Phone   `json:"phones"`
+	Patients     []Patient
 }

@@ -20,5 +20,6 @@ func migrateModels() {
 		&models.ReligiousPreference{},
 		&models.ReligiousPreferenceTranslations{},
 		&models.Race{},
-		&models.RaceTranslations{})
+		&models.RaceTranslations{},
+		&models.Patient{})
 }
