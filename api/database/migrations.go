@@ -14,6 +14,8 @@ func migrateModels() {
 
 	util.HandleErrorStop(err)
 
+	err = DB.SetupJoinTable(&models.Interviewer{}, "Reports", &models.InterviewReports{})
+
 	err := DB.AutoMigrate(&models.User{},
 		&models.Language{},
 		&models.Region{},
@@ -49,6 +51,7 @@ func migrateModels() {
 		&models.Interview{},
 		&models.InterviewAnswers{},
 		&models.InterviewInterpretations{},
+		&models.InterviewReports{},
 	)
 
 	util.HandleErrorStop(err)
