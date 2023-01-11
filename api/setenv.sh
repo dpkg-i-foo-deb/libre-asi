@@ -5,3 +5,4 @@ export DB_CONNECTION="host=libre-asi-database user=libre_asi password=libre_asi 
 export CONNECTION_STRING="postgresql://libre_asi:libre_asi@localhost?sslmode=disable"
 export ADMIN_EMAIL="admin@example.com"
 export ADMIN_PASSWORD="admin"
+export ADMIN_USERNAME="admin"

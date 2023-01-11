@@ -17,4 +17,6 @@ func init() {
 	util.HandleErrorStop(err)
 
 	migrateModels()
+
+	checkExistingAdmin()
 }
