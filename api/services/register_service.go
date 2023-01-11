@@ -18,10 +18,11 @@ func RegisterService(c *fiber.Ctx) error {
 	//var a models.Administrator
 	var pu public.PublicAdministrator
 	var p string
+	var err error
 
 	switch c.Params("role") {
 	case "admin":
-		err := database.DB.Transaction(func(tx *gorm.DB) error {
+		err = database.DB.Transaction(func(tx *gorm.DB) error {
 			err := c.BodyParser(&pu)
 
 			if err != nil {
@@ -49,19 +50,10 @@ func RegisterService(c *fiber.Ctx) error {
 				return res.Error
 			}
 
-			r.Status = string(models.STATUS_OK)
 			r.Message = "Administrator Created"
 
-			c.Status(201).JSON(r)
 			return nil
 		})
-
-		if err != nil {
-			r.Status = string(models.STATUS_ERROR)
-			r.Message = "Something went wrong"
-			log.Println(err)
-			c.Status(500).JSON(r)
-		}
 
 	default:
 		r = models.Response{
@@ -70,5 +62,16 @@ func RegisterService(c *fiber.Ctx) error {
 		}
 		return c.Status(400).JSON(&r)
 	}
+
+	if err != nil {
+		r.Status = string(models.STATUS_ERROR)
+		r.Message = "Something went wrong"
+		log.Println(err)
+		c.Status(500).JSON(r)
+	}
+
+	r.Status = string(models.STATUS_OK)
+	c.Status(201).JSON(r)
+
 	return nil
 }
