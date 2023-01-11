@@ -14,47 +14,12 @@ import (
 func RegisterService(c *fiber.Ctx) error {
 
 	var r models.Response
-	var u models.User
-	//var a models.Administrator
-	var pu public.PublicAdministrator
-	var p string
 	var err error
 
 	switch c.Params("role") {
 	case "admin":
-		err = database.DB.Transaction(func(tx *gorm.DB) error {
-			err := c.BodyParser(&pu)
-
-			if err != nil {
-				return err
-			}
-
-			p, err = util.HashPassword(u.Password)
-
-			if err != nil {
-				return err
-			}
-
-			u = models.User{
-				Email:    pu.Email,
-				Username: pu.Username,
-				Password: p,
-				Administrators: []models.Administrator{
-					{},
-				},
-			}
-
-			res := database.DB.Create(&u)
-
-			if res.Error != nil {
-				return res.Error
-			}
-
-			r.Message = "Administrator Created"
-
-			return nil
-		})
-
+		err = createAdmin(c)
+		r.Message = "Administrator Created"
 	default:
 		r = models.Response{
 			Status:  string(models.STATUS_DENIED),
@@ -74,4 +39,43 @@ func RegisterService(c *fiber.Ctx) error {
 	c.Status(201).JSON(r)
 
 	return nil
+}
+
+func createAdmin(c *fiber.Ctx) error {
+	var u models.User
+	var pa public.PublicAdministrator
+	var p string
+
+	err := database.DB.Transaction(func(tx *gorm.DB) error {
+		err := c.BodyParser(&pa)
+
+		if err != nil {
+			return err
+		}
+
+		p, err = util.HashPassword(u.Password)
+
+		if err != nil {
+			return err
+		}
+
+		u = models.User{
+			Email:    pa.Email,
+			Username: pa.Username,
+			Password: p,
+			Administrators: []models.Administrator{
+				{},
+			},
+		}
+
+		res := database.DB.Create(&u)
+
+		if res.Error != nil {
+			return res.Error
+		}
+
+		return nil
+	})
+
+	return err
 }
