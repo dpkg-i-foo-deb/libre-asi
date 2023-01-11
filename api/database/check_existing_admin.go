@@ -24,10 +24,18 @@ func checkExistingAdmin() {
 
 func createAdmin(db *gorm.DB) error {
 
+	var p string
+
+	p, err = util.HashPassword(os.Getenv("ADMIN_PASSWORD"))
+
+	if err != nil {
+		return err
+	}
+
 	u := models.User{
 		Email:    os.Getenv("ADMIN_EMAIL"),
 		Username: os.Getenv("ADMIN_USERNAME"),
-		Password: os.Getenv("ADMIN_PASSWORD"),
+		Password: p,
 		Administrators: []models.Administrator{
 			{},
 		},
@@ -42,7 +50,7 @@ func createAdmin(db *gorm.DB) error {
 	log.Println("Administrator user Created")
 	log.Println("Admin email: " + u.Email)
 	log.Println("Admin username: " + u.Username)
-	log.Println("Admin password: " + u.Password)
+	log.Println("Admin password: " + p)
 
 	return nil
 }
