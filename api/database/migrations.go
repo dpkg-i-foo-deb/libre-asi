@@ -34,5 +34,6 @@ func migrateModels() {
 		&models.Question{},
 		&models.QuestionTranslations{},
 		&models.Option{},
+		&models.OptionHelp{},
 	)
 }
