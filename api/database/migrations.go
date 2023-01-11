@@ -1,9 +1,12 @@
 package database
 
-import "libre-asi-api/models"
+import (
+	"libre-asi-api/models"
+	"libre-asi-api/util"
+)
 
 func migrateModels() {
-	DB.AutoMigrate(&models.User{},
+	err := DB.AutoMigrate(&models.User{},
 		&models.Language{},
 		&models.Region{},
 		&models.RegionTranslations{},
@@ -36,5 +39,12 @@ func migrateModels() {
 		&models.Option{},
 		&models.OptionHelp{},
 		&models.Interview{},
+		&models.InterviewAnswers{},
 	)
+
+	util.HandleErrorStop(err)
+
+	err = DB.SetupJoinTable(&models.Interview{}, "Answers", &models.InterviewAnswers{})
+
+	util.HandleErrorStop(err)
 }

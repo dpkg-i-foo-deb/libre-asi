@@ -19,3 +19,12 @@ type Interview struct {
 	AsiFormID    uint          `json:"AsiForm"`
 	LanguageID   uint          `json:"language"`
 }
+
+type InterviewAnswers struct {
+	InterviewID uint `json:"interview" gorm:"primaryKey"`
+	OptionID    uint `json:"option" gorm:"primaryKey"`
+	CreatedAt   time.Time
+	DeletedAt   gorm.DeletedAt
+	Answer      string `json:"answer"`
+	Commentary  string `json:"commentary"`
+}
