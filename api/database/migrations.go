@@ -29,5 +29,10 @@ func migrateModels() {
 		&models.AsiForm{},
 		&models.AsiFormTranslations{},
 		&models.QuestionCategory{},
-		&models.QuestionCategoryTranslations{})
+		&models.QuestionCategoryTranslations{},
+		&models.QuestionType{},
+		&models.Question{},
+		&models.QuestionTranslations{},
+		&models.Option{},
+	)
 }

@@ -14,4 +14,6 @@ type Language struct {
 	ProfessionTranslations          []ProfessionTranslations
 	AsiFormTranslations             []AsiFormTranslations
 	QuestionCategoryTranslations    []QuestionCategoryTranslations
+	QuestionTranslations            []QuestionTranslations
+	Options                         []Option
 }
