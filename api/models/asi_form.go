@@ -8,4 +8,5 @@ type AsiForm struct {
 	Version             string                `json:"version"`
 	AsiFormTranslations []AsiFormTranslations `json:"translations"`
 	Questions           []Question
+	Interviews          []Interview
 }

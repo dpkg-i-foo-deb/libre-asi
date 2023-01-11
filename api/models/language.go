@@ -17,4 +17,5 @@ type Language struct {
 	QuestionTranslations            []QuestionTranslations
 	Options                         []Option
 	OptionHelp                      []OptionHelp
+	Interviews                      []Interview
 }
