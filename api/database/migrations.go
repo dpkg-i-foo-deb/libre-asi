@@ -6,6 +6,14 @@ import (
 )
 
 func migrateModels() {
+	err = DB.SetupJoinTable(&models.Interview{}, "Answers", &models.InterviewAnswers{})
+
+	util.HandleErrorStop(err)
+
+	err = DB.SetupJoinTable(&models.Interviewer{}, "Interpretations", &models.InterviewInterpretations{})
+
+	util.HandleErrorStop(err)
+
 	err := DB.AutoMigrate(&models.User{},
 		&models.Language{},
 		&models.Region{},
@@ -40,11 +48,8 @@ func migrateModels() {
 		&models.OptionHelp{},
 		&models.Interview{},
 		&models.InterviewAnswers{},
+		&models.InterviewInterpretations{},
 	)
-
-	util.HandleErrorStop(err)
-
-	err = DB.SetupJoinTable(&models.Interview{}, "Answers", &models.InterviewAnswers{})
 
 	util.HandleErrorStop(err)
 }
