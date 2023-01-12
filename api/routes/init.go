@@ -4,4 +4,5 @@ func init() {
 	indexRoute()
 	registerRoute()
 	loginRoute()
+	signOutRoute()
 }
