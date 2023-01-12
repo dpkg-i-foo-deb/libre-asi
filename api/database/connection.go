@@ -19,4 +19,6 @@ func init() {
 	migrateModels()
 
 	checkExistingAdmin()
+
+	checkWorld()
 }

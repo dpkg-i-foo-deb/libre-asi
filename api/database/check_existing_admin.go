@@ -11,6 +11,9 @@ import (
 
 func checkExistingAdmin() {
 	var a models.Administrator
+
+	log.Println("Checking if the administrator account exists...")
+
 	r := DB.Take(&a)
 
 	if r.Error == gorm.ErrRecordNotFound {
@@ -20,6 +23,8 @@ func checkExistingAdmin() {
 	} else {
 		util.HandleErrorStop(r.Error)
 	}
+
+	util.HandleErrorStop(err)
 }
 
 func createAdmin(db *gorm.DB) error {
@@ -50,7 +55,7 @@ func createAdmin(db *gorm.DB) error {
 	log.Println("Administrator user Created")
 	log.Println("Admin email: " + u.Email)
 	log.Println("Admin username: " + u.Username)
-	log.Println("Admin password: " + p)
+	log.Println("Admin password: " + os.Getenv("ADMIN_PASSWORD"))
 
 	return nil
 }
