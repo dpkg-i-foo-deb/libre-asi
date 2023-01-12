@@ -5,4 +5,5 @@ func init() {
 	registerRoute()
 	loginRoute()
 	signOutRoute()
+	worldRoute()
 }
