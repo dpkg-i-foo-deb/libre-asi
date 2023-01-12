@@ -13,41 +13,45 @@ import (
 
 func RegisterService(c *fiber.Ctx) error {
 
-	var r models.Response
+	var res models.Response
 	var err error
 
 	switch c.Params("role") {
 	case "admin":
 		err = createAdmin(c)
-		r.Message = "Administrator Created"
+		res.Message = "Administrator Created"
 	case "interviewer":
 		err = createInterviewer(c)
-		r.Message = "Interviewer Created"
+		res.Message = "Interviewer Created"
+	case "attendant":
+		res.Message = "Not implemmented"
+	case "patient":
+		res.Message = "Not implemmented"
 	default:
-		r = models.Response{
+		res = models.Response{
 			Status:  string(models.STATUS_DENIED),
 			Message: "Bad route",
 		}
-		return c.Status(400).JSON(&r)
+		return c.Status(400).JSON(&res)
 	}
 
 	if err != nil {
-		r.Status = string(models.STATUS_ERROR)
-		r.Message = "Something went wrong"
+		res.Status = string(models.STATUS_ERROR)
+		res.Message = "Check JSON data"
 		log.Println(err)
-		c.Status(500).JSON(r)
+		c.Status(400).JSON(res)
 		return nil
 	}
 
-	r.Status = string(models.STATUS_OK)
-	c.Status(201).JSON(r)
+	res.Status = string(models.STATUS_OK)
+	c.Status(201).JSON(res)
 
 	return nil
 }
 
 func createAdmin(c *fiber.Ctx) error {
 	var u models.User
-	var p string
+	var pass string
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 		err := c.BodyParser(&u)
@@ -56,13 +60,13 @@ func createAdmin(c *fiber.Ctx) error {
 			return err
 		}
 
-		p, err = util.HashPassword(u.Password)
+		pass, err = util.HashPassword(u.Password)
 
 		if err != nil {
 			return err
 		}
 
-		u.Password = p
+		u.Password = pass
 
 		if len(u.Administrators) != 1 || u.Administrators == nil {
 			return errors.New("tried to create more than one administrator")
@@ -82,6 +86,7 @@ func createAdmin(c *fiber.Ctx) error {
 
 func createInterviewer(c *fiber.Ctx) error {
 	var u models.User
+	var pass string
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 		err := c.BodyParser(&u)
@@ -102,7 +107,15 @@ func createInterviewer(c *fiber.Ctx) error {
 			}
 		}
 
-		r := database.DB.Omit("Administators",
+		pass, err = util.HashPassword(u.Password)
+
+		if err != nil {
+			return err
+		}
+
+		u.Password = pass
+
+		res := database.DB.Omit("Administators",
 			"Patients",
 			"Attendants",
 			"PersonID",
@@ -111,8 +124,8 @@ func createInterviewer(c *fiber.Ctx) error {
 			"Reports",
 			"ProfessionTranslations").Create(&u)
 
-		if r.Error != nil {
-			return r.Error
+		if res.Error != nil {
+			return res.Error
 		}
 
 		return nil
