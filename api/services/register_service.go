@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"libre-asi-api/auth"
 	"libre-asi-api/database"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
@@ -11,18 +12,24 @@ import (
 	"gorm.io/gorm"
 )
 
+type registerFunc func(c *fiber.Ctx) error
+
 func RegisterService(c *fiber.Ctx) error {
 
 	var res models.Response
 	var err error
+	var fn registerFunc
+	var requiresAdmin bool
 
 	switch c.Params("role") {
 	case "admin":
-		err = createAdmin(c)
+		fn = createAdmin
+		requiresAdmin = true
 		res.Message = "Administrator Created"
 	case "interviewer":
-		err = createInterviewer(c)
+		fn = createInterviewer
 		res.Message = "Interviewer Created"
+		requiresAdmin = true
 	case "attendant":
 		res.Message = "Not implemmented"
 	case "patient":
@@ -34,6 +41,14 @@ func RegisterService(c *fiber.Ctx) error {
 		}
 		return c.Status(400).JSON(&res)
 	}
+
+	if requiresAdmin && !isAdmin(c.Cookies("access-token")) {
+		res.Status = string(models.STATUS_DENIED)
+		res.Message = "This session doesn't have enough privileges"
+		return c.Status(401).JSON(&res)
+	}
+
+	err = fn(c)
 
 	if err != nil {
 		res.Status = string(models.STATUS_ERROR)
@@ -132,4 +147,19 @@ func createInterviewer(c *fiber.Ctx) error {
 	})
 
 	return err
+}
+
+func isAdmin(tk string) bool {
+
+	role, err := auth.RoleFromToken(tk)
+
+	if err != nil {
+		return false
+	}
+
+	if role != "admin" {
+		return false
+	}
+
+	return true
 }

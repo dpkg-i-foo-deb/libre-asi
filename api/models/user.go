@@ -10,3 +10,10 @@ type User struct {
 	Administrators []Administrator `json:"administrators"`
 	People         []Person        `json:"people"`
 }
+
+type Role string
+
+const (
+	ADMINISTRATOR Role = "admin"
+	INTERVIEWER   Role = "interviewer"
+)
