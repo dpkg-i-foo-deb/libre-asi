@@ -2,6 +2,7 @@ package auth
 
 import (
 	"libre-asi-api/models"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -53,4 +54,32 @@ func ValidateRefreshToken(c *fiber.Ctx) error {
 
 	res.Message = "The refresh token has expired or is invalid"
 	return c.Status(401).JSON(res)
+}
+
+func ValidateRefreshTokenDate(c *fiber.Ctx) error {
+
+	//This should run AFTER validating the refresh token
+
+	var res models.Response
+
+	res.Status = string(models.STATUS_DENIED)
+	res.Message = "The refresh token is still valid"
+
+	tk := c.Cookies("refresh-token")
+
+	claims, err := GetTokenClaims(tk)
+
+	if err != nil {
+		res.Status = string(models.STATUS_ERROR)
+		res.Message = "Something failed"
+		return c.Status(500).JSON(res)
+	}
+
+	if claims.ExpiresAt > time.Now().Unix() {
+		return c.Status(412).JSON(res)
+	}
+
+	c.Next()
+
+	return nil
 }
