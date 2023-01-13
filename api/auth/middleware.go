@@ -75,7 +75,7 @@ func ValidateRefreshTokenDate(c *fiber.Ctx) error {
 		return c.Status(500).JSON(res)
 	}
 
-	if claims.ExpiresAt > time.Now().Unix() {
+	if claims.ExpiresAt > time.Now().Unix()+int64(time.Minute)*5 {
 		return c.Status(412).JSON(res)
 	}
 
