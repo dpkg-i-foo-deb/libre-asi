@@ -32,3 +32,25 @@ func ValidateAndContinue(c *fiber.Ctx) error {
 	return nil
 
 }
+
+func CheckRefreshAndContinue(c *fiber.Ctx) error {
+	tk := c.Cookies("refresh-token")
+
+	var res models.Response
+	res.Status = string(models.STATUS_DENIED)
+
+	if tk == "" {
+		res.Message = "The refresh token was not present"
+		return c.Status(401).JSON(res)
+	}
+
+	isValid, err := ValidateToken(tk)
+
+	if isValid && err == nil {
+		c.Next()
+		return nil
+	}
+
+	res.Message = "The refresh token has expired or is invalid"
+	return c.Status(401).JSON(res)
+}

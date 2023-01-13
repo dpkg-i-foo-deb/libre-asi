@@ -6,4 +6,5 @@ func init() {
 	loginRoute()
 	signOutRoute()
 	worldRoute()
+	refreshRoute()
 }
