@@ -7,5 +7,5 @@ import (
 )
 
 func signOutRoute() {
-	app.AddPost("/sign-out", auth.ValidateAndContinue, services.SignOutService)
+	app.AddPost("/sign-out", auth.ValidateAccessToken, services.SignOutService)
 }

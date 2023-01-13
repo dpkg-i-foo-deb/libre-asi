@@ -7,5 +7,5 @@ import (
 )
 
 func indexRoute() {
-	app.AddGet("/", auth.ValidateAndContinue, services.IndexService)
+	app.AddGet("/", auth.ValidateAccessToken, services.IndexService)
 }

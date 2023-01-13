@@ -7,5 +7,5 @@ import (
 )
 
 func registerRoute() {
-	app.AddPost("/register/:role", auth.ValidateAndContinue, services.RegisterService)
+	app.AddPost("/register/:role", auth.ValidateAccessToken, services.RegisterService)
 }

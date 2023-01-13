@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func ValidateAndContinue(c *fiber.Ctx) error {
+func ValidateAccessToken(c *fiber.Ctx) error {
 
 	accessToken := c.Cookies("access-token")
 	var response models.Response
@@ -33,7 +33,7 @@ func ValidateAndContinue(c *fiber.Ctx) error {
 
 }
 
-func CheckRefreshAndContinue(c *fiber.Ctx) error {
+func ValidateRefreshToken(c *fiber.Ctx) error {
 	tk := c.Cookies("refresh-token")
 
 	var res models.Response
