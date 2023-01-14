@@ -12,7 +12,7 @@ func WorldService(c *fiber.Ctx) error {
 	var world []models.Country
 	var res models.Response
 
-	result := database.DB.Preload("States").Preload("States.Cities").Find(&world)
+	result := database.DB.Preload("States").Preload("Translations").Preload("States.Cities").Find(&world)
 
 	if result.Error != nil {
 		res.Status = string(models.STATUS_ERROR)
