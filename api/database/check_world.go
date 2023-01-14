@@ -21,14 +21,13 @@ func checkWorld() {
 	res := DB.Take(&c)
 
 	if res.Error == gorm.ErrRecordNotFound {
-		log.Println("Creating world data, please wait...")
-		err = DB.Transaction(createWorld)
+		log.Println("Creating world in the background...")
+		go DB.Transaction(createWorld)
 
 	} else {
 		util.HandleErrorStop(res.Error)
 	}
 
-	util.HandleErrorStop(err)
 }
 
 func createWorld(db *gorm.DB) error {
@@ -39,7 +38,7 @@ func createWorld(db *gorm.DB) error {
 		res := DB.Omit("States", "Cities").Create(&world[i])
 
 		if res.Error != nil {
-			return res.Error
+			util.HandleErrorStop(err)
 		}
 
 	}
@@ -50,7 +49,7 @@ func createWorld(db *gorm.DB) error {
 			res := DB.Omit("Cities").Create(&world[i].States[j])
 
 			if res.Error != nil {
-				return res.Error
+				util.HandleErrorStop(err)
 			}
 		}
 	}
@@ -62,11 +61,13 @@ func createWorld(db *gorm.DB) error {
 				res := DB.Create(&world[i].States[j].Cities[k])
 
 				if res.Error != nil {
-					return res.Error
+					util.HandleErrorStop(err)
 				}
 			}
 		}
 	}
+
+	log.Println("Finished creating world")
 
 	return DB.Error
 }
