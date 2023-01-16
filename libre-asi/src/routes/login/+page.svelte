@@ -10,12 +10,15 @@
 	} from 'carbon-components-svelte';
 	import type user from '$lib/models/user';
 	import { goto } from '$app/navigation';
-	import { apiUrl, interviewerLogin } from '$lib/api/constants';
+	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
 	let email: string;
 	let password: string;
 	let invalidEmail = false;
 	let invalidCredentials = false;
 	let loginError = false;
+	let wantsAdmin = false;
+	let wantsInterviewer = false;
+	let url = '';
 
 	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 	let result: Response;
@@ -32,8 +35,17 @@
 
 		const user: user = { email: email, password: password };
 
+		if (wantsAdmin) {
+			url = apiUrl + adminLogin;
+		}
+		if (wantsInterviewer) {
+			url = apiUrl + interviewerLogin;
+		}
+
+		console.log(url);
+
 		try {
-			result = await fetch(apiUrl + interviewerLogin, {
+			result = await fetch(url, {
 				headers: { 'Content-Type': 'application/json' },
 				method: 'POST',
 				body: JSON.stringify(user),
@@ -48,6 +60,8 @@
 
 		if (!result.ok && result.status == 401) {
 			invalidCredentials = true;
+		} else {
+			loginError = true;
 		}
 
 		if (result.ok) {
@@ -87,15 +101,19 @@
 			</div>
 
 			<div class="form-element">
-				<RadioButtonGroup selected="interviewer">
+				<RadioButtonGroup selected="interviewer" required>
 					<div slot="legendText" style="display:flex">
 						Account type
 						<Tooltip>
 							<p>Your account type is determined by your administrator</p>
 						</Tooltip>
 					</div>
-					<RadioButton labelText="Interviewer" value="interviewer" />
-					<RadioButton labelText="Administrator" value="administrator" />
+					<RadioButton
+						labelText="Interviewer"
+						value="interviewer"
+						bind:checked={wantsInterviewer}
+					/>
+					<RadioButton labelText="Administrator" value="admin" bind:checked={wantsAdmin} />
 				</RadioButtonGroup>
 			</div>
 
@@ -142,9 +160,9 @@
 	}
 
 	.error-notification {
-		position: absolute;
-		bottom: 0px;
-		right: 0px;
+		position: fixed;
+		bottom: 0;
+		right: 0;
 		margin: 10px;
 	}
 
