@@ -11,6 +11,7 @@
 	import type user from '$lib/models/user';
 	import { goto } from '$app/navigation';
 	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
+	import { session } from '$lib/stores/userStore';
 	let email: string;
 	let password: string;
 	let invalidEmail = false;
@@ -65,7 +66,8 @@
 		}
 
 		if (result.ok) {
-			goto('/');
+			session.set('true');
+			goto('home');
 		}
 	}
 </script>
