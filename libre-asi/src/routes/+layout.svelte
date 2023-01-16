@@ -54,20 +54,13 @@
 		<SideNavLink text="Link 3" />
 	</SideNavItems>
 </SideNav>
-<div class="content">
-	<Content>
-		<Grid>
-			<Row>
-				<Column>
-					<slot />
-				</Column>
-			</Row>
-		</Grid>
-	</Content>
-</div>
 
-<style>
-	.content {
-		width: 100%;
-	}
-</style>
+<Content>
+	<Grid>
+		<Row>
+			<Column>
+				<slot />
+			</Column>
+		</Row>
+	</Grid>
+</Content>
