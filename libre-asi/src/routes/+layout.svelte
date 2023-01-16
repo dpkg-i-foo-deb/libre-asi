@@ -49,9 +49,8 @@
 
 <SideNav bind:isOpen={isSideNavOpen}>
 	<SideNavItems>
-		<SideNavLink text="Link 1" />
-		<SideNavLink text="Link 2" />
-		<SideNavLink text="Link 3" />
+		<SideNavLink text="Home" href="/" />
+		<SideNavLink text="Dashboard" href="/dashboard" />
 	</SideNavItems>
 </SideNav>
 
