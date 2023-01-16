@@ -10,17 +10,17 @@
 	} from 'carbon-components-svelte';
 	import type user from '$lib/models/user';
 	import { goto } from '$app/navigation';
+	import { apiUrl, interviewerLogin } from '$lib/api/constants';
 	let email: string;
 	let password: string;
-	let invalidEmail: boolean = false;
-	let invalidPassword: boolean = false;
-	let invalidCredentials: boolean = false;
-	let loginError: boolean = false;
+	let invalidEmail = false;
+	let invalidCredentials = false;
+	let loginError = false;
 
-	const emailRegex: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 	let result: Response;
 
-	async function login(event: Event) {
+	async function login(): Promise<void> {
 		invalidEmail = false;
 		invalidCredentials = false;
 		loginError = false;
@@ -33,7 +33,7 @@
 		const user: user = { email: email, password: password };
 
 		try {
-			result = await fetch('http://localhost:3000/login/interviewer', {
+			result = await fetch(apiUrl + interviewerLogin, {
 				headers: { 'Content-Type': 'application/json' },
 				method: 'POST',
 				body: JSON.stringify(user),
