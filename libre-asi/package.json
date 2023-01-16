@@ -20,6 +20,8 @@
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"carbon-components-svelte": "^0.71.0",
+		"carbon-icons-svelte": "^11.4.0",
+		"carbon-preprocess-svelte": "^0.9.1",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
