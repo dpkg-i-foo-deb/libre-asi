@@ -15,10 +15,12 @@
 		Content,
 		Grid,
 		Row,
-		Column
+		Column,
+		HeaderActionLink
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
+	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 
 	let isSideNavOpen = false;
 	let isOpen1 = false;
@@ -29,7 +31,13 @@
 		<SkipToContent />
 	</svelte:fragment>
 	<HeaderUtilities>
+		<HeaderActionLink
+			icon={LogoGithub}
+			href="https://github.com/dpkg-i-foo-deb/libre-asi"
+			target="_blank"
+		/>
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
+
 		<HeaderAction bind:isOpen={isOpen1} icon={UserAvatarFilledAlt} closeIcon={UserAvatarFilledAlt}>
 			<HeaderPanelLinks>
 				<HeaderPanelDivider>Switcher subject 1</HeaderPanelDivider>
