@@ -144,6 +144,7 @@
 	.error-notification {
 		position: absolute;
 		bottom: 0px;
+		right: 0px;
 		margin: 10px;
 	}
 
