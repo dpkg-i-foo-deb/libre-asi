@@ -21,9 +21,32 @@
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
+	import { session } from '$lib/stores/userStore';
+	import type { Unsubscriber } from 'svelte/store';
+	import { onDestroy, onMount } from 'svelte';
 
 	let isSideNavOpen = false;
-	let isOpen1 = false;
+	let isUserMenuOpen = false;
+	let subscription: Unsubscriber;
+	let activeSession = false;
+
+	onMount(async () => {
+		subscription = session.subscribe((value) => {
+			if (value == 'true') {
+				activeSession = true;
+			} else {
+				activeSession = false;
+			}
+		});
+	});
+
+	onDestroy(() => {
+		subscription;
+	});
+
+	function logOut() {
+		console.log('uwu');
+	}
 </script>
 
 <Header persistentHamburgerMenu={true} bind:isSideNavOpen company="Libre-ASI">
@@ -36,20 +59,23 @@
 			href="https://github.com/dpkg-i-foo-deb/libre-asi"
 			target="_blank"
 		/>
-		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
+		{#if activeSession}
+			<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
+		{/if}
 
-		<HeaderAction bind:isOpen={isOpen1} icon={UserAvatarFilledAlt} closeIcon={UserAvatarFilledAlt}>
+		<HeaderAction
+			bind:isOpen={isUserMenuOpen}
+			icon={UserAvatarFilledAlt}
+			closeIcon={UserAvatarFilledAlt}
+		>
 			<HeaderPanelLinks>
-				<HeaderPanelDivider>Switcher subject 1</HeaderPanelDivider>
-				<HeaderPanelLink>Switcher item 1</HeaderPanelLink>
-				<HeaderPanelLink>Switcher item 2</HeaderPanelLink>
-				<HeaderPanelLink>Switcher item 3</HeaderPanelLink>
-				<HeaderPanelLink>Switcher item 4</HeaderPanelLink>
-				<HeaderPanelDivider>Switcher subject 2</HeaderPanelDivider>
-				<HeaderPanelLink>Switcher item 1</HeaderPanelLink>
-				<HeaderPanelLink>Switcher item 2</HeaderPanelLink>
-				<HeaderPanelDivider>Switcher subject 3</HeaderPanelDivider>
-				<HeaderPanelLink>Switcher item 1</HeaderPanelLink>
+				{#if !activeSession}
+					<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
+					<HeaderPanelLink>Log In</HeaderPanelLink>
+				{:else if activeSession}
+					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
+					<HeaderPanelLink on:click={logOut}>Sign Out</HeaderPanelLink>
+				{:else}{/if}
 			</HeaderPanelLinks>
 		</HeaderAction>
 	</HeaderUtilities>

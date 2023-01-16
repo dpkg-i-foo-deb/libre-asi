@@ -19,9 +19,9 @@
 		});
 	});
 
-    onDestroy(async () => {
-        subscription
-    })
+	onDestroy(async () => {
+		subscription;
+	});
 </script>
 
 {#if activeSession}
