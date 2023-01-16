@@ -12,6 +12,7 @@
 	import { goto } from '$app/navigation';
 	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
 	import { session } from '$lib/stores/userStore';
+	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	let email: string;
 	let password: string;
 	let invalidEmail = false;
@@ -66,7 +67,8 @@
 		}
 
 		if (result.ok) {
-			session.set('true');
+			$session = 'true';
+			$loggedInCorrectly = true;
 			goto('home');
 		}
 	}

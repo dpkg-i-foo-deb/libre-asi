@@ -16,7 +16,8 @@
 		Grid,
 		Row,
 		Column,
-		HeaderActionLink
+		HeaderActionLink,
+		ToastNotification
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -24,11 +25,16 @@
 	import { session } from '$lib/stores/userStore';
 	import type { Unsubscriber } from 'svelte/store';
 	import { onDestroy, onMount } from 'svelte';
+	import { apiUrl, signOut } from '$lib/api/constants';
+	import { goto } from '$app/navigation';
+	import { loggedInCorrectly } from '$lib/stores/loginStore';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
 	let subscription: Unsubscriber;
 	let activeSession = false;
+	let logOutError = false;
+	let loggedOutCorrectly = false;
 
 	onMount(async () => {
 		subscription = session.subscribe((value) => {
@@ -44,8 +50,31 @@
 		subscription;
 	});
 
-	function logOut() {
-		console.log('uwu');
+	async function logOut() {
+		logOutError = false;
+		loggedOutCorrectly = false;
+		let result: Response;
+		try {
+			result = await fetch(apiUrl + signOut, {
+				method: 'POST',
+				credentials: 'include',
+				mode: 'cors'
+			});
+		} catch (e) {
+			logOutError = true;
+			console.log(e);
+			return;
+		} finally {
+			isUserMenuOpen = false;
+		}
+
+		if (result.ok || result.status == 401) {
+			session.set('false');
+			goto('/');
+			loggedOutCorrectly = true;
+		} else {
+			logOutError = true;
+		}
 	}
 </script>
 
@@ -71,7 +100,12 @@
 			<HeaderPanelLinks>
 				{#if !activeSession}
 					<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
-					<HeaderPanelLink>Log In</HeaderPanelLink>
+					<HeaderPanelLink
+						href="/login"
+						on:click={() => {
+							isUserMenuOpen = false;
+						}}>Log In</HeaderPanelLink
+					>
 				{:else if activeSession}
 					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
 					<HeaderPanelLink on:click={logOut}>Sign Out</HeaderPanelLink>
@@ -93,7 +127,47 @@
 		<Row>
 			<Column>
 				<slot />
+				{#if logOutError}
+					<div class="error-notification">
+						<ToastNotification
+							title="Sign Out Error"
+							subtitle="Try again later"
+							caption="If the error persists, contact your administrator"
+						/>
+					</div>
+				{/if}
+
+				{#if loggedOutCorrectly}
+					<div class="error-notification">
+						<ToastNotification
+							kind="info"
+							title="Signed Out Correctly"
+							subtitle="Thanks for trying out Libre-ASI!"
+							caption={new Date().toLocaleString()}
+						/>
+					</div>
+				{/if}
+
+				{#if $loggedInCorrectly}
+					<div class="error-notification">
+						<ToastNotification
+							kind="success"
+							title="Logged In"
+							subtitle="Welcome to Libre-ASI"
+							caption={new Date().toLocaleString()}
+						/>
+					</div>
+				{/if}
 			</Column>
 		</Row>
 	</Grid>
 </Content>
+
+<style>
+	.error-notification {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		margin: 10px;
+	}
+</style>
