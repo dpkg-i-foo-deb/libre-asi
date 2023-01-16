@@ -109,7 +109,7 @@
 				{:else if activeSession}
 					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
 					<HeaderPanelLink on:click={logOut}>Sign Out</HeaderPanelLink>
-				{:else}{/if}
+				{/if}
 			</HeaderPanelLinks>
 		</HeaderAction>
 	</HeaderUtilities>
