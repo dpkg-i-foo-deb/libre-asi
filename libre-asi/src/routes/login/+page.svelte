@@ -11,7 +11,7 @@
 	import type user from '$lib/models/user';
 	import { goto } from '$app/navigation';
 	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
-	import { session } from '$lib/stores/userStore';
+	import { role, session } from '$lib/stores/userStore';
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	import fetch from '$lib/api/customFetch';
 
@@ -69,6 +69,12 @@
 		}
 
 		if (result.ok) {
+			if (wantsAdmin) {
+				$role = 'admin';
+			} else {
+				$role = 'interviewer';
+			}
+
 			$session = 'true';
 			$loggedInCorrectly = true;
 			goto('home');

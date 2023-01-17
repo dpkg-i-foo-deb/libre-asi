@@ -10,6 +10,7 @@
 		HeaderPanelLink,
 		SideNav,
 		SideNavItems,
+		SideNavMenuItem,
 		SideNavLink,
 		SkipToContent,
 		Content,
@@ -17,12 +18,13 @@
 		Row,
 		Column,
 		HeaderActionLink,
-		ToastNotification
+		ToastNotification,
+		SideNavMenu
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
-	import { session } from '$lib/stores/userStore';
+	import { session, role } from '$lib/stores/userStore';
 	import type { Unsubscriber } from 'svelte/store';
 	import { onDestroy, onMount } from 'svelte';
 	import { apiUrl, signOut } from '$lib/api/constants';
@@ -70,7 +72,9 @@
 		}
 
 		if (result.ok || result.status == 401) {
-			session.set('false');
+			$loggedInCorrectly = false;
+			$session = 'false';
+			$role = 'none';
 			goto('/');
 			loggedOutCorrectly = true;
 		} else {
@@ -120,7 +124,13 @@
 	<SideNavItems>
 		<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
 		<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
-		<SideNavLink text="Dashboard" href="/" isSelected={$page.url.pathname == '/dashboard'} />
+		<SideNavMenu text="Management">
+			<SideNavMenuItem>
+				{#if $role == 'admin'}
+					<SideNavMenuItem href="/administrators" text="Administrators" />
+				{/if}
+			</SideNavMenuItem>
+		</SideNavMenu>
 	</SideNavItems>
 </SideNav>
 
@@ -142,6 +152,7 @@
 				{#if loggedOutCorrectly}
 					<div class="notification">
 						<ToastNotification
+							timeout={parseInt('5000')}
 							kind="info"
 							title="Signed Out Correctly"
 							subtitle="Thanks for trying out Libre-ASI!"
@@ -153,6 +164,7 @@
 				{#if $loggedInCorrectly}
 					<div class="notification">
 						<ToastNotification
+							timeout={parseInt('5000')}
 							kind="success"
 							title="Logged In"
 							subtitle="Welcome to Libre-ASI"
