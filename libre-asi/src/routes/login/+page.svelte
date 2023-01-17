@@ -13,6 +13,9 @@
 	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
 	import { session } from '$lib/stores/userStore';
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
+	import { onMount } from 'svelte';
+	import fetch from '$lib/api/customFetch';
+
 	let email: string;
 	let password: string;
 	let invalidEmail = false;

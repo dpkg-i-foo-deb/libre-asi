@@ -28,6 +28,7 @@
 	import { apiUrl, signOut } from '$lib/api/constants';
 	import { goto } from '$app/navigation';
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
+	import { page } from '$app/stores';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
@@ -117,8 +118,9 @@
 
 <SideNav bind:isOpen={isSideNavOpen}>
 	<SideNavItems>
-		<SideNavLink text="Home" href="/home" />
-		<SideNavLink text="Dashboard" href="/" />
+		<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
+		<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
+		<SideNavLink text="Dashboard" href="/" isSelected={$page.url.pathname == '/dashboard'} />
 	</SideNavItems>
 </SideNav>
 
@@ -128,7 +130,7 @@
 			<Column>
 				<slot />
 				{#if logOutError}
-					<div class="error-notification">
+					<div class="notification">
 						<ToastNotification
 							title="Sign Out Error"
 							subtitle="Try again later"
@@ -138,7 +140,7 @@
 				{/if}
 
 				{#if loggedOutCorrectly}
-					<div class="error-notification">
+					<div class="notification">
 						<ToastNotification
 							kind="info"
 							title="Signed Out Correctly"
@@ -149,7 +151,7 @@
 				{/if}
 
 				{#if $loggedInCorrectly}
-					<div class="error-notification">
+					<div class="notification">
 						<ToastNotification
 							kind="success"
 							title="Logged In"
@@ -164,7 +166,7 @@
 </Content>
 
 <style>
-	.error-notification {
+	.notification {
 		position: fixed;
 		bottom: 0;
 		right: 0;
