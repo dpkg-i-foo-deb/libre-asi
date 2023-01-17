@@ -16,14 +16,18 @@ if (browser) {
 		let response: Response;
 
 		return originalFetch.apply(url, args).then(async function (data) {
-			if (data.status == 401) {
+			if (
+				data.status == 401 &&
+				!url.toString().includes('/login/') &&
+				!url.toString().includes('refresh')
+			) {
 				response = await originalFetch(apiUrl + refresh, {
 					method: 'POST',
 					credentials: 'include',
 					mode: 'cors'
 				});
 
-				if (response.status == 401) {
+				if (response.status == 401 || response.status == 429) {
 					return data;
 				}
 				return fetch(url, config);
