@@ -13,9 +13,9 @@ func GetAdministratorsService(c *fiber.Ctx) error {
 	res.Status = string(models.STATUS_ERROR)
 	res.Message = "Something went wrong"
 
-	var admins []models.Administrator
+	var admins []models.User
 
-	result := database.DB.Find(&admins)
+	result := database.DB.Omit("people", "password").Preload("Administrators").Find(&admins)
 
 	if result.Error != nil {
 		return c.Status(500).JSON(res)
