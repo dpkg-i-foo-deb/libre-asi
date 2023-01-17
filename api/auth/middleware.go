@@ -79,7 +79,31 @@ func ValidateRefreshTokenDate(c *fiber.Ctx) error {
 		return c.Status(412).JSON(res)
 	}
 
-	c.Next()
+	return c.Next()
 
-	return nil
+}
+
+func ValidateAdministratorRole(c *fiber.Ctx) error {
+	//This should run AFTER validating the access token
+
+	var res models.Response
+
+	tk := c.Cookies("access-token")
+
+	res.Status = string(models.STATUS_DENIED)
+	res.Message = "Not enough privileges"
+
+	role, err := RoleFromToken(tk)
+
+	if err != nil {
+		res.Status = string(models.STATUS_ERROR)
+		res.Message = "Something went wrong"
+		return c.Status(500).JSON(res)
+	}
+
+	if role != string(models.ADMINISTRATOR) {
+		return c.Status(403).JSON(res)
+	}
+
+	return c.Next()
 }
