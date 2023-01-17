@@ -7,4 +7,5 @@ func init() {
 	signOutRoute()
 	worldRoute()
 	refreshRoute()
+	adminRoutes()
 }
