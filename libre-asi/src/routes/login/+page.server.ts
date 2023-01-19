@@ -22,10 +22,7 @@ const login: Action = async function ({ cookies, request, fetch }) {
 			mode: 'cors',
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(user),
-			headers: {
-				'content-type': 'application/json'
-			}
+			body: JSON.stringify(user)
 		});
 
 		if (response.status == 401) {
