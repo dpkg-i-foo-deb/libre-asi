@@ -9,8 +9,7 @@
 		ToolbarSearch
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
-	import fetch from '$lib/api/customFetch';
-	import type administrator from '$lib/models/administrator';
+	import type administrator from '$lib/models/Administrator';
 	import { apiUrl, getAdmins } from '$lib/api/constants';
 
 	let administrators: administrator[];

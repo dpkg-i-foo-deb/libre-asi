@@ -1,4 +1,4 @@
-interface administrator {
+interface Administrator {
 	ID: number;
 	CreatedAt: Date;
 	UpdatedAt: Date;
@@ -6,4 +6,4 @@ interface administrator {
 	username: string;
 }
 
-export default administrator;
+export default Administrator;

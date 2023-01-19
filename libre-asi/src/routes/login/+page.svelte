@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import {
 		TextInput,
 		PasswordInput,
@@ -9,10 +9,12 @@
 		RadioButton,
 		Tooltip
 	} from 'carbon-components-svelte';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
-	let url = '';
 	let invalidEmail = false;
 	let invalidCredentials = false;
 	let loginError = false;
@@ -23,7 +25,15 @@
 
 <main>
 	<div class="container">
-		<form use:enhance action="?/login" method="POST">
+		<form
+			use:enhance={function () {
+				return async function ({ result }) {
+					await applyAction(result);
+				};
+			}}
+			action="?/login"
+			method="POST"
+		>
 			<h3>Please Log In to your Account</h3>
 
 			<div class="form-element">
@@ -46,6 +56,7 @@
 					name="password"
 					required
 					invalidText="Check your password"
+					type="password"
 				/>
 			</div>
 
@@ -66,7 +77,7 @@
 				</RadioButtonGroup>
 			</div>
 
-			{#if invalidCredentials}
+			{#if form?.invalidCredentials}
 				<div class="invalid-credentials">
 					<p>Check your credentials</p>
 				</div>
@@ -77,7 +88,7 @@
 			</div>
 		</form>
 	</div>
-	{#if loginError}
+	{#if form?.cannotConnect}
 		<div class="error-notification">
 			<ToastNotification
 				title="Login Error"
