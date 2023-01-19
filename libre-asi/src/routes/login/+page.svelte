@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import {
 		TextInput,
 		PasswordInput,
@@ -8,83 +9,21 @@
 		RadioButton,
 		Tooltip
 	} from 'carbon-components-svelte';
-	import type user from '$lib/models/user';
-	import { goto } from '$app/navigation';
-	import { adminLogin, apiUrl, interviewerLogin } from '$lib/api/constants';
-	import { role, session } from '$lib/stores/userStore';
-	import { loggedInCorrectly } from '$lib/stores/loginStore';
-	import fetch from '$lib/api/customFetch';
 
-	let email: string;
-	let password: string;
-	let invalidEmail = false;
-	let invalidCredentials = false;
-	let loginError = false;
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
 	let url = '';
+	let invalidEmail = false;
+	let invalidCredentials = false;
+	let loginError = false;
 
 	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 	let result: Response;
-
-	async function login(): Promise<void> {
-		invalidEmail = false;
-		invalidCredentials = false;
-		loginError = false;
-
-		if (!emailRegex.test(email)) {
-			invalidEmail = true;
-			return;
-		}
-
-		const user: user = { email: email, password: password };
-
-		if (wantsAdmin) {
-			url = apiUrl + adminLogin;
-		}
-		if (wantsInterviewer) {
-			url = apiUrl + interviewerLogin;
-		}
-
-		console.log(url);
-
-		try {
-			result = await fetch(url, {
-				headers: { 'Content-Type': 'application/json' },
-				method: 'POST',
-				body: JSON.stringify(user),
-				credentials: 'include',
-				mode: 'cors'
-			});
-		} catch (e) {
-			loginError = true;
-			console.log(e);
-			return;
-		}
-
-		if (!result.ok && result.status == 401) {
-			invalidCredentials = true;
-		} else {
-			loginError = true;
-		}
-
-		if (result.ok) {
-			if (wantsAdmin) {
-				$role = 'admin';
-			} else {
-				$role = 'interviewer';
-			}
-
-			$session = 'true';
-			$loggedInCorrectly = true;
-			goto('home');
-		}
-	}
 </script>
 
 <main>
 	<div class="container">
-		<form on:submit|preventDefault={login}>
+		<form use:enhance action="?/login" method="POST">
 			<h3>Please Log In to your Account</h3>
 
 			<div class="form-element">
@@ -96,7 +35,6 @@
 					invalidText="Check your email"
 					id="email"
 					name="email"
-					bind:value={email}
 				/>
 			</div>
 
@@ -108,7 +46,6 @@
 					name="password"
 					required
 					invalidText="Check your password"
-					bind:value={password}
 				/>
 			</div>
 
