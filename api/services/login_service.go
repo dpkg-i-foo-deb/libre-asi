@@ -24,9 +24,9 @@ func LoginService(c *fiber.Ctx) error {
 	}
 
 	switch c.Params("role") {
-	case "admin":
+	case string(models.ADMINISTRATOR):
 		err = loginAdmin(&u)
-	case "interviewer":
+	case string(models.INTERVIEWER):
 		err = loginInterviewer(&u)
 	case "patient":
 		err = errors.New("not implemmented")
