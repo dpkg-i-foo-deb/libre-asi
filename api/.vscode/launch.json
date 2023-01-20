@@ -14,7 +14,8 @@
                 "CONNECTION_STRING":"postgresql://libre_asi:libre_asi@localhost?sslmode=disable",
                 "ADMIN_EMAIL":"admin@example.com",
                 "ADMIN_PASSWORD":"admin",
-                "API_PORT":":3000"
+                "API_PORT":":3000",
+                "ADMIN_USERNAME":"admin"
             }
         }
     ]
