@@ -4,7 +4,7 @@ export interface AuthCookie {
     path:string,
     domain:string,
     max_age:number,
-    expires:Date
+    expires:Date,
     secure:boolean,
     http_only:boolean,
     same_site:string,
