@@ -33,7 +33,6 @@
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
-	let activeSession = false;
 	let logOutError = false;
 	let loggedOutCorrectly = false;
 
@@ -77,7 +76,7 @@
 			href="https://github.com/dpkg-i-foo-deb/libre-asi"
 			target="_blank"
 		/>
-		{#if activeSession}
+		{#if $session.active}
 			<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
 		{/if}
 
@@ -87,7 +86,7 @@
 			closeIcon={UserAvatarFilledAlt}
 		>
 			<HeaderPanelLinks>
-				{#if !activeSession}
+				{#if !$session.active}
 					<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
 					<HeaderPanelLink
 						href="/login"
@@ -95,7 +94,7 @@
 							isUserMenuOpen = false;
 						}}>Log In</HeaderPanelLink
 					>
-				{:else if activeSession}
+				{:else if $session.active}
 					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
 					<HeaderPanelLink on:click={logOut}>Sign Out</HeaderPanelLink>
 				{/if}
