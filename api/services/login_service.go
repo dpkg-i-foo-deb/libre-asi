@@ -14,6 +14,7 @@ func LoginService(c *fiber.Ctx) error {
 	var res models.Response
 	var u models.User
 	var tk models.JWTPair
+	var jwtResponse models.JwtCookies
 
 	err := c.BodyParser(&u)
 
@@ -57,13 +58,14 @@ func LoginService(c *fiber.Ctx) error {
 	refresh := auth.GenerateRefreshCookie(tk.RefreshToken)
 	auth := auth.GenerateAccessCookie(tk.Token)
 
-	c.Cookie(auth)
-	c.Cookie(refresh)
+	//TODO use real cookies when Sveltekit allows easy cookie parsing
+	//c.Cookie(auth)
+	//c.Cookie(refresh)
 
-	res.Status = string(models.STATUS_OK)
-	res.Message = "Logged in as " + c.Params("role")
+	jwtResponse.AccessToken = auth
+	jwtResponse.RefreshToken = refresh
 
-	return c.Status(200).JSON(res)
+	return c.Status(200).JSON(jwtResponse)
 }
 
 func loginAdmin(u *models.User) error {
