@@ -1,17 +1,21 @@
 import { browser } from '$app/environment';
-import { writable } from 'svelte/store';
+import type { Session } from '$lib/models/Session';
+import { writable, type Writable } from 'svelte/store';
+import { SessionRole } from '$lib/models/Session';
 
-export const session = writable((browser && localStorage.getItem('activeSession')) || 'false');
-export const role = writable((browser && localStorage.getItem('role')) || 'none');
+let storedSession: Session = { active: false, role: SessionRole.None };
+let session: Writable<Session> = writable(storedSession);
 
-session.subscribe((value) => {
+if (browser) {
+	storedSession = JSON.parse(localStorage.getItem('session') ?? JSON.stringify(storedSession));
+
+	session = writable(storedSession);
+}
+
+session.subscribe(function (value: Session) {
 	if (browser) {
-		return (localStorage.activeSession = value);
+		return (localStorage.session = JSON.stringify(value));
 	}
 });
 
-role.subscribe((value) => {
-	if (browser) {
-		return (localStorage.role = value);
-	}
-});
+export default session;

@@ -24,34 +24,18 @@
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
-	import { session, role } from '$lib/stores/userStore';
-	import type { Unsubscriber } from 'svelte/store';
-	import { onDestroy, onMount } from 'svelte';
+	import  session  from '$lib/stores/userStore';
 	import { apiUrl, signOut } from '$lib/api/constants';
 	import { goto } from '$app/navigation';
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	import { page } from '$app/stores';
+	import { SessionRole } from '$lib/models/Session';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
-	let subscription: Unsubscriber;
 	let activeSession = false;
 	let logOutError = false;
 	let loggedOutCorrectly = false;
-
-	onMount(async () => {
-		subscription = session.subscribe((value) => {
-			if (value == 'true') {
-				activeSession = true;
-			} else {
-				activeSession = false;
-			}
-		});
-	});
-
-	onDestroy(() => {
-		subscription;
-	});
 
 	async function logOut() {
 		logOutError = false;
@@ -73,8 +57,8 @@
 
 		if (result.ok || result.status == 401) {
 			$loggedInCorrectly = false;
-			$session = 'false';
-			$role = 'none';
+			$session.active = false;
+			$session.role = SessionRole.None;
 			goto('/');
 			loggedOutCorrectly = true;
 		} else {
@@ -128,7 +112,7 @@
 			text="Management"
 			expanded={$page.url.pathname.toString().includes('/management/')}
 		>
-			{#if $role == 'admin'}
+			{#if $session.role == SessionRole.Admin}
 				<SideNavMenuItem
 					href="/management/administrators"
 					text="Administrators"
