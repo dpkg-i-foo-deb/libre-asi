@@ -24,7 +24,7 @@
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
-	import  session  from '$lib/stores/userStore';
+	import session from '$lib/stores/userStore';
 	import { apiUrl, signOut } from '$lib/api/constants';
 	import { goto } from '$app/navigation';
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
