@@ -72,8 +72,16 @@
 						labelText="Interviewer"
 						value="interviewer"
 						bind:checked={wantsInterviewer}
+						id="interviewer"
+						name="interviewer"
 					/>
-					<RadioButton labelText="Administrator" value="admin" bind:checked={wantsAdmin} />
+					<RadioButton
+						labelText="Administrator"
+						value="admin"
+						bind:checked={wantsAdmin}
+						id="administrator"
+						name="administrator"
+					/>
 				</RadioButtonGroup>
 			</div>
 
