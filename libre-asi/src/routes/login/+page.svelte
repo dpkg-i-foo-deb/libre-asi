@@ -10,6 +10,7 @@
 		Tooltip
 	} from 'carbon-components-svelte';
 	import type { ActionData } from './$types';
+	import session from '$lib/stores/userStore';
 
 	export let form: ActionData;
 
@@ -26,8 +27,11 @@
 <main>
 	<div class="container">
 		<form
-			use:enhance={function () {
-				return async function ({ result }) {
+			use:enhance={() => {
+				return async ({ form, result }) => {
+					if (result.type === 'redirect') {
+						$session.active = true;
+					}
 					await applyAction(result);
 				};
 			}}
