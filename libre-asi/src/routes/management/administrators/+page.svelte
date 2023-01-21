@@ -4,8 +4,6 @@
 		DataTable,
 		Toolbar,
 		ToolbarContent,
-		ToolbarMenu,
-		ToolbarMenuItem,
 		ToolbarSearch
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';

@@ -3,7 +3,6 @@ import type { JwtPair } from '$lib/models/JwtPair';
 import type User from '$lib/models/User';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Action, Actions } from './$types';
-import { SessionRole } from '$lib/models/Session';
 
 const login: Action = async function ({ cookies, request, fetch }) {
 	const data = await request.formData();

@@ -16,19 +16,15 @@
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
-	let invalidEmail = false;
-	let invalidCredentials = false;
-	let loginError = false;
 
-	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-	let result: Response;
+	//const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 </script>
 
 <main>
 	<div class="container">
 		<form
 			use:enhance={() => {
-				return async ({ form, result }) => {
+				return async ({ result }) => {
 					if (result.type === 'redirect') {
 						$session.active = true;
 					}
@@ -45,7 +41,6 @@
 					labelText="Email"
 					placeholder="Enter email..."
 					required
-					bind:invalid={invalidEmail}
 					invalidText="Check your email"
 					id="email"
 					name="email"
