@@ -1,5 +1,4 @@
 import { apiUrl, interviewerLogin } from '$lib/api/constants';
-import { parseNodeFetchCookies } from '$lib/api/parseCookie';
 import type { JwtPair } from '$lib/models/JwtPair';
 import type User from '$lib/models/User';
 import { fail, redirect } from '@sveltejs/kit';
