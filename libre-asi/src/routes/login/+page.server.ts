@@ -1,8 +1,8 @@
-import { apiUrl, interviewerLogin } from '$lib/api/constants';
+import { apiUrl } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
 import type User from '$lib/models/User';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Action, Actions, PageServerLoad } from './$types';
+import type { Action, Actions } from './$types';
 
 const login: Action = async function ({ cookies, request, fetch }) {
 	const data = await request.formData();
