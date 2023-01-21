@@ -14,7 +14,7 @@ if (browser) {
 
 session.subscribe(function (value: Session) {
 	if (browser) {
-		return (localStorage.session = JSON.stringify(value));
+		localStorage.setItem('session', JSON.stringify(value));
 	}
 });
 
