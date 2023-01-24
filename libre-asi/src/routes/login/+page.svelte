@@ -97,12 +97,6 @@
 				</RadioButtonGroup>
 			</div>
 
-			{#if form?.invalidCredentials}
-				<div class="invalid-credentials">
-					<p>Check your credentials</p>
-				</div>
-			{/if}
-
 			<div class="button-container">
 				<Button type="submit">Log In</Button>
 			</div>
