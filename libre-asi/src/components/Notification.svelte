@@ -1,15 +1,23 @@
 <script lang="ts">
 	import { ToastNotification } from 'carbon-components-svelte';
+	import { notifications } from '$lib/stores/notificationStore';
 
-	export let title = 'Generic Notification';
-	export let subtitle = 'Subtitle';
-	export let caption = 'Caption';
-	export let kind: undefined | 'info' | 'warning' | 'error' | 'success';
-	export let timeout = 5000;
+	export let title = $notifications.title;
+	export let subtitle = $notifications.subtitle;
+	export let caption = $notifications.caption;
+	export let kind = $notifications.kind;
+	export let timeout = $notifications.timeout;
+	export let visible = $notifications.visible;
+
+	export function toggleVisibility() {
+		$notifications.visible = !$notifications.visible;
+	}
 </script>
 
 <main>
-	<div>
-		<ToastNotification {title} {subtitle} {caption} {timeout} {kind} />
-	</div>
+	{#if visible}
+		<div>
+			<ToastNotification {title} {subtitle} {caption} {timeout} {kind} />
+		</div>
+	{/if}
 </main>
