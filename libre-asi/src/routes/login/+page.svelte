@@ -23,10 +23,7 @@
 
 	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
 		if (result.type == 'failure') {
-			if (result.status == 400) {
-			}
-			if (result.status == 500) {
-				console.log('owo');
+			if (result.status == 500 || result.status == 400) {
 				$notifications.title = 'Login Error';
 				$notifications.caption = 'If the error persist, contact your administrator';
 				$notifications.subtitle = 'Something went wrong, try again later';
