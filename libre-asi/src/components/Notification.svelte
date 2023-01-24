@@ -12,12 +12,16 @@
 	export function toggleVisibility() {
 		$notifications.visible = !$notifications.visible;
 	}
+
+	function hide() {
+		$notifications.visible = false;
+	}
 </script>
 
 <main>
 	{#if visible}
 		<div>
-			<ToastNotification {title} {subtitle} {caption} {timeout} {kind} />
+			<ToastNotification {title} {subtitle} {caption} {timeout} {kind} on:close={hide} />
 		</div>
 	{/if}
 </main>
