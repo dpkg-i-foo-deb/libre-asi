@@ -36,35 +36,6 @@
 	let isUserMenuOpen = false;
 	let logOutError = false;
 	let loggedOutCorrectly = false;
-
-	async function logOut() {
-		logOutError = false;
-		loggedOutCorrectly = false;
-		let result: Response;
-		try {
-			result = await fetch(apiUrl + signOut, {
-				method: 'POST',
-				credentials: 'include',
-				mode: 'cors'
-			});
-		} catch (e) {
-			logOutError = true;
-			console.log(e);
-			return;
-		} finally {
-			isUserMenuOpen = false;
-		}
-
-		if (result.ok || result.status == 401) {
-			$loggedInCorrectly = false;
-			$session.active = false;
-			$session.role = SessionRole.None;
-			goto('/');
-			loggedOutCorrectly = true;
-		} else {
-			logOutError = true;
-		}
-	}
 </script>
 
 <Header persistentHamburgerMenu={true} bind:isSideNavOpen company="Libre-ASI">
@@ -97,7 +68,7 @@
 					>
 				{:else if $session.active}
 					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
-					<HeaderPanelLink on:click={logOut}>Sign Out</HeaderPanelLink>
+					<HeaderPanelLink>Sign Out</HeaderPanelLink>
 				{/if}
 			</HeaderPanelLinks>
 		</HeaderAction>
