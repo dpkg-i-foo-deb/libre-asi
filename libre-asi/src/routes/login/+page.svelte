@@ -108,15 +108,6 @@
 			</div>
 		</form>
 	</div>
-	{#if form?.cannotConnect}
-		<div class="error-notification">
-			<ToastNotification
-				title="Login Error"
-				subtitle="Try again later"
-				caption="If the error persists, contact your administrator"
-			/>
-		</div>
-	{/if}
 </main>
 
 <style>
