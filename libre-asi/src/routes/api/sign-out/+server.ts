@@ -9,16 +9,20 @@ export const POST: RequestHandler = async ({ fetch, cookies, request }) => {
 
 	let response: Response;
 	try {
+		//TODO somehting better than cloning headers
 		response = await fetch(apiUrl + signOutRoute, {
 			method: 'POST',
 			credentials: 'include',
 			headers: request.headers
 		});
 
-		options.status = response.status;
-
+		//Clear the cookies no matter what
 		cookies.delete('access-token', { path: '/' });
 		cookies.delete('refresh-token', { path: '/' });
+
+		if (!response.ok) {
+			console.log('Something went wrong while signing out the client');
+		}
 
 		return new Response(body, options);
 	} catch (e) {

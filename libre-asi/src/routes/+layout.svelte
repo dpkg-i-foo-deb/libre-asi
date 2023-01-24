@@ -37,7 +37,8 @@
 		try {
 			response = await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
 		} catch (e) {
-			console.log('failed unu...');
+		} finally {
+			isUserMenuOpen = false;
 		}
 	}
 </script>
