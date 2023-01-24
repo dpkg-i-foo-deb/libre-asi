@@ -4,7 +4,6 @@
 		TextInput,
 		PasswordInput,
 		Button,
-		ToastNotification,
 		RadioButtonGroup,
 		RadioButton,
 		Tooltip

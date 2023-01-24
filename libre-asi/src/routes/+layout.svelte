@@ -19,7 +19,6 @@
 		Row,
 		Column,
 		HeaderActionLink,
-		ToastNotification,
 		SideNavMenu
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
@@ -31,7 +30,6 @@
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
-	import { onMount } from 'svelte';
 	import { notifications } from '$lib/stores/notificationStore';
 
 	let isSideNavOpen = false;
@@ -136,40 +134,6 @@
 				<div class="notification">
 					<Notification />
 				</div>
-
-				{#if logOutError}
-					<div class="notification">
-						<ToastNotification
-							title="Sign Out Error"
-							subtitle="Try again later"
-							caption="If the error persists, contact your administrator"
-						/>
-					</div>
-				{/if}
-
-				{#if loggedOutCorrectly}
-					<div class="notification">
-						<ToastNotification
-							timeout={parseInt('5000')}
-							kind="info"
-							title="Signed Out Correctly"
-							subtitle="Thanks for trying out Libre-ASI!"
-							caption={new Date().toLocaleString()}
-						/>
-					</div>
-				{/if}
-
-				{#if $loggedInCorrectly}
-					<div class="notification">
-						<ToastNotification
-							timeout={parseInt('5000')}
-							kind="success"
-							title="Logged In"
-							subtitle="Welcome to Libre-ASI"
-							caption={new Date().toLocaleString()}
-						/>
-					</div>
-				{/if}
 			</Column>
 		</Row>
 	</Grid>
