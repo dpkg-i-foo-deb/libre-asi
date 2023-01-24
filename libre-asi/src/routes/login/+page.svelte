@@ -6,7 +6,8 @@
 		Button,
 		RadioButtonGroup,
 		RadioButton,
-		Tooltip
+		Tooltip,
+		InlineNotification
 	} from 'carbon-components-svelte';
 	import type { ActionData } from './$types';
 	import session from '$lib/stores/userStore';
@@ -48,6 +49,12 @@
 			method="POST"
 		>
 			<h3>Please Log In to your Account</h3>
+
+			{#if form?.invalidCredentials}
+				<div class="invalid-credentials">
+					<InlineNotification title="Error" subtitle="Invalid username or password" />
+				</div>
+			{/if}
 
 			<div class="form-element">
 				<TextInput
@@ -125,8 +132,6 @@
 	}
 
 	.invalid-credentials {
-		padding-top: 5px;
-		padding-bottom: 5px;
-		color: red;
+		padding-top: 20px;
 	}
 </style>
