@@ -11,6 +11,9 @@
 	} from 'carbon-components-svelte';
 	import type { ActionData } from './$types';
 	import session from '$lib/stores/userStore';
+	import type { ActionResult } from '@sveltejs/kit';
+	import { notifications } from '$lib/stores/notificationStore';
+	import Layout from '../+layout.svelte';
 
 	export let form: ActionData;
 
@@ -18,6 +21,15 @@
 	let wantsInterviewer = false;
 
 	//const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
+		if (result.type == 'failure') {
+			console.log('owo');
+			$notifications.visible = true;
+			if (form?.badRequest ?? false) {
+			}
+		}
+	}
 </script>
 
 <main>
@@ -25,6 +37,7 @@
 		<form
 			use:enhance={() => {
 				return async ({ result }) => {
+					handleLogin(result);
 					if (result.type === 'redirect') {
 						$session.active = true;
 					}

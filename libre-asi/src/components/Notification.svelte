@@ -7,8 +7,6 @@
 	export let caption = $notifications.caption;
 	export let kind = $notifications.kind;
 	export let timeout = $notifications.timeout;
-	export let visible = $notifications.visible;
-
 	export function toggleVisibility() {
 		$notifications.visible = !$notifications.visible;
 	}
@@ -19,7 +17,7 @@
 </script>
 
 <main>
-	{#if visible}
+	{#if $notifications.visible}
 		<div>
 			<ToastNotification {title} {subtitle} {caption} {timeout} {kind} on:close={hide} />
 		</div>

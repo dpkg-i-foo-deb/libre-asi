@@ -31,11 +31,17 @@
 	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
+	import { onMount } from 'svelte';
+	import { notifications } from '$lib/stores/notificationStore';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
 	let logOutError = false;
 	let loggedOutCorrectly = false;
+
+	onMount(function () {
+		$notifications.visible = false;
+	});
 
 	async function logOut() {
 		logOutError = false;
@@ -130,6 +136,11 @@
 		<Row>
 			<Column>
 				<slot />
+
+				<div class="notification">
+					<Notification />
+				</div>
+
 				{#if logOutError}
 					<div class="notification">
 						<ToastNotification
@@ -163,9 +174,6 @@
 						/>
 					</div>
 				{/if}
-				<div class="notification">
-					<Notification kind="info" />
-				</div>
 			</Column>
 		</Row>
 	</Grid>
