@@ -21,7 +21,7 @@
 
 	//const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
+	function handleLogin(result: ActionResult<Record<string, unknown>, Record<string, unknown>>) {
 		if (result.type == 'failure') {
 			if (result.status == 500 || result.status == 400) {
 				$notifications.title = 'Login Error';
