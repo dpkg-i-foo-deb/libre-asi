@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'carbon-components-svelte/css/all.css';
+	import Notification from '../components/Notification.svelte';
 	import {
 		Header,
 		HeaderUtilities,
@@ -162,6 +163,9 @@
 						/>
 					</div>
 				{/if}
+				<div class="notification">
+					<Notification kind="info" />
+				</div>
 			</Column>
 		</Row>
 	</Grid>
