@@ -25,8 +25,11 @@
 	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
 		if (result.type == 'failure') {
 			console.log('owo');
-			$notifications.visible = true;
+			//$notifications.visible = true;
 			if (form?.badRequest ?? false) {
+			}
+			if (form?.cannotConnect ?? false) {
+				$notifications.visible = true;
 			}
 		}
 	}
@@ -128,13 +131,6 @@
 	.button-container {
 		padding-top: 10px;
 		float: left;
-	}
-
-	.error-notification {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-		margin: 10px;
 	}
 
 	.invalid-credentials {
