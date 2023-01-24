@@ -13,7 +13,6 @@
 	import session from '$lib/stores/userStore';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { notifications } from '$lib/stores/notificationStore';
-	import Layout from '../+layout.svelte';
 
 	export let form: ActionData;
 
@@ -24,11 +23,13 @@
 
 	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
 		if (result.type == 'failure') {
-			if (form?.badRequest ?? false) {
+			if (result.status == 400) {
 			}
-			if (form?.cannotConnect ?? false) {
+			if (result.status == 500) {
 				console.log('owo');
 				$notifications.title = 'Login Error';
+				$notifications.caption = 'If the error persist, contact your administrator';
+				$notifications.subtitle = 'Something went wrong, try again later';
 				$notifications.visible = true;
 			}
 		}

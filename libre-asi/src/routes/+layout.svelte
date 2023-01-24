@@ -39,10 +39,6 @@
 	let logOutError = false;
 	let loggedOutCorrectly = false;
 
-	onMount(function () {
-		$notifications.visible = false;
-	});
-
 	async function logOut() {
 		logOutError = false;
 		loggedOutCorrectly = false;
