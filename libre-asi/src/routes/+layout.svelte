@@ -35,7 +35,7 @@
 	async function handleSignOut() {
 		let response: Response;
 		try {
-			response = await fetch('api/sign-out', { method: 'POST' });
+			response = await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
 		} catch (e) {
 			console.log('failed unu...');
 		}
