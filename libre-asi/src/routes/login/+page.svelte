@@ -24,11 +24,11 @@
 
 	function handleLogin(result: ActionResult<Record<string, any>, Record<string, any>>) {
 		if (result.type == 'failure') {
-			console.log('owo');
-			//$notifications.visible = true;
 			if (form?.badRequest ?? false) {
 			}
 			if (form?.cannotConnect ?? false) {
+				console.log('owo');
+				$notifications.title = 'Login Error';
 				$notifications.visible = true;
 			}
 		}
