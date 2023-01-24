@@ -25,17 +25,21 @@
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import session from '$lib/stores/userStore';
-	import { apiUrl, signOut } from '$lib/api/constants';
-	import { goto } from '$app/navigation';
-	import { loggedInCorrectly } from '$lib/stores/loginStore';
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
 	import { notifications } from '$lib/stores/notificationStore';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
-	let logOutError = false;
-	let loggedOutCorrectly = false;
+
+	async function handleSignOut() {
+		let response: Response;
+		try {
+			response = await fetch('api/sign-out', { method: 'POST' });
+		} catch (e) {
+			console.log('failed unu...');
+		}
+	}
 </script>
 
 <Header persistentHamburgerMenu={true} bind:isSideNavOpen company="Libre-ASI">
@@ -68,7 +72,7 @@
 					>
 				{:else if $session.active}
 					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
-					<HeaderPanelLink>Sign Out</HeaderPanelLink>
+					<HeaderPanelLink on:click={handleSignOut}>Sign Out</HeaderPanelLink>
 				{/if}
 			</HeaderPanelLinks>
 		</HeaderAction>
