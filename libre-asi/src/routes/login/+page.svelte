@@ -30,6 +30,16 @@
 				$notifications.visible = true;
 			}
 		}
+
+		if (result.type == 'redirect') {
+			console.log('owo');
+			$notifications.kind = 'success';
+			$notifications.title = 'Logged In Correctly';
+			$notifications.subtitle = 'Welcome back!';
+			$notifications.caption = new Date().toLocaleDateString();
+			$notifications.timeout = 10000;
+			$notifications.visible = true;
+		}
 	}
 </script>
 
