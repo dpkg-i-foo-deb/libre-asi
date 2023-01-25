@@ -6,7 +6,6 @@
 		ToolbarContent,
 		ToolbarSearch
 	} from 'carbon-components-svelte';
-	import type administrator from '$lib/models/Administrator';
 </script>
 
 <DataTable title="Administrators" description="Current Registered Administrators">
