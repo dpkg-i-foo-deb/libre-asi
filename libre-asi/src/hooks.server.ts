@@ -1,6 +1,6 @@
 import { redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
-import { generalRoutes } from '$lib/protected/general';
+import { PROTECTED_ROUTES } from '$lib/protected/protected';
 
 export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -26,7 +26,7 @@ export const handle: Handle = (async ({ event, resolve }) => {
 	const cookies = event.cookies;
 
 	if (cookies.get('access-token') == undefined) {
-		generalRoutes.forEach(function (value) {
+		PROTECTED_ROUTES.forEach(function (value) {
 			if (event.url.pathname.includes(value)) {
 				throw redirect(302, '/login');
 			}
