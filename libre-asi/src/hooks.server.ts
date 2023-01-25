@@ -24,12 +24,15 @@ export const handle: Handle = (async ({ event, resolve }) => {
 	//TODO use this to protect routes
 	const cookies = event.cookies;
 
+	if (cookies.get('access-token') == undefined) {
+		generalRoutes.forEach(function (value) {
+			if (event.url.pathname.includes(value)) {
+				throw redirect(302, '/login');
+			}
+		});
+	}
+
 	const response = await resolve(event);
 
-	generalRoutes.forEach(function (value) {
-		if (event.url.pathname.includes(value)) {
-			throw redirect(302, '/login');
-		}
-	});
 	return response;
 }) satisfies Handle;
