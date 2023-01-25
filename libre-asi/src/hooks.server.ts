@@ -1,5 +1,6 @@
-import type { HandleFetch } from '@sveltejs/kit';
+import { redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
+import { generalRoutes } from '$lib/protected/general';
 
 export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -7,9 +8,13 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	const response = await fetch(request);
 	const cookies = event.cookies;
 
-	if (response.status == 401) {
+	if (response.status == 401 && !request.url.includes('login')) {
 		cookies.delete('access-token', { path: '/' });
 		cookies.delete('refresh-token', { path: '/' });
+	}
+
+	if (response.status == 403) {
+		//TODO redirect to a 'Not enough privileges page'
 	}
 
 	return response;
@@ -21,5 +26,10 @@ export const handle: Handle = (async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 
+	generalRoutes.forEach(function (value) {
+		if (event.url.pathname.includes(value)) {
+			throw redirect(302, '/login');
+		}
+	});
 	return response;
 }) satisfies Handle;
