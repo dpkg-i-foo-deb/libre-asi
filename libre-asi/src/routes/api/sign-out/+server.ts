@@ -1,6 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({ cookies }) => {
+export const POST: RequestHandler = async function ({ cookies }) {
 	let body = 'Success';
 	const options = { status: 200, statusText: 'Logged out' };
 
