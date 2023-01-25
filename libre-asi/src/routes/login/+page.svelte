@@ -13,6 +13,7 @@
 	import session from '$lib/stores/userStore';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { notifications } from '$lib/stores/notificationStore';
+	import { SessionRole } from '$lib/models/Session';
 
 	export let form: ActionData;
 
@@ -32,6 +33,14 @@
 		}
 
 		if (result.type == 'redirect') {
+			$session.active = true;
+			if (wantsAdmin) {
+				$session.role = SessionRole.Admin;
+			}
+			if (wantsInterviewer) {
+				$session.role = SessionRole.Interviewer;
+			}
+
 			$notifications.kind = 'success';
 			$notifications.title = 'Logged In Correctly';
 			$notifications.subtitle = 'Welcome back!';

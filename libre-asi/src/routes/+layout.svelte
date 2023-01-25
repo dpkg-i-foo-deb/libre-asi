@@ -34,9 +34,8 @@
 	let isUserMenuOpen = false;
 
 	async function handleSignOut() {
-		let response: Response;
 		try {
-			response = await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
+			await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
 
 			//Set session data to false and redirect to the home page
 			$session.active = false;
