@@ -28,6 +28,7 @@
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
 	import { notifications } from '$lib/stores/notificationStore';
+	import { goto } from '$app/navigation';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
@@ -36,6 +37,12 @@
 		let response: Response;
 		try {
 			response = await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
+
+			//Set session data to false and redirect to the home page
+			$session.active = false;
+			$session.role = SessionRole.None;
+
+			goto('/');
 		} catch (e) {
 			console.error(e);
 		} finally {
