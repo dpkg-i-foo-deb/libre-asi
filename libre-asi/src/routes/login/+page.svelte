@@ -32,7 +32,6 @@
 		}
 
 		if (result.type == 'redirect') {
-			console.log('owo');
 			$notifications.kind = 'success';
 			$notifications.title = 'Logged In Correctly';
 			$notifications.subtitle = 'Welcome back!';
