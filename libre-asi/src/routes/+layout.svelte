@@ -42,6 +42,13 @@
 			$session.active = false;
 			$session.role = SessionRole.None;
 
+			$notifications.kind = 'success';
+			$notifications.title = 'Signed Out Correctly';
+			$notifications.subtitle = 'Thank you for using Libre-ASI';
+			$notifications.caption = new Date().toLocaleString();
+			$notifications.timeout = 8;
+			$notifications.visible = true;
+
 			goto('/');
 		} catch (e) {
 			console.error(e);
