@@ -55,7 +55,7 @@ const login: Action = async function ({ cookies, request, fetch }) {
 			secure: pair.refresh_token.secure
 		});
 
-		throw redirect(302, '/management/' + administrator ?? interviewer);
+		throw redirect(302, 'home');
 	}
 };
 
