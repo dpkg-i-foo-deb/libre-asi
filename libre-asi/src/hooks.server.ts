@@ -1,6 +1,7 @@
 import { redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protected';
+import { API_URL, REFRESH } from '$lib/api/constants';
 
 export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -8,10 +9,27 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	const response = await fetch(request);
 	const cookies = event.cookies;
 
-	if (response.status == 401 && !request.url.includes('login')) {
-		//Try to refresh the access token
-		cookies.delete('access-token', { path: '/' });
-		cookies.delete('refresh-token', { path: '/' });
+	if (
+		response.status == 401 &&
+		!request.url.includes('login') &&
+		!request.url.includes('refresh')
+	) {
+		const refresh = await fetch(API_URL + REFRESH, {
+			credentials: 'include',
+			headers: request.headers
+		});
+
+		if (refresh.ok) {
+			const newResponse = await fetch(request);
+
+			if (newResponse.ok) {
+				return newResponse;
+			}
+		}
+
+		cookies.set('access-token', '', { path: '/' });
+		cookies.set('refresh-token', '', { path: '/' });
+		throw redirect(302, '/login');
 	}
 
 	if (response.status == 403) {
@@ -24,14 +42,6 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 export const handle: Handle = (async ({ event, resolve }) => {
 	//TODO use this to protect routes
 	const cookies = event.cookies;
-
-	if (cookies.get('access-token') == undefined) {
-		PROTECTED_ROUTES.forEach(function (value) {
-			if (event.url.pathname.includes(value)) {
-				throw redirect(302, '/login');
-			}
-		});
-	}
 
 	const response = await resolve(event);
 

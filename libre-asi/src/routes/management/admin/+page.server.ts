@@ -8,7 +8,7 @@ export const load: PageServerLoad = async function ({ cookies, fetch, request })
 	try {
 		response = await fetch(API_URL + GET_ADMINS, {
 			credentials: 'include',
-			headers: { Cookie: 'access-token=' + cookies.get('access-token') }
+			headers: request.headers
 		});
 
 		if (response.ok) {
@@ -19,9 +19,5 @@ export const load: PageServerLoad = async function ({ cookies, fetch, request })
 	} catch (e) {
 		console.log(e);
 	}
-
-	//cookies.delete('access-token', { path: '/' });
-	//cookies.delete('refresh-token', { path: '/' });
-
 	return { error: true };
 };
