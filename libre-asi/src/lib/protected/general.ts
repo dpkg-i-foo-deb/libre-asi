@@ -1,1 +1,1 @@
-export const generalRoutes = ['/management/'];
+export const generalRoutes = ['/management/', '/home'];
