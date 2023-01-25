@@ -104,9 +104,9 @@
 		>
 			{#if $session.role == SessionRole.Admin}
 				<SideNavMenuItem
-					href="/management/administrators"
+					href="/management/admin"
 					text="Administrators"
-					isSelected={$page.url.pathname == '/management/administrators'}
+					isSelected={$page.url.pathname == '/management/admin'}
 				/>
 
 				<SideNavMenuItem text="Interviewers" />
