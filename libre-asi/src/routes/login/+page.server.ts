@@ -1,4 +1,4 @@
-import { apiUrl } from '$lib/api/constants';
+import { API_URL } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
 import type User from '$lib/models/User';
 import { fail, redirect } from '@sveltejs/kit';
@@ -14,7 +14,7 @@ const login: Action = async function ({ cookies, request, fetch }) {
 	const administrator = data.get('administrator');
 	const interviewer = data.get('interviewer');
 
-	const fullUrl = `${apiUrl}login/${administrator ?? interviewer}`;
+	const fullUrl = `${API_URL}login/${administrator ?? interviewer}`;
 
 	if (typeof email !== 'string' || typeof password !== 'string') {
 		return fail(400, { badRequest: true });

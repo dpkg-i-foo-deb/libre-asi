@@ -1,8 +1,8 @@
-const apiUrl = 'http://127.0.0.1:3000/';
-const interviewerLogin = 'login/interviewer/';
-const adminLogin = 'login/admin';
-const signOut = 'sign-out';
-const refresh = 'refresh/';
-const getAdmins = 'administrators/';
+const API_URL = 'http://127.0.0.1:3000/';
+const INTERVIEWER_LOGIN = 'login/interviewer/';
+const ADMIN_LOGIN = 'login/admin';
+const SIGN_OUT = 'sign-out';
+const REFRESH = 'refresh/';
+const GET_ADMINS = 'administrators/';
 
-export { apiUrl, interviewerLogin, adminLogin, signOut, refresh, getAdmins };
+export { API_URL, INTERVIEWER_LOGIN, ADMIN_LOGIN, SIGN_OUT, REFRESH, GET_ADMINS };

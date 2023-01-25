@@ -9,6 +9,7 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	const cookies = event.cookies;
 
 	if (response.status == 401 && !request.url.includes('login')) {
+		//Try to refresh the access token
 		cookies.delete('access-token', { path: '/' });
 		cookies.delete('refresh-token', { path: '/' });
 	}
