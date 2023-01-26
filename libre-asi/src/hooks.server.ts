@@ -1,7 +1,8 @@
-import { redirect, type HandleFetch } from '@sveltejs/kit';
+import type { HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protected';
 import { API_URL, REFRESH } from '$lib/api/constants';
+import type { JwtPair } from '$lib/models/JwtPair';
 
 export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -15,12 +16,34 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 		!request.url.includes('refresh')
 	) {
 		const refresh = await fetch(API_URL + REFRESH, {
+			method: 'POST',
 			credentials: 'include',
 			headers: request.headers
 		});
 
 		if (refresh.ok) {
-			const newResponse = await fetch(request);
+			//Set the new access and refresh token as cookies
+			const newCookies = (await refresh.json()) as JwtPair;
+
+			console.log(newCookies.access_token);
+
+			cookies.set('access-token', newCookies.access_token.value, {
+				path: '/',
+				httpOnly: true
+			});
+			cookies.set('refresh-token', newCookies.refresh_token.value, {
+				path: '/',
+				httpOnly: true
+			});
+
+			//Make a new request and pray for it to work
+
+			let newRequest = request.clone();
+			newRequest.headers.set('cookie', 'access-token=' + newCookies.access_token.value);
+
+			const newResponse = await fetch(newRequest, {
+				credentials: 'include'
+			});
 
 			if (newResponse.ok) {
 				return newResponse;
@@ -29,7 +52,6 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 
 		cookies.set('access-token', '', { path: '/' });
 		cookies.set('refresh-token', '', { path: '/' });
-		throw redirect(302, '/login');
 	}
 
 	if (response.status == 403) {

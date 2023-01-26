@@ -6,7 +6,7 @@
 
 	onMount(function () {
 		if (!$session.active) {
-			goto('/');
+			goto('/login');
 		}
 	});
 </script>
