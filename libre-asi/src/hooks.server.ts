@@ -3,7 +3,6 @@ import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
-import type { Session } from '$lib/models/Session';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -39,7 +38,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 
 			//Make a new request and pray for it to work
 
-			let newRequest = request.clone();
+			const newRequest = request.clone();
 			newRequest.headers.set('cookie', 'access-token=' + newCookies.access_token.value);
 
 			const newResponse = await fetch(newRequest, {
@@ -65,7 +64,6 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 export const handle: Handle = async ({ event, resolve }) => {
 	//TODO use this to protect routes
 	const cookies = event.cookies;
-	let session: Session;
 	let protectedRoute = false;
 
 	const accessToken = cookies.get('access-token') ?? '';

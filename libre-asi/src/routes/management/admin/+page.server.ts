@@ -2,7 +2,7 @@ import { API_URL, GET_ADMINS } from '$lib/api/constants';
 import type Administrator from '$lib/models/Administrator';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async function ({ cookies, fetch, request }) {
+export const load: PageServerLoad = async function ({ fetch, request }) {
 	let response: Response;
 
 	try {

@@ -33,7 +33,9 @@
 			goto('/');
 		}
 
-		rows = data.administrators!.map(function (value: Administrator) {
+		const existingAdmins = data.administrators ?? [];
+
+		rows = existingAdmins.map(function (value: Administrator) {
 			return { id: value.ID, email: value.email, username: value.username };
 		});
 	});
