@@ -7,7 +7,11 @@ let storedSession: Session = { active: false, role: SessionRole.None };
 let session: Writable<Session> = writable(storedSession);
 
 if (browser) {
-	storedSession = JSON.parse(localStorage.getItem('session') ?? JSON.stringify(storedSession));
+	try {
+		storedSession = JSON.parse(localStorage.getItem('session') ?? JSON.stringify(storedSession));
+	} catch (e) {
+		console.warn('Local storage session value is wrong, fixing...');
+	}
 	session = writable(storedSession);
 }
 
