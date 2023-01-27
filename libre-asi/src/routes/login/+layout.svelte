@@ -5,11 +5,9 @@
 
 	onMount(async () => {
 		if ($session.active == true) {
-			goto('/');
+			//goto('/');
 		}
 	});
 </script>
 
-{#if !$session.active}
 	<slot />
-{/if}

@@ -6,11 +6,9 @@
 
 	onMount(function () {
 		if (!$session.active) {
-			goto('/login');
+			//goto('/login');
 		}
 	});
 </script>
 
-{#if $session.active && $session.role == SessionRole.Admin}
 	<slot />
-{/if}
