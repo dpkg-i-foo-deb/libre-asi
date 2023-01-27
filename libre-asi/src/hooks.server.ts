@@ -1,4 +1,4 @@
-import { fail, redirect, type HandleFetch } from '@sveltejs/kit';
+import { redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
