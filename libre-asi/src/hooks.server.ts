@@ -4,7 +4,7 @@ import { PROTECTED_ROUTES } from '$lib/protected/protected';
 import { API_URL, REFRESH } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
 
-export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
+export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
 
 	const response = await fetch(request);
@@ -59,13 +59,13 @@ export const handleFetch: HandleFetch = (async ({ request, fetch, event }) => {
 	}
 
 	return response;
-}) satisfies HandleFetch;
+};
 
-export const handle: Handle = (async ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve }) => {
 	//TODO use this to protect routes
 	const cookies = event.cookies;
 
 	const response = await resolve(event);
 
 	return response;
-}) satisfies Handle;
+};
