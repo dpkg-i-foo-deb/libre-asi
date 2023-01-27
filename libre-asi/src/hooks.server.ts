@@ -1,8 +1,9 @@
 import { redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
-import { PROTECTED_ROUTES } from '$lib/protected/protected';
+import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
+import { SessionRole, type Session } from '$lib/models/Session';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -64,19 +65,42 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 export const handle: Handle = async ({ event, resolve }) => {
 	//TODO use this to protect routes
 	const cookies = event.cookies;
+	let session: Session;
+	let protectedRoute = false;
 
 	const accessToken = cookies.get('access-token') ?? '';
 	const refreshToken = cookies.get('refresh-token') ?? '';
+	const sessionCookie = cookies.get('session') ?? '';
 
-	console.log(accessToken);
+	PROTECTED_ROUTES.forEach(function (route) {
+		if (event.url.pathname.includes(route)) {
+			protectedRoute = true;
+		}
+	});
 
-	if (accessToken == '' && refreshToken == '' && !event.url.pathname.includes('login')) {
-		throw redirect(302, '/login');
+	if (protectedRoute) {
+		try {
+			session = JSON.parse(sessionCookie);
+
+			if (!session.active) {
+				throw redirect(302, '/login');
+			}
+		} catch (e) {
+			console.log(e);
+			session = { active: false, role: SessionRole.None };
+			cookies.set('session', JSON.stringify(session), { path: '/' });
+			throw redirect(302, '/login');
+		}
+
+		if (accessToken == '' && refreshToken == '') {
+			throw redirect(302, '/login');
+		}
+
+		if (accessToken != '' || refreshToken != '') {
+			throw redirect(302, '/');
+		}
 	}
 
-	if ((accessToken != '' || refreshToken != '') && event.url.pathname.includes('login')) {
-		throw redirect(302, '/');
-	}
 	const response = await resolve(event);
 
 	return response;
