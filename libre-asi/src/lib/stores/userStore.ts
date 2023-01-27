@@ -8,7 +8,6 @@ let session: Writable<Session> = writable(storedSession);
 
 if (browser) {
 	storedSession = JSON.parse(localStorage.getItem('session') ?? JSON.stringify(storedSession));
-
 	session = writable(storedSession);
 }
 

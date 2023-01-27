@@ -3,7 +3,7 @@ import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
-import { SessionRole, type Session } from '$lib/models/Session';
+import type { Session } from '$lib/models/Session';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
@@ -70,7 +70,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const accessToken = cookies.get('access-token') ?? '';
 	const refreshToken = cookies.get('refresh-token') ?? '';
-	const sessionCookie = cookies.get('session') ?? '';
 
 	PROTECTED_ROUTES.forEach(function (route) {
 		if (event.url.pathname.includes(route)) {
@@ -79,19 +78,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	if (protectedRoute) {
-		try {
-			session = JSON.parse(sessionCookie);
-
-			if (!session.active) {
-				throw redirect(302, '/login');
-			}
-		} catch (e) {
-			console.log(e);
-			session = { active: false, role: SessionRole.None };
-			cookies.set('session', JSON.stringify(session), { path: '/' });
-			throw redirect(302, '/login');
-		}
-
 		if (accessToken == '' && refreshToken == '') {
 			throw redirect(302, '/login');
 		}
