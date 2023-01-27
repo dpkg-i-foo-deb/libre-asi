@@ -83,7 +83,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
-	if ((accessToken != '' || refreshToken != '') && event.url.pathname != '/') {
+	if ((accessToken != '' || refreshToken != '') && event.url.pathname == '/login') {
 		throw redirect(302, '/');
 	}
 
