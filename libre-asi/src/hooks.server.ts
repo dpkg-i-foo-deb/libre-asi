@@ -1,4 +1,4 @@
-import { redirect, type HandleFetch } from '@sveltejs/kit';
+import { fail, redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
@@ -81,10 +81,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (accessToken == '' && refreshToken == '') {
 			throw redirect(302, '/login');
 		}
+	}
 
-		if (accessToken != '' || refreshToken != '') {
-			throw redirect(302, '/');
-		}
+	if ((accessToken != '' || refreshToken != '') && event.url.pathname != '/') {
+		throw redirect(302, '/');
 	}
 
 	const response = await resolve(event);
