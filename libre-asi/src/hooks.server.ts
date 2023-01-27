@@ -74,7 +74,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		throw redirect(302, '/login');
 	}
 
-	if (accessToken != '' || (refreshToken != '' && event.url.pathname.includes('login'))) {
+	if ((accessToken != '' || refreshToken != '') && event.url.pathname.includes('login')) {
 		throw redirect(302, '/');
 	}
 	const response = await resolve(event);
