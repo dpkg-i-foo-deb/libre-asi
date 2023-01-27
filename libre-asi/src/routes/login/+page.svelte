@@ -14,11 +14,18 @@
 	import type { ActionResult } from '@sveltejs/kit';
 	import { notifications } from '$lib/stores/notificationStore';
 	import { SessionRole } from '$lib/models/Session';
+	import { onMount } from 'svelte';
 
 	export let form: ActionData;
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
+
+	onMount(function () {
+		//If the user lands here, it means they need a session
+		$session.active = false;
+		$session.role = SessionRole.None;
+	});
 
 	//const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
