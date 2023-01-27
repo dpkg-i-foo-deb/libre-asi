@@ -12,8 +12,12 @@
 	import { notifications } from '$lib/stores/notificationStore';
 	import { SessionRole } from '$lib/models/Session';
 	import { goto } from '$app/navigation';
+	import type Administrator from '$lib/models/Administrator';
+	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
 	export let data: PageData;
+
+	let rows: ReadonlyArray<DataTableRow>;
 
 	onMount(function () {
 		if (data.error) {
@@ -28,10 +32,22 @@
 
 			goto('/');
 		}
+
+		rows = data.administrators!.map(function (value: Administrator) {
+			return { id: value.ID, email: value.email, username: value.username };
+		});
 	});
 </script>
 
-<DataTable title="Administrators" description="Current Registered Administrators">
+<DataTable
+	title="Administrators"
+	description="Current Registered Administrators"
+	headers={[
+		{ key: 'email', value: 'Email' },
+		{ key: 'username', value: 'Username' }
+	]}
+	{rows}
+>
 	<Toolbar>
 		<ToolbarContent>
 			<ToolbarSearch />
