@@ -14,7 +14,7 @@
 	import { goto } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-
+	import { DataTableSkeleton } from 'carbon-components-svelte';
 	export let data: PageData;
 
 	let rows: ReadonlyArray<DataTableRow>;
@@ -41,19 +41,29 @@
 	});
 </script>
 
-<DataTable
-	title="Administrators"
-	description="Current Registered Administrators"
-	headers={[
-		{ key: 'email', value: 'Email' },
-		{ key: 'username', value: 'Username' }
-	]}
-	{rows}
->
-	<Toolbar>
-		<ToolbarContent>
-			<ToolbarSearch />
-			<Button>Register Administrator</Button>
-		</ToolbarContent>
-	</Toolbar>
-</DataTable>
+{#if rows == undefined}
+	<DataTableSkeleton
+		headers={[
+			{ key: 'email', value: 'Email' },
+			{ key: 'username', value: 'Username' }
+		]}
+		rows={5}
+	/>
+{:else}
+	<DataTable
+		title="Administrators"
+		description="Current Registered Administrators"
+		headers={[
+			{ key: 'email', value: 'Email' },
+			{ key: 'username', value: 'Username' }
+		]}
+		{rows}
+	>
+		<Toolbar>
+			<ToolbarContent>
+				<ToolbarSearch />
+				<Button>Register Administrator</Button>
+			</ToolbarContent>
+		</Toolbar>
+	</DataTable>
+{/if}
