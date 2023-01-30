@@ -97,11 +97,8 @@
 			body: JSON.stringify(administrator)
 		});
 
-		//TODO use a general cannot connect error page :/
 		if (response.status == 503) {
-			isOpen = false;
-
-			sendError('Something went wrong', 'If the error persists, contact your administrator');
+			goto('/cannot-connect');
 		}
 
 		if (response.status == 401) {
