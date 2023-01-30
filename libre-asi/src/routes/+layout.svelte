@@ -29,6 +29,7 @@
 	import { SessionRole } from '$lib/models/Session';
 	import { notifications } from '$lib/stores/notificationStore';
 	import { goto } from '$app/navigation';
+	import { sendSuccess } from '$lib/util/notifications';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
@@ -41,12 +42,7 @@
 			$session.active = false;
 			$session.role = SessionRole.None;
 
-			$notifications.kind = 'success';
-			$notifications.title = 'Signed Out Correctly';
-			$notifications.subtitle = 'Thank you for using Libre-ASI';
-			$notifications.caption = new Date().toLocaleString();
-			$notifications.timeout = 8;
-			$notifications.visible = true;
+			sendSuccess('Signed out correctly', 'Thank you for using Libre-ASI');
 
 			goto('/');
 		} catch (e) {
