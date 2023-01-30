@@ -27,7 +27,6 @@
 	import session from '$lib/stores/userStore';
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
-	import { notifications } from '$lib/stores/notificationStore';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
 
@@ -35,6 +34,7 @@
 	let isUserMenuOpen = false;
 
 	async function handleSignOut() {
+		//TODO check if this try catch is needed
 		try {
 			await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
 
