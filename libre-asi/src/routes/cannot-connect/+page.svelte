@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { Button, ExpandableTile } from 'carbon-components-svelte';
+	import session from '$lib/stores/userStore';
+	import { SessionRole } from '$lib/models/Session';
+	import { onMount } from 'svelte';
+
+	//If the user lands here, their session is invalidated
+	onMount(function () {
+		$session.active = false;
+		$session.role = SessionRole.None;
+	});
 </script>
 
 <h1>Error.</h1>
