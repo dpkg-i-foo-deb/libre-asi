@@ -111,10 +111,7 @@
 		}
 
 		if (response.status == 503) {
-			sendError(
-				'Something went wrong',
-				'Try again later, if the problem persists, contact your administrator'
-			);
+			goto('/cannot-connect');
 		}
 	}
 </script>
