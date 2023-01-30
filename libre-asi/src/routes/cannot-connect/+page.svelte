@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ExpandableTile } from 'carbon-components-svelte';
+	import { goto } from '$app/navigation';
+	import { Button, ExpandableTile } from 'carbon-components-svelte';
 </script>
 
 <h1>Error.</h1>
@@ -7,7 +8,13 @@
 	Something went wrong while processing your request, try again later, if the error persists.
 	Contact your administrator.
 </h3>
+<h3>For your security, your session has been invalidated.</h3>
 <h4>Code: 503.</h4>
+<Button
+	on:click={() => {
+		goto('/');
+	}}>Go back to welcome page</Button
+>
 
 <div class="help">
 	<ExpandableTile>
@@ -34,5 +41,9 @@
 
 	.help {
 		margin-top: 40px;
+	}
+
+	h4 {
+		margin-bottom: 30px;
 	}
 </style>
