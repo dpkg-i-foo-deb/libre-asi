@@ -6,8 +6,8 @@ import type { JwtPair } from '$lib/models/JwtPair';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
-	const body = 'Cannot connect to the server';
-	const options = { status: 503, statusText: 'Something failed' };
+	let body = 'Cannot connect to the server';
+	let options = { status: 503, statusText: 'Cannot connect' };
 	const cookies = event.cookies;
 
 	try {
@@ -61,7 +61,9 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 		}
 
 		if (response.status == 403) {
-			//TODO redirect to a 'Not enough privileges page'
+			body = 'Not enough privileges';
+			options = { status: 403, statusText: 'Not enough privileges' };
+			return new Response(body, options);
 		}
 
 		return response;
@@ -69,7 +71,6 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 		console.error(e);
 		cookies.set('access-token', '', { path: '/' });
 		cookies.set('refresh-token', '', { path: '/' });
-		//TODO redirect to a server unavailable page
 		return new Response(body, options);
 	}
 };
