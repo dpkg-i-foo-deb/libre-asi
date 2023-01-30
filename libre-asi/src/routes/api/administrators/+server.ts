@@ -8,10 +8,6 @@ export const POST: RequestHandler = async function ({ fetch, request }) {
 
 	const admin = (await request.json()) as Administrator;
 
-	try {
-		const response = await fetch(API_URL);
-		return response;
-	} catch (e) {
-		throw e;
-	}
+	const response = await fetch(API_URL);
+	return response;
 };
