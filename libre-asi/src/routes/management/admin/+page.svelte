@@ -100,11 +100,22 @@
 			username: username
 		};
 
-		await fetch('/api/administrators', {
-			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify(administrator)
-		});
+		try {
+			const response = await fetch('/api/administrators', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(administrator)
+			});
+
+			if (response.status == 503) {
+				isOpen = false;
+				$notifications.kind = 'error';
+				$notifications.title = 'Something went wrong';
+				$notifications.subtitle = 'Try again later';
+				$notifications.caption = 'If the error persists, contact your administrator';
+				$notifications.visible = true;
+			}
+		} catch (e) {}
 	}
 </script>
 
