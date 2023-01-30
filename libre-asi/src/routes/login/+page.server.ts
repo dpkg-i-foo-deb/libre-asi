@@ -22,6 +22,7 @@ const login: Action = async function ({ cookies, request, fetch }) {
 
 	const user: User = { email: email, password: password };
 
+	//TODO FIX cannot connect message
 	try {
 		response = await fetch(fullUrl, {
 			mode: 'cors',

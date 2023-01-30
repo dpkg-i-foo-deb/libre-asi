@@ -21,6 +21,8 @@
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
 
+	//TODO make this form less ugly
+
 	onMount(function () {
 		//If the user lands here, it means they need a session
 		$session.active = false;

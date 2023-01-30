@@ -68,6 +68,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 		console.error(e);
 		cookies.set('access-token', '', { path: '/' });
 		cookies.set('refresh-token', '', { path: '/' });
+		//TODO redirect to a server unavailable page
 		return new Response(body, options);
 	}
 };
