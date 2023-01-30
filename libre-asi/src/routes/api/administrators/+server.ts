@@ -1,3 +1,4 @@
+import { API_URL } from '$lib/api/constants';
 import type Administrator from '$lib/models/Administrator';
 import type { RequestHandler } from '@sveltejs/kit';
 
@@ -7,7 +8,10 @@ export const POST: RequestHandler = async function ({ fetch, request }) {
 
 	const admin = (await request.json()) as Administrator;
 
-	console.log(admin);
-
-	return new Response();
+	try {
+		const response = await fetch(API_URL);
+		return response;
+	} catch (e) {
+		throw e;
+	}
 };
