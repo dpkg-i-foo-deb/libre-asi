@@ -12,14 +12,18 @@
 	import type { ActionData } from './$types';
 	import session from '$lib/stores/userStore';
 	import type { ActionResult } from '@sveltejs/kit';
-	import { notifications } from '$lib/stores/notificationStore';
 	import { SessionRole } from '$lib/models/Session';
 	import { onMount } from 'svelte';
+	import type User from '$lib/models/User';
+	import { goto } from '$app/navigation';
+	import { sendSuccess } from '$lib/util/notifications';
 
 	export let form: ActionData;
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
+	let email = '';
+	let password = '';
 
 	//TODO make this form less ugly
 
@@ -29,17 +33,16 @@
 		$session.role = SessionRole.None;
 	});
 
-	function handleLogin(result: ActionResult<Record<string, unknown>, Record<string, unknown>>) {
-		if (result.type == 'failure') {
-			if (result.status == 500 || result.status == 400) {
-				$notifications.title = 'Login Error';
-				$notifications.caption = 'If the error persist, contact your administrator';
-				$notifications.subtitle = 'Something went wrong, try again later';
-				$notifications.visible = true;
-			}
-		}
+	async function login() {
+		const user: User = { email: email, password: password };
 
-		if (result.type == 'redirect') {
+		const response = await fetch('/api/login', {
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify(user)
+		});
+
+		if (response.ok) {
 			$session.active = true;
 			if (wantsAdmin) {
 				$session.role = SessionRole.Admin;
@@ -48,31 +51,18 @@
 				$session.role = SessionRole.Interviewer;
 			}
 
-			$notifications.kind = 'success';
-			$notifications.title = 'Logged In Correctly';
-			$notifications.subtitle = 'Welcome back!';
-			$notifications.caption = new Date().toLocaleDateString();
-			$notifications.timeout = 10000;
-			$notifications.visible = true;
+			sendSuccess('Logged In', 'Welcome back');
+
+			goto('/home');
+
+			return;
 		}
 	}
 </script>
 
 <main>
 	<div class="container">
-		<form
-			use:enhance={() => {
-				return async ({ result }) => {
-					handleLogin(result);
-					if (result.type === 'redirect') {
-						$session.active = true;
-					}
-					await applyAction(result);
-				};
-			}}
-			action="?/login"
-			method="POST"
-		>
+		<form on:submit|preventDefault={login}>
 			<h3>Please Log In to your Account</h3>
 
 			{#if form?.invalidCredentials}
@@ -89,6 +79,7 @@
 					invalidText="Check your email"
 					id="email"
 					name="email"
+					bind:value={email}
 				/>
 			</div>
 
@@ -101,6 +92,7 @@
 					required
 					invalidText="Check your password"
 					type="password"
+					bind:value={password}
 				/>
 			</div>
 
