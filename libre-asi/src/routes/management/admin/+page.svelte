@@ -10,8 +10,7 @@
 		ModalHeader,
 		ModalFooter,
 		ModalBody,
-		TextInput,
-		InlineNotification
+		TextInput
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
@@ -23,7 +22,7 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import emailValidator from '$lib/util/emailValidator';
 	import emptyValidator from '$lib/util/emptyValidator';
-	import { json } from '@sveltejs/kit';
+	import { sendError } from '$lib/util/notifications';
 
 	export let data: PageData;
 
@@ -100,22 +99,18 @@
 			username: username
 		};
 
-		try {
-			const response = await fetch('/api/administrators', {
-				method: 'POST',
-				credentials: 'include',
-				body: JSON.stringify(administrator)
-			});
+		const response = await fetch('/api/administrators', {
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify(administrator)
+		});
 
-			if (response.status == 503) {
-				isOpen = false;
-				$notifications.kind = 'error';
-				$notifications.title = 'Something went wrong';
-				$notifications.subtitle = 'Try again later';
-				$notifications.caption = 'If the error persists, contact your administrator';
-				$notifications.visible = true;
-			}
-		} catch (e) {}
+		//TODO use a general cannot connect error page :/
+		if (response.status == 503) {
+			isOpen = false;
+
+			sendError('Something went wrong', 'If the error persists, contact your administrator');
+		}
 	}
 </script>
 
