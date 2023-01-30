@@ -60,7 +60,7 @@
 		invalidEmailCaption = '';
 		invalidEmail = true;
 		if (!emptyValidator(email)) {
-			invalidEmailCaption = 'This field is mandatory';
+			invalidEmailCaption = 'Email is required';
 			return false;
 		}
 
@@ -78,7 +78,7 @@
 		invalidUsernameCaption = '';
 
 		if (!emptyValidator(username)) {
-			invalidUsernameCaption = 'This field is mandatory';
+			invalidUsernameCaption = 'Username is required';
 			return false;
 		}
 
