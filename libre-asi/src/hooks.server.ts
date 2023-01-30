@@ -1,4 +1,4 @@
-import { redirect, type HandleFetch } from '@sveltejs/kit';
+import { fail, redirect, type HandleFetch } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
 import { API_URL, REFRESH } from '$lib/api/constants';
@@ -6,59 +6,70 @@ import type { JwtPair } from '$lib/models/JwtPair';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
-
-	const response = await fetch(request);
+	const body = 'Failure';
+	const options = { status: 500, statusText: 'Something failed' };
 	const cookies = event.cookies;
 
-	if (
-		response.status == 401 &&
-		!request.url.includes('login') &&
-		!request.url.includes('refresh')
-	) {
-		const refresh = await fetch(API_URL + REFRESH, {
-			method: 'POST',
-			credentials: 'include',
-			headers: request.headers
-		});
+	try {
+		const response = await fetch(request);
 
-		if (refresh.ok) {
-			//Set the new access and refresh token as cookies
-			const newCookies = (await refresh.json()) as JwtPair;
+		const cookies = event.cookies;
 
-			console.log(newCookies.access_token);
-
-			cookies.set('access-token', newCookies.access_token.value, {
-				path: '/',
-				httpOnly: true
-			});
-			cookies.set('refresh-token', newCookies.refresh_token.value, {
-				path: '/',
-				httpOnly: true
+		if (
+			response.status == 401 &&
+			!request.url.includes('login') &&
+			!request.url.includes('refresh')
+		) {
+			const refresh = await fetch(API_URL + REFRESH, {
+				method: 'POST',
+				credentials: 'include',
+				headers: request.headers
 			});
 
-			//Make a new request and pray for it to work
+			if (refresh.ok) {
+				//Set the new access and refresh token as cookies
+				const newCookies = (await refresh.json()) as JwtPair;
 
-			const newRequest = request.clone();
-			newRequest.headers.set('cookie', 'access-token=' + newCookies.access_token.value);
+				console.log(newCookies.access_token);
 
-			const newResponse = await fetch(newRequest, {
-				credentials: 'include'
-			});
+				cookies.set('access-token', newCookies.access_token.value, {
+					path: '/',
+					httpOnly: true
+				});
+				cookies.set('refresh-token', newCookies.refresh_token.value, {
+					path: '/',
+					httpOnly: true
+				});
 
-			if (newResponse.ok) {
-				return newResponse;
+				//Make a new request and pray for it to work
+
+				const newRequest = request.clone();
+				newRequest.headers.set('cookie', 'access-token=' + newCookies.access_token.value);
+
+				const newResponse = await fetch(newRequest, {
+					credentials: 'include'
+				});
+
+				if (newResponse.ok) {
+					return newResponse;
+				}
 			}
+
+			cookies.set('access-token', '', { path: '/' });
+			cookies.set('refresh-token', '', { path: '/' });
 		}
 
+		if (response.status == 403) {
+			//TODO redirect to a 'Not enough privileges page'
+		}
+
+		return response;
+	} catch (e) {
+		console.error(e);
 		cookies.set('access-token', '', { path: '/' });
 		cookies.set('refresh-token', '', { path: '/' });
+		return new Response(body, options);
 	}
-
-	if (response.status == 403) {
-		//TODO redirect to a 'Not enough privileges page'
-	}
-
-	return response;
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
