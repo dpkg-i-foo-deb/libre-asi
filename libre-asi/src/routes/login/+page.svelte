@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { applyAction, enhance } from '$app/forms';
 	import {
 		TextInput,
 		PasswordInput,
@@ -9,21 +8,24 @@
 		Tooltip,
 		InlineNotification
 	} from 'carbon-components-svelte';
-	import type { ActionData } from './$types';
 	import session from '$lib/stores/userStore';
-	import type { ActionResult } from '@sveltejs/kit';
 	import { SessionRole } from '$lib/models/Session';
 	import { onMount } from 'svelte';
 	import type User from '$lib/models/User';
 	import { goto } from '$app/navigation';
-	import { sendSuccess } from '$lib/util/notifications';
-
-	export let form: ActionData;
+	import { sendError, sendSuccess } from '$lib/util/notifications';
+	import emptyValidator from '$lib/util/emptyValidator';
+	import emailValidator from '$lib/util/emailValidator';
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
+	let invalidEmail = false;
+	let invalidPassword = false;
+	let invalidEmailCaption = '';
+	let invalidPasswordCaption = '';
 	let email = '';
 	let password = '';
+	let invalidCredentials = false;
 
 	//TODO make this form less ugly
 
@@ -33,10 +35,55 @@
 		$session.role = SessionRole.None;
 	});
 
+	function checkEmail(): boolean {
+		invalidEmailCaption = '';
+		invalidEmail = true;
+		if (!emptyValidator(email)) {
+			invalidEmailCaption = 'This field is mandatory';
+			return false;
+		}
+
+		if (!emailValidator(email)) {
+			invalidEmailCaption = 'Enter a valid email address';
+			return false;
+		}
+
+		invalidEmail = false;
+		return true;
+	}
+
+	function checkPassword(): boolean {
+		invalidPasswordCaption = '';
+		invalidPassword = true;
+
+		if (!emptyValidator(password)) {
+			invalidPasswordCaption = 'This field is mandatory';
+			return false;
+		}
+
+		invalidPassword = false;
+		return true;
+	}
+
 	async function login() {
+		invalidCredentials = false;
+		let url = '/api/login/';
+
+		if (wantsAdmin) {
+			url += 'administrator';
+		}
+
+		if (wantsInterviewer) {
+			url += 'interviewer';
+		}
+
+		if (!(checkEmail() || checkPassword())) {
+			return;
+		}
+
 		const user: User = { email: email, password: password };
 
-		const response = await fetch('/api/login', {
+		const response = await fetch(url, {
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(user)
@@ -57,6 +104,18 @@
 
 			return;
 		}
+
+		if (response.status == 401) {
+			invalidCredentials = true;
+			return;
+		}
+
+		if (response.status == 503) {
+			sendError(
+				'Something went wrong',
+				'Try again later, if the problem persists, contact your administrator'
+			);
+		}
 	}
 </script>
 
@@ -65,7 +124,7 @@
 		<form on:submit|preventDefault={login}>
 			<h3>Please Log In to your Account</h3>
 
-			{#if form?.invalidCredentials}
+			{#if invalidCredentials}
 				<div class="invalid-credentials">
 					<InlineNotification title="Error" subtitle="Invalid username or password" />
 				</div>
@@ -75,11 +134,13 @@
 				<TextInput
 					labelText="Email"
 					placeholder="Enter email..."
-					required
-					invalidText="Check your email"
 					id="email"
 					name="email"
 					bind:value={email}
+					bind:invalid={invalidEmail}
+					bind:invalidText={invalidEmailCaption}
+					on:blur={checkEmail}
+					autofocus
 				/>
 			</div>
 
@@ -89,10 +150,11 @@
 					placeholder="Enter password..."
 					id="password"
 					name="password"
-					required
-					invalidText="Check your password"
 					type="password"
 					bind:value={password}
+					bind:invalid={invalidPassword}
+					bind:invalidText={invalidPasswordCaption}
+					on:blur={checkPassword}
 				/>
 			</div>
 
