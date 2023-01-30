@@ -8,4 +8,5 @@ import (
 
 func adminRoutes() {
 	app.AddGet("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, services.GetAdministratorsService)
+	app.AddPost("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, services.RegisterAdministratorService)
 }
