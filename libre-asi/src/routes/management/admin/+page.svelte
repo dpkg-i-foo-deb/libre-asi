@@ -10,7 +10,8 @@
 		ModalHeader,
 		ModalFooter,
 		ModalBody,
-		TextInput
+		TextInput,
+		InlineNotification
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
@@ -21,7 +22,6 @@
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import emailValidator from '$lib/util/emailValidator';
-	import validateEmail from '$lib/util/emailValidator';
 	import emptyValidator from '$lib/util/emptyValidator';
 
 	export let data: PageData;
@@ -56,32 +56,40 @@
 		});
 	});
 
-	function checkEmail() {
+	function checkEmail(): boolean {
 		invalidEmailCaption = '';
 		invalidEmail = true;
 		if (!emptyValidator(email)) {
 			invalidEmailCaption = 'This field is mandatory';
-			return;
+			return false;
 		}
 
 		if (!emailValidator(email)) {
 			invalidEmailCaption = 'Enter a valid email address';
-			return;
+			return false;
 		}
 
 		invalidEmail = false;
+		return true;
 	}
 
-	function checkUsername() {
+	function checkUsername(): boolean {
 		invalidUsername = true;
 		invalidUsernameCaption = '';
 
 		if (!emptyValidator(username)) {
 			invalidUsernameCaption = 'This field is mandatory';
-			return;
+			return false;
 		}
 
 		invalidUsername = false;
+		return true;
+	}
+
+	function register() {
+		if (!(checkEmail() || checkUsername())) {
+			return;
+		}
 	}
 </script>
 
@@ -115,7 +123,7 @@
 		</Toolbar>
 	</DataTable>
 
-	<ComposedModal bind:open={isOpen} selectorPrimaryFocus="#email">
+	<ComposedModal bind:open={isOpen} selectorPrimaryFocus="#email" on:submit={register}>
 		<ModalHeader label="Transaction" title="New Administrator Account" />
 		<ModalBody hasForm>
 			<form>
@@ -128,6 +136,7 @@
 					The account password will be generated automatically and the new user will be prompted to
 					change it
 				</h6>
+
 				<div class="input-field">
 					<TextInput
 						id="email"
