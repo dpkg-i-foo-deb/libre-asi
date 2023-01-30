@@ -36,19 +36,6 @@
 	let invalidUsernameCaption = '';
 
 	onMount(function () {
-		if (data.error) {
-			$session.active = false;
-			$session.role = SessionRole.None;
-
-			$notifications.kind = 'error';
-			$notifications.title = 'Your session has expired';
-			$notifications.subtitle = 'Log In Again';
-			$notifications.caption = new Date().toLocaleString();
-			$notifications.visible = true;
-
-			goto('/');
-		}
-
 		const existingAdmins = data.administrators ?? [];
 
 		rows = existingAdmins.map(function (value: Administrator) {
