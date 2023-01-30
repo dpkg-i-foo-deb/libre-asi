@@ -11,6 +11,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	const cookies = event.cookies;
 
 	try {
+		//TODO idk if this automatically forwards all the cookies
 		const response = await fetch(request);
 
 		const cookies = event.cookies;
