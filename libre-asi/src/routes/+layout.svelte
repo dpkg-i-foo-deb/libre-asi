@@ -94,20 +94,22 @@
 	<SideNavItems>
 		<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
 		<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
-		<SideNavMenu
-			text="Management"
-			expanded={$page.url.pathname.toString().includes('/management/')}
-		>
-			{#if $session.role == SessionRole.Admin}
-				<SideNavMenuItem
-					href="/management/admin"
-					text="Administrators"
-					isSelected={$page.url.pathname == '/management/admin'}
-				/>
+		{#if $session.active}
+			<SideNavMenu
+				text="Management"
+				expanded={$page.url.pathname.toString().includes('/management/')}
+			>
+				{#if $session.role == SessionRole.Admin}
+					<SideNavMenuItem
+						href="/management/admin"
+						text="Administrators"
+						isSelected={$page.url.pathname == '/management/admin'}
+					/>
 
-				<SideNavMenuItem text="Interviewers" />
-			{/if}
-		</SideNavMenu>
+					<SideNavMenuItem text="Interviewers" />
+				{/if}
+			</SideNavMenu>
+		{/if}
 	</SideNavItems>
 </SideNav>
 
