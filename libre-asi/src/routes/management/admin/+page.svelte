@@ -23,6 +23,7 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import emailValidator from '$lib/util/emailValidator';
 	import emptyValidator from '$lib/util/emptyValidator';
+	import { json } from '@sveltejs/kit';
 
 	export let data: PageData;
 
@@ -86,10 +87,24 @@
 		return true;
 	}
 
-	function register() {
+	async function register() {
 		if (!(checkEmail() || checkUsername())) {
 			return;
 		}
+
+		const administrator: Administrator = {
+			ID: 0,
+			CreatedAt: new Date(),
+			UpdatedAt: new Date(),
+			email: email,
+			username: username
+		};
+
+		await fetch('/api/administrators', {
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify(administrator)
+		});
 	}
 </script>
 
