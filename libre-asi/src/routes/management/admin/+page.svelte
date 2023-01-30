@@ -36,6 +36,11 @@
 	let invalidUsernameCaption = '';
 
 	onMount(function () {
+		if (data.error) {
+			sendError('Your session has expired', 'Log In again');
+			goto('/login');
+		}
+
 		const existingAdmins = data.administrators ?? [];
 
 		rows = existingAdmins.map(function (value: Administrator) {
@@ -97,6 +102,11 @@
 			isOpen = false;
 
 			sendError('Something went wrong', 'If the error persists, contact your administrator');
+		}
+
+		if (response.status == 401) {
+			sendError('Your session has expired', 'Log In again');
+			goto('/login');
 		}
 	}
 </script>
