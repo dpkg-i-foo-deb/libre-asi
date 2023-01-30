@@ -15,9 +15,9 @@
 			If you're the administrator... Click here to see some help
 		</div>
 		<div slot="below">
-			Status code 503 is thrown when Libre-ASI API can't be reached, this can be caused by either
-			misconfiguring environment variables or stopping the API server. Make sure it is running,
-			check server logs and its address is correctly configured on the server and try again
+			Status code 503 is thrown when Libre-ASI API refused the connection, this can be caused by
+			either misconfiguring environment variables or stopping the API server. Make sure it is
+			running, check server logs and its address is correctly configured on the server and try again
 		</div>
 	</ExpandableTile>
 </div>
