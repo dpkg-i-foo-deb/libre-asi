@@ -20,11 +20,20 @@
 	import { goto } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { enhance } from '$app/forms';
+	import emailValidator from '$lib/util/emailValidator';
+	import validateEmail from '$lib/util/emailValidator';
+	import emptyValidator from '$lib/util/emptyValidator';
+
 	export let data: PageData;
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let isOpen = false;
+	let email = '';
+	let username = '';
+	let invalidEmail = false;
+	let invalidUsername = false;
+	let invalidEmailCaption = '';
+	let invalidUsernameCaption = '';
 
 	onMount(function () {
 		if (data.error) {
@@ -46,6 +55,34 @@
 			return { id: value.ID, email: value.email, username: value.username };
 		});
 	});
+
+	function checkEmail() {
+		invalidEmailCaption = '';
+		invalidEmail = true;
+		if (!emptyValidator(email)) {
+			invalidEmailCaption = 'This field is mandatory';
+			return;
+		}
+
+		if (!emailValidator(email)) {
+			invalidEmailCaption = 'Enter a valid email address';
+			return;
+		}
+
+		invalidEmail = false;
+	}
+
+	function checkUsername() {
+		invalidUsername = true;
+		invalidUsernameCaption = '';
+
+		if (!emptyValidator(username)) {
+			invalidUsernameCaption = 'This field is mandatory';
+			return;
+		}
+
+		invalidUsername = false;
+	}
 </script>
 
 {#if rows == undefined}
@@ -92,10 +129,26 @@
 					change it
 				</h6>
 				<div class="input-field">
-					<TextInput id="email" labelText="Email" placeholder="Enter email..." />
+					<TextInput
+						id="email"
+						labelText="Email"
+						placeholder="Enter email..."
+						on:blur={checkEmail}
+						bind:invalid={invalidEmail}
+						bind:value={email}
+						bind:invalidText={invalidEmailCaption}
+					/>
 				</div>
 				<div class="input-field">
-					<TextInput labelText="User name" placeholder="Enter user name..." />
+					<TextInput
+						id="username"
+						labelText="User name"
+						placeholder="Enter user name..."
+						on:blur={checkUsername}
+						bind:invalid={invalidUsername}
+						bind:value={username}
+						bind:invalidText={invalidUsernameCaption}
+					/>
 				</div>
 			</form>
 		</ModalBody>
