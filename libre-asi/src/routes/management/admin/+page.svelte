@@ -10,14 +10,14 @@
 		ModalHeader,
 		ModalFooter,
 		ModalBody,
-		TextInput
+		TextInput,
+		InlineNotification,
+		Modal,
+		CodeSnippet
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-	import session from '$lib/stores/userStore';
-	import { notifications } from '$lib/stores/notificationStore';
-	import { SessionRole } from '$lib/models/Session';
-	import { goto } from '$app/navigation';
+	import { goto, invalidate, invalidateAll } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import emailValidator from '$lib/util/emailValidator';
@@ -26,27 +26,44 @@
 
 	export let data: PageData;
 
+	let newAdministrator: Administrator;
+
 	let rows: ReadonlyArray<DataTableRow>;
-	let isOpen = false;
+	let isRegisterFormOpen = false;
+	let isSuccessRegisterOpen = false;
 	let email = '';
 	let username = '';
 	let invalidEmail = false;
 	let invalidUsername = false;
 	let invalidEmailCaption = '';
 	let invalidUsernameCaption = '';
+	let duplicateCredentials = false;
 
 	onMount(function () {
+		newAdministrator = {
+			ID: 0,
+			CreatedAt: new Date(),
+			UpdatedAt: new Date(),
+			email: '',
+			username: '',
+			password: ''
+		};
+
 		if (data.error) {
 			sendError('Your session has expired', 'Log In again');
 			goto('/login');
 		}
 
+		loadAdmins();
+	});
+
+	function loadAdmins() {
 		const existingAdmins = data.administrators ?? [];
 
 		rows = existingAdmins.map(function (value: Administrator) {
 			return { id: value.ID, email: value.email, username: value.username };
 		});
-	});
+	}
 
 	function checkEmail(): boolean {
 		invalidEmailCaption = '';
@@ -79,23 +96,39 @@
 	}
 
 	async function register() {
+		duplicateCredentials = false;
+		isSuccessRegisterOpen = false;
+
 		if (!(checkEmail() || checkUsername())) {
 			return;
 		}
 
-		const administrator: Administrator = {
+		newAdministrator = {
 			ID: 0,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 			email: email,
-			username: username
+			username: username,
+			password: ''
 		};
 
 		const response = await fetch('/api/administrators', {
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(administrator)
+			body: JSON.stringify(newAdministrator)
 		});
+
+		if (response.ok) {
+			newAdministrator = (await response.json()) as Administrator;
+			isRegisterFormOpen = false;
+			isSuccessRegisterOpen = true;
+			await invalidateAll();
+			loadAdmins();
+		}
+
+		if (response.status == 409) {
+			duplicateCredentials = true;
+		}
 
 		if (response.status == 503) {
 			goto('/cannot-connect');
@@ -131,14 +164,14 @@
 				<ToolbarSearch />
 				<Button
 					on:click={() => {
-						isOpen = true;
+						isRegisterFormOpen = true;
 					}}>Register Administrator</Button
 				>
 			</ToolbarContent>
 		</Toolbar>
 	</DataTable>
 
-	<ComposedModal bind:open={isOpen} selectorPrimaryFocus="#email" on:submit={register}>
+	<ComposedModal bind:open={isRegisterFormOpen} selectorPrimaryFocus="#email" on:submit={register}>
 		<ModalHeader label="Transaction" title="New Administrator Account" />
 		<ModalBody hasForm>
 			<form>
@@ -152,6 +185,9 @@
 					change it
 				</h6>
 
+				{#if duplicateCredentials}
+					<InlineNotification title="Error:" subtitle="Email or username already registered" />
+				{/if}
 				<div class="input-field">
 					<TextInput
 						id="email"
@@ -180,10 +216,31 @@
 			primaryButtonText="Register"
 			secondaryButtonText="Cancel"
 			on:click:button--secondary={() => {
-				isOpen = false;
+				isRegisterFormOpen = false;
 			}}
 		/>
 	</ComposedModal>
+
+	<Modal
+		passiveModal
+		on:close={() => {
+			isSuccessRegisterOpen = false;
+		}}
+		bind:open={isSuccessRegisterOpen}
+		modalHeading="Administrator Registered"
+		primaryButtonText="Finish"
+	>
+		<p>The account has been created and a random password has been generated.</p>
+		<br />
+		<p class="bold">
+			The new user will be prompted to change their password once they try to log in.
+		</p>
+		<br />
+		<p>The generated password is:</p>
+		<div class="password-container">
+			<CodeSnippet code={newAdministrator.password} />
+		</div>
+	</Modal>
 {/if}
 
 <style>
@@ -195,5 +252,14 @@
 	.paragraph {
 		padding-top: 5px;
 		padding-bottom: 5px;
+	}
+
+	.password-container {
+		margin-top: 10px;
+		padding-bottom: 40px;
+	}
+
+	.bold {
+		font-weight: bold;
 	}
 </style>
