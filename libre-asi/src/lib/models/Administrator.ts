@@ -4,6 +4,7 @@ interface Administrator {
 	UpdatedAt: Date;
 	email: string;
 	username: string;
+	password: string;
 }
 
 export default Administrator;
