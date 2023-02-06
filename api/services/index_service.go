@@ -9,7 +9,7 @@ import (
 func IndexService(c *fiber.Ctx) error {
 
 	r := models.Response{
-		Status:  string(models.STATUS_OK),
+		Status:  string(models.OK),
 		Message: "Welcome to LibreASI API!",
 	}
 

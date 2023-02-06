@@ -12,7 +12,7 @@ import (
 func GetAdministratorsService(c *fiber.Ctx) error {
 
 	var res models.Response
-	res.Status = string(models.STATUS_ERROR)
+	res.Status = string(models.ERROR)
 	res.Message = "Something went wrong"
 
 	var admins []models.Administrator
@@ -41,7 +41,7 @@ func GetAdministratorsService(c *fiber.Ctx) error {
 func RegisterAdministratorService(c *fiber.Ctx) error {
 
 	var res models.Response
-	res.Status = string(models.STATUS_ERROR)
+	res.Status = string(models.ERROR)
 	res.Message = "Something went wrong"
 
 	var newUser models.User
@@ -56,7 +56,7 @@ func RegisterAdministratorService(c *fiber.Ctx) error {
 	result := database.DB.Where("email = ?", newUser.Email).First(&queriedUser)
 
 	if result.Error == nil {
-		res.Status = string(models.STATUS_DENIED)
+		res.Status = string(models.DENIED)
 		res.Message = "Email already registered"
 		return c.Status(409).JSON(res)
 	}
@@ -64,7 +64,7 @@ func RegisterAdministratorService(c *fiber.Ctx) error {
 	result = database.DB.Where("username = ?", newUser.Username).First(&queriedUser)
 
 	if result.Error == nil {
-		res.Status = string(models.STATUS_DENIED)
+		res.Status = string(models.DENIED)
 		res.Message = "User name already registered"
 		return c.Status(409).JSON(res)
 	}

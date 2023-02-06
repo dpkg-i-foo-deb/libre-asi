@@ -36,14 +36,14 @@ func RegisterService(c *fiber.Ctx) error {
 		res.Message = "Not implemmented"
 	default:
 		res = models.Response{
-			Status:  string(models.STATUS_DENIED),
+			Status:  string(models.DENIED),
 			Message: "Bad route",
 		}
 		return c.Status(400).JSON(&res)
 	}
 
 	if requiresAdmin && !isAdmin(c.Cookies("access-token")) {
-		res.Status = string(models.STATUS_DENIED)
+		res.Status = string(models.DENIED)
 		res.Message = "This session doesn't have enough privileges"
 		return c.Status(401).JSON(&res)
 	}
@@ -51,14 +51,14 @@ func RegisterService(c *fiber.Ctx) error {
 	err = fn(c)
 
 	if err != nil {
-		res.Status = string(models.STATUS_ERROR)
+		res.Status = string(models.ERROR)
 		res.Message = "Check JSON data"
 		log.Println(err)
 		c.Status(400).JSON(res)
 		return nil
 	}
 
-	res.Status = string(models.STATUS_OK)
+	res.Status = string(models.OK)
 	c.Status(201).JSON(res)
 
 	return nil

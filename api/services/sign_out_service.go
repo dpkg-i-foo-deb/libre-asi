@@ -15,7 +15,7 @@ func SignOutService(c *fiber.Ctx) error {
 	c.Cookie(refresh)
 
 	res := models.Response{
-		Status:  string(models.STATUS_OK),
+		Status:  string(models.OK),
 		Message: "Signed Out",
 	}
 

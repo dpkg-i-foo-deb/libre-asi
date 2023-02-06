@@ -12,7 +12,7 @@ func ValidateAccessToken(c *fiber.Ctx) error {
 	accessToken := c.Cookies("access-token")
 	var response models.Response
 
-	response.Status = string(models.STATUS_DENIED)
+	response.Status = string(models.DENIED)
 	response.Message = "The access token was not present"
 
 	if accessToken == "" {
@@ -28,7 +28,7 @@ func ValidateAccessToken(c *fiber.Ctx) error {
 	}
 
 	response.Message = "The access token is not valid or has expired"
-	response.Status = string(models.STATUS_DENIED)
+	response.Status = string(models.DENIED)
 	c.Status(fiber.StatusUnauthorized).JSON(response)
 	return nil
 
@@ -38,7 +38,7 @@ func ValidateRefreshToken(c *fiber.Ctx) error {
 	tk := c.Cookies("refresh-token")
 
 	var res models.Response
-	res.Status = string(models.STATUS_DENIED)
+	res.Status = string(models.DENIED)
 
 	if tk == "" {
 		res.Message = "The refresh token was not present"
@@ -62,7 +62,7 @@ func ValidateRefreshTokenDate(c *fiber.Ctx) error {
 
 	var res models.Response
 
-	res.Status = string(models.STATUS_DENIED)
+	res.Status = string(models.DENIED)
 	res.Message = "The refresh token is still valid"
 
 	tk := c.Cookies("refresh-token")
@@ -70,7 +70,7 @@ func ValidateRefreshTokenDate(c *fiber.Ctx) error {
 	claims, err := GetTokenClaims(tk)
 
 	if err != nil {
-		res.Status = string(models.STATUS_ERROR)
+		res.Status = string(models.ERROR)
 		res.Message = "Something failed"
 		return c.Status(500).JSON(res)
 	}
@@ -90,13 +90,13 @@ func ValidateAdministratorRole(c *fiber.Ctx) error {
 
 	tk := c.Cookies("access-token")
 
-	res.Status = string(models.STATUS_DENIED)
+	res.Status = string(models.DENIED)
 	res.Message = "Not enough privileges"
 
 	role, err := RoleFromToken(tk)
 
 	if err != nil {
-		res.Status = string(models.STATUS_ERROR)
+		res.Status = string(models.ERROR)
 		res.Message = "Something went wrong"
 		return c.Status(500).JSON(res)
 	}

@@ -17,7 +17,7 @@ func RefreshService(c *fiber.Ctx) error {
 	var refreshTk *fiber.Cookie
 	var err error
 
-	res.Status = string(models.STATUS_ERROR)
+	res.Status = string(models.ERROR)
 	res.Message = "Something went wrong"
 
 	email, err = auth.EmailFromToken(c.Cookies("refresh-token"))

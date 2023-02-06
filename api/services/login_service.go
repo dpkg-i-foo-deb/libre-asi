@@ -19,7 +19,7 @@ func LoginService(c *fiber.Ctx) error {
 	err := c.BodyParser(&u)
 
 	if err != nil {
-		res.Status = string(models.STATUS_DENIED)
+		res.Status = string(models.DENIED)
 		res.Message = "Check JSON data"
 		return c.Status(400).JSON(res)
 	}
@@ -33,14 +33,14 @@ func LoginService(c *fiber.Ctx) error {
 		err = errors.New("not implemmented")
 	default:
 		res = models.Response{
-			Status:  string(models.STATUS_DENIED),
+			Status:  string(models.DENIED),
 			Message: "Bad route",
 		}
 		return c.Status(400).JSON(&res)
 	}
 
 	if err != nil {
-		res.Status = string(models.STATUS_DENIED)
+		res.Status = string(models.DENIED)
 		res.Message = "Invalid credentials or not enough privileges"
 
 		return c.Status(401).JSON(&res)
@@ -49,7 +49,7 @@ func LoginService(c *fiber.Ctx) error {
 	tk, err = auth.GenerateJWTPair(u.Email, c.Params("role"))
 
 	if err != nil {
-		res.Status = string(models.STATUS_ERROR)
+		res.Status = string(models.ERROR)
 		res.Message = "Something went wrong"
 
 		return c.Status(500).JSON(&res)

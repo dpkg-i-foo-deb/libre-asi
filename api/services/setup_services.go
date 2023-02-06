@@ -10,7 +10,7 @@ func SetupService(c *fiber.Ctx) error {
 
 	var res models.Response
 
-	res.Status = string(models.STATUS_OK)
+	res.Status = string(models.OK)
 	res.Message = "Setup Complete"
 
 	if createAdmin(c) != nil {

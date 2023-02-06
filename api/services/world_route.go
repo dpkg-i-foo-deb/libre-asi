@@ -15,7 +15,7 @@ func WorldService(c *fiber.Ctx) error {
 	result := database.DB.Preload("States").Preload("Translations").Preload("States.Cities").Find(&world)
 
 	if result.Error != nil {
-		res.Status = string(models.STATUS_ERROR)
+		res.Status = string(models.ERROR)
 		res.Message = "Something failed"
 		return c.Status(500).JSON(res)
 	}
