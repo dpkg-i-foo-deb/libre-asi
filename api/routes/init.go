@@ -8,4 +8,5 @@ func init() {
 	worldRoute()
 	refreshRoute()
 	adminRoutes()
+	setupRoutes()
 }
