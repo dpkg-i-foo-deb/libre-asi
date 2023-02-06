@@ -64,12 +64,6 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 		cookies.set('refresh-token', '', { path: '/' });
 	}
 
-	if (response.status == 403) {
-		body = 'Not enough privileges';
-		options = { status: 403, statusText: 'Not enough privileges' };
-		return new Response(body, options);
-	}
-
 	return response;
 
 };
