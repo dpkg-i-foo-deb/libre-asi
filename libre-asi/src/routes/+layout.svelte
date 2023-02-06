@@ -25,13 +25,21 @@
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import session from '$lib/stores/userStore';
+	import setup from '$lib/stores/setupStore';
 	import { page } from '$app/stores';
 	import { SessionRole } from '$lib/models/Session';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
+	import { onMount } from 'svelte';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
+
+	onMount(function(){
+		if(!$setup){
+			goto('/set-up')
+		}
+	})
 
 	async function handleSignOut() {
 		//TODO check if this try catch is needed
