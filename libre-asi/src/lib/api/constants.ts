@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:3000/';
+const API_URL = 'http://desarrollo:3000/';
 const INTERVIEWER_LOGIN = 'login/interviewer/';
 const ADMIN_LOGIN = 'login/admin';
 const SIGN_OUT = 'sign-out';
