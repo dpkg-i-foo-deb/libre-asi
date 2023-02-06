@@ -18,7 +18,8 @@ func migrateModels() {
 
 	util.HandleErrorStop(err)
 
-	err := DB.AutoMigrate(&models.User{},
+	err := DB.AutoMigrate(
+		&models.User{},
 		&models.Language{},
 		&models.Country{},
 		&models.CountryTranslations{},

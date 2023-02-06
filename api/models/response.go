@@ -6,7 +6,7 @@ const (
 	STATUS_OK     Status = "OK"
 	STATUS_DENIED Status = "ACCESS_DENIED"
 	STATUS_ERROR  Status = "SERVER_ERROR"
-	SETUP_REQUIRED
+	SETUP_REQUIRED Status = "SETUP_REQUIRED"
 )
 
 type Response struct {

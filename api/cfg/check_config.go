@@ -4,7 +4,6 @@ import (
 	"errors"
 	"libre-asi-api/database"
 	"libre-asi-api/models"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -28,7 +27,7 @@ func New(config Config) fiber.Handler {
 
 		//Check if the app requires configuration
 
-		if checkExistingAdmin() != nil {
+		if checkExistingAdmin() != nil && c.Path() != "/set-up" {
 			return c.Status(412).JSON(res)
 		}
 
@@ -41,7 +40,6 @@ func checkExistingAdmin() error {
 	var a models.Administrator
 
 	if database.DB.Take(&a).Error == gorm.ErrRecordNotFound {
-		log.Println("Checking if the administrator account exists...")
 		return errors.New("setup required")
 	}
 
