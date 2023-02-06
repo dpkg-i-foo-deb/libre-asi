@@ -16,6 +16,7 @@
 	import { sendError, sendSuccess } from '$lib/util/notifications';
 	import emptyValidator from '$lib/util/emptyValidator';
 	import emailValidator from '$lib/util/emailValidator';
+	import { handleResponse } from '$lib/util/handleResponse';
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
@@ -98,6 +99,8 @@
 				$session.role = SessionRole.Interviewer;
 			}
 
+			handleResponse(response.status)
+
 			sendSuccess('Logged In', 'Welcome back');
 
 			goto('/home');
@@ -112,6 +115,10 @@
 
 		if (response.status == 503) {
 			goto('/cannot-connect');
+		}
+
+		if(response.status == 412){
+			goto('/set-up')
 		}
 	}
 </script>
