@@ -1,6 +1,7 @@
 package app
 
 import (
+	"libre-asi-api/cfg"
 	"log"
 	"os"
 
@@ -28,7 +29,11 @@ func init() {
 		MaxAge:           0,
 	}))
 
+	//TODO enable limiter when frontend is stable
 	//app.Use(limiter.New())
+
+	app.Use(cfg.New(cfg.ConfigDefault))
+
 }
 
 func Start() {

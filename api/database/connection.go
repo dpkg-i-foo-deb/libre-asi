@@ -19,7 +19,7 @@ func init() {
 
 	migrateModels()
 
-	checkExistingAdmin()
+	//checkExistingAdmin()
 
 	checkWorld()
 }
