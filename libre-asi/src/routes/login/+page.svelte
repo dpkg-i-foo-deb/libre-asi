@@ -99,8 +99,6 @@
 				$session.role = SessionRole.Interviewer;
 			}
 
-			handleResponse(response.status)
-
 			sendSuccess('Logged In', 'Welcome back');
 
 			goto('/home');
@@ -108,17 +106,13 @@
 			return;
 		}
 
+		if (handleResponse(response.status)){
+			return
+		}
+
 		if (response.status == 401) {
 			invalidCredentials = true;
 			return;
-		}
-
-		if (response.status == 503) {
-			goto('/cannot-connect');
-		}
-
-		if(response.status == 412){
-			goto('/set-up')
 		}
 	}
 </script>

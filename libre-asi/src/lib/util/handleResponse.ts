@@ -1,6 +1,9 @@
 import { goto } from "$app/navigation"
 
-export function handleResponse(code: number) {
+export function handleResponse(code: number) : boolean {
+
+   let  shouldNavigate = true
+
     switch (code) {
         //TODO not enough privileges page
         case 403: goto('/')
@@ -11,5 +14,9 @@ export function handleResponse(code: number) {
 
         case 412: goto('/set-up')
             break;
+
+        default: shouldNavigate = false
     }
+
+    return shouldNavigate
 }
