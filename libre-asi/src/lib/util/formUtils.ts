@@ -24,7 +24,7 @@ export function checkUsername(username: string): [caption: string, valid: boolea
 
 export function checkPassword(password: string): [caption: string, valid: boolean] {
 
-    if (!emailValidator(password)) {
+    if (!emptyValidator(password)) {
         return ['Password is required', false]
     }
 
