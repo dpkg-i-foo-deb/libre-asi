@@ -106,8 +106,8 @@
 			return;
 		}
 
-		if (handleResponse(response.status)){
-			return
+		if (handleResponse(response.status, true)) {
+			return;
 		}
 
 		if (response.status == 401) {

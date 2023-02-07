@@ -23,6 +23,8 @@
 	import emailValidator from '$lib/util/emailValidator';
 	import emptyValidator from '$lib/util/emptyValidator';
 	import { sendError } from '$lib/util/notifications';
+	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
+	import { handleResponse } from '$lib/util/handleResponse';
 
 	export let data: PageData;
 
@@ -65,41 +67,29 @@
 		});
 	}
 
-	function checkEmail(): boolean {
-		invalidEmailCaption = '';
-		invalidEmail = true;
-		if (!emptyValidator(email)) {
-			invalidEmailCaption = 'Email is required';
-			return false;
-		}
+	function validateUsername(): boolean {
+		const usernameField = checkUsername(username);
 
-		if (!emailValidator(email)) {
-			invalidEmailCaption = 'Enter a valid email address';
-			return false;
-		}
+		invalidUsernameCaption = usernameField[0];
+		invalidUsername = usernameField[1];
 
-		invalidEmail = false;
-		return true;
+		return usernameField[1];
 	}
 
-	function checkUsername(): boolean {
-		invalidUsername = true;
-		invalidUsernameCaption = '';
+	function validateEmail(): boolean {
+		const emailField = checkEmail(email);
 
-		if (!emptyValidator(username)) {
-			invalidUsernameCaption = 'Username is required';
-			return false;
-		}
+		invalidEmailCaption = emailField[0];
+		invalidEmail = emailField[1];
 
-		invalidUsername = false;
-		return true;
+		return emailField[1];
 	}
 
 	async function register() {
 		duplicateCredentials = false;
 		isSuccessRegisterOpen = false;
 
-		if (!(checkEmail() || checkUsername())) {
+		if (!validateEmail() || !validateUsername()) {
 			return;
 		}
 
@@ -124,19 +114,11 @@
 			isSuccessRegisterOpen = true;
 			await invalidateAll();
 			loadAdmins();
+			return;
 		}
 
-		if (response.status == 409) {
-			duplicateCredentials = true;
-		}
-
-		if (response.status == 503) {
-			goto('/cannot-connect');
-		}
-
-		if (response.status == 401) {
-			sendError('Your session has expired', 'Log In again');
-			goto('/login');
+		if (handleResponse(response.status, false)) {
+			return;
 		}
 	}
 </script>
@@ -193,7 +175,7 @@
 						id="email"
 						labelText="Email"
 						placeholder="Enter email..."
-						on:blur={checkEmail}
+						on:blur={validateEmail}
 						bind:invalid={invalidEmail}
 						bind:value={email}
 						bind:invalidText={invalidEmailCaption}
@@ -204,7 +186,7 @@
 						id="username"
 						labelText="User name"
 						placeholder="Enter user name..."
-						on:blur={checkUsername}
+						on:blur={validateUsername}
 						bind:invalid={invalidUsername}
 						bind:value={username}
 						bind:invalidText={invalidUsernameCaption}
