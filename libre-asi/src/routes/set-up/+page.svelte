@@ -50,6 +50,12 @@
 		return passwordField[1];
 	}
 
+	function back() {
+		if (stepIndex > 0) {
+			stepIndex--;
+		}
+	}
+
 	function handleNext() {
 		switch (stepIndex) {
 			case 0:
@@ -143,6 +149,7 @@
 
 		<ButtonSet>
 			<div class="main-button-container">
+				<Button kind="secondary" on:click={back}>Back</Button>
 				<Button type="submit">Next</Button>
 			</div>
 		</ButtonSet>
@@ -156,9 +163,9 @@
 	}
 
 	.main-button-container {
+		display: flex;
 		margin-top: 15px;
-		margin-left: auto;
-		margin-right: 0;
+		flex-direction: row;
 	}
 
 	.container {
