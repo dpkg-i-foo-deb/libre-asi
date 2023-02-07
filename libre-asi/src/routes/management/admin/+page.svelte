@@ -17,13 +17,11 @@
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-	import { goto, invalidate, invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import emailValidator from '$lib/util/emailValidator';
-	import emptyValidator from '$lib/util/emptyValidator';
 	import { sendError } from '$lib/util/notifications';
-	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
+	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 
 	export let data: PageData;
