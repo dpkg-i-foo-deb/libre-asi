@@ -19,7 +19,8 @@
 		Row,
 		Column,
 		HeaderActionLink,
-		SideNavMenu
+		SideNavMenu,
+		InlineLoading
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -30,16 +31,23 @@
 	import { SessionRole } from '$lib/models/Session';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
+	let canRender = false;
 
-	onMount(function(){
-		if(!$setup){
-			goto('/set-up')
+	async function checkSetup() {
+		canRender = false;
+		if (!$setup) {
+			await goto('/set-up');
 		}
-	})
+		canRender = true;
+	}
+
+	onMount(async function () {
+		await checkSetup();
+	});
 
 	async function handleSignOut() {
 		//TODO check if this try catch is needed
@@ -125,7 +133,13 @@
 	<Grid>
 		<Row>
 			<Column>
-				<slot />
+				{#await checkSetup()}
+					<InlineLoading description="loading..." />
+				{:then}
+					{#if canRender}
+						<slot />
+					{/if}
+				{/await}
 
 				<div class="notification">
 					<Notification />
