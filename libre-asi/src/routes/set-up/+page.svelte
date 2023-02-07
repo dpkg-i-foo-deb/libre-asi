@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type Administrator from '$lib/models/Administrator';
 	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
 	import {
 		ButtonSet,
@@ -83,6 +84,18 @@
 			stepIndex++;
 			return;
 		}
+
+		if (stepIndex == 2) {
+			register();
+		}
+	}
+
+	function register() {
+		const newAdmin: Administrator = {
+			email: '',
+			username: '',
+			password: ''
+		};
 	}
 </script>
 

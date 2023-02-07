@@ -21,7 +21,7 @@
 		HeaderActionLink,
 		SideNavMenu,
 		InlineLoading,
-		ProgressBar,
+		ProgressBar
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -140,7 +140,7 @@
 		<Row>
 			<Column>
 				{#await checkSetup()}
-					<ProgressBar helperText="Loading..."/>
+					<ProgressBar helperText="Loading..." />
 				{:then}
 					{#if canRender}
 						<slot />

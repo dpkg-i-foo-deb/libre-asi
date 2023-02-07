@@ -12,11 +12,10 @@ export const POST: RequestHandler = async function ({ fetch, request, cookies })
 	const response = await fetch(API_URL + INTERVIEWER_LOGIN, {
 		body: JSON.stringify(user),
 		credentials: 'include',
-		method: 'POST',
+		method: 'POST'
 	});
 
 	if (response.ok) {
-
 		const pair = (await response.json()) as JwtPair;
 
 		cookies.set(pair.access_token.name, pair.access_token.value, {
