@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type Administrator from '$lib/models/Administrator';
 	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
+	import { handleResponse } from '$lib/util/handleResponse';
+	import { sendSuccess } from '$lib/util/notifications';
 	import {
 		ButtonSet,
 		Form,
@@ -90,12 +92,26 @@
 		}
 	}
 
-	function register() {
+	async function register() {
 		const newAdmin: Administrator = {
-			email: '',
-			username: '',
-			password: ''
+			email: email,
+			username: username,
+			password: password
 		};
+
+		const response = await fetch('/api/administrators', {
+			method: 'POST',
+			body: JSON.stringify(newAdmin)
+		});
+
+		if (response.ok) {
+			sendSuccess('Success', 'Account created successfully, you can log in');
+			return;
+		}
+
+		if (handleResponse(response.status, false)) {
+			return;
+		}
 	}
 </script>
 
