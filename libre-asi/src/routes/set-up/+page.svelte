@@ -51,18 +51,23 @@
 	}
 
 	function handleNext() {
-		if (!validateEmail() || !validatePassword() || !validateUsername()) {
-			return;
-		}
-
 		switch (stepIndex) {
 			case 0:
+				if (!validateEmail()) {
+					return;
+				}
 				break;
-			default:
-				stepIndex = 0;
+			case 1:
+				if (!validatePassword()) {
+					return;
+				}
+				break;
 		}
 
-		stepIndex++;
+		if (stepIndex < 1) {
+			stepIndex++;
+			return;
+		}
 	}
 </script>
 
@@ -79,7 +84,7 @@
 	>
 		<div class="stepper">
 			<ProgressIndicator bind:currentIndex={stepIndex} spaceEqually preventChangeOnClick>
-				<ProgressStep complete={stepIndex > 0} label="Identification" />
+				<ProgressStep complete={stepIndex > 0} label="Identification" bind:invalid={invalidEmail} />
 				<ProgressStep complete={stepIndex > 1} label="Password" />
 			</ProgressIndicator>
 		</div>
@@ -144,7 +149,7 @@
 	}
 
 	.stepper {
-		margin-top: 15px;
+		margin-top: 25px;
 		margin-bottom: 25px;
 	}
 </style>
