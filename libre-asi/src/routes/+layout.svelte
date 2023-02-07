@@ -20,7 +20,8 @@
 		Column,
 		HeaderActionLink,
 		SideNavMenu,
-		InlineLoading
+		InlineLoading,
+		TimePicker
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -41,6 +42,7 @@
 		canRender = false;
 		if (!$setup) {
 			await goto('/set-up');
+			await tick()
 		}
 		canRender = true;
 	}
