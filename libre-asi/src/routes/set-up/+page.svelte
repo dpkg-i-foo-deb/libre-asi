@@ -1,5 +1,5 @@
-<script>
-	import emptyValidator from '$lib/util/emptyValidator';
+<script lang="ts">
+	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
 	import {
 		ButtonSet,
 		Form,
@@ -13,13 +13,50 @@
 	let stepIndex = 0;
 	let email = '';
 	let password = '';
+	let username = '';
+
+	let invalidEmail = false;
+	let invalidPassword = false;
+	let invalidUsername = false;
+
+	let invalidEmailCaption = '';
+	let invalidPasswordCaption = '';
+	let invalidUsernameCaption = '';
+
+	function validateUsername(): boolean {
+		const usernameField = checkUsername(username);
+
+		invalidUsernameCaption = usernameField[0];
+		invalidUsername = usernameField[1];
+
+		return usernameField[1];
+	}
+
+	function validateEmail(): boolean {
+		const emailField = checkEmail(email);
+
+		invalidEmailCaption = emailField[0];
+		invalidEmail = !emailField[1];
+
+		return emailField[1];
+	}
+
+	function validatePassword(): boolean {
+		const passwordField = checkPassword(password);
+
+		invalidPasswordCaption = passwordField[0];
+		invalidPassword = !passwordField[1];
+
+		return passwordField[1];
+	}
 
 	function handleNext() {
+		if (!validateEmail() || !validatePassword() || !validateUsername()) {
+			return;
+		}
+
 		switch (stepIndex) {
 			case 0:
-				if (!emptyValidator(email)) {
-					return;
-				}
 				break;
 			default:
 				stepIndex = 0;
@@ -49,7 +86,15 @@
 
 		{#if stepIndex == 0}
 			<div class="form-element">
-				<TextInput labelText="Email" placeholder="Enter email..." autofocus bind:value={email} />
+				<TextInput
+					labelText="Email"
+					placeholder="Enter email..."
+					autofocus
+					bind:value={email}
+					on:blur={validateEmail}
+					bind:invalid={invalidEmail}
+					bind:invalidText={invalidEmailCaption}
+				/>
 			</div>
 		{/if}
 

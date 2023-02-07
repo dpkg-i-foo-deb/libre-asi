@@ -69,7 +69,7 @@
 		const usernameField = checkUsername(username);
 
 		invalidUsernameCaption = usernameField[0];
-		invalidUsername = usernameField[1];
+		invalidUsername = !usernameField[1];
 
 		return usernameField[1];
 	}
@@ -78,7 +78,7 @@
 		const emailField = checkEmail(email);
 
 		invalidEmailCaption = emailField[0];
-		invalidEmail = emailField[1];
+		invalidEmail = !emailField[1];
 
 		return emailField[1];
 	}
