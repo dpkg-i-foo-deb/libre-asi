@@ -153,6 +153,7 @@
 	}
 
 	.main-button-container {
+		margin-top: 15px;
 		margin-left: auto;
 		margin-right: 0;
 	}
@@ -162,14 +163,14 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		min-height: 60vh;
+		min-height: 50px;
 		width: 100%;
 	}
 
 	.form-element {
 		padding-top: 15px;
 		padding-bottom: 15px;
-		width: 350px;
+		width: 100%;
 	}
 
 	.stepper {
