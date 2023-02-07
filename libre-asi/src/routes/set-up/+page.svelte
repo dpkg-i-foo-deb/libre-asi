@@ -27,7 +27,7 @@
 		const usernameField = checkUsername(username);
 
 		invalidUsernameCaption = usernameField[0];
-		invalidUsername = usernameField[1];
+		invalidUsername = !usernameField[1];
 
 		return usernameField[1];
 	}
@@ -58,13 +58,22 @@
 				}
 				break;
 			case 1:
+				if (!validateUsername()) {
+					return;
+				}
+				break;
+
+			case 2:
 				if (!validatePassword()) {
 					return;
 				}
 				break;
+
+			default:
+				stepIndex = 0;
 		}
 
-		if (stepIndex < 1) {
+		if (stepIndex < 2) {
 			stepIndex++;
 			return;
 		}
@@ -84,8 +93,9 @@
 	>
 		<div class="stepper">
 			<ProgressIndicator bind:currentIndex={stepIndex} spaceEqually preventChangeOnClick>
-				<ProgressStep complete={stepIndex > 0} label="Identification" bind:invalid={invalidEmail} />
-				<ProgressStep complete={stepIndex > 1} label="Password" />
+				<ProgressStep complete={stepIndex > 0} label="Email" bind:invalid={invalidEmail} />
+				<ProgressStep complete={stepIndex > 1} label="Username" bind:invalid={invalidUsername} />
+				<ProgressStep complete={stepIndex > 2} label="Password" bind:invalid={invalidPassword} />
 			</ProgressIndicator>
 		</div>
 
@@ -104,6 +114,20 @@
 		{/if}
 
 		{#if stepIndex == 1}
+			<div class="form-element">
+				<TextInput
+					labelText="Username"
+					placeholder="Enter username..."
+					bind:value={username}
+					bind:invalid={invalidUsername}
+					bind:invalidText={invalidUsernameCaption}
+					on:blur={validateUsername}
+					autofocus
+				/>
+			</div>
+		{/if}
+
+		{#if stepIndex == 2}
 			<div class="form-element">
 				<PasswordInput
 					labelText="Password"
