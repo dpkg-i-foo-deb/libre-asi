@@ -93,9 +93,9 @@
 	>
 		<div class="stepper">
 			<ProgressIndicator bind:currentIndex={stepIndex} spaceEqually preventChangeOnClick>
-				<ProgressStep complete={stepIndex > 0} label="Email" bind:invalid={invalidEmail} />
-				<ProgressStep complete={stepIndex > 1} label="Username" bind:invalid={invalidUsername} />
-				<ProgressStep complete={stepIndex > 2} label="Password" bind:invalid={invalidPassword} />
+				<ProgressStep complete={stepIndex > 0} label="Step 1" bind:invalid={invalidEmail} />
+				<ProgressStep complete={stepIndex > 1} label="Step 2" bind:invalid={invalidUsername} />
+				<ProgressStep complete={stepIndex > 2} label="Step 3" bind:invalid={invalidPassword} />
 			</ProgressIndicator>
 		</div>
 
@@ -134,6 +134,9 @@
 					placeholder="Enter password..."
 					autofocus
 					bind:value={password}
+					bind:invalid={invalidPassword}
+					bind:invalidText={invalidPasswordCaption}
+					on:blur={validatePassword}
 				/>
 			</div>
 		{/if}
