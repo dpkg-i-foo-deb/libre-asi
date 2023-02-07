@@ -21,7 +21,7 @@
 		HeaderActionLink,
 		SideNavMenu,
 		InlineLoading,
-		TimePicker
+		ProgressBar,
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -42,7 +42,7 @@
 		canRender = false;
 		if (!$setup) {
 			await goto('/set-up');
-			await tick()
+			await tick();
 		}
 		canRender = true;
 	}
@@ -71,7 +71,7 @@
 	}
 </script>
 
-<Header persistentHamburgerMenu={true} bind:isSideNavOpen company="Libre-ASI">
+<Header persistentHamburgerMenu={$setup} bind:isSideNavOpen company="Libre-ASI">
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -81,62 +81,66 @@
 			href="https://github.com/dpkg-i-foo-deb/libre-asi"
 			target="_blank"
 		/>
-		{#if $session.active}
-			<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
-		{/if}
+		{#if $setup}
+			{#if $session.active}
+				<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
+			{/if}
 
-		<HeaderAction
-			bind:isOpen={isUserMenuOpen}
-			icon={UserAvatarFilledAlt}
-			closeIcon={UserAvatarFilledAlt}
-		>
-			<HeaderPanelLinks>
-				{#if !$session.active}
-					<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
-					<HeaderPanelLink
-						href="/login"
-						on:click={() => {
-							isUserMenuOpen = false;
-						}}>Log In</HeaderPanelLink
-					>
-				{:else if $session.active}
-					<HeaderPanelDivider>Session Active</HeaderPanelDivider>
-					<HeaderPanelLink on:click={handleSignOut}>Sign Out</HeaderPanelLink>
-				{/if}
-			</HeaderPanelLinks>
-		</HeaderAction>
+			<HeaderAction
+				bind:isOpen={isUserMenuOpen}
+				icon={UserAvatarFilledAlt}
+				closeIcon={UserAvatarFilledAlt}
+			>
+				<HeaderPanelLinks>
+					{#if !$session.active}
+						<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
+						<HeaderPanelLink
+							href="/login"
+							on:click={() => {
+								isUserMenuOpen = false;
+							}}>Log In</HeaderPanelLink
+						>
+					{:else if $session.active}
+						<HeaderPanelDivider>Session Active</HeaderPanelDivider>
+						<HeaderPanelLink on:click={handleSignOut}>Sign Out</HeaderPanelLink>
+					{/if}
+				</HeaderPanelLinks>
+			</HeaderAction>
+		{/if}
 	</HeaderUtilities>
 </Header>
 
-<SideNav bind:isOpen={isSideNavOpen}>
-	<SideNavItems>
-		<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
-		<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
-		{#if $session.active}
-			<SideNavMenu
-				text="Management"
-				expanded={$page.url.pathname.toString().includes('/management/')}
-			>
-				{#if $session.role == SessionRole.Admin}
-					<SideNavMenuItem
-						href="/management/admin"
-						text="Administrators"
-						isSelected={$page.url.pathname == '/management/admin'}
-					/>
+{#if $setup}
+	<SideNav bind:isOpen={isSideNavOpen}>
+		<SideNavItems>
+			<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
+			<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
+			{#if $session.active}
+				<SideNavMenu
+					text="Management"
+					expanded={$page.url.pathname.toString().includes('/management/')}
+				>
+					{#if $session.role == SessionRole.Admin}
+						<SideNavMenuItem
+							href="/management/admin"
+							text="Administrators"
+							isSelected={$page.url.pathname == '/management/admin'}
+						/>
 
-					<SideNavMenuItem text="Interviewers" />
-				{/if}
-			</SideNavMenu>
-		{/if}
-	</SideNavItems>
-</SideNav>
+						<SideNavMenuItem text="Interviewers" />
+					{/if}
+				</SideNavMenu>
+			{/if}
+		</SideNavItems>
+	</SideNav>
+{/if}
 
 <Content>
 	<Grid>
 		<Row>
 			<Column>
 				{#await checkSetup()}
-					<InlineLoading description="loading..." />
+					<ProgressBar helperText="Loading..."/>
 				{:then}
 					{#if canRender}
 						<slot />
