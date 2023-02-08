@@ -75,6 +75,10 @@ func createAdmin(c *fiber.Ctx) error {
 			return err
 		}
 
+		u.Administrators = []models.Administrator{
+			{},
+		}
+
 		pass, err = util.HashPassword(u.Password)
 
 		if err != nil {
@@ -82,10 +86,6 @@ func createAdmin(c *fiber.Ctx) error {
 		}
 
 		u.Password = pass
-
-		if len(u.Administrators) != 1 || u.Administrators == nil {
-			return errors.New("tried to create more than one administrator")
-		}
 
 		res := database.DB.Omit("People").Create(&u)
 
