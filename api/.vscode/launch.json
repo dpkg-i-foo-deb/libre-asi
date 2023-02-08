@@ -11,7 +11,7 @@
             "mode": "debug",
             "program": "main.go", 
             "env":{
-                "CONNECTION_STRING":"postgresql://libre_asi:libre_asi@localhost?sslmode=disable",
+                "DB_CONNECTION":"postgresql://libre_asi:libre_asi@192.168.122.1?sslmode=disable",
                 "ADMIN_EMAIL":"admin@example.com",
                 "ADMIN_PASSWORD":"admin",
                 "API_PORT":":3000",
