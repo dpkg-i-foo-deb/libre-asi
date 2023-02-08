@@ -3,6 +3,7 @@
 	import { checkEmail, checkPassword, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendSuccess } from '$lib/util/notifications';
+	import setup from '$lib/stores/setupStore';
 	import {
 		ButtonSet,
 		Form,
@@ -13,6 +14,7 @@
 		ProgressStep,
 		InlineLoading
 	} from 'carbon-components-svelte';
+	import { goto } from '$app/navigation';
 
 	let loading = false;
 
@@ -114,7 +116,12 @@
 		});
 
 		if (response.ok) {
-			sendSuccess('Success', 'Account created successfully, you can log in');
+			//Set the setup store to true and go to the welcome page
+			$setup = true;
+
+			sendSuccess('Success', 'Set-up completed, you can log in now');
+
+			goto('/');
 		}
 
 		handleResponse(response.status, false);
