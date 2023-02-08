@@ -10,8 +10,11 @@
 		TextInput,
 		PasswordInput,
 		ProgressIndicator,
-		ProgressStep
+		ProgressStep,
+		InlineLoading
 	} from 'carbon-components-svelte';
+
+	let loading = false;
 
 	let stepIndex = 0;
 	let email = '';
@@ -88,30 +91,35 @@
 		}
 
 		if (stepIndex == 2) {
+			if (!validateEmail() || !validateUsername() || !validatePassword()) {
+				return;
+			}
+
 			register();
 		}
 	}
 
 	async function register() {
+		loading = true;
+
 		const newAdmin: Administrator = {
 			email: email,
 			username: username,
 			password: password
 		};
 
-		const response = await fetch('/api/administrators', {
+		const response = await fetch('/api/set-up', {
 			method: 'POST',
 			body: JSON.stringify(newAdmin)
 		});
 
 		if (response.ok) {
 			sendSuccess('Success', 'Account created successfully, you can log in');
-			return;
 		}
 
-		if (handleResponse(response.status, false)) {
-			return;
-		}
+		handleResponse(response.status, false);
+
+		loading = false;
 	}
 </script>
 
@@ -133,6 +141,10 @@
 				<ProgressStep complete={stepIndex > 2} label="Step 3" bind:invalid={invalidPassword} />
 			</ProgressIndicator>
 		</div>
+
+		{#if loading}
+			<InlineLoading description="Submitting" />
+		{/if}
 
 		{#if stepIndex == 0}
 			<div class="form-element">
@@ -178,8 +190,8 @@
 
 		<ButtonSet>
 			<div class="main-button-container">
-				<Button kind="secondary" on:click={back}>Back</Button>
-				<Button type="submit">Next</Button>
+				<Button kind="secondary" bind:disabled={loading} on:click={back}>Back</Button>
+				<Button type="submit" bind:disabled={loading}>Next</Button>
 			</div>
 		</ButtonSet>
 	</Form>
