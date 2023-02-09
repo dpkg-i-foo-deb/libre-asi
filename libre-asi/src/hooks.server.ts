@@ -6,8 +6,8 @@ import type { JwtPair } from '$lib/models/JwtPair';
 
 export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 	request.headers.set('content-type', 'application/json');
-	let body = 'Cannot connect to the server';
-	let options = { status: 503, statusText: 'Cannot connect' };
+	const body = 'Cannot connect to the server';
+	const options = { status: 503, statusText: 'Cannot connect' };
 	let response: Response;
 	const cookies = event.cookies;
 	try {

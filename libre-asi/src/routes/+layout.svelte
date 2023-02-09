@@ -20,7 +20,6 @@
 		Column,
 		HeaderActionLink,
 		SideNavMenu,
-		InlineLoading,
 		ProgressBar
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
@@ -32,7 +31,7 @@
 	import { SessionRole } from '$lib/models/Session';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
 	import { handleResponse } from '$lib/util/handleResponse';
 
 	let isSideNavOpen = false;

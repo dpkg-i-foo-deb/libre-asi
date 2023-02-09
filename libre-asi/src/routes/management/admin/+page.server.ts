@@ -4,9 +4,7 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ fetch, request }) {
-	let response: Response;
-
-	response = await fetch(API_URL + GET_ADMINS, {
+	const response = await fetch(API_URL + GET_ADMINS, {
 		credentials: 'include',
 		headers: request.headers
 	});

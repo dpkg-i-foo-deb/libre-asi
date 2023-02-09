@@ -149,8 +149,7 @@
 			goto('/home');
 		}
 
-		if (handleResponse(response.status, true)) {
-		}
+		handleResponse(response.status, true);
 
 		if (response.status == 401) {
 			invalidCredentials = true;

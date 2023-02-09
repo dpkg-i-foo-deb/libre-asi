@@ -26,6 +26,7 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 				sendError('Your session has expired', 'Log In again');
 				goto('/login');
 			}
+			break;
 
 		default:
 			shouldNavigate = false;
