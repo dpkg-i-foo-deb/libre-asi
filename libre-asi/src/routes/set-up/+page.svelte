@@ -132,7 +132,7 @@
 
 <h1>Set-Up Required</h1>
 <br />
-<h3>The application was just initialized, you need to create an administrator account</h3>
+<h3>Create an administrator account</h3>
 
 <div class="container">
 	<Form
@@ -197,7 +197,9 @@
 
 		<ButtonSet>
 			<div class="main-button-container">
-				<Button kind="secondary" bind:disabled={loading} on:click={back}>Back</Button>
+				<Button kind="secondary" bind:disabled={loading} on:click={back}
+					>Back</Button
+				>
 				<Button type="submit" bind:disabled={loading}>Next</Button>
 			</div>
 		</ButtonSet>
