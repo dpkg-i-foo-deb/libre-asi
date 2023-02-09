@@ -197,10 +197,8 @@
 
 		<ButtonSet>
 			<div class="main-button-container">
-				<Button kind="secondary" bind:disabled={loading} on:click={back}
-					>Back</Button
-				>
-				<Button type="submit" bind:disabled={loading}>Next</Button>
+				<Button kind="secondary" disabled={loading || stepIndex == 0} on:click={back}>Back</Button>
+				<Button type="submit" disabled={loading}>Next</Button>
 			</div>
 		</ButtonSet>
 	</Form>
