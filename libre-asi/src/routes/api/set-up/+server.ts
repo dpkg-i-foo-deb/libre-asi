@@ -14,3 +14,7 @@ export const POST: RequestHandler = async function ({ fetch, request }) {
 
 	return response;
 };
+
+export const GET: RequestHandler = async function ({ fetch }) {
+	return await fetch(API_URL + SET_UP, { method: 'GET' });
+};
