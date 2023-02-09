@@ -33,23 +33,29 @@
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
 	import { onMount, tick } from 'svelte';
+	import { handleResponse } from '$lib/util/handleResponse';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
 	let canRender = false;
 
+	//Using the stores should guarantee that the request
+	//is sent only once
 	async function checkSetup() {
 		canRender = false;
 		if (!$setup) {
-			await goto('/set-up');
+			const response = await fetch('/api/set-up', { method: 'GET' });
+
+			if (response.ok) {
+				$setup = true;
+				return;
+			}
+
+			handleResponse(response.status, false);
 			await tick();
 		}
 		canRender = true;
 	}
-
-	onMount(async function () {
-		await checkSetup();
-	});
 
 	async function handleSignOut() {
 		//TODO check if this try catch is needed
