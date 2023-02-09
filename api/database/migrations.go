@@ -20,7 +20,6 @@ func migrateModels() {
 
 	err := DB.AutoMigrate(
 		&models.User{},
-		&models.Language{},
 		&models.Country{},
 		&models.CountryTranslations{},
 		&models.State{},
