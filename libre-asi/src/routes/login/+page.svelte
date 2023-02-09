@@ -6,17 +6,26 @@
 		RadioButtonGroup,
 		RadioButton,
 		Tooltip,
-		InlineNotification
+		InlineNotification,
+		Form,
+		ProgressIndicator,
+		ProgressStep,
+		ButtonSet,
+		InlineLoading
 	} from 'carbon-components-svelte';
 	import session from '$lib/stores/userStore';
 	import { SessionRole } from '$lib/models/Session';
 	import { onMount } from 'svelte';
 	import type User from '$lib/models/User';
 	import { goto } from '$app/navigation';
-	import { sendError, sendSuccess } from '$lib/util/notifications';
+	import { sendSuccess } from '$lib/util/notifications';
 	import emptyValidator from '$lib/util/emptyValidator';
 	import emailValidator from '$lib/util/emailValidator';
 	import { handleResponse } from '$lib/util/handleResponse';
+
+	let loading = false;
+
+	let stepIndex = 0;
 
 	let wantsAdmin = false;
 	let wantsInterviewer = false;
@@ -28,10 +37,8 @@
 	let password = '';
 	let invalidCredentials = false;
 
-	//TODO make this form less ugly
-
+	//If the user lands here, it means they need a session
 	onMount(function () {
-		//If the user lands here, it means they need a session
 		$session.active = false;
 		$session.role = SessionRole.None;
 	});
@@ -66,7 +73,45 @@
 		return true;
 	}
 
+	function back() {
+		if (stepIndex > 0) {
+			stepIndex--;
+		}
+	}
+
+	function hadnleNext() {
+		switch (stepIndex) {
+			case 1:
+				if (!checkEmail()) {
+					return;
+				}
+				break;
+			case 2:
+				if (!checkPassword()) {
+					return;
+				}
+				break;
+			default:
+				stepIndex = 0;
+		}
+
+		if (stepIndex < 2) {
+			stepIndex++;
+			return;
+		}
+
+		if (stepIndex == 2) {
+			if (!checkEmail() || !checkPassword()) {
+				return;
+			}
+
+			login();
+		}
+	}
+
 	async function login() {
+		loading = true;
+
 		invalidCredentials = false;
 		let url = '/api/login/';
 
@@ -102,25 +147,30 @@
 			sendSuccess('Logged In', 'Welcome back');
 
 			goto('/home');
-
-			return;
 		}
 
 		if (handleResponse(response.status, true)) {
-			return;
 		}
 
 		if (response.status == 401) {
 			invalidCredentials = true;
-			return;
 		}
+
+		loading = false;
 	}
 </script>
 
 <main>
 	<div class="container">
-		<form on:submit|preventDefault={login}>
-			<h3>Please Log In to your Account</h3>
+		<Form
+			on:submit={(e) => {
+				e.preventDefault();
+				hadnleNext();
+			}}
+		>
+			<div class="title">
+				<h3>Log In to your Account</h3>
+			</div>
 
 			{#if invalidCredentials}
 				<div class="invalid-credentials">
@@ -128,63 +178,94 @@
 				</div>
 			{/if}
 
-			<div class="form-element">
-				<TextInput
-					labelText="Email"
-					placeholder="Enter email..."
-					id="email"
-					name="email"
-					bind:value={email}
-					bind:invalid={invalidEmail}
-					bind:invalidText={invalidEmailCaption}
-					on:blur={checkEmail}
-					autofocus
-				/>
-			</div>
-
-			<div class="form-element">
-				<PasswordInput
-					labelText="Password"
-					placeholder="Enter password..."
-					id="password"
-					name="password"
-					type="password"
-					bind:value={password}
-					bind:invalid={invalidPassword}
-					bind:invalidText={invalidPasswordCaption}
-					on:blur={checkPassword}
-				/>
-			</div>
-
-			<div class="form-element">
-				<RadioButtonGroup selected="interviewer" required>
-					<div slot="legendText" style="display:flex">
-						Account type
-						<Tooltip>
-							<p>Your account type is determined by your administrator</p>
-						</Tooltip>
-					</div>
-					<RadioButton
-						labelText="Interviewer"
-						value="interviewer"
-						bind:checked={wantsInterviewer}
-						id="interviewer"
-						name="interviewer"
+			<div class="stepper">
+				<ProgressIndicator bind:currentIndex={stepIndex} spaceEqually preventChangeOnClick>
+					<ProgressStep complete={stepIndex > 0} label="Role" />
+					<ProgressStep
+						complete={stepIndex > 1}
+						label="Identification"
+						bind:invalid={invalidEmail}
 					/>
-					<RadioButton
-						labelText="Administrator"
-						value="admin"
-						bind:checked={wantsAdmin}
-						id="administrator"
-						name="administrator"
+					<ProgressStep
+						complete={stepIndex > 2}
+						label="Credentials"
+						bind:invalid={invalidPassword}
 					/>
-				</RadioButtonGroup>
+				</ProgressIndicator>
 			</div>
 
-			<div class="button-container">
-				<Button type="submit">Log In</Button>
-			</div>
-		</form>
+			{#if loading}
+				<InlineLoading description="Submitting" />
+			{/if}
+
+			{#if stepIndex == 0}
+				<div class="role-container">
+					<RadioButtonGroup selected="interviewer" required>
+						<div slot="legendText" style="display:flex;margin-top:20px">
+							Account type
+							<Tooltip>
+								<p>Your account type is determined by your administrator</p>
+							</Tooltip>
+						</div>
+						<RadioButton
+							labelText="Interviewer"
+							value="interviewer"
+							bind:checked={wantsInterviewer}
+							id="interviewer"
+							name="interviewer"
+							autofocus
+						/>
+						<RadioButton
+							labelText="Administrator"
+							value="admin"
+							bind:checked={wantsAdmin}
+							id="administrator"
+							name="administrator"
+						/>
+					</RadioButtonGroup>
+				</div>
+			{/if}
+
+			{#if stepIndex == 1}
+				<div class="form-element">
+					<TextInput
+						labelText="Email"
+						placeholder="Enter email..."
+						id="email"
+						name="email"
+						bind:value={email}
+						bind:invalid={invalidEmail}
+						bind:invalidText={invalidEmailCaption}
+						on:blur={checkEmail}
+						autofocus
+					/>
+				</div>
+			{/if}
+
+			{#if stepIndex == 2}
+				<div class="form-element">
+					<PasswordInput
+						labelText="Password"
+						placeholder="Enter password..."
+						id="password"
+						name="password"
+						type="password"
+						bind:value={password}
+						bind:invalid={invalidPassword}
+						bind:invalidText={invalidPasswordCaption}
+						on:blur={checkPassword}
+						autofocus
+					/>
+				</div>
+			{/if}
+
+			<ButtonSet>
+				<div class="button-container">
+					<Button kind="secondary" disabled={stepIndex == 0} on:click={back}>Back</Button>
+					<Button type="submit">Next</Button>
+				</div>
+			</ButtonSet>
+		</Form>
 	</div>
 </main>
 
@@ -195,7 +276,11 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		min-height: 85vh;
+		min-height: 70vh;
+	}
+
+	.title {
+		margin-bottom: 35px;
 	}
 
 	.form-element {
@@ -209,6 +294,20 @@
 	}
 
 	.invalid-credentials {
-		padding-top: 20px;
+		padding-bottom: 10px;
+	}
+
+	.stepper {
+		margin-bottom: 30px;
+	}
+
+	.button-container {
+		display: flex;
+		margin-top: 15px;
+		flex-direction: row;
+	}
+
+	.role-container {
+		margin-top: -10px;
 	}
 </style>
