@@ -17,6 +17,7 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			break;
 
 		case 412:
+			setup.set(false);
 			goto('/set-up');
 			break;
 

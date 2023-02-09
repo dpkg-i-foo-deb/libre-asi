@@ -68,6 +68,11 @@ func createAdmin(c *fiber.Ctx) error {
 	var u models.User
 	var pass string
 
+	//Tomar los idiomas de las preguntas en una tabla a parte donde se encuentre
+	// el enunciado
+
+	//Borrar la tabla idiomas ya que no hace falta
+
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 		err := c.BodyParser(&u)
 
