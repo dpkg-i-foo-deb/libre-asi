@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type AsiFormTranslations struct {
 	gorm.Model
-	LanguageID  uint   `json:"language"`
+	Language    string `json:"language"`
 	AsiFormID   uint   `json:"asiForm"`
 	IsDefault   bool   `json:"isDefault"`
 	Name        string `json:"name"`

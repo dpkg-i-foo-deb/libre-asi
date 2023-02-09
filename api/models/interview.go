@@ -17,7 +17,7 @@ type Interview struct {
 	Attendants   []Attendant   `json:"attendants" gorm:"many2many:attendants_interviews"`
 	Answers      []Option      `json:"answers" gorm:"many2many:interview_answers"`
 	AsiFormID    uint          `json:"AsiForm"`
-	LanguageID   uint          `json:"language"`
+	Language     string        `json:"language"`
 }
 
 type InterviewAnswers struct {

@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type QuestionCategoryTranslations struct {
 	gorm.Model
-	LanguageID         uint   `json:"language"`
+	Language           string `json:"language"`
 	QuestionCategoryID uint   `json:"questionCategory"`
 	IsDefault          bool   `json:"isDefault"`
 	Category           string `json:"category"`
