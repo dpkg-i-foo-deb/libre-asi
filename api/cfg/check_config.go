@@ -31,7 +31,7 @@ func New(config Config) fiber.Handler {
 			return c.Status(412).JSON(res)
 		}
 
-		if CheckExistingAdmin() == nil && c.Path() == "/set-up" {
+		if CheckExistingAdmin() == nil && c.Path() == "/set-up" && c.Route().Method == "POST" {
 			res.Status = string(models.DENIED)
 			res.Message = "Libre-ASI is already set-up"
 			return c.Status(409).JSON(res)
@@ -45,7 +45,7 @@ func CheckExistingAdmin() error {
 
 	var a models.Administrator
 
-	if database.DB.Take(&a).Error == gorm.ErrRecordNotFound {
+	if database.DB.First(&a).Error == gorm.ErrRecordNotFound {
 		return errors.New("setup required")
 	}
 

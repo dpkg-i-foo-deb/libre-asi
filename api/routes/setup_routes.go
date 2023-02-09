@@ -7,4 +7,5 @@ import (
 
 func setupRoutes() {
 	app.AddPost("/set-up", services.SetupService)
+	app.AddGet("/set-up", services.CheckSetupService)
 }
