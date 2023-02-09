@@ -27,11 +27,13 @@ func New(config Config) fiber.Handler {
 
 		//Check if the app requires configuration
 
-		if CheckExistingAdmin() != nil && c.Path() != "/set-up" {
+		err := CheckExistingAdmin()
+
+		if err != nil && c.Path() != "/set-up" {
 			return c.Status(412).JSON(res)
 		}
 
-		if CheckExistingAdmin() == nil && c.Path() == "/set-up" && c.Route().Method == "POST" {
+		if err == nil && c.Path() == "/set-up" && c.Route().Method == "POST" {
 			res.Status = string(models.DENIED)
 			res.Message = "Libre-ASI is already set-up"
 			return c.Status(409).JSON(res)
