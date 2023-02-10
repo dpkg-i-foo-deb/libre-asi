@@ -10,6 +10,7 @@ if (browser) {
 		isSetup = JSON.parse(localStorage.getItem('setup') ?? JSON.stringify(isSetup));
 	} catch (e) {
 		console.warn('Local storage setup is wrong, fixing...');
+		isSetup = false;
 	}
 	setup = writable(isSetup);
 }
