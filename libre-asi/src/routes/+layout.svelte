@@ -33,6 +33,7 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import { tick } from 'svelte';
 	import { handleResponse } from '$lib/util/handleResponse';
+	import LL from '$lib/i18n/i18n-svelte';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
@@ -148,6 +149,7 @@
 					<ProgressBar helperText="Loading..." />
 				{:then}
 					{#if canRender}
+						<h1>{$LL.HI({ name: 'world' })}</h1>
 						<slot />
 					{/if}
 				{/await}
