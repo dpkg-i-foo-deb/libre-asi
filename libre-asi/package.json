@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev --host",
+		"dev": "npm-run-all --parallel vite typesafe-i18n",
+		"vite":"vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
