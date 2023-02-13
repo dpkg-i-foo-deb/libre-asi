@@ -59,7 +59,7 @@
 	async function handleSignOut() {
 		//TODO check if this try catch is needed
 		try {
-			await fetch('api/sign-out', { method: 'POST', credentials: 'include' });
+			await fetch('/api/sign-out', { method: 'POST', credentials: 'include' });
 
 			//Set session data to false and redirect to the home page
 			$session.active = false;
