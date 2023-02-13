@@ -10,8 +10,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({ out: 'build', fallback: 'index.html' }),
-		prerender: { entries: ['*'] }
+		prerender: { entries: ['*'] },
 	}
+
 };
 
 export default config;
