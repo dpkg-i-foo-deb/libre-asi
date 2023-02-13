@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "npm-run-all --parallel vite typesafe-i18n",
-		"vite":"vite dev --host",
+		"vite": "vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
@@ -33,8 +33,10 @@
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.3",
 		"tslib": "^2.4.1",
+		"typesafe-i18n": "^5.24.1",
 		"typescript": "^4.9.5",
 		"vite": "^4.1.1",
+		"vite-plugin-mkcert": "^1.13.0",
 		"vitest": "^0.28.4"
 	},
 	"type": "module",
