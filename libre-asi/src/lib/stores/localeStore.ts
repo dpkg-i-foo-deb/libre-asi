@@ -1,7 +1,7 @@
 import { writable, type Writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { Locale } from '$lib/models/Locale';
-let storedLocale = 'en';
+let storedLocale = Locale.EN;
 
 let locale: Writable<string> = writable(storedLocale);
 
@@ -10,6 +10,7 @@ if (browser) {
 		storedLocale = JSON.parse(localStorage.getItem('locale') ?? JSON.stringify(storedLocale));
 	} catch (e) {
 		console.warn('Local storage locale is wrong, fixing...');
+		localStorage.setItem('locale', storedLocale);
 	}
 
 	locale = writable(storedLocale);
