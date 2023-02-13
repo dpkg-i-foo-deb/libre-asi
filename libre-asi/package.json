@@ -33,14 +33,8 @@
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.3",
 		"tslib": "^2.4.1",
-<<<<<<< HEAD
-		"typesafe-i18n": "^5.24.0",
-		"typescript": "^4.9.5",
-		"vite": "^4.0.0",
-=======
 		"typescript": "^4.9.5",
 		"vite": "^4.1.1",
->>>>>>> main
 		"vitest": "^0.28.4"
 	},
 	"type": "module",
