@@ -36,13 +36,13 @@
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
-	let canRender = false;
+	let canRender = true;
 
 	//Using the stores should guarantee that the request
 	//is sent only once
 	async function checkSetup() {
-		canRender = false;
 		if (!$setup) {
+			canRender = false;
 			const response = await fetch('/api/set-up', { method: 'GET' });
 
 			if (response.ok) {
@@ -53,6 +53,7 @@
 			handleResponse(response.status, false);
 			await tick();
 		}
+
 		canRender = true;
 	}
 
