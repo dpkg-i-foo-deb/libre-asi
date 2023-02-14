@@ -1,14 +1,17 @@
 <script lang="ts">
+	import LL from '$lib/i18n/i18n-svelte';
 	import { Locale } from '$lib/models/Locale';
-	import { Tile, Dropdown, Button } from 'carbon-components-svelte';
+	import { Tile, Dropdown, Button, DropdownSkeleton } from 'carbon-components-svelte';
 	import type { DropdownItem } from 'carbon-components-svelte/types/Dropdown/Dropdown.svelte';
 	import { onMount } from 'svelte';
 	import locale from '$lib/stores/localeStore';
 	import { setLocale } from '$lib/i18n/i18n-svelte';
 	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async';
+	import { sendSuccess } from '$lib/util/notifications';
 
 	let languageOptions: ReadonlyArray<DropdownItem>;
 	let selectedLanguage = Locale.EN;
+	let loading = false;
 
 	onMount(function () {
 		loadLanguages();
@@ -36,7 +39,11 @@
 	}
 
 	async function save() {
+		loading = true;
 		await setupLocale();
+		loading = false;
+
+		sendSuccess($LL.general.SUCCESS(), $LL.settings.SUCCESS_TEXT());
 	}
 
 	async function setupLocale() {
@@ -49,24 +56,28 @@
 </script>
 
 <Tile>
-	<h1 class="title">Libre-ASI Settings</h1>
+	<h1 class="title">{$LL.settings.TITLE()}</h1>
 	<br />
 	<br />
-	<h4>Local settings, only applied on this browser</h4>
+	<h4>{$LL.settings.LOCAL_SETTINGS()}</h4>
 
 	<div class="bar" />
 
 	<div class="settings-container">
-		<h3>Language</h3>
+		<h3>{$LL.settings.LANGUAGE()}</h3>
 		<div class="settings-element">
-			<Dropdown
-				titleText="Pick a language"
-				bind:selectedId={selectedLanguage}
-				items={languageOptions}
-			/>
+			{#if !languageOptions}
+				<DropdownSkeleton />
+			{:else}
+				<Dropdown
+					titleText={$LL.settings.PICKER()}
+					bind:selectedId={selectedLanguage}
+					items={languageOptions}
+				/>
+			{/if}
 		</div>
 
-		<Button on:click={save}>Save</Button>
+		<Button on:click={save} bind:disabled={loading}>{$LL.general.SAVE()}</Button>
 	</div>
 </Tile>
 
