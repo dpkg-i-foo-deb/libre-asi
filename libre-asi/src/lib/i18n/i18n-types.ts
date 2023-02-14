@@ -61,6 +61,34 @@ type RootTranslation = {
 		 * S​e​t​t​i​n​g​s​ ​h​a​v​e​ ​b​e​e​n​ ​s​a​v​e​d​ ​s​u​c​c​e​s​s​f​u​l​l​y
 		 */
 		SUCCESS_TEXT: string
+		/**
+		 * T​h​e​m​e
+		 */
+		THEME: string
+		/**
+		 * P​i​c​k​ ​a​ ​t​h​e​m​e
+		 */
+		THEME_PICKER: string
+		/**
+		 * w​h​i​t​e
+		 */
+		WHITE: string
+		/**
+		 * g​1​0
+		 */
+		G10: string
+		/**
+		 * g​8​0
+		 */
+		G80: string
+		/**
+		 * g​9​0
+		 */
+		G90: string
+		/**
+		 * g​1​0​0
+		 */
+		G100: string
 	}
 	general: {
 		/**
@@ -122,6 +150,34 @@ export type TranslationFunctions = {
 		 * Settings have been saved successfully
 		 */
 		SUCCESS_TEXT: () => LocalizedString
+		/**
+		 * Theme
+		 */
+		THEME: () => LocalizedString
+		/**
+		 * Pick a theme
+		 */
+		THEME_PICKER: () => LocalizedString
+		/**
+		 * white
+		 */
+		WHITE: () => LocalizedString
+		/**
+		 * g10
+		 */
+		G10: () => LocalizedString
+		/**
+		 * g80
+		 */
+		G80: () => LocalizedString
+		/**
+		 * g90
+		 */
+		G90: () => LocalizedString
+		/**
+		 * g100
+		 */
+		G100: () => LocalizedString
 	}
 	general: {
 		/**

@@ -18,6 +18,7 @@
 	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async';
 	import { sendSuccess } from '$lib/util/notifications';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
+	import settings from '$lib/i18n/en/settings';
 
 	let theme: CarbonTheme = 'g90';
 	let languageOptions: ReadonlyArray<DropdownItem>;
@@ -90,12 +91,14 @@
 			{/if}
 		</div>
 
-		<h3>Theme</h3>
+		<h3>{$LL.settings.THEME()}</h3>
 		<div class="settings-element">
-			<RadioButtonGroup legendText="Carbon theme" bind:selected={theme}>
-				{#each ['white', 'g10', 'g80', 'g90', 'g100'] as value}
-					<RadioButton labelText={value} {value} />
-				{/each}
+			<RadioButtonGroup legendText={$LL.settings.THEME_PICKER()} bind:selected={theme}>
+				<RadioButton labelText={$LL.settings.WHITE()} value="white" />
+				<RadioButton labelText={$LL.settings.G10()} value="g10" />
+				<RadioButton labelText={$LL.settings.G80()} value="g80" />
+				<RadioButton labelText={$LL.settings.G90()} value="g90" />
+				<RadioButton labelText={$LL.settings.G100()} value="g100" />
 			</RadioButtonGroup>
 		</div>
 
