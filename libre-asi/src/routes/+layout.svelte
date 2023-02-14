@@ -92,7 +92,13 @@
 		/>
 		{#if $setup}
 			{#if $session.active}
-				<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust} />
+				<HeaderGlobalAction
+					aria-label="Settings"
+					icon={SettingsAdjust}
+					on:click={function () {
+						goto('/settings');
+					}}
+				/>
 			{/if}
 
 			<HeaderAction
