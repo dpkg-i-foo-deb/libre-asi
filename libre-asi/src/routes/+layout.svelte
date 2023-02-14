@@ -31,7 +31,7 @@
 	import { SessionRole } from '$lib/models/Session';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
-	import { tick } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { handleResponse } from '$lib/util/handleResponse';
 
 	let isSideNavOpen = false;
@@ -40,19 +40,23 @@
 
 	//Using the stores should guarantee that the request
 	//is sent only once
-	async function checkSetup() {
+
+	onMount(function () {
 		if (!$setup) {
 			canRender = false;
-			const response = await fetch('/api/set-up', { method: 'GET' });
-
-			if (response.ok) {
-				$setup = true;
-				return;
-			}
-
-			handleResponse(response.status, false);
-			await tick();
 		}
+	});
+
+	async function checkSetup() {
+		canRender = false;
+		const response = await fetch('/api/set-up', { method: 'GET' });
+
+		if (response.ok) {
+			$setup = true;
+		}
+
+		handleResponse(response.status, false);
+		await tick();
 
 		canRender = true;
 	}
@@ -145,13 +149,17 @@
 	<Grid>
 		<Row>
 			<Column>
-				{#await checkSetup()}
-					<ProgressBar helperText="Loading..." />
-				{:then}
-					{#if canRender}
-						<slot />
-					{/if}
-				{/await}
+				{#if !canRender}
+					{#await checkSetup()}
+						<ProgressBar helperText="Loading..." />
+					{:then}
+						{#if canRender}
+							<slot />
+						{/if}
+					{/await}
+				{:else}
+					<slot />
+				{/if}
 
 				<div class="notification">
 					<Notification />
