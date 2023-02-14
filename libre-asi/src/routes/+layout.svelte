@@ -48,7 +48,6 @@
 	});
 
 	async function checkSetup() {
-		canRender = false;
 		const response = await fetch('/api/set-up', { method: 'GET' });
 
 		if (response.ok) {
