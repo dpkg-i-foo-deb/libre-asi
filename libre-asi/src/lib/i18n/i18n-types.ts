@@ -40,6 +40,38 @@ type RootTranslation = {
 		 */
 		KNOW: string
 	}
+	settings: {
+		/**
+		 * L​i​b​r​e​-​A​S​I​ ​S​e​t​t​i​n​g​s
+		 */
+		TITLE: string
+		/**
+		 * L​o​c​a​l​ ​s​e​t​t​i​n​g​s​,​ ​o​n​l​y​ ​a​p​p​l​i​e​d​ ​o​n​ ​t​h​i​s​ ​b​r​o​w​s​e​r
+		 */
+		LOCAL_SETTINGS: string
+		/**
+		 * L​a​n​g​u​a​g​e
+		 */
+		LANGUAGE: string
+		/**
+		 * P​i​c​k​ ​a​ ​l​a​n​g​u​a​g​e
+		 */
+		PICKER: string
+		/**
+		 * S​e​t​t​i​n​g​s​ ​h​a​v​e​ ​b​e​e​n​ ​s​a​v​e​d​ ​s​u​c​c​e​s​s​f​u​l​l​y
+		 */
+		SUCCESS_TEXT: string
+	}
+	general: {
+		/**
+		 * S​a​v​e
+		 */
+		SAVE: string
+		/**
+		 * S​u​c​c​e​s​s
+		 */
+		SUCCESS: string
+	}
 }
 
 export type TranslationFunctions = {
@@ -68,6 +100,38 @@ export type TranslationFunctions = {
 		 * to know more and read the documentation
 		 */
 		KNOW: () => LocalizedString
+	}
+	settings: {
+		/**
+		 * Libre-ASI Settings
+		 */
+		TITLE: () => LocalizedString
+		/**
+		 * Local settings, only applied on this browser
+		 */
+		LOCAL_SETTINGS: () => LocalizedString
+		/**
+		 * Language
+		 */
+		LANGUAGE: () => LocalizedString
+		/**
+		 * Pick a language
+		 */
+		PICKER: () => LocalizedString
+		/**
+		 * Settings have been saved successfully
+		 */
+		SUCCESS_TEXT: () => LocalizedString
+	}
+	general: {
+		/**
+		 * Save
+		 */
+		SAVE: () => LocalizedString
+		/**
+		 * Success
+		 */
+		SUCCESS: () => LocalizedString
 	}
 }
 
