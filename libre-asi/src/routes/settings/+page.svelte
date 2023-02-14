@@ -3,9 +3,12 @@
 	import { Tile, Dropdown, Button } from 'carbon-components-svelte';
 	import type { DropdownItem } from 'carbon-components-svelte/types/Dropdown/Dropdown.svelte';
 	import { onMount } from 'svelte';
+	import locale from '$lib/stores/localeStore';
+	import { setLocale } from '$lib/i18n/i18n-svelte';
+	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async';
 
 	let languageOptions: ReadonlyArray<DropdownItem>;
-	let selectedLanguage = 0;
+	let selectedLanguage = Locale.EN;
 
 	onMount(function () {
 		loadLanguages();
@@ -28,12 +31,20 @@
 					'Undefined';
 			}
 
-			return { id: index, text: text };
+			return { id: value, text: text };
 		});
 	}
 
-	function save() {
-		console.log('owo');
+	async function save() {
+		await setupLocale();
+	}
+
+	async function setupLocale() {
+		locale.set(selectedLanguage);
+
+		await loadLocaleAsync(selectedLanguage);
+
+		setLocale(selectedLanguage);
 	}
 </script>
 
@@ -41,7 +52,7 @@
 	<h1 class="title">Libre-ASI Settings</h1>
 	<br />
 	<br />
-	<h4>Settings will only be applied on this browser</h4>
+	<h4>Local settings, only applied on this browser</h4>
 
 	<div class="bar" />
 
