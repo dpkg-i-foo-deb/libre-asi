@@ -100,6 +100,24 @@ type RootTranslation = {
 		 */
 		SUCCESS: string
 	}
+	navMenu: {
+		/**
+		 * N​o​t​ ​l​o​g​g​e​d​ ​i​n
+		 */
+		NOT_LOGGED_IN: string
+		/**
+		 * L​o​g​ ​I​n
+		 */
+		LOGIN: string
+		/**
+		 * S​e​s​s​i​o​n​ ​A​c​t​i​v​e
+		 */
+		SESSION_ACTIVE: string
+		/**
+		 * S​i​g​n​ ​O​u​t
+		 */
+		SIGN_OUT: string
+	}
 }
 
 export type TranslationFunctions = {
@@ -188,6 +206,24 @@ export type TranslationFunctions = {
 		 * Success
 		 */
 		SUCCESS: () => LocalizedString
+	}
+	navMenu: {
+		/**
+		 * Not logged in
+		 */
+		NOT_LOGGED_IN: () => LocalizedString
+		/**
+		 * Log In
+		 */
+		LOGIN: () => LocalizedString
+		/**
+		 * Session Active
+		 */
+		SESSION_ACTIVE: () => LocalizedString
+		/**
+		 * Sign Out
+		 */
+		SIGN_OUT: () => LocalizedString
 	}
 }
 

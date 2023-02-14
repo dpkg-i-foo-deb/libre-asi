@@ -1,6 +1,7 @@
 <script lang="ts">
 	import 'carbon-components-svelte/css/all.css';
 	import Notification from '../components/Notification.svelte';
+	import LL from '$lib/i18n/i18n-svelte';
 	import {
 		Header,
 		HeaderUtilities,
@@ -111,16 +112,16 @@
 			>
 				<HeaderPanelLinks>
 					{#if !$session.active}
-						<HeaderPanelDivider>Not Logged in</HeaderPanelDivider>
+						<HeaderPanelDivider>{$LL.navMenu.NOT_LOGGED_IN()}</HeaderPanelDivider>
 						<HeaderPanelLink
 							href="/login"
 							on:click={() => {
 								isUserMenuOpen = false;
-							}}>Log In</HeaderPanelLink
+							}}>{$LL.navMenu.LOGIN()}</HeaderPanelLink
 						>
 					{:else if $session.active}
-						<HeaderPanelDivider>Session Active</HeaderPanelDivider>
-						<HeaderPanelLink on:click={handleSignOut}>Sign Out</HeaderPanelLink>
+						<HeaderPanelDivider>{$LL.navMenu.SESSION_ACTIVE()}</HeaderPanelDivider>
+						<HeaderPanelLink on:click={handleSignOut}>{$LL.navMenu.SIGN_OUT()}</HeaderPanelLink>
 					{/if}
 				</HeaderPanelLinks>
 			</HeaderAction>
