@@ -10,14 +10,16 @@
 		Theme,
 		RadioButton
 	} from 'carbon-components-svelte';
+
 	import type { DropdownItem } from 'carbon-components-svelte/types/Dropdown/Dropdown.svelte';
 	import { onMount } from 'svelte';
 	import locale from '$lib/stores/localeStore';
 	import { setLocale } from '$lib/i18n/i18n-svelte';
 	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async';
 	import { sendSuccess } from '$lib/util/notifications';
+	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 
-	let theme = 'g90';
+	let theme: CarbonTheme = 'g90';
 	let languageOptions: ReadonlyArray<DropdownItem>;
 	let selectedLanguage = Locale.EN;
 	let loading = false;
@@ -64,6 +66,8 @@
 	}
 </script>
 
+<Theme bind:theme persist persistKey="__carbon-theme" />
+
 <Tile>
 	<h1 class="title">{$LL.settings.TITLE()}</h1>
 	<br />
@@ -86,16 +90,17 @@
 			{/if}
 		</div>
 
+		<h3>Theme</h3>
+		<div class="settings-element">
+			<RadioButtonGroup legendText="Carbon theme" bind:selected={theme}>
+				{#each ['white', 'g10', 'g80', 'g90', 'g100'] as value}
+					<RadioButton labelText={value} {value} />
+				{/each}
+			</RadioButtonGroup>
+		</div>
+
 		<Button on:click={save} bind:disabled={loading}>{$LL.general.SAVE()}</Button>
 	</div>
-
-	<Theme bind:theme persist persistKey="__carbon-theme" />
-
-	<RadioButtonGroup legendText="Carbon theme" bind:selected={theme}>
-		{#each ['white', 'g10', 'g80', 'g90', 'g100'] as value}
-			<RadioButton labelText={value} {value} />
-		{/each}
-	</RadioButtonGroup>
 </Tile>
 
 <style>

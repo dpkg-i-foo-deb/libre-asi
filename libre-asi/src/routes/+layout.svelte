@@ -20,7 +20,8 @@
 		Column,
 		HeaderActionLink,
 		SideNavMenu,
-		ProgressBar
+		ProgressBar,
+		Theme
 	} from 'carbon-components-svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import UserAvatarFilledAlt from 'carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte';
@@ -79,6 +80,8 @@
 		}
 	}
 </script>
+
+<Theme persist persistKey="__carbon-theme" />
 
 <Header persistentHamburgerMenu={$setup} bind:isSideNavOpen company="Libre-ASI">
 	<svelte:fragment slot="skip-to-content">
