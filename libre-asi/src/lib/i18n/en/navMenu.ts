@@ -7,7 +7,8 @@ const navMenu = {
 	HOME: 'Home',
 	MANAGEMENT: 'Management',
 	ADMINISTRATORS: 'Administrators',
-	INTERVIEWERS: 'Interviewers'
+	INTERVIEWERS: 'Interviewers',
+	LOADING: 'Loading...'
 };
 
 export default navMenu;

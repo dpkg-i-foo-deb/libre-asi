@@ -137,6 +137,7 @@ type RootTranslation = {
 		 * I​n​t​e​r​v​i​e​w​e​r​s
 		 */
 		INTERVIEWERS: string
+		LOADING: string
 	}
 }
 
@@ -264,6 +265,7 @@ export type TranslationFunctions = {
 		 * Interviewers
 		 */
 		INTERVIEWERS: () => LocalizedString
+		LOADING: () => LocalizedString
 	}
 }
 

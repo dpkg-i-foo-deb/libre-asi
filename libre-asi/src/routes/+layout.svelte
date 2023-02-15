@@ -115,7 +115,6 @@
 						<HeaderPanelDivider>{$LL.navMenu.NOT_LOGGED_IN()}</HeaderPanelDivider>
 						<HeaderPanelLink
 							href="/login"
-							
 							on:click={() => {
 								isUserMenuOpen = false;
 							}}>{$LL.navMenu.LOGIN()}</HeaderPanelLink
@@ -133,21 +132,30 @@
 {#if $setup}
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
-			<SideNavLink text="Welcome Page" href="/" isSelected={$page.url.pathname == '/'} />
-			<SideNavLink text="Home" href="/home" isSelected={$page.url.pathname == '/home'} />
+			<SideNavLink
+				text={$LL.navMenu.WELCOME_PAGE()}
+				href="/"
+				isSelected={$page.url.pathname == '/'}
+			/>
+			<SideNavLink
+				text={$LL.navMenu.HOME()}
+				href="/home"
+				isSelected={$page.url.pathname == '/home'}
+			/>
 			{#if $session.active}
 				<SideNavMenu
-					text="Management"
+					text={$LL.navMenu.MANAGEMENT()}
 					expanded={$page.url.pathname.toString().includes('/management/')}
 				>
 					{#if $session.role == SessionRole.Admin}
 						<SideNavMenuItem
 							href="/management/admin"
-							text="Administrators"
+							text={$LL.navMenu.ADMINISTRATORS()}
+							}
 							isSelected={$page.url.pathname == '/management/admin'}
 						/>
 
-						<SideNavMenuItem text="Interviewers" />
+						<SideNavMenuItem text={$LL.navMenu.INTERVIEWERS()} />
 					{/if}
 				</SideNavMenu>
 			{/if}
@@ -161,7 +169,7 @@
 			<Column>
 				{#if !canRender}
 					{#await checkSetup()}
-						<ProgressBar helperText="Loading..." />
+						<ProgressBar helperText={$LL.navMenu.LOADING()} />
 					{:then}
 						{#if canRender}
 							<slot />
