@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LL from '$lib/i18n/i18n-svelte';
 	import { goto } from '$app/navigation';
 	import { Button, ExpandableTile } from 'carbon-components-svelte';
 	import session from '$lib/stores/userStore';
@@ -12,28 +13,25 @@
 	});
 </script>
 
-<h1>Error.</h1>
+<h1>{$LL.cannotConnect.ERROR()}</h1>
 <h3>
-	Something went wrong while processing your request, try again later, if the error persists.
-	Contact your administrator.
+	{$LL.cannotConnect.PARAGRAPH_1()}
 </h3>
-<h3>For your security, your session has been invalidated.</h3>
-<h4>Code: 503.</h4>
+<h3>{$LL.cannotConnect.PARAGRAPH_2()}</h3>
+<h4>{$LL.cannotConnect.CODE()}</h4>
 <Button
 	on:click={() => {
 		goto('/');
-	}}>Go back to welcome page</Button
+	}}>{$LL.cannotConnect.GO_BACK()}</Button
 >
 
 <div class="help">
 	<ExpandableTile>
 		<div slot="above" style="height:3rem">
-			If you're the administrator... Click here to see some help
+			{$LL.cannotConnect.IF_ADMIN()}
 		</div>
 		<div slot="below">
-			Status code 503 is thrown when Libre-ASI API refused the connection, this can be caused by
-			either misconfiguring environment variables or stopping the API server. Make sure it is
-			running, check server logs and its address is correctly configured on the server and try again
+			{$LL.cannotConnect.HELP()}
 		</div>
 	</ExpandableTile>
 </div>

@@ -137,7 +137,42 @@ type RootTranslation = {
 		 * I​n​t​e​r​v​i​e​w​e​r​s
 		 */
 		INTERVIEWERS: string
+		/**
+		 * L​o​a​d​i​n​g​.​.​.
+		 */
 		LOADING: string
+	}
+	cannotConnect: {
+		/**
+		 * E​r​r​o​r​.
+		 */
+		ERROR: string
+		/**
+		 * S​o​m​e​t​h​i​n​g​ ​w​e​n​t​ ​w​r​o​n​g​ ​w​h​i​l​e​ ​p​r​o​c​e​s​s​i​n​g​ ​y​o​u​r​ ​r​e​q​u​e​s​t​,​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​,​ ​i​f​ ​t​h​e​ ​e​r​r​o​r​ ​p​e​r​s​i​s​t​s​.​	​C​o​n​t​a​c​t​ ​y​o​u​r​ ​a​d​m​i​n​i​s​t​r​a​t​o​r​.
+		 */
+		PARAGRAPH_1: string
+		/**
+		 * F​o​r​ ​y​o​u​r​ ​s​e​c​u​r​i​t​y​,​ ​y​o​u​r​ ​s​e​s​s​i​o​n​ ​h​a​s​ ​b​e​e​n​ ​i​n​v​a​l​i​d​a​t​e​d​.
+		 */
+		PARAGRAPH_2: string
+		/**
+		 * C​o​d​e​:​ ​5​0​3​.
+		 */
+		CODE: string
+		/**
+		 * G​o​ ​b​a​c​k​ ​t​o​ ​w​e​l​c​o​m​e​ ​p​a​g​e
+		 */
+		GO_BACK: string
+		/**
+		 * I​f​ ​y​o​u​'​r​e​ ​t​h​e​ ​a​d​m​i​n​i​s​t​r​a​t​o​r​.​.​.​ ​C​l​i​c​k​ ​h​e​r​e​ ​t​o​ ​s​e​e​ ​s​o​m​e​ ​h​e​l​p
+		 */
+		IF_ADMIN: string
+		/**
+		 * S​t​a​t​u​s​ ​c​o​d​e​ ​5​0​3​ ​i​s​ ​t​h​r​o​w​n​ ​w​h​e​n​ ​L​i​b​r​e​-​A​S​I​ ​A​P​I​ ​r​e​f​u​s​e​d​ ​t​h​e​ ​c​o​n​n​e​c​t​i​o​n​,​ ​t​h​i​s​ ​c​a​n​ ​b​e​ ​c​a​u​s​e​d​ ​b​y​
+	​	​e​i​t​h​e​r​ ​m​i​s​c​o​n​f​i​g​u​r​i​n​g​ ​e​n​v​i​r​o​n​m​e​n​t​ ​v​a​r​i​a​b​l​e​s​ ​o​r​ ​s​t​o​p​p​i​n​g​ ​t​h​e​ ​A​P​I​ ​s​e​r​v​e​r​.​ ​M​a​k​e​ ​s​u​r​e​ ​i​t​ ​i​s​
+	​	​r​u​n​n​i​n​g​,​ ​c​h​e​c​k​ ​s​e​r​v​e​r​ ​l​o​g​s​ ​a​n​d​ ​i​t​s​ ​a​d​d​r​e​s​s​ ​i​s​ ​c​o​r​r​e​c​t​l​y​ ​c​o​n​f​i​g​u​r​e​d​ ​o​n​ ​t​h​e​ ​s​e​r​v​e​r​ ​a​n​d​ ​t​r​y​ ​a​g​a​i​n
+		 */
+		HELP: string
 	}
 }
 
@@ -265,7 +300,42 @@ export type TranslationFunctions = {
 		 * Interviewers
 		 */
 		INTERVIEWERS: () => LocalizedString
+		/**
+		 * Loading...
+		 */
 		LOADING: () => LocalizedString
+	}
+	cannotConnect: {
+		/**
+		 * Error.
+		 */
+		ERROR: () => LocalizedString
+		/**
+		 * Something went wrong while processing your request, try again later, if the error persists.	Contact your administrator.
+		 */
+		PARAGRAPH_1: () => LocalizedString
+		/**
+		 * For your security, your session has been invalidated.
+		 */
+		PARAGRAPH_2: () => LocalizedString
+		/**
+		 * Code: 503.
+		 */
+		CODE: () => LocalizedString
+		/**
+		 * Go back to welcome page
+		 */
+		GO_BACK: () => LocalizedString
+		/**
+		 * If you're the administrator... Click here to see some help
+		 */
+		IF_ADMIN: () => LocalizedString
+		/**
+		 * Status code 503 is thrown when Libre-ASI API refused the connection, this can be caused by
+		either misconfiguring environment variables or stopping the API server. Make sure it is
+		running, check server logs and its address is correctly configured on the server and try again
+		 */
+		HELP: () => LocalizedString
 	}
 }
 
