@@ -3,10 +3,10 @@ import settings from './settings';
 import general from './general';
 import navMenu from './navMenu';
 const es = {
+	navMenu,
 	welcome,
 	settings,
-	general,
-	navMenu
+	general
 };
 
 export default es;

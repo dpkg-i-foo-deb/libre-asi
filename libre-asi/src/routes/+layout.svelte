@@ -115,6 +115,7 @@
 						<HeaderPanelDivider>{$LL.navMenu.NOT_LOGGED_IN()}</HeaderPanelDivider>
 						<HeaderPanelLink
 							href="/login"
+							
 							on:click={() => {
 								isUserMenuOpen = false;
 							}}>{$LL.navMenu.LOGIN()}</HeaderPanelLink
