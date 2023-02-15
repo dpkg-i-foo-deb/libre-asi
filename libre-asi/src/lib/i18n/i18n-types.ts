@@ -117,6 +117,26 @@ type RootTranslation = {
 		 * S​i​g​n​ ​O​u​t
 		 */
 		SIGN_OUT: string
+		/**
+		 * W​e​l​c​o​m​e​ ​P​a​g​e
+		 */
+		WELCOME_PAGE: string
+		/**
+		 * H​o​m​e
+		 */
+		HOME: string
+		/**
+		 * M​a​n​a​g​e​m​e​n​t
+		 */
+		MANAGEMENT: string
+		/**
+		 * A​d​m​i​n​i​s​t​r​a​t​o​r​s
+		 */
+		ADMINISTRATORS: string
+		/**
+		 * I​n​t​e​r​v​i​e​w​e​r​s
+		 */
+		INTERVIEWERS: string
 	}
 }
 
@@ -224,6 +244,26 @@ export type TranslationFunctions = {
 		 * Sign Out
 		 */
 		SIGN_OUT: () => LocalizedString
+		/**
+		 * Welcome Page
+		 */
+		WELCOME_PAGE: () => LocalizedString
+		/**
+		 * Home
+		 */
+		HOME: () => LocalizedString
+		/**
+		 * Management
+		 */
+		MANAGEMENT: () => LocalizedString
+		/**
+		 * Administrators
+		 */
+		ADMINISTRATORS: () => LocalizedString
+		/**
+		 * Interviewers
+		 */
+		INTERVIEWERS: () => LocalizedString
 	}
 }
 
