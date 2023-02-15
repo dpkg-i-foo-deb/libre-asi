@@ -151,7 +151,6 @@
 						<SideNavMenuItem
 							href="/management/admin"
 							text={$LL.navMenu.ADMINISTRATORS()}
-							}
 							isSelected={$page.url.pathname == '/management/admin'}
 						/>
 
