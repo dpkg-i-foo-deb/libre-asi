@@ -19,6 +19,8 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 	import settings from '$lib/i18n/en/settings';
+	import { POST } from '../api/administrators/+server';
+	import { handleResponse } from '$lib/util/handleResponse';
 
 	let theme: CarbonTheme = 'g90';
 	let languageOptions: ReadonlyArray<DropdownItem>;
@@ -59,11 +61,18 @@
 	}
 
 	async function setupLocale() {
-		locale.set(selectedLanguage);
+		const response = await fetch('/api/lang', {
+			method: 'POST',
+			body: JSON.stringify(selectedLanguage)
+		});
 
-		await loadLocaleAsync(selectedLanguage);
+		handleResponse(response.status, false);
 
-		setLocale(selectedLanguage);
+		//locale.set(selectedLanguage);
+
+		//await loadLocaleAsync(selectedLanguage);
+
+		//setLocale(selectedLanguage);
 	}
 </script>
 
