@@ -66,13 +66,17 @@
 			body: JSON.stringify(selectedLanguage)
 		});
 
+		if (response.ok) {
+			locale.set(selectedLanguage);
+
+			await loadLocaleAsync(selectedLanguage);
+
+			setLocale(selectedLanguage);
+
+			return;
+		}
+
 		handleResponse(response.status, false);
-
-		//locale.set(selectedLanguage);
-
-		//await loadLocaleAsync(selectedLanguage);
-
-		//setLocale(selectedLanguage);
 	}
 </script>
 
