@@ -174,6 +174,72 @@ type RootTranslation = {
 		 */
 		HELP: string
 	}
+	login: {
+		/**
+		 * L​o​g​ ​I​n​ ​t​o​ ​y​o​u​r​ ​a​c​c​o​u​n​t
+		 */
+		TITLE: string
+		/**
+		 * I​n​v​a​l​i​d​ ​u​s​e​r​n​a​m​e​ ​o​r​ ​p​a​s​s​w​o​r​d
+		 */
+		INVALID_CREDENTIALS: string
+		/**
+		 * E​r​r​o​r
+		 */
+		ERROR: string
+		/**
+		 * R​o​l​e
+		 */
+		ROLE: string
+		/**
+		 * S​u​b​m​i​t​t​i​n​g
+		 */
+		SUBMITTING: string
+		/**
+		 * A​c​c​o​u​n​t​ ​t​y​p​e
+		 */
+		ACCOUNT_TYPE: string
+		/**
+		 * Y​o​u​r​ ​a​c​c​o​u​n​t​ ​t​y​p​e​ ​i​s​ ​d​e​t​e​r​m​i​n​e​d​ ​b​y​ ​y​o​u​r​ ​a​d​m​i​n​i​s​t​r​a​t​o​r
+		 */
+		ACCOUNT_TOOLTIP: string
+		/**
+		 * I​n​t​e​r​v​i​e​w​e​r
+		 */
+		INTERVIEWER: string
+		/**
+		 * A​d​m​i​n​i​s​t​r​a​t​o​r
+		 */
+		ADMINISTRATOR: string
+		/**
+		 * E​m​a​i​l
+		 */
+		EMAIL: string
+		/**
+		 * E​n​t​e​r​ ​e​m​a​i​l​.​.​.
+		 */
+		EMAIL_PLACEHOLDER: string
+		/**
+		 * P​a​s​s​w​o​r​d
+		 */
+		PASSWORD: string
+		/**
+		 * E​n​t​e​r​ ​p​a​s​s​w​o​r​d​.​.​.
+		 */
+		PASSWORD_PLACEHOLDER: string
+		/**
+		 * B​a​c​k
+		 */
+		BACK: string
+		/**
+		 * N​e​x​t
+		 */
+		NEXT: string
+		/**
+		 * I​d​e​n​t​i​f​i​c​a​t​i​o​n
+		 */
+		IDENTIFICATION: string
+	}
 }
 
 export type TranslationFunctions = {
@@ -336,6 +402,72 @@ export type TranslationFunctions = {
 		running, check server logs and its address is correctly configured on the server and try again
 		 */
 		HELP: () => LocalizedString
+	}
+	login: {
+		/**
+		 * Log In to your account
+		 */
+		TITLE: () => LocalizedString
+		/**
+		 * Invalid username or password
+		 */
+		INVALID_CREDENTIALS: () => LocalizedString
+		/**
+		 * Error
+		 */
+		ERROR: () => LocalizedString
+		/**
+		 * Role
+		 */
+		ROLE: () => LocalizedString
+		/**
+		 * Submitting
+		 */
+		SUBMITTING: () => LocalizedString
+		/**
+		 * Account type
+		 */
+		ACCOUNT_TYPE: () => LocalizedString
+		/**
+		 * Your account type is determined by your administrator
+		 */
+		ACCOUNT_TOOLTIP: () => LocalizedString
+		/**
+		 * Interviewer
+		 */
+		INTERVIEWER: () => LocalizedString
+		/**
+		 * Administrator
+		 */
+		ADMINISTRATOR: () => LocalizedString
+		/**
+		 * Email
+		 */
+		EMAIL: () => LocalizedString
+		/**
+		 * Enter email...
+		 */
+		EMAIL_PLACEHOLDER: () => LocalizedString
+		/**
+		 * Password
+		 */
+		PASSWORD: () => LocalizedString
+		/**
+		 * Enter password...
+		 */
+		PASSWORD_PLACEHOLDER: () => LocalizedString
+		/**
+		 * Back
+		 */
+		BACK: () => LocalizedString
+		/**
+		 * Next
+		 */
+		NEXT: () => LocalizedString
+		/**
+		 * Identification
+		 */
+		IDENTIFICATION: () => LocalizedString
 	}
 }
 

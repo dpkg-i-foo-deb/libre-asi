@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LL from '$lib/i18n/i18n-svelte';
 	import {
 		TextInput,
 		PasswordInput,
@@ -168,18 +169,18 @@
 			}}
 		>
 			<div class="title">
-				<h3>Log In to your Account</h3>
+				<h3>{$LL.login.TITLE()}</h3>
 			</div>
 
 			{#if invalidCredentials}
 				<div class="invalid-credentials">
-					<InlineNotification title="Error" subtitle="Invalid username or password" />
+					<InlineNotification title={$LL.login.ERROR()} subtitle={$LL.login.INVALID_CREDENTIALS()}/>
 				</div>
 			{/if}
 
 			<div class="stepper">
 				<ProgressIndicator bind:currentIndex={stepIndex} spaceEqually preventChangeOnClick>
-					<ProgressStep complete={stepIndex > 0} label="Role" />
+					<ProgressStep complete={stepIndex > 0} label={$LL.login.ROLE()} />
 					<ProgressStep
 						complete={stepIndex > 1}
 						label="Identification"
@@ -194,20 +195,20 @@
 			</div>
 
 			{#if loading}
-				<InlineLoading description="Submitting" />
+				<InlineLoading description={$LL.login.SUBMITTING()}/>
 			{/if}
 
 			{#if stepIndex == 0}
-				<div class="role-container">
+				<div class="form-element">
 					<RadioButtonGroup selected="interviewer" required>
 						<div slot="legendText" style="display:flex;margin-top:20px">
-							Account type
+							{$LL.login.ACCOUNT_TYPE()}
 							<Tooltip>
-								<p>Your account type is determined by your administrator</p>
+								<p>{$LL.login.ACCOUNT_TOOLTIP()}</p>
 							</Tooltip>
 						</div>
 						<RadioButton
-							labelText="Interviewer"
+							labelText={$LL.login.INTERVIEWER()}
 							value="interviewer"
 							bind:checked={wantsInterviewer}
 							id="interviewer"
@@ -215,7 +216,7 @@
 							autofocus
 						/>
 						<RadioButton
-							labelText="Administrator"
+							labelText={$LL.login.ADMINISTRATOR()}
 							value="admin"
 							bind:checked={wantsAdmin}
 							id="administrator"
@@ -228,8 +229,8 @@
 			{#if stepIndex == 1}
 				<div class="form-element">
 					<TextInput
-						labelText="Email"
-						placeholder="Enter email..."
+						labelText={$LL.login.EMAIL()}
+						placeholder={$LL.login.EMAIL_PLACEHOLDER()}
 						id="email"
 						name="email"
 						bind:value={email}
@@ -244,8 +245,8 @@
 			{#if stepIndex == 2}
 				<div class="form-element">
 					<PasswordInput
-						labelText="Password"
-						placeholder="Enter password..."
+						labelText={$LL.login.PASSWORD()}
+						placeholder={$LL.login.PASSWORD_PLACEHOLDER()}
 						id="password"
 						name="password"
 						type="password"
@@ -260,9 +261,9 @@
 
 			<ButtonSet>
 				<div class="button-container">
-					<Button kind="secondary" disabled={stepIndex == 0 || loading} on:click={back}>Back</Button
+					<Button kind="secondary" disabled={stepIndex == 0 || loading} on:click={back}>{$LL.login.BACK()}</Button
 					>
-					<Button type="submit" disabled={loading}>Next</Button>
+					<Button type="submit" disabled={loading}>{$LL.login.NEXT()}</Button>
 				</div>
 			</ButtonSet>
 		</Form>
@@ -303,7 +304,7 @@
 
 	.button-container {
 		display: flex;
-		margin-top: 15px;
+		margin-top: 25px;
 		flex-direction: row;
 	}
 
