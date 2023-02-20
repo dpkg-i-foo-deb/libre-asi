@@ -218,6 +218,7 @@
 
 	.container {
 		display: flex;
+		flex-flow: 0;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -229,6 +230,7 @@
 		padding-top: 15px;
 		padding-bottom: 15px;
 		width: 100%;
+		height: 100px;
 	}
 
 	.stepper {
