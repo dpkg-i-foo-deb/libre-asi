@@ -28,5 +28,7 @@ func init() {
 
 	migrateModels()
 
-	checkWorld()
+	if os.Getenv("WORLD") == "true" {
+		checkWorld()
+	}
 }
