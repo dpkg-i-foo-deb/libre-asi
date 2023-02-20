@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 podman stop libre-asi-database
 
 podman rm libre-asi-database
