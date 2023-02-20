@@ -18,8 +18,6 @@
 	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async';
 	import { sendSuccess } from '$lib/util/notifications';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
-	import settings from '$lib/i18n/en/settings';
-	import { POST } from '../api/administrators/+server';
 	import { handleResponse } from '$lib/util/handleResponse';
 
 	let theme: CarbonTheme = 'g90';
@@ -34,8 +32,8 @@
 	function loadLanguages() {
 		const languages = Object.values(Locale);
 
-		languageOptions = languages.map(function (value, index) {
-			let text: string = '';
+		languageOptions = languages.map(function (value) {
+			let text = '';
 
 			switch (value) {
 				case Locale.EN:
