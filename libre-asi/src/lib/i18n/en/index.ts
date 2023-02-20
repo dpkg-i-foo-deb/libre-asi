@@ -4,7 +4,7 @@ import settings from './settings';
 import general from './general';
 import navMenu from './navMenu';
 import cannotConnect from './cannotConnect';
-import login from './login'
+import login from './login';
 
 const en = {
 	welcome,

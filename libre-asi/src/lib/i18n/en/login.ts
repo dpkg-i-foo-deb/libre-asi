@@ -10,11 +10,11 @@ const login = {
 	ADMINISTRATOR: 'Administrator',
 	EMAIL: 'Email',
 	EMAIL_PLACEHOLDER: 'Enter email...',
-    PASSWORD:'Password',
-    PASSWORD_PLACEHOLDER:'Enter password...',
-    BACK:'Back',
-    NEXT:'Next',
-    IDENTIFICATION:'Identification'
+	PASSWORD: 'Password',
+	PASSWORD_PLACEHOLDER: 'Enter password...',
+	BACK: 'Back',
+	NEXT: 'Next',
+	IDENTIFICATION: 'Identification'
 };
 
 export default login;

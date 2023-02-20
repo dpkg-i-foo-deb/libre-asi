@@ -174,7 +174,10 @@
 
 			{#if invalidCredentials}
 				<div class="invalid-credentials">
-					<InlineNotification title={$LL.login.ERROR()} subtitle={$LL.login.INVALID_CREDENTIALS()}/>
+					<InlineNotification
+						title={$LL.login.ERROR()}
+						subtitle={$LL.login.INVALID_CREDENTIALS()}
+					/>
 				</div>
 			{/if}
 
@@ -195,7 +198,7 @@
 			</div>
 
 			{#if loading}
-				<InlineLoading description={$LL.login.SUBMITTING()}/>
+				<InlineLoading description={$LL.login.SUBMITTING()} />
 			{/if}
 
 			{#if stepIndex == 0}
@@ -261,7 +264,8 @@
 
 			<ButtonSet>
 				<div class="button-container">
-					<Button kind="secondary" disabled={stepIndex == 0 || loading} on:click={back}>{$LL.login.BACK()}</Button
+					<Button kind="secondary" disabled={stepIndex == 0 || loading} on:click={back}
+						>{$LL.login.BACK()}</Button
 					>
 					<Button type="submit" disabled={loading}>{$LL.login.NEXT()}</Button>
 				</div>
