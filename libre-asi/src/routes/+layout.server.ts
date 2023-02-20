@@ -1,7 +1,6 @@
 //https://blog.encodeart.dev/typesafe-i18n-with-sveltekit
 import type { LayoutServerLoad } from './$types';
 import { detectLocale } from '$lib/i18n/i18n-util';
-import { redirect } from '@sveltejs/kit';
 
 const langParam = 'lang';
 
