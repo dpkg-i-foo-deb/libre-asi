@@ -4,6 +4,7 @@ import (
 	"libre-asi-api/cfg"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -36,7 +37,12 @@ func init() {
 
 }
 
-func Start() {
+func Start(port int) {
+
+	portString := ":" + strconv.FormatInt(int64(port), 10)
+
+	app.Listen(portString)
+
 	log.Fatal(app.Listen(os.Getenv("API_PORT")))
 }
 
