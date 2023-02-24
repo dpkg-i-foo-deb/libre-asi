@@ -1,11 +1,10 @@
 package routes
 
 import (
-	"libre-asi-api/app"
 	"libre-asi-api/auth"
-	"libre-asi-api/services"
+	"libre-asi-api/handlers"
 )
 
 func indexRoute() {
-	app.AddGet("/", auth.ValidateAccessToken, services.IndexService)
+	server.Get("/", auth.ValidateAccessToken, handlers.IndexHandler)
 }

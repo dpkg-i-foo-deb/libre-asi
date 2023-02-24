@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"libre-asi-api/app"
+	"libre-asi-api/routes"
 	"libre-asi-api/util"
 
 	"github.com/spf13/cobra"
@@ -43,6 +44,10 @@ func runServe(cmd *cobra.Command, args []string) {
 	if err != nil {
 		util.HandleErrorStop(err)
 	}
+
+	server := app.SetUp()
+
+	routes.SetRoutes(server)
 
 	app.Start(port)
 }

@@ -13,7 +13,7 @@ import (
 
 var app *fiber.App
 
-func init() {
+func SetUp() *fiber.App {
 	app = fiber.New()
 
 	app.Use(logger.New(logger.Config{
@@ -35,6 +35,8 @@ func init() {
 
 	app.Use(cfg.New(cfg.ConfigDefault))
 
+	return app
+
 }
 
 func Start(port int) {
@@ -44,6 +46,7 @@ func Start(port int) {
 	app.Listen(portString)
 
 	log.Fatal(app.Listen(os.Getenv("API_PORT")))
+
 }
 
 func AddGet(route string, handlers ...fiber.Handler) {
