@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
 
@@ -8,11 +9,17 @@ import (
 )
 
 func CheckSetupHandler(c *fiber.Ctx) error {
-	response, err := services.CheckSetupService()
 
-	if err != nil {
-		return util.HandleFiberError(c, err, response)
+	res := models.Response{
+		Status:  string(models.OK),
+		Message: "Setup is not needed",
 	}
 
-	return c.Status(200).JSON(response)
+	err := services.CheckSetupService()
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(res)
 }
