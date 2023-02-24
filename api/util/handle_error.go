@@ -54,6 +54,10 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 400
 		res.Status = string(models.DENIED)
 		res.Message = "Bad route"
+	case errors.ErrAccessDenied:
+		status = 401
+		res.Status = string(models.DENIED)
+		res.Message = "Access denied, not enough privileges"
 	}
 
 	return c.Status(status).JSON(res)
