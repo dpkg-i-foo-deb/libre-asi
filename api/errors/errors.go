@@ -14,4 +14,5 @@ const (
 	ErrTooManyEntities ApiError = "too many entities to register"
 	ErrNotImplemmented ApiError = "functionality not implemmented"
 	ErrBadRoute        ApiError = "bad route requested"
+	ErrAccessDenied    ApiError = "access denied"
 )

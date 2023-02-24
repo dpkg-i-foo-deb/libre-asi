@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"libre-asi-api/auth"
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
@@ -31,10 +32,8 @@ func RegisterHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrBadRoute)
 	}
 
-	if requiresAdmin && !isAdmin(c.Cookies("access-token")) {
-		res.Status = string(models.DENIED)
-		res.Message = "This session doesn't have enough privileges"
-		return c.Status(401).JSON(&res)
+	if requiresAdmin && !auth.IsAdmin(c.Cookies("access-token")) {
+		return util.HandleFiberError(c, errors.ErrAccessDenied)
 	}
 
 	return nil
