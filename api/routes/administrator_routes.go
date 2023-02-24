@@ -1,12 +1,11 @@
 package routes
 
 import (
-	"libre-asi-api/app"
 	"libre-asi-api/auth"
-	"libre-asi-api/services"
+	"libre-asi-api/handlers"
 )
 
 func adminRoutes() {
-	app.AddGet("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, services.GetAdministratorsService)
-	app.AddPost("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, services.RegisterAdministratorService)
+	server.Get("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, handlers.GetAdministratorsHandler)
+	server.Post("/administrators", auth.ValidateAccessToken, auth.ValidateAdministratorRole, handlers.RegisterAdministratorHandler)
 }

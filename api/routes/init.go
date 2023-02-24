@@ -8,6 +8,7 @@ func SetRoutes(app *fiber.App) {
 	server = app
 	indexRoute()
 	setupRoutes()
+	adminRoutes()
 }
 
 func init() {
@@ -17,6 +18,4 @@ func init() {
 	// signOutRoute()
 	// worldRoute()
 	// refreshRoute()
-	// adminRoutes()
-	// setupRoutes()
 }

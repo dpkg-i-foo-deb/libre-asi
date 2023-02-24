@@ -58,6 +58,10 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 401
 		res.Status = string(models.DENIED)
 		res.Message = "Access denied, not enough privileges"
+	case errors.ErrConflict:
+		status = 409
+		res.Status = string(models.DENIED)
+		res.Message = "The entity already exists"
 	}
 
 	return c.Status(status).JSON(res)

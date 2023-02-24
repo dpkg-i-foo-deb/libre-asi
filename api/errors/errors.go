@@ -15,4 +15,5 @@ const (
 	ErrNotImplemmented ApiError = "functionality not implemmented"
 	ErrBadRoute        ApiError = "bad route requested"
 	ErrAccessDenied    ApiError = "access denied"
+	ErrConflict        ApiError = "data conflict"
 )
