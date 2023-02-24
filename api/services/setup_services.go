@@ -6,22 +6,9 @@ import (
 	"libre-asi-api/models"
 )
 
-func SetupService(user models.User) (models.Response, error) {
+func SetupService(user models.User) error {
 
-	var res models.Response
-
-	res.Status = string(models.OK)
-	res.Message = "Setup Complete"
-
-	if createAdmin(user) != nil {
-
-		res.Status = string(models.CHECK_REQUEST)
-		res.Message = "Check Request"
-
-		return res
-	}
-
-	return c.Status(201).JSON(res)
+	return createAdmin(user)
 }
 
 func CheckSetupService() error {
