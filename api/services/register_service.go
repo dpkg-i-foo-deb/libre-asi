@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type registerFunc func(c *fiber.Ctx) error
+type registerFunc func(models.User) error
 
 func RegisterService(c *fiber.Ctx) error {
 
@@ -27,7 +27,8 @@ func RegisterService(c *fiber.Ctx) error {
 		requiresAdmin = true
 		res.Message = "Administrator Created"
 	case "interviewer":
-		fn = createInterviewer
+		//TODO enable interviewer login
+		//fn = createInterviewer
 		res.Message = "Interviewer Created"
 		requiresAdmin = true
 	case "attendant":
@@ -48,7 +49,8 @@ func RegisterService(c *fiber.Ctx) error {
 		return c.Status(401).JSON(&res)
 	}
 
-	err = fn(c)
+	//TODO tidy up
+	err = fn(models.User{})
 
 	if err != nil {
 		res.Status = string(models.ERROR)
@@ -66,8 +68,6 @@ func RegisterService(c *fiber.Ctx) error {
 
 func createAdmin(models.User) error {
 	var u models.User
-	var pass string
-	var err error
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
@@ -75,7 +75,7 @@ func createAdmin(models.User) error {
 			{},
 		}
 
-		pass, err = util.HashPassword(u.Password)
+		pass, err := util.HashPassword(u.Password)
 
 		if err != nil {
 			return err
