@@ -1,41 +1,33 @@
 package services
 
 import (
-	"libre-asi-api/database"
-	"libre-asi-api/models"
-	"libre-asi-api/util"
-
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
+	"libre-asi-api/database"
+	"libre-asi-api/errors"
+	"libre-asi-api/models"
+	"libre-asi-api/util"
 )
 
-func GetAdministratorsService(c *fiber.Ctx) error {
-
-	var res models.Response
-	res.Status = string(models.ERROR)
-	res.Message = "Something went wrong"
+func GetAdministratorsService() ([]models.User, error) {
 
 	var admins []models.Administrator
 	var ids []uint
 	var users []models.User
 
-	result := database.DB.Find(&admins)
-
-	if result.Error != nil {
-		return c.Status(500).JSON(res)
+	if database.DB.Find(&admins).Error != nil {
+		return nil, errors.ErrInternalError
 	}
 
 	for i := range admins {
 		ids = append(ids, admins[i].UserID)
 	}
 
-	result = database.DB.Omit("password", "administrators", "people").Find(&users, ids)
-
-	if result.Error != nil {
-		return c.Status(500).JSON(res)
+	if database.DB.Omit("password", "administrators", "people").Find(&users, ids).Error != nil {
+		return nil, errors.ErrInternalError
 	}
 
-	return c.Status(200).JSON(&users)
+	return users, nil
 }
 
 func RegisterAdministratorService(c *fiber.Ctx) error {
