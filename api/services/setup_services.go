@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"libre-asi-api/cfg"
 	"libre-asi-api/models"
 
@@ -21,7 +22,7 @@ func SetupService(c *fiber.Ctx) error {
 	return c.Status(201).JSON(res)
 }
 
-func CheckSetupService(c *fiber.Ctx) error {
+func CheckSetupService() (models.Response, error) {
 
 	var res models.Response
 
@@ -32,8 +33,8 @@ func CheckSetupService(c *fiber.Ctx) error {
 		res.Status = string(models.SETUP_REQUIRED)
 		res.Message = "Libre-ASI requires set-up"
 
-		return c.Status(412).JSON(res)
+		return res, errors.New("setup was required")
 	}
 
-	return c.Status(200).JSON(res)
+	return res, nil
 }

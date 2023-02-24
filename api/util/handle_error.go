@@ -20,5 +20,13 @@ func HandleErrorStop(err error) {
 }
 
 func HandleFiberError(c *fiber.Ctx, err error, res models.Response) error {
-	return c.Status(500).JSON(res)
+
+	status := 200
+
+	switch res.Status {
+	case string(models.SETUP_REQUIRED):
+		status = 412
+	}
+
+	return c.Status(status).JSON(res)
 }
