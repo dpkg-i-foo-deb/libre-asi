@@ -7,6 +7,9 @@ func (e ApiError) Error() string {
 }
 
 const (
-	ErrCheckRequest  ApiError = "check request"
-	ErrSetupRequired ApiError = "setup required"
+	ErrCheckRequest    ApiError = "check request"
+	ErrSetupRequired   ApiError = "setup required"
+	ErrInternalError   ApiError = "internal error"
+	ErrNoData          ApiError = "no data was present"
+	ErrTooManyEntities ApiError = "too many entities to register"
 )

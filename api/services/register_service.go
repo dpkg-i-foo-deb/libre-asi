@@ -1,9 +1,9 @@
 package services
 
 import (
-	"errors"
 	"libre-asi-api/auth"
 	"libre-asi-api/database"
+	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
 	"log"
@@ -78,15 +78,13 @@ func createAdmin(models.User) error {
 		pass, err := util.HashPassword(u.Password)
 
 		if err != nil {
-			return err
+			return errors.ErrInternalError
 		}
 
 		u.Password = pass
 
-		res := database.DB.Omit("People").Create(&u)
-
-		if res.Error != nil {
-			return res.Error
+		if database.DB.Omit("People").Create(&u).Error != nil {
+			return errors.ErrInternalError
 		}
 
 		return nil
@@ -103,18 +101,18 @@ func createInterviewer(c *fiber.Ctx) error {
 		err := c.BodyParser(&u)
 
 		if err != nil {
-			return err
+			return errors.ErrCheckRequest
 		}
 
 		if u.People == nil {
-			return errors.New("nothing to register")
+			return errors.ErrNoData
 		}
 
 		if len(u.People) != 1 {
-			return errors.New("tried to create more than one person")
+			return errors.ErrTooManyEntities
 		} else {
 			if len(u.People[0].Interviewers) > 1 || u.People[0].Interviewers == nil {
-				return errors.New("tried to create more than one interviewer")
+				return errors.ErrTooManyEntities
 			}
 		}
 
