@@ -34,6 +34,26 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 400
 		res.Status = string(models.CHECK_REQUEST)
 		res.Message = "Check your request"
+	case errors.ErrNotImplemmented:
+		status = 501
+		res.Status = string(models.ERROR)
+		res.Message = "Functionality is not yet implemmented"
+	case errors.ErrNoData:
+		status = 400
+		res.Status = string(models.CHECK_REQUEST)
+		res.Message = "Not enough data was present"
+	case errors.ErrInternalError:
+		status = 500
+		res.Status = string(models.ERROR)
+		res.Message = "Something went wrong on the server side"
+	case errors.ErrTooManyEntities:
+		status = 413
+		res.Status = string(models.DENIED)
+		res.Message = "Too many entities were present"
+	case errors.ErrBadRoute:
+		status = 400
+		res.Status = string(models.DENIED)
+		res.Message = "Bad route"
 	}
 
 	return c.Status(status).JSON(res)
