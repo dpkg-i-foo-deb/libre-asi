@@ -9,13 +9,12 @@ func SetRoutes(app *fiber.App) {
 	indexRoute()
 	setupRoutes()
 	adminRoutes()
+	loginRoute()
+	registerRoute()
+	refreshRoute()
 }
 
 func init() {
-	//	registerRoute()
-	//
-	// loginRoute()
 	// signOutRoute()
 	// worldRoute()
-	// refreshRoute()
 }
