@@ -27,8 +27,7 @@ func RegisterService(c *fiber.Ctx) error {
 		requiresAdmin = true
 		res.Message = "Administrator Created"
 	case "interviewer":
-		//TODO enable interviewer login
-		//fn = createInterviewer
+		fn = createInterviewer
 		res.Message = "Interviewer Created"
 		requiresAdmin = true
 	case "attendant":
@@ -93,16 +92,9 @@ func createAdmin(models.User) error {
 	return err
 }
 
-func createInterviewer(c *fiber.Ctx) error {
-	var u models.User
-	var pass string
+func createInterviewer(u models.User) error {
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
-		err := c.BodyParser(&u)
-
-		if err != nil {
-			return errors.ErrCheckRequest
-		}
 
 		if u.People == nil {
 			return errors.ErrNoData
@@ -116,7 +108,7 @@ func createInterviewer(c *fiber.Ctx) error {
 			}
 		}
 
-		pass, err = util.HashPassword(u.Password)
+		pass, err := util.HashPassword(u.Password)
 
 		if err != nil {
 			return errors.ErrInternalError
