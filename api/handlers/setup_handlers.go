@@ -11,26 +11,16 @@ import (
 
 func CheckSetupHandler(c *fiber.Ctx) error {
 
-	res := models.Response{
-		Status:  string(models.OK),
-		Message: "Setup is not needed",
-	}
-
 	err := services.CheckSetupService()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
-	return c.Status(200).JSON(res)
+	return util.SendSuccess(c, 200, "Setup not needed")
 }
 
 func SetupHandler(c *fiber.Ctx) error {
-
-	res := models.Response{
-		Status:  string(models.OK),
-		Message: "Setup completed",
-	}
 
 	var user models.User
 
@@ -44,5 +34,5 @@ func SetupHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, err)
 	}
 
-	return c.Status(201).JSON(res)
+	return util.SendSuccess(c, 200, "Setup complete")
 }
