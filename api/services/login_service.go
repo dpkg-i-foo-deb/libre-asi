@@ -1,71 +1,35 @@
 package services
 
 import (
-	"errors"
+	"golang.org/x/crypto/bcrypt"
 	"libre-asi-api/auth"
 	"libre-asi-api/database"
+	"libre-asi-api/errors"
 	"libre-asi-api/models"
-
-	"github.com/gofiber/fiber/v2"
-	"golang.org/x/crypto/bcrypt"
 )
 
-func LoginService(c *fiber.Ctx) error {
-	var res models.Response
-	var u models.User
-	var tk models.JWTPair
-	var jwtResponse models.JwtCookies
+func LoginService(u models.User, role models.Role) (*models.JWTPair, error) {
 
-	err := c.BodyParser(&u)
+	var err error
 
-	if err != nil {
-		res.Status = string(models.DENIED)
-		res.Message = "Check JSON data"
-		return c.Status(400).JSON(res)
-	}
-
-	switch c.Params("role") {
-	case string(models.ADMINISTRATOR):
+	switch role {
+	case models.ADMINISTRATOR:
 		err = loginAdmin(&u)
-	case string(models.INTERVIEWER):
+	case models.INTERVIEWER:
 		err = loginInterviewer(&u)
-	case "patient":
-		err = errors.New("not implemmented")
-	default:
-		res = models.Response{
-			Status:  string(models.DENIED),
-			Message: "Bad route",
-		}
-		return c.Status(400).JSON(&res)
 	}
 
 	if err != nil {
-		res.Status = string(models.DENIED)
-		res.Message = "Invalid credentials or not enough privileges"
-
-		return c.Status(401).JSON(&res)
+		return nil, err
 	}
 
-	tk, err = auth.GenerateJWTPair(u.Email, c.Params("role"))
+	tk, err := auth.GenerateJWTPair(u.Email, string(role))
 
 	if err != nil {
-		res.Status = string(models.ERROR)
-		res.Message = "Something went wrong"
-
-		return c.Status(500).JSON(&res)
+		return nil, errors.ErrInternalError
 	}
 
-	refresh := auth.GenerateRefreshCookie(tk.RefreshToken)
-	auth := auth.GenerateAccessCookie(tk.Token)
-
-	//TODO use real cookies when Sveltekit allows easy cookie parsing
-	//c.Cookie(auth)
-	//c.Cookie(refresh)
-
-	jwtResponse.AccessToken = auth
-	jwtResponse.RefreshToken = refresh
-
-	return c.Status(200).JSON(jwtResponse)
+	return &tk, nil
 }
 
 func loginAdmin(u *models.User) error {
@@ -73,19 +37,19 @@ func loginAdmin(u *models.User) error {
 	var user models.User
 	var admin models.Administrator
 
-	res := database.DB.Where("email = ?", u.Email).First(&user)
-
-	if res.Error != nil {
-		return res.Error
+	if database.DB.Where("email = ?", u.Email).First(&user).Error != nil {
+		return errors.ErrInvalidCredentials
 	}
 
-	res = database.DB.Where("user_id = ?", user.ID).First(&admin)
-
-	if res.Error != nil {
-		return res.Error
+	if database.DB.Where("user_id = ?", user.ID).First(&admin).Error != nil {
+		return errors.ErrInvalidCredentials
 	}
 
-	return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password))
+	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password)) != nil {
+		return errors.ErrInvalidCredentials
+	}
+
+	return nil
 }
 
 func loginInterviewer(u *models.User) error {
@@ -93,23 +57,21 @@ func loginInterviewer(u *models.User) error {
 	var person models.Person
 	var inter models.Interviewer
 
-	res := database.DB.Where("email = ?", u.Email).First(&user)
-
-	if res.Error != nil {
-		return res.Error
+	if database.DB.Where("email = ?", u.Email).First(&user).Error != nil {
+		return errors.ErrInvalidCredentials
 	}
 
-	res = database.DB.Where("user_id = ?", user.ID).First(&person)
-
-	if res.Error != nil {
-		return res.Error
+	if database.DB.Where("user_id = ?", user.ID).First(&person).Error != nil {
+		return errors.ErrInvalidCredentials
 	}
 
-	res = database.DB.Where("person_id = ?", person.ID).First(&inter)
-
-	if res.Error != nil {
-		return res.Error
+	if database.DB.Where("person_id = ?", person.ID).First(&inter).Error != nil {
+		return errors.ErrInvalidCredentials
 	}
 
-	return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password))
+	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password)) != nil {
+		return errors.ErrInvalidCredentials
+	}
+
+	return nil
 }
