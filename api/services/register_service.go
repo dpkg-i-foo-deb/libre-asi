@@ -119,7 +119,7 @@ func createInterviewer(c *fiber.Ctx) error {
 		pass, err = util.HashPassword(u.Password)
 
 		if err != nil {
-			return err
+			return errors.ErrInternalError
 		}
 
 		u.Password = pass
@@ -134,7 +134,7 @@ func createInterviewer(c *fiber.Ctx) error {
 			"ProfessionTranslations").Create(&u)
 
 		if res.Error != nil {
-			return res.Error
+			return errors.ErrInternalError
 		}
 
 		return nil
