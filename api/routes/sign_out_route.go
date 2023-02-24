@@ -1,11 +1,10 @@
 package routes
 
 import (
-	"libre-asi-api/app"
 	"libre-asi-api/auth"
-	"libre-asi-api/services"
+	"libre-asi-api/handlers"
 )
 
 func signOutRoute() {
-	app.AddPost("/sign-out", auth.ValidateAccessToken, services.SignOutService)
+	server.Post("/sign-out", auth.ValidateAccessToken, handlers.SignOutHandler)
 }
