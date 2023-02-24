@@ -64,16 +64,12 @@ func RegisterService(c *fiber.Ctx) error {
 	return nil
 }
 
-func createAdmin(c *fiber.Ctx) error {
+func createAdmin(models.User) error {
 	var u models.User
 	var pass string
+	var err error
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
-		err := c.BodyParser(&u)
-
-		if err != nil {
-			return err
-		}
 
 		u.Administrators = []models.Administrator{
 			{},

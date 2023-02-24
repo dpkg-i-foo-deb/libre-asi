@@ -1,40 +1,34 @@
 package services
 
 import (
-	"errors"
 	"libre-asi-api/cfg"
+	"libre-asi-api/errors"
 	"libre-asi-api/models"
-
-	"github.com/gofiber/fiber/v2"
 )
 
-func SetupService(c *fiber.Ctx) error {
+func SetupService(user models.User) (models.Response, error) {
 
 	var res models.Response
 
 	res.Status = string(models.OK)
 	res.Message = "Setup Complete"
 
-	if createAdmin(c) != nil {
-		return c.Status(400).JSON(res)
+	if createAdmin(user) != nil {
+
+		res.Status = string(models.CHECK_REQUEST)
+		res.Message = "Check Request"
+
+		return res
 	}
 
 	return c.Status(201).JSON(res)
 }
 
-func CheckSetupService() (models.Response, error) {
-
-	var res models.Response
-
-	res.Status = string(models.OK)
-	res.Message = "Setup is OK"
+func CheckSetupService() error {
 
 	if cfg.CheckExistingAdmin() != nil {
-		res.Status = string(models.SETUP_REQUIRED)
-		res.Message = "Libre-ASI requires set-up"
-
-		return res, errors.New("setup was required")
+		return errors.ErrSetupRequired
 	}
 
-	return res, nil
+	return nil
 }
