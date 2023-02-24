@@ -1,7 +1,6 @@
 package services
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 	"libre-asi-api/database"
 	"libre-asi-api/errors"
@@ -30,57 +29,36 @@ func GetAdministratorsService() ([]models.User, error) {
 	return users, nil
 }
 
-func RegisterAdministratorService(c *fiber.Ctx) error {
+func RegisterAdministratorService(newUser models.User) (*models.User, error) {
 
-	var res models.Response
-	res.Status = string(models.ERROR)
-	res.Message = "Something went wrong"
-
-	var newUser models.User
 	var queriedUser models.User
 
-	err := c.BodyParser(&newUser)
-
-	if err != nil {
-		return c.Status(400).JSON(res)
+	if database.DB.Where("email = ?", newUser.Email).First(&queriedUser).Error != nil {
+		return nil, errors.ErrConflict
 	}
 
-	result := database.DB.Where("email = ?", newUser.Email).First(&queriedUser)
-
-	if result.Error == nil {
-		res.Status = string(models.DENIED)
-		res.Message = "Email already registered"
-		return c.Status(409).JSON(res)
+	if database.DB.Where("username = ?", newUser.Username).First(&queriedUser).Error != nil {
+		return nil, errors.ErrConflict
 	}
 
-	result = database.DB.Where("username = ?", newUser.Username).First(&queriedUser)
-
-	if result.Error == nil {
-		res.Status = string(models.DENIED)
-		res.Message = "User name already registered"
-		return c.Status(409).JSON(res)
-	}
-
-	err = database.DB.Transaction(func(tx *gorm.DB) error {
+	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
 		password, err := util.MakeRandomPassword()
 
 		if err != nil {
-			return err
+			return errors.ErrInternalError
 		}
 
 		hashedPassword, err := util.HashPassword(password)
 
 		if err != nil {
-			return err
+			return errors.ErrInternalError
 		}
 
 		newUser.Password = hashedPassword
 
-		result := database.DB.Omit("Administrators", "People").Create(&newUser)
-
-		if result.Error != nil {
-			return result.Error
+		if database.DB.Omit("Administrators", "People").Create(&newUser).Error != nil {
+			return errors.ErrInternalError
 		}
 
 		id := newUser.ID
@@ -89,10 +67,8 @@ func RegisterAdministratorService(c *fiber.Ctx) error {
 			UserID: id,
 		}
 
-		result = database.DB.Create(&newAdmin)
-
-		if result.Error != nil {
-			return result.Error
+		if database.DB.Create(&newAdmin).Error != nil {
+			return errors.ErrInternalError
 		}
 
 		newUser.Password = password
@@ -101,9 +77,8 @@ func RegisterAdministratorService(c *fiber.Ctx) error {
 	})
 
 	if err != nil {
-
-		return c.Status(500).JSON(res)
+		return nil, err
 	}
 
-	return c.Status(201).JSON(newUser)
+	return &newUser, nil
 }
