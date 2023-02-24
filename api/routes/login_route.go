@@ -1,10 +1,7 @@
 package routes
 
-import (
-	"libre-asi-api/app"
-	"libre-asi-api/services"
-)
+import "libre-asi-api/handlers"
 
 func loginRoute() {
-	app.AddPost("/login/:role", services.LoginService)
+	server.Post("/login/:role", handlers.LoginHandler)
 }

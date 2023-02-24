@@ -26,6 +26,10 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 	var res models.Response
 
 	switch err {
+	case errors.ErrInvalidCredentials:
+		status = 401
+		res.Status = string(models.DENIED)
+		res.Message = "Invalid Credentials"
 	case errors.ErrSetupRequired:
 		status = 412
 		res.Status = string(models.SETUP_REQUIRED)
