@@ -7,6 +7,7 @@ var server *fiber.App
 func SetRoutes(app *fiber.App) {
 	server = app
 	indexRoute()
+	setupRoutes()
 }
 
 func init() {

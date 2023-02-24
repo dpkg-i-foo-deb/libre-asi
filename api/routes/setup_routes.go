@@ -1,11 +1,12 @@
 package routes
 
 import (
-	"libre-asi-api/app"
-	"libre-asi-api/services"
+	"libre-asi-api/handlers"
 )
 
 func setupRoutes() {
-	app.AddPost("/set-up", services.SetupService)
-	app.AddGet("/set-up", services.CheckSetupService)
+
+	server.Get("/set-up", handlers.CheckSetupHandler)
+
+	//app.AddPost("/set-up", services.SetupService)
 }
