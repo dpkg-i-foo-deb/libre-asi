@@ -311,8 +311,4 @@
 		margin-top: 25px;
 		flex-direction: row;
 	}
-
-	.role-container {
-		margin-top: -10px;
-	}
 </style>
