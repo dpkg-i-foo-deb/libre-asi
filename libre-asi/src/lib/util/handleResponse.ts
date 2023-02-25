@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import setup from '$lib/stores/setupStore';
 import { sendError } from './notifications';
+import { sendInfo } from './notifications';
 
 export function handleResponse(code: number, allow401: boolean): boolean {
   let shouldNavigate = true;
@@ -17,6 +18,7 @@ export function handleResponse(code: number, allow401: boolean): boolean {
       break;
     case 500:
       sendError('Something went wrong', 'Internal server error')
+      break;
     case 412:
       setup.set(false);
       goto('/set-up');
@@ -28,7 +30,9 @@ export function handleResponse(code: number, allow401: boolean): boolean {
         goto('/login');
       }
       break;
-
+    case 428:
+      sendInfo('You need to set a new password to continue', 'Set new password')
+      break;
     default:
       shouldNavigate = false;
   }
