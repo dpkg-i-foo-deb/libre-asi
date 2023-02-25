@@ -33,11 +33,11 @@ func RegisterAdministratorService(newUser models.User) (*models.User, error) {
 
 	var queriedUser models.User
 
-	if database.DB.Where("email = ?", newUser.Email).First(&queriedUser).Error != nil {
+	if database.DB.Where("email = ?", newUser.Email).First(&queriedUser).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
-	if database.DB.Where("username = ?", newUser.Username).First(&queriedUser).Error != nil {
+	if database.DB.Where("username = ?", newUser.Username).First(&queriedUser).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
