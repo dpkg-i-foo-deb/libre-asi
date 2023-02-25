@@ -21,8 +21,7 @@ func RegisterService(user models.User, role models.Role) error {
 
 }
 
-func createAdmin(models.User) error {
-	var u models.User
+func createAdmin(u models.User) error {
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
