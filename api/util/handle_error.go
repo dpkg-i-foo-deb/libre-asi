@@ -66,6 +66,10 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 409
 		res.Status = string(models.DENIED)
 		res.Message = "The entity already exists"
+	case errors.ErrrNeedsPasswordReset:
+		status = 428
+		res.Status = string(models.DENIED)
+		res.Message = "You need to reset your password"
 	}
 
 	return c.Status(status).JSON(res)

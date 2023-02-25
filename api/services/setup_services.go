@@ -7,7 +7,7 @@ import (
 )
 
 func SetupService(user models.User) error {
-	return createAdmin(user)
+	return createAdmin(user, false)
 }
 
 func CheckSetupService() error {

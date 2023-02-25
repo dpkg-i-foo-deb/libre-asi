@@ -12,16 +12,16 @@ func RegisterService(user models.User, role models.Role) error {
 
 	switch role {
 	case models.ADMINISTRATOR:
-		return createAdmin(user)
+		return createAdmin(user, true)
 	case models.INTERVIEWER:
-		return createInterviewer(user)
+		return createInterviewer(user, true)
 	default:
 		return errors.ErrCheckRequest
 	}
 
 }
 
-func createAdmin(u models.User) error {
+func createAdmin(u models.User, passwordReset bool) error {
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
@@ -37,6 +37,8 @@ func createAdmin(u models.User) error {
 
 		u.Password = pass
 
+		u.ResetPassword = passwordReset
+
 		if database.DB.Omit("People").Create(&u).Error != nil {
 			return errors.ErrInternalError
 		}
@@ -47,7 +49,7 @@ func createAdmin(u models.User) error {
 	return err
 }
 
-func createInterviewer(u models.User) error {
+func createInterviewer(u models.User, passwordReset bool) error {
 
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
@@ -70,6 +72,8 @@ func createInterviewer(u models.User) error {
 		}
 
 		u.Password = pass
+
+		u.ResetPassword = passwordReset
 
 		res := database.DB.Omit("Administators",
 			"Patients",
