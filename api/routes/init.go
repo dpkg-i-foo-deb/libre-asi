@@ -14,8 +14,3 @@ func SetRoutes(app *fiber.App) {
 	refreshRoute()
 	signOutRoute()
 }
-
-func init() {
-	// signOutRoute()
-	// worldRoute()
-}
