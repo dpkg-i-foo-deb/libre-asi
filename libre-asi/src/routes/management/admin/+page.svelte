@@ -118,6 +118,10 @@
 		if (handleResponse(response.status, false)) {
 			return;
 		}
+
+		if (response.status == 409) {
+			duplicateCredentials = true;
+		}
 	}
 </script>
 
