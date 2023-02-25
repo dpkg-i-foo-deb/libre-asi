@@ -12,6 +12,7 @@ func SetRoutes(app *fiber.App) {
 	loginRoute()
 	registerRoute()
 	refreshRoute()
+	signOutRoute()
 }
 
 func init() {
