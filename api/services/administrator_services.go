@@ -56,6 +56,7 @@ func RegisterAdministratorService(newUser models.User) (*models.User, error) {
 		}
 
 		newUser.Password = hashedPassword
+		newUser.ResetPassword = true
 
 		if database.DB.Omit("Administrators", "People").Create(&newUser).Error != nil {
 			return errors.ErrInternalError

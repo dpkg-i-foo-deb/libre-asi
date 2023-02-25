@@ -23,10 +23,6 @@ func LoginService(u models.User, role models.Role) (*models.JWTPair, error) {
 		return nil, err
 	}
 
-	if u.ResetPassword {
-		return nil, errors.ErrrNeedsPasswordReset
-	}
-
 	tk, err := auth.GenerateJWTPair(u.Email, string(role))
 
 	if err != nil {
@@ -51,6 +47,10 @@ func loginAdmin(u *models.User) error {
 
 	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password)) != nil {
 		return errors.ErrInvalidCredentials
+	}
+
+	if user.ResetPassword {
+		return errors.ErrrNeedsPasswordReset
 	}
 
 	return nil
