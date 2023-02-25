@@ -2,7 +2,7 @@
 node_modules
 /build
 /.svelte-kit
-/src/lib/i18n
+/src/lib/i18n/**
 /package
 .env
 .env.*
