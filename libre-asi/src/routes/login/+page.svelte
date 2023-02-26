@@ -289,8 +289,9 @@
 	}
 
 	.form-element {
-		padding-top: 15px;
-		padding-bottom: 15px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		height: 50px;
 	}
 
 	.button-container {
