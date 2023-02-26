@@ -1,5 +1,6 @@
 <script lang="ts">
 	import emptyValidator from '$lib/util/emptyValidator';
+	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
 
 	let password = '';
@@ -10,22 +11,24 @@
 	let invalidPasswordConfirm = false;
 	let invalidPasswordCaptionConfirm = '';
 
-	function checkPassword() {
+	function validatePassword() {
 		invalidPassword = false;
 		invalidPasswordCaption = '';
-		if (!emptyValidator(password)) {
-			invalidPassword = true;
-			invalidPasswordCaption = 'Password is required';
-		}
+
+		const result = checkPassword(password);
+
+		invalidPassword = !result[1];
+		invalidPasswordCaption = result[0];
 	}
 
-	function checkPasswordConfirm() {
+	function validatePasswordConfirm() {
 		invalidPasswordConfirm = false;
 		invalidPasswordCaptionConfirm = '';
-		if (!emptyValidator(passwordConfirm)) {
-			invalidPasswordConfirm = true;
-			invalidPasswordCaptionConfirm = 'Password confirmation is required';
-		}
+
+		const result = checkPasswordConfirm(passwordConfirm);
+
+		invalidPasswordConfirm = !result[1];
+		invalidPasswordCaptionConfirm = result[0];
 	}
 </script>
 
@@ -50,7 +53,7 @@
 					bind:value={password}
 					bind:invalid={invalidPassword}
 					bind:invalidText={invalidPasswordCaption}
-					on:blur={checkPassword}
+					on:blur={validatePassword}
 					autofocus
 				/>
 			</div>
@@ -64,7 +67,7 @@
 					bind:value={passwordConfirm}
 					bind:invalid={invalidPasswordConfirm}
 					bind:invalidText={invalidPasswordCaptionConfirm}
-					on:blur={checkPasswordConfirm}
+					on:blur={validatePasswordConfirm}
 				/>
 			</div>
 
