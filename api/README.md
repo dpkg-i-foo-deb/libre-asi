@@ -1,5 +1,8 @@
 # Libre-ASI API
 
+# How do I run this project?
+`go run . serve`
+
 This API uses...
 
 ## GO
