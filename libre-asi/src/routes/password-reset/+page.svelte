@@ -29,6 +29,8 @@
 		invalidPasswordConfirm = !result[1];
 		invalidPasswordCaptionConfirm = result[0];
 	}
+
+	function resetPassword() {}
 </script>
 
 <main>
@@ -36,6 +38,7 @@
 		<Form
 			on:submit={(e) => {
 				e.preventDefault();
+				resetPassword();
 			}}
 		>
 			<div class="title">
