@@ -12,8 +12,9 @@ import (
 )
 
 type CustomClaims struct {
-	Email string `json:"email"`
-	Role  string `json:"role"`
+	Email              string `json:"email"`
+	Role               string `json:"role"`
+	NeedsPasswordReset bool   `json:"needsPasswordReset"`
 	jwt.StandardClaims
 }
 
@@ -24,6 +25,7 @@ func GenerateJWTPair(email string, role string) (models.JWTPair, error) {
 	claims := CustomClaims{
 		email,
 		role,
+		false,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
 		},
@@ -40,6 +42,7 @@ func GenerateJWTPair(email string, role string) (models.JWTPair, error) {
 	claims = CustomClaims{
 		email,
 		role,
+		false,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -57,6 +60,31 @@ func GenerateJWTPair(email string, role string) (models.JWTPair, error) {
 	pair.Token = t
 
 	return pair, nil
+}
+
+func GeneratePasswordResetToken(email string) (models.PasswordResetTk, error) {
+	var token models.PasswordResetTk
+
+	claims := CustomClaims{
+		email,
+		string(models.NONE),
+		true,
+		jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Minute * 5).Unix(),
+		},
+	}
+
+	tk := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	t, err := tk.SignedString([]byte(os.Getenv("AUTH_KEY")))
+
+	if err != nil {
+		return token, err
+	}
+
+	token.Token = t
+
+	return token, nil
 }
 
 func ValidateToken(tokenString string) (bool, error) {
@@ -117,4 +145,14 @@ func RoleFromToken(tokeString string) (string, error) {
 	}
 
 	return claims.Role, nil
+}
+
+func NeedsPasswordResetFromToken(tokenString string) (bool, error) {
+	claims, err := GetTokenClaims(tokenString)
+
+	if err != nil {
+		return false, err
+	}
+
+	return claims.NeedsPasswordReset, nil
 }

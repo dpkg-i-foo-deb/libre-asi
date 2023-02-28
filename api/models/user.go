@@ -7,6 +7,7 @@ type Role string
 const (
 	ADMINISTRATOR Role = "admin"
 	INTERVIEWER   Role = "interviewer"
+	NONE          Role = "none"
 )
 
 type User struct {
