@@ -1,7 +1,9 @@
 package auth
 
 import (
+	"libre-asi-api/errors"
 	"libre-asi-api/models"
+	"libre-asi-api/util"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -27,10 +29,7 @@ func ValidateAccessToken(c *fiber.Ctx) error {
 		return nil
 	}
 
-	response.Message = "The access token is not valid or has expired"
-	response.Status = string(models.DENIED)
-	c.Status(fiber.StatusUnauthorized).JSON(response)
-	return nil
+	return util.HandleFiberError(c, errors.ErrAccessDenied)
 
 }
 
@@ -54,6 +53,23 @@ func ValidateRefreshToken(c *fiber.Ctx) error {
 
 	res.Message = "The refresh token has expired or is invalid"
 	return c.Status(401).JSON(res)
+}
+
+func ValidatePasswordResetToken(c *fiber.Ctx) error {
+
+	passwordResetTk := c.Cookies("password-reset-token")
+
+	if passwordResetTk == "" {
+		return util.HandleFiberError(c, errors.ErrAccessDenied)
+	}
+
+	isValid, err := ValidateToken(passwordResetTk)
+
+	if isValid && err == nil {
+		return c.Next()
+	}
+
+	return util.HandleFiberError(c, errors.ErrAccessDenied)
 }
 
 func ValidateRefreshTokenDate(c *fiber.Ctx) error {
