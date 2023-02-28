@@ -25,7 +25,7 @@
 		invalidPasswordConfirm = false;
 		invalidPasswordCaptionConfirm = '';
 
-		const result = checkPasswordConfirm(passwordConfirm);
+		const result = checkPasswordConfirm(password, passwordConfirm);
 
 		invalidPasswordConfirm = !result[1];
 		invalidPasswordCaptionConfirm = result[0];

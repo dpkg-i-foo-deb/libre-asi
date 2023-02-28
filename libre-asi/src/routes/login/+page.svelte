@@ -23,6 +23,7 @@
 	import emptyValidator from '$lib/util/emptyValidator';
 	import emailValidator from '$lib/util/emailValidator';
 	import { handleResponse } from '$lib/util/handleResponse';
+	import { checkEmail, checkPassword } from '$lib/util/formUtils';
 
 	let loading = false;
 
@@ -44,34 +45,28 @@
 		$session.role = SessionRole.None;
 	});
 
-	function checkEmail(): boolean {
+	function validateEmail(): boolean {
 		invalidEmailCaption = '';
 		invalidEmail = true;
-		if (!emptyValidator(email)) {
-			invalidEmailCaption = 'Email is required';
-			return false;
-		}
 
-		if (!emailValidator(email)) {
-			invalidEmailCaption = 'Enter a valid email address';
-			return false;
-		}
+		const result = checkEmail(email);
 
-		invalidEmail = false;
-		return true;
+		invalidEmail = !result[1];
+		invalidEmailCaption = result[0];
+
+		return result[1];
 	}
 
-	function checkPassword(): boolean {
+	function validatePassword(): boolean {
 		invalidPasswordCaption = '';
 		invalidPassword = true;
 
-		if (!emptyValidator(password)) {
-			invalidPasswordCaption = 'Password is required';
-			return false;
-		}
+		const result = checkPassword(password);
 
-		invalidPassword = false;
-		return true;
+		invalidPassword = !result[1];
+		invalidPasswordCaption = result[0];
+
+		return result[1];
 	}
 
 	function back() {
@@ -83,12 +78,12 @@
 	function hadnleNext() {
 		switch (stepIndex) {
 			case 1:
-				if (!checkEmail()) {
+				if (!validateEmail()) {
 					return;
 				}
 				break;
 			case 2:
-				if (!checkPassword()) {
+				if (!validatePassword()) {
 					return;
 				}
 				break;
@@ -102,7 +97,7 @@
 		}
 
 		if (stepIndex == 2) {
-			if (!checkEmail() || !checkPassword()) {
+			if (!validateEmail() || !validatePassword()) {
 				return;
 			}
 
@@ -124,7 +119,7 @@
 			url += 'interviewer';
 		}
 
-		if (!(checkEmail() || checkPassword())) {
+		if (!(validateEmail() || validatePassword())) {
 			return;
 		}
 
@@ -239,7 +234,7 @@
 						bind:value={email}
 						bind:invalid={invalidEmail}
 						bind:invalidText={invalidEmailCaption}
-						on:blur={checkEmail}
+						on:blur={validateEmail}
 						autofocus
 					/>
 				</div>
@@ -256,7 +251,7 @@
 						bind:value={password}
 						bind:invalid={invalidPassword}
 						bind:invalidText={invalidPasswordCaption}
-						on:blur={checkPassword}
+						on:blur={validatePassword}
 						autofocus
 					/>
 				</div>
