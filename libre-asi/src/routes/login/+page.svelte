@@ -20,8 +20,6 @@
 	import type User from '$lib/models/User';
 	import { goto } from '$app/navigation';
 	import { sendSuccess } from '$lib/util/notifications';
-	import emptyValidator from '$lib/util/emptyValidator';
-	import emailValidator from '$lib/util/emailValidator';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { checkEmail, checkPassword } from '$lib/util/formUtils';
 

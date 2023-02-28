@@ -1,5 +1,4 @@
 <script lang="ts">
-	import emptyValidator from '$lib/util/emptyValidator';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
 
