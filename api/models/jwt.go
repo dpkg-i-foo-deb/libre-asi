@@ -11,3 +11,11 @@ type JwtCookies struct {
 	AccessToken  *fiber.Cookie `json:"access_token"`
 	RefreshToken *fiber.Cookie `json:"refresh_token"`
 }
+
+type PasswordResetTk struct {
+	Token string `json:"token"`
+}
+
+type PasswordResetCookie struct {
+	Token *fiber.Cookie `json:"token"`
+}
