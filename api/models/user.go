@@ -2,6 +2,13 @@ package models
 
 import "gorm.io/gorm"
 
+type Role string
+
+const (
+	ADMINISTRATOR Role = "admin"
+	INTERVIEWER   Role = "interviewer"
+)
+
 type User struct {
 	gorm.Model
 	Email          string          `json:"email" gorm:"unique;not null; default:null"`
@@ -12,9 +19,7 @@ type User struct {
 	People         []Person        `json:"people"`
 }
 
-type Role string
-
-const (
-	ADMINISTRATOR Role = "admin"
-	INTERVIEWER   Role = "interviewer"
-)
+type PasswordChange struct {
+	CurrentPassword string `json:"current_password"`
+	NewPassword     string `json:"new_password"`
+}
