@@ -1,6 +1,9 @@
 <script lang="ts">
+	import type PasswordReset from '$lib/models/PasswordReset';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
+
+	//TODO use stepper widget
 
 	let currentPassword = '';
 	let invalidCurrentPassword = false;
@@ -14,7 +17,7 @@
 	let invalidPasswordConfirm = false;
 	let invalidPasswordCaptionConfirm = '';
 
-	function validateCurrentPassword() {
+	function validateCurrentPassword(): Boolean {
 		invalidCurrentPassword = false;
 		invalidCurrentPasswordCaption = '';
 
@@ -22,9 +25,11 @@
 
 		invalidCurrentPassword = !result[1];
 		invalidCurrentPasswordCaption = result[0];
+
+		return result[1];
 	}
 
-	function validatePassword() {
+	function validateNewPassword(): Boolean {
 		newInvalidPassword = false;
 		newInvalidPasswordCaption = '';
 
@@ -32,9 +37,11 @@
 
 		newInvalidPassword = !result[1];
 		newInvalidPasswordCaption = result[0];
+
+		return result[1];
 	}
 
-	function validatePasswordConfirm() {
+	function validatePasswordConfirm(): Boolean {
 		invalidPasswordConfirm = false;
 		invalidPasswordCaptionConfirm = '';
 
@@ -42,12 +49,30 @@
 
 		invalidPasswordConfirm = !result[1];
 		invalidPasswordCaptionConfirm = result[0];
+
+		return result[1];
 	}
 
-	function resetPassword() {}
+	function resetPassword() {
+		if (!validateCurrentPassword()) {
+			return;
+		}
+
+		if (!validateNewPassword()) {
+			return;
+		}
+
+		if (!validatePasswordConfirm()) {
+			return;
+		}
+
+		const credentials: PasswordReset = {
+			currentPassword: currentPassword,
+			newPassword: newPassword
+		};
+	}
 </script>
 
-//TODO use stepper widget
 <main>
 	<div class="container">
 		<Form
@@ -84,7 +109,7 @@
 					bind:value={newPassword}
 					bind:invalid={newInvalidPassword}
 					bind:invalidText={newInvalidPasswordCaption}
-					on:blur={validatePassword}
+					on:blur={validateNewPassword}
 				/>
 			</div>
 			<div class="form-element">
