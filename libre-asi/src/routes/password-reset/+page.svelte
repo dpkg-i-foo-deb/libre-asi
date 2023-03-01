@@ -2,29 +2,33 @@
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
 
-	let password = '';
-	let invalidPassword = false;
-	let invalidPasswordCaption = '';
+	let currentPassword = '';
+	let invalidCurrentPassword = false;
+	let invalidCurrentPasswordCaption = '';
+
+	let newPassword = '';
+	let newInvalidPassword = false;
+	let newInvalidPasswordCaption = '';
 
 	let passwordConfirm = '';
 	let invalidPasswordConfirm = false;
 	let invalidPasswordCaptionConfirm = '';
 
 	function validatePassword() {
-		invalidPassword = false;
-		invalidPasswordCaption = '';
+		newInvalidPassword = false;
+		newInvalidPasswordCaption = '';
 
-		const result = checkPassword(password);
+		const result = checkPassword(newPassword);
 
-		invalidPassword = !result[1];
-		invalidPasswordCaption = result[0];
+		newInvalidPassword = !result[1];
+		newInvalidPasswordCaption = result[0];
 	}
 
 	function validatePasswordConfirm() {
 		invalidPasswordConfirm = false;
 		invalidPasswordCaptionConfirm = '';
 
-		const result = checkPasswordConfirm(password, passwordConfirm);
+		const result = checkPasswordConfirm(newPassword, passwordConfirm);
 
 		invalidPasswordConfirm = !result[1];
 		invalidPasswordCaptionConfirm = result[0];
@@ -52,9 +56,9 @@
 					id="password"
 					name="password"
 					type="password"
-					bind:value={password}
-					bind:invalid={invalidPassword}
-					bind:invalidText={invalidPasswordCaption}
+					bind:value={newPassword}
+					bind:invalid={newInvalidPassword}
+					bind:invalidText={newInvalidPasswordCaption}
 					on:blur={validatePassword}
 					autofocus
 				/>
