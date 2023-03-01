@@ -53,7 +53,7 @@
 		return result[1];
 	}
 
-	function resetPassword() {
+	async function resetPassword() {
 		if (!validateCurrentPassword()) {
 			return;
 		}
@@ -70,6 +70,8 @@
 			currentPassword: currentPassword,
 			newPassword: newPassword
 		};
+
+		const response = await fetch('/api/password-reset');
 	}
 </script>
 
