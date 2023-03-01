@@ -3,7 +3,7 @@
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendSuccess } from '$lib/util/notifications';
-	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
+	import { Button, Form, InlineNotification, PasswordInput } from 'carbon-components-svelte';
 
 	//TODO use stepper widget
 
@@ -18,6 +18,8 @@
 	let passwordConfirm = '';
 	let invalidPasswordConfirm = false;
 	let invalidPasswordCaptionConfirm = '';
+
+	let invalidCredentials = false;
 
 	function validateCurrentPassword(): Boolean {
 		invalidCurrentPassword = false;
@@ -56,6 +58,8 @@
 	}
 
 	async function resetPassword() {
+		invalidCredentials = false;
+
 		if (!validateCurrentPassword()) {
 			return;
 		}
@@ -85,6 +89,10 @@
 		}
 
 		handleResponse(response.status, true);
+
+		if (response.status == 401) {
+			invalidCredentials = true;
+		}
 	}
 </script>
 
@@ -99,6 +107,10 @@
 			<div class="title">
 				<h3>Set a new password</h3>
 			</div>
+
+			{#if invalidCredentials}
+				<InlineNotification title="Error" subtitle="Check your credentials" />
+			{/if}
 
 			<div class="form-element">
 				<PasswordInput
