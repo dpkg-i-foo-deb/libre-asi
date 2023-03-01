@@ -15,12 +15,12 @@ type User struct {
 	Email          string          `json:"email" gorm:"unique;not null; default:null"`
 	Username       string          `json:"username" gorm:"not null;default:null;unique"`
 	Password       string          `json:"password" gorm:"not null;default:null"`
-	ResetPassword  bool            `json:"reset_password" gorm:"not null;default:false"`
+	ResetPassword  bool            `json:"resetPassword" gorm:"not null;default:false"`
 	Administrators []Administrator `json:"administrators"`
 	People         []Person        `json:"people"`
 }
 
 type PasswordChange struct {
-	CurrentPassword string `json:"current_password"`
-	NewPassword     string `json:"new_password"`
+	CurrentPassword string `json:"currentPassword"`
+	NewPassword     string `json:"newPassword"`
 }
