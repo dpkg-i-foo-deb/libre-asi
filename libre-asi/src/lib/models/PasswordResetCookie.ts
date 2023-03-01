@@ -1,4 +1,4 @@
-export interface AuthCookie {
+export interface PasswordResetCookie {
   name: string;
   value: string;
   path: string;

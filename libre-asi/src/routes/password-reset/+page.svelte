@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type PasswordReset from '$lib/models/PasswordReset';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
@@ -85,6 +86,7 @@
 
 		if (response.ok) {
 			sendSuccess('Password updated', 'You can now log in using that password');
+			goto('/login');
 			return;
 		}
 
