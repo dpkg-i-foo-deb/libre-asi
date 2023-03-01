@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type PasswordReset from '$lib/models/PasswordReset';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
+	import { handleResponse } from '$lib/util/handleResponse';
+	import { sendSuccess } from '$lib/util/notifications';
 	import { Button, Form, PasswordInput } from 'carbon-components-svelte';
 
 	//TODO use stepper widget
@@ -71,7 +73,18 @@
 			newPassword: newPassword
 		};
 
-		const response = await fetch('/api/password-reset');
+		const response = await fetch('/api/password-reset', {
+			method: 'POST',
+			credentials: 'include',
+			body: JSON.stringify(credentials)
+		});
+
+		if (response.ok) {
+			sendSuccess('Password updated', 'You can now log in using that password');
+			return;
+		}
+
+		handleResponse(response.status, true);
 	}
 </script>
 
