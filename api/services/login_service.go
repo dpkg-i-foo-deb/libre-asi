@@ -77,5 +77,9 @@ func loginInterviewer(u *models.User) error {
 		return errors.ErrInvalidCredentials
 	}
 
+	if user.ResetPassword {
+		return errors.ErrrNeedsPasswordReset
+	}
+
 	return nil
 }
