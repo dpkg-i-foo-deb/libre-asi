@@ -14,6 +14,16 @@
 	let invalidPasswordConfirm = false;
 	let invalidPasswordCaptionConfirm = '';
 
+	function validateCurrentPassword() {
+		invalidCurrentPassword = false;
+		invalidCurrentPasswordCaption = '';
+
+		const result = checkPassword(currentPassword);
+
+		invalidCurrentPassword = !result[1];
+		invalidCurrentPasswordCaption = result[0];
+	}
+
 	function validatePassword() {
 		newInvalidPassword = false;
 		newInvalidPasswordCaption = '';
@@ -37,6 +47,7 @@
 	function resetPassword() {}
 </script>
 
+//TODO use stepper widget
 <main>
 	<div class="container">
 		<Form
@@ -51,21 +62,34 @@
 
 			<div class="form-element">
 				<PasswordInput
-					labelText="Password"
-					placeholder="Enter password..."
-					id="password"
-					name="password"
+					labelText="Current password"
+					placeholder="Enter current password..."
+					id="current-password"
+					name="current-password"
+					type="password"
+					bind:value={currentPassword}
+					bind:invalid={invalidCurrentPassword}
+					bind:invalidText={invalidCurrentPasswordCaption}
+					on:blur={validateCurrentPassword}
+				/>
+			</div>
+
+			<div class="form-element">
+				<PasswordInput
+					labelText="New password"
+					placeholder="Enter new password..."
+					id="new-password"
+					name="newPassword"
 					type="password"
 					bind:value={newPassword}
 					bind:invalid={newInvalidPassword}
 					bind:invalidText={newInvalidPasswordCaption}
 					on:blur={validatePassword}
-					autofocus
 				/>
 			</div>
 			<div class="form-element">
 				<PasswordInput
-					labelText="Confirm password"
+					labelText="Confirm new password"
 					placeholder="Enter the same password..."
 					id="password-confirm"
 					name="password-confirm"
