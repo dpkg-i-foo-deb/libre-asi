@@ -28,6 +28,7 @@ func SetPasswordService(credentials models.PasswordChange, email string) error {
 	}
 
 	user.Password = hashedPassword
+	user.ResetPassword = false
 
 	if database.DB.Save(&user).Error != nil {
 		return errors.ErrInternalError
