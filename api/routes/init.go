@@ -13,4 +13,5 @@ func SetRoutes(app *fiber.App) {
 	registerRoute()
 	refreshRoute()
 	signOutRoute()
+	passwordResetRoute()
 }
