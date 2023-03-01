@@ -33,7 +33,22 @@ func LoginHandler(c *fiber.Ctx) error {
 
 	tk, err := services.LoginService(u, role)
 
+	if err == errors.ErrrNeedsPasswordReset {
+
+		tk, errTk := auth.GeneratePasswordResetToken(u.Email)
+
+		if errTk != nil {
+			return util.HandleFiberError(c, errors.ErrInternalError)
+		}
+
+		tkCookie := auth.GeneratePasswordResetCookie(tk.Token)
+
+		return c.Status(428).JSON(tkCookie)
+
+	}
+
 	if err != nil {
+
 		return util.HandleFiberError(c, err)
 	}
 

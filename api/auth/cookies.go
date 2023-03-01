@@ -35,6 +35,20 @@ func GenerateRefreshCookie(value string) *fiber.Cookie {
 	return refreshCookie
 }
 
+func GeneratePasswordResetCookie(value string) *fiber.Cookie {
+	resetCookie := &fiber.Cookie{
+		Name:     "password-reset-token",
+		HTTPOnly: true,
+		Expires:  time.Now().Add(time.Minute * 5),
+		Value:    value,
+		Path:     "/",
+		SameSite: fiber.CookieSameSiteNoneMode,
+		Secure:   true,
+	}
+
+	return resetCookie
+}
+
 func GenerateFakeAccessCookie() *fiber.Cookie {
 	accessCookie := &fiber.Cookie{
 		Name:     "access-token",
