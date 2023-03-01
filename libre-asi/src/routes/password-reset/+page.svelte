@@ -4,7 +4,13 @@
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendSuccess } from '$lib/util/notifications';
-	import { Button, Form, InlineNotification, PasswordInput } from 'carbon-components-svelte';
+	import {
+		Button,
+		Form,
+		InlineLoading,
+		InlineNotification,
+		PasswordInput
+	} from 'carbon-components-svelte';
 
 	//TODO use stepper widget
 
@@ -21,6 +27,8 @@
 	let invalidPasswordCaptionConfirm = '';
 
 	let invalidCredentials = false;
+
+	let loading = false;
 
 	function validateCurrentPassword(): Boolean {
 		invalidCurrentPassword = false;
@@ -59,6 +67,7 @@
 	}
 
 	async function resetPassword() {
+		loading = true;
 		invalidCredentials = false;
 
 		if (!validateCurrentPassword()) {
@@ -95,6 +104,8 @@
 		if (response.status == 401) {
 			invalidCredentials = true;
 		}
+
+		loading = false;
 	}
 </script>
 
@@ -112,6 +123,10 @@
 
 			{#if invalidCredentials}
 				<InlineNotification title="Error" subtitle="Check your credentials" />
+			{/if}
+
+			{#if loading}
+				<InlineLoading description="submitting..." />
 			{/if}
 
 			<div class="form-element">
@@ -157,7 +172,7 @@
 
 			<div class="button-container">
 				<div class="main-button">
-					<Button type="submit">Submit</Button>
+					<Button type="submit" disabled={loading}>Submit</Button>
 				</div>
 			</div>
 		</Form>
