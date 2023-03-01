@@ -30,7 +30,7 @@
 
 	let loading = false;
 
-	function validateCurrentPassword(): Boolean {
+	function validateCurrentPassword(): boolean {
 		invalidCurrentPassword = false;
 		invalidCurrentPasswordCaption = '';
 
@@ -42,7 +42,7 @@
 		return result[1];
 	}
 
-	function validateNewPassword(): Boolean {
+	function validateNewPassword(): boolean {
 		newInvalidPassword = false;
 		newInvalidPasswordCaption = '';
 
@@ -54,7 +54,7 @@
 		return result[1];
 	}
 
-	function validatePasswordConfirm(): Boolean {
+	function validatePasswordConfirm(): boolean {
 		invalidPasswordConfirm = false;
 		invalidPasswordCaptionConfirm = '';
 
