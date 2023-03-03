@@ -83,3 +83,25 @@ func RegisterAdministratorService(newUser models.User) (*models.User, error) {
 
 	return &newUser, nil
 }
+
+func UpdateAdministratorService(updatedAdmin models.User) error {
+
+	var found models.User
+
+	if err := database.DB.Where("ID = ?", updatedAdmin.ID).First(&found).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("user_id = ?", updatedAdmin.ID).First(&models.Administrator{}).Error; err != nil {
+		return errors.ErrBadRoute
+	}
+
+	if database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin) != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+}

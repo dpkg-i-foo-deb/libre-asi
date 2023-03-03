@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-//Adapted to use https://github.com/dr5hn/countries-states-cities-database
+// Adapted to use https://github.com/dr5hn/countries-states-cities-database
 type CountryTranslations struct {
 	gorm.Model
 	CountryID uint   `json:"country"`

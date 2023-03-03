@@ -1,10 +1,12 @@
 package handlers
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func GetAdministratorsHandler(c *fiber.Ctx) error {
@@ -35,4 +37,19 @@ func RegisterAdministratorHandler(c *fiber.Ctx) error {
 	}
 
 	return c.Status(201).JSON(registeredUser)
+}
+
+func UpdateAdministratorHandler(c *fiber.Ctx) error {
+
+	var updatedAdmin models.User
+
+	if c.BodyParser(&updatedAdmin) != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	if err := services.UpdateAdministratorService(updatedAdmin); err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return util.SendSuccess(c, 200, "Updated")
 }

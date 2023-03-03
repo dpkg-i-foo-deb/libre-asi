@@ -38,6 +38,10 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 400
 		res.Status = string(models.CHECK_REQUEST)
 		res.Message = "Check your request"
+	case errors.ErrEntityNotFound:
+		status = 404
+		res.Status = string(models.NOT_FOUND)
+		res.Message = "The requested resource was not found"
 	case errors.ErrNotImplemmented:
 		status = 501
 		res.Status = string(models.ERROR)

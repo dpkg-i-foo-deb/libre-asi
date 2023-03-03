@@ -18,4 +18,5 @@ const (
 	ErrConflict            ApiError = "data conflict"
 	ErrInvalidCredentials  ApiError = "invalid credentials"
 	ErrrNeedsPasswordReset ApiError = "password reset needed"
+	ErrEntityNotFound      ApiError = "The requested entity was not found"
 )

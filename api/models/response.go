@@ -8,6 +8,7 @@ const (
 	ERROR          Status = "SERVER_ERROR"
 	SETUP_REQUIRED Status = "SETUP_REQUIRED"
 	CHECK_REQUEST  Status = "CHECK_REQUEST"
+	NOT_FOUND      Status = "NOT_FOUND"
 )
 
 type Response struct {

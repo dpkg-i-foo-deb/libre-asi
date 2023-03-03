@@ -1,6 +1,6 @@
 package models
 
-//Adapted to use data from https://github.com/dr5hn/countries-states-cities-database
+// Adapted to use data from https://github.com/dr5hn/countries-states-cities-database
 type Country struct {
 	ID           uint                `gorm:"primaryKey" json:"id"`
 	Name         string              `json:"name"`
