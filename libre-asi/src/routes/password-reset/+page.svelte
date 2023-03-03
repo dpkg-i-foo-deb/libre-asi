@@ -118,7 +118,16 @@
 			}}
 		>
 			<div class="title">
-				<h3>Set a new password</h3>
+				<h3>Update your password</h3>
+			</div>
+
+			<br />
+
+			<div class="subtitle">
+				<p>
+					You need to update your password because it is the first time you log in or you have
+					requested a password reset to your administrator.
+				</p>
 			</div>
 
 			{#if invalidCredentials}
@@ -186,7 +195,7 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		min-height: 70vh;
+		min-height: 30vh;
 	}
 
 	.title {
@@ -198,6 +207,11 @@
 		margin-bottom: 45px;
 		height: 50px;
 		width: 350px;
+	}
+
+	.subtitle {
+		width: 350px;
+		text-align: left;
 	}
 
 	.button-container {
