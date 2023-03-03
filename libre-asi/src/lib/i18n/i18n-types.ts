@@ -176,7 +176,7 @@ type RootTranslation = {
 	}
 	login: {
 		/**
-		 * L​o​g​ ​I​n​ ​t​o​ ​y​o​u​r​ ​a​c​c​o​u​n​t
+		 * L​o​g​ ​i​n
 		 */
 		TITLE: string
 		/**
@@ -405,7 +405,7 @@ export type TranslationFunctions = {
 	}
 	login: {
 		/**
-		 * Log In to your account
+		 * Log in
 		 */
 		TITLE: () => LocalizedString
 		/**

@@ -1,5 +1,5 @@
 const login = {
-	TITLE: 'Inicia sesión en tu cuenta',
+	TITLE: 'Inicia sesión',
 	INVALID_CREDENTIALS: 'Correo electrónico o contraseña inválidos',
 	ERROR: 'Error',
 	ROLE: 'Rol',
