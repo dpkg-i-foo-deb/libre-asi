@@ -53,7 +53,7 @@ func LoginHandler(c *fiber.Ctx) error {
 	}
 
 	accessToken := auth.GenerateAccessCookie(tk.Token)
-	refreshToken := auth.GenerateAccessCookie(tk.RefreshToken)
+	refreshToken := auth.GenerateRefreshCookie(tk.RefreshToken)
 
 	jwtResponse.AccessToken = accessToken
 	jwtResponse.RefreshToken = refreshToken
