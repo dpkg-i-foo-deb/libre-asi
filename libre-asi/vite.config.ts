@@ -1,13 +1,16 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
-import mkcert from 'vite-plugin-mkcert';
+import path from 'path'
 
 const config: UserConfig = {
 	server: {
-		https: true,
+		https: {
+      key:path.resolve('./key.pem'),
+      cert:path.resolve('./cert.pem')
+    },
 		proxy: {}
 	},
-	plugins: [mkcert(), sveltekit()],
+	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
