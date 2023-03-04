@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:3000/';
+const API_URL = process.env.API_URL
 const SET_UP = 'set-up';
 const INTERVIEWER_LOGIN = 'login/interviewer/';
 const ADMIN_LOGIN = 'login/admin';
