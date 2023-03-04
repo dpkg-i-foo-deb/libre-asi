@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-netlify';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { optimizeImports } from 'carbon-preprocess-svelte';
 
@@ -9,7 +9,10 @@ const config = {
 	preprocess: [vitePreprocess(), optimizeImports()],
 
 	kit: {
-		adapter: adapter({})
+		adapter: adapter({
+      edge:false,
+      split:true,
+   })
 	}
 };
 
