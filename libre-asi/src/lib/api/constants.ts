@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL
+const API_URL = 'https://libre-asi-api.onrender.com'
 const SET_UP = 'set-up';
 const INTERVIEWER_LOGIN = 'login/interviewer/';
 const ADMIN_LOGIN = 'login/admin';
