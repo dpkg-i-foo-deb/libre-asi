@@ -22,6 +22,7 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { checkEmail, checkPassword } from '$lib/util/formUtils';
+	import { ADMIN_LOGIN, API_URL, INTERVIEWER_LOGIN } from '$lib/api/constants';
 
 	let loading = false;
 
@@ -107,14 +108,14 @@
 		loading = true;
 
 		invalidCredentials = false;
-		let url = '/api/login/';
+		let url = '';
 
 		if (wantsAdmin) {
-			url += 'administrator';
+			url += API_URL+ADMIN_LOGIN;
 		}
 
 		if (wantsInterviewer) {
-			url += 'interviewer';
+			url += API_URL+INTERVIEWER_LOGIN;
 		}
 
 		if (!(validateEmail() || validatePassword())) {
@@ -126,7 +127,8 @@
 		const response = await fetch(url, {
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(user)
+			body: JSON.stringify(user),
+      mode:'cors'
 		});
 
 		if (response.ok) {
