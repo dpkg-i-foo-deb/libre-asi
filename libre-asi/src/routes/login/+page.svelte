@@ -125,6 +125,10 @@
 		const user: User = { email: email, password: password };
 
 		const response = await fetch(url, {
+      headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(user),
