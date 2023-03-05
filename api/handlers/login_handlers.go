@@ -59,8 +59,8 @@ func LoginHandler(c *fiber.Ctx) error {
 	jwtResponse.RefreshToken = refreshToken
 
 	//TODO use real cookies when Sveltekit allows easy cookie parsing
-	//c.Cookie(auth)
-	//c.Cookie(refresh)
+  c.Cookie(accessToken)
+	c.Cookie(refreshToken)
 
 	return c.Status(200).JSON(jwtResponse)
 
