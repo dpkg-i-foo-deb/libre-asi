@@ -10,7 +10,8 @@ export const POST: RequestHandler = async function ({ fetch, request }) {
 		credentials: 'include',
 		headers: request.headers,
 		body: JSON.stringify(admin),
-    mode:'cors'
+    mode:'cors',
+
 	});
 
 	return response;

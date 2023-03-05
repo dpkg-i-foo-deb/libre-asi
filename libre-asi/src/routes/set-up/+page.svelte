@@ -110,9 +110,15 @@
 			password: password
 		};
 
-		const response = await fetch('/api/set-up', {
+		const response = await fetch('https://libre-asi-api.onrender.com/set-up', {
+      headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
 			method: 'POST',
-			body: JSON.stringify(newAdmin)
+			body: JSON.stringify(newAdmin),
+      credentials:'include',
+      mode:'cors'
 		});
 
 		if (response.ok) {
