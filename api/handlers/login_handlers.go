@@ -13,7 +13,6 @@ import (
 func LoginHandler(c *fiber.Ctx) error {
 
 	var u models.User
-	var jwtResponse models.JwtCookies
 	var role models.Role
 
 	if c.BodyParser(&u) != nil {
@@ -55,13 +54,10 @@ func LoginHandler(c *fiber.Ctx) error {
 	accessToken := auth.GenerateAccessCookie(tk.Token)
 	refreshToken := auth.GenerateRefreshCookie(tk.RefreshToken)
 
-	jwtResponse.AccessToken = accessToken
-	jwtResponse.RefreshToken = refreshToken
-
 	//TODO use real cookies when Sveltekit allows easy cookie parsing
   c.Cookie(accessToken)
 	c.Cookie(refreshToken)
 
-	return c.Status(200).JSON(jwtResponse)
+	return util.SendSuccess(c,200,"Welcome back")
 
 }
