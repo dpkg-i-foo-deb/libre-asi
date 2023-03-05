@@ -1,4 +1,11 @@
-const API_URL = 'https://libre-asi-api.onrender.com/'
+import { dev } from "$app/environment";
+
+let API_URL = 'https://libre-asi-api.onrender.com/'
+if (dev){
+API_URL = 'http://127.0.0.1:3000/'
+
+}
+
 const SET_UP = 'set-up';
 const INTERVIEWER_LOGIN = 'login/interviewer/';
 const ADMIN_LOGIN = 'login/admin';
