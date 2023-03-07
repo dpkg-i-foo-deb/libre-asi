@@ -9,7 +9,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	golang.org/x/crypto v0.6.0
 	gorm.io/driver/postgres v1.4.8
-	gorm.io/gorm v1.24.5
+	gorm.io/gorm v1.24.6
 )
 
 require (
