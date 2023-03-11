@@ -13,18 +13,18 @@
 		TextInput,
 		InlineNotification,
 		Modal,
-		CodeSnippet
+		CodeSnippet,
+		OverflowMenu,
+		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
 	import { goto, invalidateAll } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { sendError } from '$lib/util/notifications';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
-
-	export let data: PageData;
+	import { API_URL, GET_ADMINS, REGISTER_ADMIN } from '$lib/api/constants';
 
 	let newAdministrator: Administrator;
 
@@ -39,7 +39,7 @@
 	let invalidUsernameCaption = '';
 	let duplicateCredentials = false;
 
-	onMount(function () {
+	onMount(async function () {
 		newAdministrator = {
 			ID: 0,
 			CreatedAt: new Date(),
@@ -49,20 +49,24 @@
 			password: ''
 		};
 
-		if (data.error) {
-			sendError('Your session has expired', 'Log In again');
-			goto('/login');
-		}
-
-		loadAdmins();
+		await loadAdmins();
 	});
 
-	function loadAdmins() {
-		const existingAdmins = data.administrators ?? [];
-
-		rows = existingAdmins.map(function (value: Administrator) {
-			return { id: value.ID, email: value.email, username: value.username };
+	async function loadAdmins() {
+		const response = await fetch(API_URL + GET_ADMINS, {
+			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+			method: 'GET',
+			credentials: 'include',
+			mode: 'cors'
 		});
+
+		if (response.ok) {
+			const existingAdmins = (await response.json()) as Administrator[];
+
+			rows = existingAdmins.map(function (value: Administrator) {
+				return { id: value.ID, email: value.email, username: value.username };
+			});
+		}
 	}
 
 	function validateUsername(): boolean {
@@ -100,10 +104,12 @@
 			password: ''
 		};
 
-		const response = await fetch('/api/administrators', {
+		const response = await fetch(API_URL + REGISTER_ADMIN, {
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(newAdministrator)
+			body: JSON.stringify(newAdministrator),
+			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+			mode: 'cors'
 		});
 
 		if (response.ok) {
@@ -139,10 +145,19 @@
 		description="Current Registered Administrators"
 		headers={[
 			{ key: 'email', value: 'Email' },
-			{ key: 'username', value: 'Username' }
+			{ key: 'username', value: 'Username' },
+			{ key: 'overflow', empty: true }
 		]}
 		{rows}
 	>
+		<svelte:fragment slot="cell" let:cell let:row>
+			{#if cell.key === 'overflow'}
+				<OverflowMenu flipped>
+					<OverflowMenuItem text="Edit" />
+					<OverflowMenuItem danger text="Delete" />
+				</OverflowMenu>
+			{:else}{cell.value}{/if}
+		</svelte:fragment>
 		<Toolbar>
 			<ToolbarContent>
 				<ToolbarSearch />
