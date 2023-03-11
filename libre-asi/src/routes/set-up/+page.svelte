@@ -15,6 +15,7 @@
 		InlineLoading
 	} from 'carbon-components-svelte';
 	import { goto } from '$app/navigation';
+	import { API_URL, SET_UP } from '$lib/api/constants';
 
 	let loading = false;
 
@@ -110,15 +111,15 @@
 			password: password
 		};
 
-		const response = await fetch('https://libre-asi-api.onrender.com/set-up', {
-      headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
+		const response = await fetch(API_URL + SET_UP, {
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
 			method: 'POST',
 			body: JSON.stringify(newAdmin),
-      credentials:'include',
-      mode:'cors'
+			credentials: 'include',
+			mode: 'cors'
 		});
 
 		if (response.ok) {
