@@ -24,7 +24,7 @@
 	import { sendError } from '$lib/util/notifications';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { API_URL, GET_ADMINS } from '$lib/api/constants';
+	import { API_URL, GET_ADMINS, REGISTER_ADMIN } from '$lib/api/constants';
 
 	let newAdministrator: Administrator;
 
@@ -104,10 +104,12 @@
 			password: ''
 		};
 
-		const response = await fetch('/api/administrators', {
+		const response = await fetch(API_URL + REGISTER_ADMIN, {
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(newAdministrator)
+			body: JSON.stringify(newAdministrator),
+			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+			mode: 'cors'
 		});
 
 		if (response.ok) {
