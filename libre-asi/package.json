@@ -42,7 +42,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-node": "^1.2.0",
+		"@sveltejs/adapter-node": "^1.2.2",
 		"@sveltejs/adapter-static": "^2.0.1"
 	}
 }
