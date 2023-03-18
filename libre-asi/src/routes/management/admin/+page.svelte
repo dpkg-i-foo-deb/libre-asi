@@ -116,7 +116,6 @@
 			newAdministrator = (await response.json()) as Administrator;
 			isRegisterFormOpen = false;
 			isSuccessRegisterOpen = true;
-			await invalidateAll();
 			loadAdmins();
 			return;
 		}
