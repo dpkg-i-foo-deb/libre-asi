@@ -1,6 +1,4 @@
-import { redirect, type HandleFetch } from '@sveltejs/kit';
-import type { Handle } from '@sveltejs/kit';
-import { PROTECTED_ROUTES } from '$lib/protected/protectedRoutes';
+import type { HandleFetch } from '@sveltejs/kit';
 import { API_URL, REFRESH } from '$lib/api/constants';
 import type { JwtPair } from '$lib/models/JwtPair';
 
@@ -64,35 +62,6 @@ export const handleFetch: HandleFetch = async ({ request, fetch, event }) => {
 		cookies.set('access-token', '', { path: '/' });
 		cookies.set('refresh-token', '', { path: '/' });
 	}
-
-	return response;
-};
-
-export const handle: Handle = async ({ event, resolve }) => {
-	//TODO use this to protect routes
-	const cookies = event.cookies;
-	let protectedRoute = false;
-
-	const accessToken = cookies.get('access-token') ?? '';
-	const refreshToken = cookies.get('refresh-token') ?? '';
-
-	PROTECTED_ROUTES.forEach(function (route) {
-		if (event.url.pathname.includes(route)) {
-			protectedRoute = true;
-		}
-	});
-
-	if (protectedRoute) {
-		if (accessToken == '' && refreshToken == '') {
-			throw redirect(302, '/login');
-		}
-	}
-
-	if ((accessToken != '' || refreshToken != '') && event.url.pathname == '/login') {
-		throw redirect(302, '/');
-	}
-
-	const response = await resolve(event);
 
 	return response;
 };
