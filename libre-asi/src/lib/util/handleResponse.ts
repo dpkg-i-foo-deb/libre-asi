@@ -2,6 +2,8 @@ import { goto } from '$app/navigation';
 import setup from '$lib/stores/setupStore';
 import { sendError } from './notifications';
 import { sendInfo } from './notifications';
+import session from '$lib/stores/userStore';
+import { SessionRole } from '$lib/models/Session';
 
 export function handleResponse(code: number, allow401: boolean): boolean {
 	let shouldNavigate = true;
@@ -27,6 +29,10 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 		case 401:
 			if (!allow401) {
 				sendError('Your session has expired', 'Log In again');
+				session.set({
+					active: false,
+					role: SessionRole.None
+				})
 				goto('/login');
 			}
 			break;

@@ -8,7 +8,7 @@ const config: UserConfig = {
       key:path.resolve('./key.pem'),
       cert:path.resolve('./cert.pem')
     },
-		proxy: {}
+
 	},
 	plugins: [sveltekit()],
 	test: {
