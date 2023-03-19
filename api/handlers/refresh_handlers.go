@@ -12,7 +12,6 @@ import (
 func RefreshHandler(c *fiber.Ctx) error {
 
 	var pair models.JWTPair
-	var cookies models.JwtCookies
 	var email string
 	var role string
 	var accessTk *fiber.Cookie
@@ -40,9 +39,9 @@ func RefreshHandler(c *fiber.Ctx) error {
 	accessTk = auth.GenerateAccessCookie(pair.Token)
 	refreshTk = auth.GenerateRefreshCookie(pair.RefreshToken)
 
-	cookies.AccessToken = accessTk
-	cookies.RefreshToken = refreshTk
+	c.Cookie(accessTk)
+	c.Cookie(refreshTk)
 
-	return c.Status(200).JSON(cookies)
+	return util.SendSuccess(c, 200, "Session refreshed")
 
 }

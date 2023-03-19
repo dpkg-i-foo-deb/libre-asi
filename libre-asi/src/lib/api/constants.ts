@@ -1,9 +1,8 @@
-import { dev } from "$app/environment";
+import { dev } from '$app/environment';
 
-let API_URL = 'https://libre-asi-api.onrender.com/'
-if (dev){
-API_URL = 'http://127.0.0.1:3000/'
-
+let API_URL = 'https://libre-asi-api.onrender.com/';
+if (dev) {
+	API_URL = 'http://127.0.0.1:3000/';
 }
 
 const SET_UP = 'set-up';

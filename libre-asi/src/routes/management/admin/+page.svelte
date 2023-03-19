@@ -18,13 +18,12 @@
 		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
-	import { goto, invalidateAll } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { sendError } from '$lib/util/notifications';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { API_URL, GET_ADMINS, REGISTER_ADMIN } from '$lib/api/constants';
+	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 
 	let newAdministrator: Administrator;
 
@@ -53,12 +52,7 @@
 	});
 
 	async function loadAdmins() {
-		const response = await fetch(API_URL + GET_ADMINS, {
-			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-			method: 'GET',
-			credentials: 'include',
-			mode: 'cors'
-		});
+		const response = await fetchWithRefresh(API_URL + GET_ADMINS, { method: 'GET' });
 
 		if (response.ok) {
 			const existingAdmins = (await response.json()) as Administrator[];
@@ -104,12 +98,9 @@
 			password: ''
 		};
 
-		const response = await fetch(API_URL + REGISTER_ADMIN, {
+		const response = await fetchWithRefresh(API_URL + REGISTER_ADMIN, {
 			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify(newAdministrator),
-			headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-			mode: 'cors'
+			body: JSON.stringify(newAdministrator)
 		});
 
 		if (response.ok) {
