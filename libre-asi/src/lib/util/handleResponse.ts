@@ -32,7 +32,7 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 				session.set({
 					active: false,
 					role: SessionRole.None
-				})
+				});
 				goto('/login');
 			}
 			break;

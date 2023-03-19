@@ -52,7 +52,7 @@
 	});
 
 	async function loadAdmins() {
-		const response = await fetchWithRefresh(API_URL+GET_ADMINS,{method:'GET'})
+		const response = await fetchWithRefresh(API_URL + GET_ADMINS, { method: 'GET' });
 
 		if (response.ok) {
 			const existingAdmins = (await response.json()) as Administrator[];
@@ -98,7 +98,10 @@
 			password: ''
 		};
 
-		const response = await fetchWithRefresh(API_URL+REGISTER_ADMIN,{method:'POST',body:JSON.stringify(newAdministrator)})
+		const response = await fetchWithRefresh(API_URL + REGISTER_ADMIN, {
+			method: 'POST',
+			body: JSON.stringify(newAdministrator)
+		});
 
 		if (response.ok) {
 			newAdministrator = (await response.json()) as Administrator;

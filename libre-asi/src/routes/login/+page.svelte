@@ -111,11 +111,11 @@
 		let url = '';
 
 		if (wantsAdmin) {
-			url += API_URL+ADMIN_LOGIN;
+			url += API_URL + ADMIN_LOGIN;
 		}
 
 		if (wantsInterviewer) {
-			url += API_URL+INTERVIEWER_LOGIN;
+			url += API_URL + INTERVIEWER_LOGIN;
 		}
 
 		if (!(validateEmail() || validatePassword())) {
@@ -125,14 +125,14 @@
 		const user: User = { email: email, password: password };
 
 		const response = await fetch(url, {
-      headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(user),
-      mode:'cors'
+			mode: 'cors'
 		});
 
 		if (response.ok) {
