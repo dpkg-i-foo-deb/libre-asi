@@ -24,6 +24,7 @@
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { API_URL, GET_ADMINS, REGISTER_ADMIN, EDIT_ADMINS } from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
+	import { sendSuccess } from '$lib/util/notifications';
 	let newAdministrator: Administrator;
 	let editAdministrador: Administrator;
 	let filteredData = loadAdmins();
@@ -31,7 +32,6 @@
 	let rows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
-	let isEditionFormOpen = false;
 	let isSuccessEditOpen = false;
 	let email = '';
 	let username = '';
@@ -40,6 +40,9 @@
 	let invalidEmailCaption = '';
 	let invalidUsernameCaption = '';
 	let duplicateCredentials = false;
+
+	let isEditionFormOpen = false;
+	let editingId = 0;
 
 	onMount(async function () {
 		newAdministrator = {
@@ -131,10 +134,10 @@
 		}
 	}
 
-	function toggleEditForm(id: number) {
+	function toggleEditForm() {
 		isEditionFormOpen = true;
 
-		let row = rows.find((row) => row.id === id);
+		let row = rows.find((row) => row.id === editingId);
 
 		if (row) {
 			email = row.email;
@@ -151,7 +154,7 @@
 		}
 
 		editAdministrador = {
-			ID: 0,
+			ID: editingId,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 
@@ -161,15 +164,15 @@
 		};
 
 		const response = await fetchWithRefresh(API_URL + EDIT_ADMINS, {
-			method: 'POST',
+			method: 'PATCH',
 			body: JSON.stringify(editAdministrador)
 		});
 
 		if (response.ok) {
 			editAdministrador = (await response.json()) as Administrator;
 			isEditionFormOpen = false;
-			isSuccessEditOpen = true;
 			loadAdmins();
+			sendSuccess('Account modified successfully', 'You can now use the new credentials');
 			return;
 		}
 
@@ -208,7 +211,8 @@
 					<OverflowMenuItem
 						text="Edit"
 						on:click={function () {
-							toggleEditForm(row.id);
+							editingId = row.id;
+							toggleEditForm();
 						}}>Edit</OverflowMenuItem
 					>
 					<OverflowMenuItem danger text="Delete" />
