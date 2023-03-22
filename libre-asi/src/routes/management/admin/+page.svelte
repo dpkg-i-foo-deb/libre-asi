@@ -22,14 +22,17 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { API_URL, GET_ADMINS, REGISTER_ADMIN } from '$lib/api/constants';
+	import { API_URL, GET_ADMINS, REGISTER_ADMIN, EDIT_ADMINS } from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-
 	let newAdministrator: Administrator;
-
+	let editAdministrador: Administrator;
+	let filteredData = loadAdmins();
+	let searchValue = '';
 	let rows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
+	let isEditionFormOpen = false;
+	let isSuccessEditOpen = false;
 	let email = '';
 	let username = '';
 	let invalidEmail = false;
@@ -53,7 +56,6 @@
 
 	async function loadAdmins() {
 		const response = await fetchWithRefresh(API_URL + GET_ADMINS, { method: 'GET' });
-
 		if (response.ok) {
 			const existingAdmins = (await response.json()) as Administrator[];
 
@@ -62,6 +64,15 @@
 			});
 		}
 	}
+
+	// function search(value) {
+	// 	searchValue = value;
+	// 	if (value) {
+	// 		filteredData = data.filter((item) => item.nombre.toLowerCase().includes(value.toLowerCase()));
+	// 	} else {
+	// 		filteredData = data;
+	// 	}
+	// }
 
 	function validateUsername(): boolean {
 		const usernameField = checkUsername(username);
@@ -119,6 +130,57 @@
 			duplicateCredentials = true;
 		}
 	}
+
+	function toggleEditForm(id: number) {
+		isEditionFormOpen = true;
+
+		let row = rows.find((row) => row.id === id);
+
+		if (row) {
+			email = row.email;
+			username = row.username;
+		}
+	}
+
+	async function editAdmin() {
+		duplicateCredentials = false;
+		isSuccessRegisterOpen = false;
+
+		if (!validateEmail() || !validateUsername()) {
+			return;
+		}
+
+		editAdministrador = {
+			ID: 0,
+			CreatedAt: new Date(),
+			UpdatedAt: new Date(),
+
+			email: email,
+			username: username,
+			password: ''
+		};
+
+		const response = await fetchWithRefresh(API_URL + EDIT_ADMINS, {
+			method: 'POST',
+			body: JSON.stringify(editAdministrador)
+		});
+
+		if (response.ok) {
+			editAdministrador = (await response.json()) as Administrator;
+			isEditionFormOpen = false;
+			isSuccessEditOpen = true;
+			loadAdmins();
+			return;
+		}
+
+		if (handleResponse(response.status, false)) {
+			return;
+		}
+
+		if (response.status == 409) {
+			duplicateCredentials = true;
+		}
+	}
 </script>
 
 {#if rows == undefined}
@@ -143,7 +205,12 @@
 		<svelte:fragment slot="cell" let:cell let:row>
 			{#if cell.key === 'overflow'}
 				<OverflowMenu flipped>
-					<OverflowMenuItem text="Edit" />
+					<OverflowMenuItem
+						text="Edit"
+						on:click={function () {
+							toggleEditForm(row.id);
+						}}>Edit</OverflowMenuItem
+					>
 					<OverflowMenuItem danger text="Delete" />
 				</OverflowMenu>
 			{:else}{cell.value}{/if}
@@ -203,6 +270,49 @@
 		</ModalBody>
 		<ModalFooter
 			primaryButtonText="Register"
+			secondaryButtonText="Cancel"
+			on:click:button--secondary={() => {
+				isRegisterFormOpen = false;
+			}}
+		/>
+	</ComposedModal>
+
+	<ComposedModal bind:open={isEditionFormOpen} selectorPrimaryFocus="#email" on:submit={editAdmin}>
+		<ModalHeader label="Transaction" title="Edit Administrator Account" />
+		<ModalBody hasForm>
+			<form>
+				<h7 class="paragraph"> Administrators can edit other administrators' information. </h7>
+				<br />
+
+				{#if duplicateCredentials}
+					<InlineNotification title="Error:" subtitle="Email or username already registered" />
+				{/if}
+				<div class="input-field">
+					<TextInput
+						id="email"
+						labelText="Email"
+						placeholder="Enter email..."
+						on:blur={validateEmail}
+						bind:invalid={invalidEmail}
+						bind:value={email}
+						bind:invalidText={invalidEmailCaption}
+					/>
+				</div>
+				<div class="input-field">
+					<TextInput
+						id="username"
+						labelText="User name"
+						placeholder="Enter user name..."
+						on:blur={validateUsername}
+						bind:invalid={invalidUsername}
+						bind:value={username}
+						bind:invalidText={invalidUsernameCaption}
+					/>
+				</div>
+			</form>
+		</ModalBody>
+		<ModalFooter
+			primaryButtonText="Edit"
 			secondaryButtonText="Cancel"
 			on:click:button--secondary={() => {
 				isRegisterFormOpen = false;
