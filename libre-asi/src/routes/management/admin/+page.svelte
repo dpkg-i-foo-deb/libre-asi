@@ -22,17 +22,21 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { API_URL, GET_ADMINS, REGISTER_ADMIN, EDIT_ADMINS } from '$lib/api/constants';
+	import {
+		API_URL,
+		GET_ADMINS,
+		REGISTER_ADMIN,
+		EDIT_ADMINS,
+		DELETE_ADMIN
+	} from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-	import { sendSuccess } from '$lib/util/notifications';
+	import { sendError, sendSuccess } from '$lib/util/notifications';
 	let newAdministrator: Administrator;
 	let editAdministrador: Administrator;
-	let filteredData = loadAdmins();
-	let searchValue = '';
+	let deleteAdministrator: Administrator;
 	let rows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
-	let isSuccessEditOpen = false;
 	let email = '';
 	let username = '';
 	let invalidEmail = false;
@@ -40,9 +44,10 @@
 	let invalidEmailCaption = '';
 	let invalidUsernameCaption = '';
 	let duplicateCredentials = false;
-
 	let isEditionFormOpen = false;
 	let editingId = 0;
+	let deletingId = 0;
+	let modalOpen = false;
 
 	onMount(async function () {
 		newAdministrator = {
@@ -67,15 +72,6 @@
 			});
 		}
 	}
-
-	// function search(value) {
-	// 	searchValue = value;
-	// 	if (value) {
-	// 		filteredData = data.filter((item) => item.nombre.toLowerCase().includes(value.toLowerCase()));
-	// 	} else {
-	// 		filteredData = data;
-	// 	}
-	// }
 
 	function validateUsername(): boolean {
 		const usernameField = checkUsername(username);
@@ -144,6 +140,9 @@
 			username = row.username;
 		}
 	}
+	function handleCancel() {
+		modalOpen = false;
+	}
 
 	async function editAdmin() {
 		duplicateCredentials = false;
@@ -184,6 +183,23 @@
 			duplicateCredentials = true;
 		}
 	}
+
+	async function handleDelete() {
+		const response = await fetchWithRefresh(API_URL + DELETE_ADMIN + deletingId.toString(), {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			loadAdmins();
+			sendSuccess('Account deleted successfully', '');
+			return;
+		}
+
+		if (handleResponse(response.status, false)) {
+			sendError('Error trying to remove administrator', '');
+			return;
+		}
+	}
 </script>
 
 {#if rows == undefined}
@@ -215,7 +231,11 @@
 							toggleEditForm();
 						}}>Edit</OverflowMenuItem
 					>
-					<OverflowMenuItem danger text="Delete" />
+					<OverflowMenuItem
+						danger
+						text="Delete"
+						on:click={() => ((modalOpen = true), (deletingId = row.id))}
+					/>
 				</OverflowMenu>
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
@@ -343,6 +363,18 @@
 		<div class="password-container">
 			<CodeSnippet code={newAdministrator.password} />
 		</div>
+	</Modal>
+
+	<Modal
+		danger
+		bind:open={modalOpen}
+		modalHeading="Delete Administrator"
+		primaryButtonText="Delete"
+		secondaryButtonText="Cancel"
+		on:submit={handleDelete}
+		on:click:button--secondary={handleCancel}
+	>
+		<p>Are you sure you want to delete this Administrator?</p>
 	</Modal>
 {/if}
 
