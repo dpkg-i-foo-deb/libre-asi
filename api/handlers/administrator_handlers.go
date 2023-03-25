@@ -5,6 +5,7 @@ import (
 	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -52,4 +53,21 @@ func UpdateAdministratorHandler(c *fiber.Ctx) error {
 	}
 
 	return util.SendSuccess(c, 200, "Updated")
+}
+
+func DeleteAdministratorHandler(c *fiber.Ctx) error {
+
+	id := c.Params("id")
+
+	intId, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	if err := services.DeleteAdministratorService(intId); err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return util.SendSuccess(c, 200, "Deleted")
 }
