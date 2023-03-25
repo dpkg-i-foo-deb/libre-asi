@@ -32,9 +32,9 @@
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { sendError, sendSuccess } from '$lib/util/notifications';
 	let newAdministrator: Administrator;
-	let editAdministrador: Administrator;
-	let deleteAdministrator: Administrator;
+	let editedAdministrator: Administrator;
 	let rows: ReadonlyArray<DataTableRow>;
+	let filteredRows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
 	let email = '';
@@ -47,7 +47,8 @@
 	let isEditionFormOpen = false;
 	let editingId = 0;
 	let deletingId = 0;
-	let modalOpen = false;
+	let isModalOpen = false;
+	let searchValue = '';
 
 	onMount(async function () {
 		newAdministrator = {
@@ -70,6 +71,8 @@
 			rows = existingAdmins.map(function (value: Administrator) {
 				return { id: value.ID, email: value.email, username: value.username };
 			});
+
+			filteredRows = rows;
 		}
 	}
 
@@ -130,6 +133,19 @@
 		}
 	}
 
+	function handleSearch() {
+		const query = searchValue;
+
+		if (searchValue == '') {
+			filteredRows = rows;
+			return;
+		}
+
+		filteredRows = rows.filter((row) => {
+			return row.email.toLocaleLowerCase().includes(query) || row.username.includes(query);
+		});
+	}
+
 	function toggleEditForm() {
 		isEditionFormOpen = true;
 
@@ -141,7 +157,7 @@
 		}
 	}
 	function handleCancel() {
-		modalOpen = false;
+		isModalOpen = false;
 	}
 
 	async function editAdmin() {
@@ -152,7 +168,7 @@
 			return;
 		}
 
-		editAdministrador = {
+		editedAdministrator = {
 			ID: editingId,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
@@ -164,11 +180,11 @@
 
 		const response = await fetchWithRefresh(API_URL + EDIT_ADMINS, {
 			method: 'PATCH',
-			body: JSON.stringify(editAdministrador)
+			body: JSON.stringify(editedAdministrator)
 		});
 
 		if (response.ok) {
-			editAdministrador = (await response.json()) as Administrator;
+			editedAdministrator = (await response.json()) as Administrator;
 			isEditionFormOpen = false;
 			loadAdmins();
 			sendSuccess('Account modified successfully', 'You can now use the new credentials');
@@ -219,7 +235,7 @@
 			{ key: 'username', value: 'Username' },
 			{ key: 'overflow', empty: true }
 		]}
-		{rows}
+		bind:rows={filteredRows}
 	>
 		<svelte:fragment slot="cell" let:cell let:row>
 			{#if cell.key === 'overflow'}
@@ -234,14 +250,14 @@
 					<OverflowMenuItem
 						danger
 						text="Delete"
-						on:click={() => ((modalOpen = true), (deletingId = row.id))}
+						on:click={() => ((isModalOpen = true), (deletingId = row.id))}
 					/>
 				</OverflowMenu>
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 		<Toolbar>
 			<ToolbarContent>
-				<ToolbarSearch />
+				<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
 				<Button
 					on:click={() => {
 						isRegisterFormOpen = true;
@@ -367,7 +383,7 @@
 
 	<Modal
 		danger
-		bind:open={modalOpen}
+		bind:open={isModalOpen}
 		modalHeading="Delete Administrator"
 		primaryButtonText="Delete"
 		secondaryButtonText="Cancel"
