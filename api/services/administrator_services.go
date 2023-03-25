@@ -100,7 +100,7 @@ func UpdateAdministratorService(updatedAdmin models.User) error {
 		return errors.ErrBadRoute
 	}
 
-	if database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin) != nil {
+	if err := database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
