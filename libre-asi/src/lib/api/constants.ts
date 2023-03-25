@@ -13,7 +13,8 @@ const REFRESH = 'refresh/';
 const GET_ADMINS = 'administrators/';
 const REGISTER_ADMIN = 'administrators/';
 const PASSWORD_RESET = 'password-reset/';
-
+const EDIT_ADMINS = 'administrators/';
+const DELETE_ADMIN = 'administrators/';
 export {
 	API_URL,
 	INTERVIEWER_LOGIN,
@@ -23,5 +24,7 @@ export {
 	GET_ADMINS,
 	REGISTER_ADMIN,
 	SET_UP,
-	PASSWORD_RESET
+	PASSWORD_RESET,
+	EDIT_ADMINS,
+	DELETE_ADMIN
 };
