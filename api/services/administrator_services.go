@@ -1,11 +1,12 @@
 package services
 
 import (
-	"gorm.io/gorm"
 	"libre-asi-api/database"
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
+
+	"gorm.io/gorm"
 )
 
 func GetAdministratorsService() ([]models.User, error) {
@@ -99,7 +100,25 @@ func UpdateAdministratorService(updatedAdmin models.User) error {
 		return errors.ErrBadRoute
 	}
 
-	if database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin) != nil {
+	if err := database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin).Error; err != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+}
+
+func DeleteAdministratorService(id int) error {
+
+	var found models.User
+
+	if err := database.DB.Where("ID = ?", id).First(&found).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Delete(&found).Error; err != nil {
 		return errors.ErrInternalError
 	}
 

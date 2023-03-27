@@ -10,6 +10,7 @@
             "request": "launch",
             "mode": "debug",
             "program": "main.go", 
+            "args": ["serve"],
             "env":{
                 "DB_CONNECTION":"postgresql://libre_asi:libre_asi@192.168.122.1?sslmode=disable",
                 "ADMIN_EMAIL":"admin@example.com",

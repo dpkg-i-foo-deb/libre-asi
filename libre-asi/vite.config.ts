@@ -1,14 +1,13 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
-import path from 'path'
+import path from 'path';
 
 const config: UserConfig = {
 	server: {
 		https: {
-      key:path.resolve('./key.pem'),
-      cert:path.resolve('./cert.pem')
-    },
-		proxy: {}
+			key: path.resolve('./key.pem'),
+			cert: path.resolve('./cert.pem')
+		}
 	},
 	plugins: [sveltekit()],
 	test: {

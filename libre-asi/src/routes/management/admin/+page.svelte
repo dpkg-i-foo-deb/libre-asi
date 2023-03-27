@@ -13,22 +13,28 @@
 		TextInput,
 		InlineNotification,
 		Modal,
-		CodeSnippet
+		CodeSnippet,
+		OverflowMenu,
+		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
-	import { goto, invalidateAll } from '$app/navigation';
 	import type Administrator from '$lib/models/Administrator';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { sendError } from '$lib/util/notifications';
 	import { checkEmail, checkUsername } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
-
-	export let data: PageData;
-
+	import {
+		API_URL,
+		GET_ADMINS,
+		REGISTER_ADMIN,
+		EDIT_ADMINS,
+		DELETE_ADMIN
+	} from '$lib/api/constants';
+	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
+	import { sendError, sendSuccess } from '$lib/util/notifications';
 	let newAdministrator: Administrator;
-
+	let editedAdministrator: Administrator;
 	let rows: ReadonlyArray<DataTableRow>;
+	let filteredRows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
 	let email = '';
@@ -38,8 +44,13 @@
 	let invalidEmailCaption = '';
 	let invalidUsernameCaption = '';
 	let duplicateCredentials = false;
+	let isEditionFormOpen = false;
+	let editingId = 0;
+	let deletingId = 0;
+	let isModalOpen = false;
+	let searchValue = '';
 
-	onMount(function () {
+	onMount(async function () {
 		newAdministrator = {
 			ID: 0,
 			CreatedAt: new Date(),
@@ -49,20 +60,20 @@
 			password: ''
 		};
 
-		if (data.error) {
-			sendError('Your session has expired', 'Log In again');
-			goto('/login');
-		}
-
-		loadAdmins();
+		await loadAdmins();
 	});
 
-	function loadAdmins() {
-		const existingAdmins = data.administrators ?? [];
+	async function loadAdmins() {
+		const response = await fetchWithRefresh(API_URL + GET_ADMINS, { method: 'GET' });
+		if (response.ok) {
+			const existingAdmins = (await response.json()) as Administrator[];
 
-		rows = existingAdmins.map(function (value: Administrator) {
-			return { id: value.ID, email: value.email, username: value.username };
-		});
+			rows = existingAdmins.map(function (value: Administrator) {
+				return { id: value.ID, email: value.email, username: value.username };
+			});
+
+			filteredRows = rows;
+		}
 	}
 
 	function validateUsername(): boolean {
@@ -100,9 +111,8 @@
 			password: ''
 		};
 
-		const response = await fetch('/api/administrators', {
+		const response = await fetchWithRefresh(API_URL + REGISTER_ADMIN, {
 			method: 'POST',
-			credentials: 'include',
 			body: JSON.stringify(newAdministrator)
 		});
 
@@ -110,7 +120,6 @@
 			newAdministrator = (await response.json()) as Administrator;
 			isRegisterFormOpen = false;
 			isSuccessRegisterOpen = true;
-			await invalidateAll();
 			loadAdmins();
 			return;
 		}
@@ -121,6 +130,90 @@
 
 		if (response.status == 409) {
 			duplicateCredentials = true;
+		}
+	}
+
+	function handleSearch() {
+		const query = searchValue;
+
+		if (searchValue == '') {
+			filteredRows = rows;
+			return;
+		}
+
+		filteredRows = rows.filter((row) => {
+			return row.email.toLocaleLowerCase().includes(query) || row.username.includes(query);
+		});
+	}
+
+	function toggleEditForm() {
+		isEditionFormOpen = true;
+
+		let row = rows.find((row) => row.id === editingId);
+
+		if (row) {
+			email = row.email;
+			username = row.username;
+		}
+	}
+	function handleCancel() {
+		isModalOpen = false;
+	}
+
+	async function editAdmin() {
+		duplicateCredentials = false;
+		isSuccessRegisterOpen = false;
+
+		if (!validateEmail() || !validateUsername()) {
+			return;
+		}
+
+		editedAdministrator = {
+			ID: editingId,
+			CreatedAt: new Date(),
+			UpdatedAt: new Date(),
+
+			email: email,
+			username: username,
+			password: ''
+		};
+
+		const response = await fetchWithRefresh(API_URL + EDIT_ADMINS, {
+			method: 'PATCH',
+			body: JSON.stringify(editedAdministrator)
+		});
+
+		if (response.ok) {
+			editedAdministrator = (await response.json()) as Administrator;
+			isEditionFormOpen = false;
+			loadAdmins();
+			sendSuccess('Account modified successfully', 'You can now use the new credentials');
+			return;
+		}
+
+		if (handleResponse(response.status, false)) {
+			return;
+		}
+
+		if (response.status == 409) {
+			duplicateCredentials = true;
+		}
+	}
+
+	async function handleDelete() {
+		const response = await fetchWithRefresh(API_URL + DELETE_ADMIN + deletingId.toString(), {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			loadAdmins();
+			sendSuccess('Account deleted successfully', '');
+			return;
+		}
+
+		if (handleResponse(response.status, false)) {
+			sendError('Error trying to remove administrator', '');
+			return;
 		}
 	}
 </script>
@@ -139,13 +232,32 @@
 		description="Current Registered Administrators"
 		headers={[
 			{ key: 'email', value: 'Email' },
-			{ key: 'username', value: 'Username' }
+			{ key: 'username', value: 'Username' },
+			{ key: 'overflow', empty: true }
 		]}
-		{rows}
+		bind:rows={filteredRows}
 	>
+		<svelte:fragment slot="cell" let:cell let:row>
+			{#if cell.key === 'overflow'}
+				<OverflowMenu flipped>
+					<OverflowMenuItem
+						text="Edit"
+						on:click={function () {
+							editingId = row.id;
+							toggleEditForm();
+						}}>Edit</OverflowMenuItem
+					>
+					<OverflowMenuItem
+						danger
+						text="Delete"
+						on:click={() => ((isModalOpen = true), (deletingId = row.id))}
+					/>
+				</OverflowMenu>
+			{:else}{cell.value}{/if}
+		</svelte:fragment>
 		<Toolbar>
 			<ToolbarContent>
-				<ToolbarSearch />
+				<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
 				<Button
 					on:click={() => {
 						isRegisterFormOpen = true;
@@ -205,6 +317,49 @@
 		/>
 	</ComposedModal>
 
+	<ComposedModal bind:open={isEditionFormOpen} selectorPrimaryFocus="#email" on:submit={editAdmin}>
+		<ModalHeader label="Transaction" title="Edit Administrator Account" />
+		<ModalBody hasForm>
+			<form>
+				<h7 class="paragraph"> Administrators can edit other administrators' information. </h7>
+				<br />
+
+				{#if duplicateCredentials}
+					<InlineNotification title="Error:" subtitle="Email or username already registered" />
+				{/if}
+				<div class="input-field">
+					<TextInput
+						id="email"
+						labelText="Email"
+						placeholder="Enter email..."
+						on:blur={validateEmail}
+						bind:invalid={invalidEmail}
+						bind:value={email}
+						bind:invalidText={invalidEmailCaption}
+					/>
+				</div>
+				<div class="input-field">
+					<TextInput
+						id="username"
+						labelText="User name"
+						placeholder="Enter user name..."
+						on:blur={validateUsername}
+						bind:invalid={invalidUsername}
+						bind:value={username}
+						bind:invalidText={invalidUsernameCaption}
+					/>
+				</div>
+			</form>
+		</ModalBody>
+		<ModalFooter
+			primaryButtonText="Edit"
+			secondaryButtonText="Cancel"
+			on:click:button--secondary={() => {
+				isRegisterFormOpen = false;
+			}}
+		/>
+	</ComposedModal>
+
 	<Modal
 		passiveModal
 		on:close={() => {
@@ -224,6 +379,18 @@
 		<div class="password-container">
 			<CodeSnippet code={newAdministrator.password} />
 		</div>
+	</Modal>
+
+	<Modal
+		danger
+		bind:open={isModalOpen}
+		modalHeading="Delete Administrator"
+		primaryButtonText="Delete"
+		secondaryButtonText="Cancel"
+		on:submit={handleDelete}
+		on:click:button--secondary={handleCancel}
+	>
+		<p>Are you sure you want to delete this Administrator?</p>
 	</Modal>
 {/if}
 
