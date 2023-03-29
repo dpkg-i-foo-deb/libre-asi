@@ -4,8 +4,10 @@ updates:
     directory: "/libre-asi" # Location of package manifests
     schedule:
       interval: "weekly"
+    target-branch: "testing"
 
   - package-ecosystem: "gomod" # See documentation fo  possible values
     directory: "/api" # Location of package manifests
     schedule:
        interval: "weekly"
+    target-branch: "testing"
