@@ -16,7 +16,8 @@
                 "ADMIN_EMAIL":"admin@example.com",
                 "ADMIN_PASSWORD":"admin",
                 "API_PORT":":3000",
-                "ADMIN_USERNAME":"admin"
+                "ADMIN_USERNAME":"admin",
+                "CORS_ORIGINS":"https://localhost:5173"
             }
         }
     ]
