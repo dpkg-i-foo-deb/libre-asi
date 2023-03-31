@@ -112,10 +112,10 @@
 			password: password
 		};
 
-		const response = await fetchNoRefresh(API_URL+SET_UP,{
-			method:'POST',
-			body:JSON.stringify(newAdmin)
-		})
+		const response = await fetchNoRefresh(API_URL + SET_UP, {
+			method: 'POST',
+			body: JSON.stringify(newAdmin)
+		});
 
 		if (response.ok) {
 			//Set the setup store to true and go to the welcome page

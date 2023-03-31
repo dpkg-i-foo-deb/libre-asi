@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { API_URL, PASSWORD_RESET } from '$lib/api/constants';
 	import type PasswordReset from '$lib/models/PasswordReset';
+	import { fetchNoRefresh } from '$lib/util/fetch';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendSuccess } from '$lib/util/notifications';
@@ -87,9 +89,8 @@
 			newPassword: newPassword
 		};
 
-		const response = await fetch('/api/password-reset', {
+		const response = await fetchNoRefresh(API_URL+PASSWORD_RESET, {
 			method: 'POST',
-			credentials: 'include',
 			body: JSON.stringify(credentials)
 		});
 
