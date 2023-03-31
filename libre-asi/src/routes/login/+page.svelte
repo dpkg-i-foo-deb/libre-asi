@@ -125,10 +125,10 @@
 
 		const user: User = { email: email, password: password };
 
-		const response = await fetchNoRefresh(url,{
-			method:'POST',
+		const response = await fetchNoRefresh(url, {
+			method: 'POST',
 			body: JSON.stringify(user)
-		})
+		});
 
 		if (response.ok) {
 			$session.active = true;
