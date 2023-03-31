@@ -23,6 +23,7 @@
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { checkEmail, checkPassword } from '$lib/util/formUtils';
 	import { ADMIN_LOGIN, API_URL, INTERVIEWER_LOGIN } from '$lib/api/constants';
+	import { fetchNoRefresh } from '$lib/util/fetch';
 
 	let loading = false;
 
@@ -124,16 +125,10 @@
 
 		const user: User = { email: email, password: password };
 
-		const response = await fetch(url, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify(user),
-			mode: 'cors'
-		});
+		const response = await fetchNoRefresh(url,{
+			method:'POST',
+			body: JSON.stringify(user)
+		})
 
 		if (response.ok) {
 			$session.active = true;
