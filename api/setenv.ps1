@@ -1,7 +1,7 @@
 Write-Host "Setting environment variables..."
 
 $env:AUTH_KEY="owo";
-$env:CORS_ORIGINS="*";
+$env:CORS_ORIGINS="https://localhost:5173";
 $env:API_PORT=":3000";
 $env:DB_CONNECTION="";
 $env:PROD="false";
