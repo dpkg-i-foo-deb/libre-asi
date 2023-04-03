@@ -85,9 +85,14 @@ func SetPassword(c *fiber.Ctx) error {
 	case string(models.ADMINISTRATOR):
 		err = services.SetAdministratorPassword(email, credentials)
 	case string(models.INTERVIEWER):
+		err = services.SetInterviewerPassword(email, credentials)
 	default:
 		return util.HandleFiberError(c, errors.ErrBadRoute)
 
+	}
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
 	}
 
 	return util.SendSuccess(c, 200, "New password has been set")
