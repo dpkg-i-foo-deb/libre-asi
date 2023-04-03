@@ -42,7 +42,9 @@ func LoginHandler(c *fiber.Ctx) error {
 
 		tkCookie := auth.GeneratePasswordResetCookie(tk.Token)
 
-		return c.Status(428).JSON(tkCookie)
+		c.Cookie(tkCookie)
+
+		return c.SendStatus(428)
 
 	}
 
