@@ -10,7 +10,6 @@ func SetRoutes(app *fiber.App) {
 	setupRoutes()
 	adminRoutes()
 	loginRoute()
-	registerRoute()
 	refreshRoute()
 	signOutRoute()
 	passwordResetRoute()
