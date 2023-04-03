@@ -22,7 +22,7 @@ func LoginInterviewer(i models.Interviewer) (*models.Interviewer, *models.JWTPai
 		return nil, nil, nil, errors.ErrAccessDenied
 	}
 
-	if interviewer.ResetPassword {
+	if interviewer.NeedsPasswordReset {
 		token, err := auth.GeneratePasswordResetToken(i.Email)
 
 		if err != nil {

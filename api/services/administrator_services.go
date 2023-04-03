@@ -23,7 +23,7 @@ func LoginAdmin(a models.Administrator) (*models.Administrator, *models.JWTPair,
 		return nil, nil, nil, errors.ErrAccessDenied
 	}
 
-	if admin.ResetPassword {
+	if admin.NeedsPasswordReset {
 		token, err := auth.GeneratePasswordResetToken(a.Email)
 
 		if err != nil {
@@ -78,6 +78,8 @@ func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator
 	if err != nil {
 		return nil, errors.ErrInternalError
 	}
+
+	newAdmin.NeedsPasswordReset = true
 
 	if err := database.DB.Create(&newAdmin).Error; err != nil {
 		return nil, errors.ErrInternalError
