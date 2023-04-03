@@ -7,7 +7,7 @@ import (
 )
 
 func Setup(admin models.Administrator) error {
-	_, err := RegisterAdministrator(admin)
+	_, err := RegisterAdministrator(admin, true)
 
 	return err
 }

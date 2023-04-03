@@ -31,7 +31,7 @@ func RegisterAdministrator(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, err)
 	}
 
-	registeredAdmin, err := services.RegisterAdministrator(newAdmin)
+	registeredAdmin, err := services.RegisterAdministrator(newAdmin, false)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)

@@ -53,9 +53,11 @@ func GetAdministrators() ([]models.Administrator, error) {
 	return admins, nil
 }
 
-func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator, error) {
+func RegisterAdministrator(newAdmin models.Administrator, isFirst bool) (*models.Administrator, error) {
 
+	var p string
 	var queriedAdmin models.Administrator
+	var err error
 
 	if database.DB.Where("email = ?", newAdmin.Email).First(&queriedAdmin).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
@@ -65,13 +67,18 @@ func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator
 		return nil, errors.ErrConflict
 	}
 
-	p, err := util.MakeRandomPassword()
+	if !isFirst {
 
-	if err != nil {
-		return nil, errors.ErrInternalError
+		p, err := util.MakeRandomPassword()
+
+		if err != nil {
+			return nil, errors.ErrInternalError
+		}
+
+		newAdmin.Password = p
+
+		newAdmin.NeedsPasswordReset = true
 	}
-
-	newAdmin.Password = p
 
 	newAdmin.Password, err = util.HashPassword(newAdmin.Password)
 
@@ -79,9 +86,7 @@ func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator
 		return nil, errors.ErrInternalError
 	}
 
-	newAdmin.NeedsPasswordReset = true
-
-	if err := database.DB.Create(&newAdmin).Error; err != nil {
+	if err = database.DB.Create(&newAdmin).Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
 
