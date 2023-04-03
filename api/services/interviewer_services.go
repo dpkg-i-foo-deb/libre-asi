@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func LoginInterviewerService(i models.Interviewer) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
+func LoginInterviewer(i models.Interviewer) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
 	var interviewer models.Interviewer
 
 	if database.DB.Where("email = ?", i.Email).First(&interviewer).Error != nil {

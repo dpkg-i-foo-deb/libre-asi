@@ -11,7 +11,7 @@ import (
 
 func CheckSetupHandler(c *fiber.Ctx) error {
 
-	err := services.CheckSetupService()
+	err := services.CheckSetup()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -28,7 +28,7 @@ func SetupHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	err := services.SetupService(user)
+	err := services.Setup(user)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)

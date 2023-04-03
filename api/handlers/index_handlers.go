@@ -9,7 +9,7 @@ import (
 
 func IndexHandler(c *fiber.Ctx) error {
 
-	err := services.IndexService()
+	err := services.Index()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)

@@ -12,7 +12,7 @@ import (
 
 func GetAdministratorsHandler(c *fiber.Ctx) error {
 
-	administrators, err := services.GetAdministratorsService()
+	administrators, err := services.GetAdministrators()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -31,7 +31,7 @@ func RegisterAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, err)
 	}
 
-	registeredAdmin, err := services.RegisterAdministratorService(newAdmin)
+	registeredAdmin, err := services.RegisterAdministrator(newAdmin)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -48,7 +48,7 @@ func UpdateAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	if err := services.UpdateAdministratorService(updatedAdmin); err != nil {
+	if err := services.UpdateAdministrator(updatedAdmin); err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
@@ -65,7 +65,7 @@ func DeleteAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	if err := services.DeleteAdministratorService(intId); err != nil {
+	if err := services.DeleteAdministrator(intId); err != nil {
 		return util.HandleFiberError(c, err)
 	}
 

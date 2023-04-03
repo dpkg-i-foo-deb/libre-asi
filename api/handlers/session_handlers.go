@@ -69,10 +69,6 @@ func SetPasswordHandler(c *fiber.Ctx) error {
 
 	token := c.Cookies("password-reset-token")
 
-	if token == "" {
-		return util.HandleFiberError(c, errors.ErrAccessDenied)
-	}
-
 	email, err := auth.EmailFromToken(token)
 
 	if err != nil {
@@ -85,10 +81,12 @@ func SetPasswordHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	err = services.SetPasswordService(credentials, email)
+	switch c.Params("role") {
+	case string(models.ADMINISTRATOR):
+	case string(models.INTERVIEWER):
+	default:
+		return util.HandleFiberError(c, errors.ErrBadRoute)
 
-	if err != nil {
-		return util.HandleFiberError(c, err)
 	}
 
 	return util.SendSuccess(c, 200, "New password has been set")
@@ -101,7 +99,7 @@ func loginAdmin(c *fiber.Ctx) (*models.Administrator, *models.JWTPair, *models.P
 		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	return services.LoginAdminService(a)
+	return services.LoginAdmin(a)
 }
 
 func loginInterviewer(c *fiber.Ctx) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
@@ -111,5 +109,5 @@ func loginInterviewer(c *fiber.Ctx) (*models.Interviewer, *models.JWTPair, *mode
 		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	return services.LoginInterviewerService(i)
+	return services.LoginInterviewer(i)
 }
