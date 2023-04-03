@@ -22,7 +22,7 @@ func CheckSetupHandler(c *fiber.Ctx) error {
 
 func SetupHandler(c *fiber.Ctx) error {
 
-	var user models.User
+	var user models.Administrator
 
 	if c.BodyParser(&user) != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)

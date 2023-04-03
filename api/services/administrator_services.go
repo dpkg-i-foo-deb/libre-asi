@@ -1,93 +1,88 @@
 package services
 
 import (
+	"libre-asi-api/auth"
 	"libre-asi-api/database"
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
-func GetAdministratorsService() ([]models.User, error) {
+func LoginAdminService(a models.Administrator) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
+
+	var admin models.Administrator
+
+	if database.DB.Where("email = ?", a.Email).First(&admin).Error != nil {
+		return nil, nil, nil, errors.ErrNoData
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(a.Password)); err != nil {
+		return nil, nil, nil, errors.ErrAccessDenied
+	}
+
+	if admin.ResetPassword {
+		token, err := auth.GeneratePasswordResetToken(a.Email)
+
+		if err != nil {
+			return nil, nil, nil, errors.ErrInternalError
+		}
+
+		return &admin, nil, &token, err
+	}
+
+	token, err := auth.GenerateJWTPair(a.Email, string(models.ADMINISTRATOR))
+
+	if err != nil {
+		return nil, nil, nil, errors.ErrInternalError
+	}
+
+	return &admin, &token, nil, nil
+}
+
+func GetAdministratorsService() ([]models.Administrator, error) {
 
 	var admins []models.Administrator
-	var ids []uint
-	var users []models.User
 
 	if database.DB.Find(&admins).Error != nil {
 		return nil, errors.ErrInternalError
 	}
 
-	for i := range admins {
-		ids = append(ids, admins[i].UserID)
+	return admins, nil
+}
+
+func RegisterAdministratorService(newAdmin models.Administrator) (*models.Administrator, error) {
+
+	var queriedAdmin models.Administrator
+
+	if database.DB.Where("email = ?", newAdmin.Email).First(&queriedAdmin).Error != gorm.ErrRecordNotFound {
+		return nil, errors.ErrConflict
 	}
 
-	if database.DB.Omit("password", "administrators", "people").Find(&users, ids).Error != nil {
+	if database.DB.Where("username = ?", newAdmin.Username).First(&queriedAdmin).Error != gorm.ErrRecordNotFound {
+		return nil, errors.ErrConflict
+	}
+
+	p, err := util.HashPassword(newAdmin.Password)
+
+	if err != nil {
 		return nil, errors.ErrInternalError
 	}
 
-	return users, nil
+	newAdmin.Password = p
+
+	if err := database.DB.Create(&newAdmin).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return &newAdmin, nil
 }
 
-func RegisterAdministratorService(newUser models.User) (*models.User, error) {
+func UpdateAdministratorService(updatedAdmin models.Administrator) error {
 
-	var queriedUser models.User
-
-	if database.DB.Where("email = ?", newUser.Email).First(&queriedUser).Error != gorm.ErrRecordNotFound {
-		return nil, errors.ErrConflict
-	}
-
-	if database.DB.Where("username = ?", newUser.Username).First(&queriedUser).Error != gorm.ErrRecordNotFound {
-		return nil, errors.ErrConflict
-	}
-
-	err := database.DB.Transaction(func(tx *gorm.DB) error {
-
-		password, err := util.MakeRandomPassword()
-
-		if err != nil {
-			return errors.ErrInternalError
-		}
-
-		hashedPassword, err := util.HashPassword(password)
-
-		if err != nil {
-			return errors.ErrInternalError
-		}
-
-		newUser.Password = hashedPassword
-		newUser.ResetPassword = true
-
-		if database.DB.Omit("Administrators", "People").Create(&newUser).Error != nil {
-			return errors.ErrInternalError
-		}
-
-		id := newUser.ID
-
-		var newAdmin = models.Administrator{
-			UserID: id,
-		}
-
-		if database.DB.Create(&newAdmin).Error != nil {
-			return errors.ErrInternalError
-		}
-
-		newUser.Password = password
-
-		return nil
-	})
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &newUser, nil
-}
-
-func UpdateAdministratorService(updatedAdmin models.User) error {
-
-	var found models.User
+	var found models.Administrator
 
 	if err := database.DB.Where("ID = ?", updatedAdmin.ID).First(&found).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
@@ -96,11 +91,7 @@ func UpdateAdministratorService(updatedAdmin models.User) error {
 		return errors.ErrInternalError
 	}
 
-	if err := database.DB.Where("user_id = ?", updatedAdmin.ID).First(&models.Administrator{}).Error; err != nil {
-		return errors.ErrBadRoute
-	}
-
-	if err := database.DB.Model(&updatedAdmin).Select("email", "username").Updates(&updatedAdmin).Error; err != nil {
+	if err := database.DB.Model(&updatedAdmin).Updates(&updatedAdmin).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
@@ -109,7 +100,7 @@ func UpdateAdministratorService(updatedAdmin models.User) error {
 
 func DeleteAdministratorService(id int) error {
 
-	var found models.User
+	var found models.Administrator
 
 	if err := database.DB.Where("ID = ?", id).First(&found).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
