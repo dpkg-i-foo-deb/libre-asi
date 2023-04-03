@@ -6,8 +6,10 @@ import (
 	"libre-asi-api/models"
 )
 
-func SetupService(user models.User) error {
-	return createAdmin(user, false)
+func SetupService(admin models.Administrator) error {
+	_, err := RegisterAdministratorService(admin)
+
+	return err
 }
 
 func CheckSetupService() error {

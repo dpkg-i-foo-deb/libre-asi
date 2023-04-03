@@ -12,43 +12,32 @@ import (
 
 func LoginHandler(c *fiber.Ctx) error {
 
-	var u models.User
-	var role models.Role
-
-	if c.BodyParser(&u) != nil {
-		return util.HandleFiberError(c, errors.ErrCheckRequest)
-	}
+	var tk *models.JWTPair
+	var pk *models.PasswordResetTk
+	var err error
 
 	switch c.Params("role") {
 	case string(models.ADMINISTRATOR):
-		role = models.ADMINISTRATOR
+		err, _, tk, pk = loginAdmin(c)
 	case string(models.INTERVIEWER):
-		role = models.INTERVIEWER
+		err, _, tk, pk = loginInterviewer(c)
 	case "patient":
 		return util.HandleFiberError(c, errors.ErrNotImplemmented)
 	default:
 		return util.HandleFiberError(c, errors.ErrBadRoute)
 	}
 
-	tk, err := services.LoginService(u, role)
-
-	if err == errors.ErrrNeedsPasswordReset {
-
-		tk, errTk := auth.GeneratePasswordResetToken(u.Email)
-
-		if errTk != nil {
-			return util.HandleFiberError(c, errors.ErrInternalError)
-		}
-
-		tkCookie := auth.GeneratePasswordResetCookie(tk.Token)
-
-		c.Cookie(tkCookie)
-
-		return c.SendStatus(428)
-
-	}
-
 	if err != nil {
+
+		if err == errors.ErrrNeedsPasswordReset {
+
+			tkCookie := auth.GeneratePasswordResetCookie(pk.Token)
+
+			c.Cookie(tkCookie)
+
+			return c.SendStatus(428)
+
+		}
 
 		return util.HandleFiberError(c, err)
 	}
@@ -61,4 +50,24 @@ func LoginHandler(c *fiber.Ctx) error {
 
 	return util.SendSuccess(c, 200, "Welcome back")
 
+}
+
+func loginAdmin(c *fiber.Ctx) (error, *models.Administrator, *models.JWTPair, *models.PasswordResetTk) {
+	var a models.Administrator
+
+	if c.BodyParser(&a) != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest), nil, nil, nil
+	}
+
+	return services.LoginAdminService(a)
+}
+
+func loginInterviewer(c *fiber.Ctx) (error, *models.Interviewer, *models.JWTPair, *models.PasswordResetTk) {
+	var i models.Interviewer
+
+	if c.BodyParser(&i) != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest), nil, nil, nil
+	}
+
+	return services.LoginInterviewerService(i)
 }

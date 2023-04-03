@@ -19,7 +19,6 @@ func migrateModels() {
 	util.HandleErrorStop(err)
 
 	err := DB.AutoMigrate(
-		&models.User{},
 		&models.Country{},
 		&models.CountryTranslations{},
 		&models.State{},
@@ -27,7 +26,6 @@ func migrateModels() {
 		&models.AddressType{},
 		&models.Address{},
 		&models.Administrator{},
-		&models.Person{},
 		&models.Phone{},
 		&models.ReligiousPreference{},
 		&models.ReligiousPreferenceTranslations{},

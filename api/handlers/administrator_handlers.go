@@ -23,26 +23,26 @@ func GetAdministratorsHandler(c *fiber.Ctx) error {
 
 func RegisterAdministratorHandler(c *fiber.Ctx) error {
 
-	var newUser models.User
+	var newAdmin models.Administrator
 
-	err := c.BodyParser(&newUser)
-
-	if err != nil {
-		return util.HandleFiberError(c, err)
-	}
-
-	registeredUser, err := services.RegisterAdministratorService(newUser)
+	err := c.BodyParser(&newAdmin)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
-	return c.Status(201).JSON(registeredUser)
+	registeredAdmin, err := services.RegisterAdministratorService(newAdmin)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(201).JSON(registeredAdmin)
 }
 
 func UpdateAdministratorHandler(c *fiber.Ctx) error {
 
-	var updatedAdmin models.User
+	var updatedAdmin models.Administrator
 
 	if c.BodyParser(&updatedAdmin) != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
