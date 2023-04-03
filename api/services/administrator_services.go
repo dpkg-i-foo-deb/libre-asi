@@ -30,7 +30,7 @@ func LoginAdmin(a models.Administrator) (*models.Administrator, *models.JWTPair,
 			return nil, nil, nil, errors.ErrInternalError
 		}
 
-		return &admin, nil, &token, err
+		return &admin, nil, &token, errors.ErrrNeedsPasswordReset
 	}
 
 	token, err := auth.GenerateJWTPair(a.Email, string(models.ADMINISTRATOR))
@@ -153,8 +153,9 @@ func SetAdministratorPassword(email string, credentials models.PasswordChange) e
 	}
 
 	found.Password = p
+	found.NeedsPasswordReset = false
 
-	if err := database.DB.Model(&found).Updates(&found).Error; err != nil {
+	if err := database.DB.Save(&found).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
