@@ -56,7 +56,6 @@ func LoginHandler(c *fiber.Ctx) error {
 	accessToken := auth.GenerateAccessCookie(tk.Token)
 	refreshToken := auth.GenerateRefreshCookie(tk.RefreshToken)
 
-	//TODO use real cookies when Sveltekit allows easy cookie parsing
 	c.Cookie(accessToken)
 	c.Cookie(refreshToken)
 
