@@ -9,32 +9,32 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func LoginInterviewerService(i models.Interviewer) (error, *models.Interviewer, *models.JWTPair, *models.PasswordResetTk) {
+func LoginInterviewerService(i models.Interviewer) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
 	var interviewer models.Interviewer
 
 	if database.DB.Where("email = ?", i.Email).First(&interviewer).Error != nil {
-		return errors.ErrNoData, nil, nil, nil
+		return nil, nil, nil, errors.ErrNoData
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(interviewer.Password), []byte(i.Password)); err != nil {
-		return errors.ErrAccessDenied, nil, nil, nil
+		return nil, nil, nil, errors.ErrAccessDenied
 	}
 
 	if interviewer.ResetPassword {
 		token, err := auth.GeneratePasswordResetToken(i.Email)
 
 		if err != nil {
-			return errors.ErrInternalError, nil, nil, nil
+			return nil, nil, nil, errors.ErrInternalError
 		}
 
-		return nil, &interviewer, nil, &token
+		return &interviewer, nil, &token, nil
 	}
 
 	token, err := auth.GenerateJWTPair(i.Email, string(models.INTERVIEWER))
 
 	if err != nil {
-		return errors.ErrInternalError, nil, nil, nil
+		return nil, nil, nil, errors.ErrInternalError
 	}
 
-	return nil, &interviewer, &token, nil
+	return &interviewer, &token, nil, nil
 }

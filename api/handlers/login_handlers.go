@@ -18,9 +18,9 @@ func LoginHandler(c *fiber.Ctx) error {
 
 	switch c.Params("role") {
 	case string(models.ADMINISTRATOR):
-		err, _, tk, pk = loginAdmin(c)
+		_, tk, pk, err = loginAdmin(c)
 	case string(models.INTERVIEWER):
-		err, _, tk, pk = loginInterviewer(c)
+		_, tk, pk, err = loginInterviewer(c)
 	case "patient":
 		return util.HandleFiberError(c, errors.ErrNotImplemmented)
 	default:
@@ -52,21 +52,21 @@ func LoginHandler(c *fiber.Ctx) error {
 
 }
 
-func loginAdmin(c *fiber.Ctx) (error, *models.Administrator, *models.JWTPair, *models.PasswordResetTk) {
+func loginAdmin(c *fiber.Ctx) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
 	var a models.Administrator
 
 	if c.BodyParser(&a) != nil {
-		return util.HandleFiberError(c, errors.ErrCheckRequest), nil, nil, nil
+		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
 	return services.LoginAdminService(a)
 }
 
-func loginInterviewer(c *fiber.Ctx) (error, *models.Interviewer, *models.JWTPair, *models.PasswordResetTk) {
+func loginInterviewer(c *fiber.Ctx) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
 	var i models.Interviewer
 
 	if c.BodyParser(&i) != nil {
-		return util.HandleFiberError(c, errors.ErrCheckRequest), nil, nil, nil
+		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
 	return services.LoginInterviewerService(i)

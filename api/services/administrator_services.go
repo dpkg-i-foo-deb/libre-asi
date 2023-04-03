@@ -11,35 +11,35 @@ import (
 	"gorm.io/gorm"
 )
 
-func LoginAdminService(a models.Administrator) (error, *models.Administrator, *models.JWTPair, *models.PasswordResetTk) {
+func LoginAdminService(a models.Administrator) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
 
 	var admin models.Administrator
 
 	if database.DB.Where("email = ?", a.Email).First(&admin).Error != nil {
-		return errors.ErrNoData, nil, nil, nil
+		return nil, nil, nil, errors.ErrNoData
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(a.Password)); err != nil {
-		return errors.ErrAccessDenied, nil, nil, nil
+		return nil, nil, nil, errors.ErrAccessDenied
 	}
 
 	if admin.ResetPassword {
 		token, err := auth.GeneratePasswordResetToken(a.Email)
 
 		if err != nil {
-			return errors.ErrInternalError, nil, nil, nil
+			return nil, nil, nil, errors.ErrInternalError
 		}
 
-		return nil, &admin, nil, &token
+		return &admin, nil, &token, err
 	}
 
 	token, err := auth.GenerateJWTPair(a.Email, string(models.ADMINISTRATOR))
 
 	if err != nil {
-		return errors.ErrInternalError, nil, nil, nil
+		return nil, nil, nil, errors.ErrInternalError
 	}
 
-	return nil, &admin, &token, nil
+	return &admin, &token, nil, nil
 }
 
 func GetAdministratorsService() ([]models.Administrator, error) {
