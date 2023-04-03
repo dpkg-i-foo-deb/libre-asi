@@ -6,13 +6,13 @@ import (
 	"libre-asi-api/models"
 )
 
-func SetupService(admin models.Administrator) error {
-	_, err := RegisterAdministratorService(admin)
+func Setup(admin models.Administrator) error {
+	_, err := RegisterAdministrator(admin, true)
 
 	return err
 }
 
-func CheckSetupService() error {
+func CheckSetup() error {
 
 	if cfg.CheckExistingAdmin() != nil {
 		return errors.ErrSetupRequired

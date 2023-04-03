@@ -7,9 +7,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func IndexHandler(c *fiber.Ctx) error {
+func Index(c *fiber.Ctx) error {
 
-	err := services.IndexService()
+	err := services.Index()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
