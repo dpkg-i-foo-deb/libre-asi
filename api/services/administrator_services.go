@@ -69,7 +69,7 @@ func RegisterAdministrator(newAdmin models.Administrator, isFirst bool) (*models
 
 	if !isFirst {
 
-		p, err := util.MakeRandomPassword()
+		p, err = util.MakeRandomPassword()
 
 		if err != nil {
 			return nil, errors.ErrInternalError
