@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func LoginHandler(c *fiber.Ctx) error {
+func Login(c *fiber.Ctx) error {
 
 	var tk *models.JWTPair
 	var pk *models.PasswordResetTk
@@ -52,7 +52,7 @@ func LoginHandler(c *fiber.Ctx) error {
 
 }
 
-func SignOutHandler(c *fiber.Ctx) error {
+func SignOut(c *fiber.Ctx) error {
 
 	refresh := auth.GenerateFakeRefreshCookie()
 	auth := auth.GenerateFakeAccessCookie()
@@ -63,7 +63,7 @@ func SignOutHandler(c *fiber.Ctx) error {
 	return util.SendSuccess(c, 200, "Signed Out")
 }
 
-func SetPasswordHandler(c *fiber.Ctx) error {
+func SetPassword(c *fiber.Ctx) error {
 
 	var credentials models.PasswordChange
 

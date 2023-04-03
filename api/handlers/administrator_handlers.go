@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetAdministratorsHandler(c *fiber.Ctx) error {
+func GetAdministrators(c *fiber.Ctx) error {
 
 	administrators, err := services.GetAdministrators()
 
@@ -21,7 +21,7 @@ func GetAdministratorsHandler(c *fiber.Ctx) error {
 	return c.Status(200).JSON(administrators)
 }
 
-func RegisterAdministratorHandler(c *fiber.Ctx) error {
+func RegisterAdministrator(c *fiber.Ctx) error {
 
 	var newAdmin models.Administrator
 
@@ -40,7 +40,7 @@ func RegisterAdministratorHandler(c *fiber.Ctx) error {
 	return c.Status(201).JSON(registeredAdmin)
 }
 
-func UpdateAdministratorHandler(c *fiber.Ctx) error {
+func UpdateAdministrator(c *fiber.Ctx) error {
 
 	var updatedAdmin models.Administrator
 
@@ -55,7 +55,7 @@ func UpdateAdministratorHandler(c *fiber.Ctx) error {
 	return util.SendSuccess(c, 200, "Updated")
 }
 
-func DeleteAdministratorHandler(c *fiber.Ctx) error {
+func DeleteAdministrator(c *fiber.Ctx) error {
 
 	id := c.Params("id")
 

@@ -6,7 +6,7 @@ import (
 )
 
 func sessionRoutes() {
-	server.Post("/login/:role", handlers.LoginHandler)
-	server.Post("/password-reset/:role", auth.ValidatePasswordResetToken, handlers.SetPasswordHandler)
-	server.Post("/sign-out", auth.ValidateAccessToken, handlers.SignOutHandler)
+	server.Post("/login/:role", handlers.Login)
+	server.Post("/password-reset/:role", auth.ValidatePasswordResetToken, handlers.SetPassword)
+	server.Post("/sign-out", auth.ValidateAccessToken, handlers.SignOut)
 }
