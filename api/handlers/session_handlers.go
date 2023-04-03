@@ -83,6 +83,7 @@ func SetPassword(c *fiber.Ctx) error {
 
 	switch c.Params("role") {
 	case string(models.ADMINISTRATOR):
+		err = services.SetAdministratorPassword(email, credentials)
 	case string(models.INTERVIEWER):
 	default:
 		return util.HandleFiberError(c, errors.ErrBadRoute)
