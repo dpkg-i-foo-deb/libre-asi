@@ -52,6 +52,48 @@ func LoginHandler(c *fiber.Ctx) error {
 
 }
 
+func SignOutHandler(c *fiber.Ctx) error {
+
+	refresh := auth.GenerateFakeRefreshCookie()
+	auth := auth.GenerateFakeAccessCookie()
+
+	c.Cookie(auth)
+	c.Cookie(refresh)
+
+	return util.SendSuccess(c, 200, "Signed Out")
+}
+
+func SetPasswordHandler(c *fiber.Ctx) error {
+
+	var credentials models.PasswordChange
+
+	token := c.Cookies("password-reset-token")
+
+	if token == "" {
+		return util.HandleFiberError(c, errors.ErrAccessDenied)
+	}
+
+	email, err := auth.EmailFromToken(token)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrAccessDenied)
+	}
+
+	err = c.BodyParser(&credentials)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	err = services.SetPasswordService(credentials, email)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return util.SendSuccess(c, 200, "New password has been set")
+}
+
 func loginAdmin(c *fiber.Ctx) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
 	var a models.Administrator
 
