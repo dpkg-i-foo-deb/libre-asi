@@ -115,3 +115,33 @@ func DeleteAdministratorService(id int) error {
 
 	return nil
 }
+
+func SetAdministratorPassword(email string, credentials models.PasswordChange) error {
+
+	var found models.Administrator
+
+	if err := database.DB.Where("email = ?", email).First(&found).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+		return errors.ErrInternalError
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(found.Password), []byte(credentials.CurrentPassword)); err != nil {
+		return errors.ErrAccessDenied
+	}
+
+	p, err := util.HashPassword(credentials.NewPassword)
+
+	if err != nil {
+		return errors.ErrInternalError
+	}
+
+	found.Password = p
+
+	if err := database.DB.Model(&found).Updates(&found).Error; err != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+}
