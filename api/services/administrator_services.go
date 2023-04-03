@@ -65,7 +65,7 @@ func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator
 		return nil, errors.ErrConflict
 	}
 
-	p, err := util.HashPassword(newAdmin.Password)
+	p, err := util.MakeRandomPassword()
 
 	if err != nil {
 		return nil, errors.ErrInternalError
@@ -73,9 +73,17 @@ func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator
 
 	newAdmin.Password = p
 
+	newAdmin.Password, err = util.HashPassword(newAdmin.Password)
+
+	if err != nil {
+		return nil, errors.ErrInternalError
+	}
+
 	if err := database.DB.Create(&newAdmin).Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
+
+	newAdmin.Password = p
 
 	return &newAdmin, nil
 }
