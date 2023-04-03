@@ -9,9 +9,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func CheckSetupHandler(c *fiber.Ctx) error {
+func CheckSetup(c *fiber.Ctx) error {
 
-	err := services.CheckSetupService()
+	err := services.CheckSetup()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -20,7 +20,7 @@ func CheckSetupHandler(c *fiber.Ctx) error {
 	return util.SendSuccess(c, 200, "Setup not needed")
 }
 
-func SetupHandler(c *fiber.Ctx) error {
+func Setup(c *fiber.Ctx) error {
 
 	var user models.Administrator
 
@@ -28,7 +28,7 @@ func SetupHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	err := services.SetupService(user)
+	err := services.Setup(user)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)

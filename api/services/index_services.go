@@ -1,5 +1,5 @@
 package services
 
-func IndexService() error {
+func Index() error {
 	return nil
 }

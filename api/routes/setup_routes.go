@@ -5,6 +5,6 @@ import (
 )
 
 func setupRoutes() {
-	server.Get("/set-up", handlers.CheckSetupHandler)
-	server.Post("/set-up", handlers.SetupHandler)
+	server.Get("/set-up", handlers.CheckSetup)
+	server.Post("/set-up", handlers.Setup)
 }

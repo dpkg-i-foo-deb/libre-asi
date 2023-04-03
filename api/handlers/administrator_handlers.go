@@ -10,9 +10,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetAdministratorsHandler(c *fiber.Ctx) error {
+func GetAdministrators(c *fiber.Ctx) error {
 
-	administrators, err := services.GetAdministratorsService()
+	administrators, err := services.GetAdministrators()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -21,7 +21,7 @@ func GetAdministratorsHandler(c *fiber.Ctx) error {
 	return c.Status(200).JSON(administrators)
 }
 
-func RegisterAdministratorHandler(c *fiber.Ctx) error {
+func RegisterAdministrator(c *fiber.Ctx) error {
 
 	var newAdmin models.Administrator
 
@@ -31,7 +31,7 @@ func RegisterAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, err)
 	}
 
-	registeredAdmin, err := services.RegisterAdministratorService(newAdmin)
+	registeredAdmin, err := services.RegisterAdministrator(newAdmin, false)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -40,7 +40,7 @@ func RegisterAdministratorHandler(c *fiber.Ctx) error {
 	return c.Status(201).JSON(registeredAdmin)
 }
 
-func UpdateAdministratorHandler(c *fiber.Ctx) error {
+func UpdateAdministrator(c *fiber.Ctx) error {
 
 	var updatedAdmin models.Administrator
 
@@ -48,14 +48,14 @@ func UpdateAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	if err := services.UpdateAdministratorService(updatedAdmin); err != nil {
+	if err := services.UpdateAdministrator(updatedAdmin); err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
 	return util.SendSuccess(c, 200, "Updated")
 }
 
-func DeleteAdministratorHandler(c *fiber.Ctx) error {
+func DeleteAdministrator(c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -65,7 +65,7 @@ func DeleteAdministratorHandler(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	if err := services.DeleteAdministratorService(intId); err != nil {
+	if err := services.DeleteAdministrator(intId); err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
