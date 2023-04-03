@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func LoginAdminService(a models.Administrator) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
+func LoginAdmin(a models.Administrator) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
 
 	var admin models.Administrator
 
@@ -42,7 +42,7 @@ func LoginAdminService(a models.Administrator) (*models.Administrator, *models.J
 	return &admin, &token, nil, nil
 }
 
-func GetAdministratorsService() ([]models.Administrator, error) {
+func GetAdministrators() ([]models.Administrator, error) {
 
 	var admins []models.Administrator
 
@@ -53,7 +53,7 @@ func GetAdministratorsService() ([]models.Administrator, error) {
 	return admins, nil
 }
 
-func RegisterAdministratorService(newAdmin models.Administrator) (*models.Administrator, error) {
+func RegisterAdministrator(newAdmin models.Administrator) (*models.Administrator, error) {
 
 	var queriedAdmin models.Administrator
 
@@ -80,7 +80,7 @@ func RegisterAdministratorService(newAdmin models.Administrator) (*models.Admini
 	return &newAdmin, nil
 }
 
-func UpdateAdministratorService(updatedAdmin models.Administrator) error {
+func UpdateAdministrator(updatedAdmin models.Administrator) error {
 
 	var found models.Administrator
 
@@ -98,7 +98,7 @@ func UpdateAdministratorService(updatedAdmin models.Administrator) error {
 	return nil
 }
 
-func DeleteAdministratorService(id int) error {
+func DeleteAdministrator(id int) error {
 
 	var found models.Administrator
 
