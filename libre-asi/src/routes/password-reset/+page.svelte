@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { ADMIN_LOGIN, ADMIN_PASSWORD_RESET, API_URL, INTERVIEWER_LOGIN, INTERVIEWER_PASSWORD_RESET, PASSWORD_RESET } from '$lib/api/constants';
 	import type PasswordReset from '$lib/models/PasswordReset';
+	import { fetchNoRefresh } from '$lib/util/fetch';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendSuccess } from '$lib/util/notifications';
@@ -9,7 +11,10 @@
 		Form,
 		InlineLoading,
 		InlineNotification,
-		PasswordInput
+		PasswordInput,
+		RadioButton,
+		RadioButtonGroup,
+		Tooltip
 	} from 'carbon-components-svelte';
 
 	//TODO use stepper widget
@@ -29,6 +34,9 @@
 	let invalidCredentials = false;
 
 	let loading = false;
+
+	let wantsAdmin = false;
+	let wantsInterviewer = false;
 
 	function validateCurrentPassword(): boolean {
 		invalidCurrentPassword = false;
@@ -69,6 +77,7 @@
 	async function resetPassword() {
 		loading = true;
 		invalidCredentials = false;
+		let url = API_URL
 
 		if (!validateCurrentPassword()) {
 			return;
@@ -82,14 +91,21 @@
 			return;
 		}
 
+		if (wantsAdmin){
+			url += ADMIN_PASSWORD_RESET
+		} 
+		if (wantsInterviewer){
+			url += INTERVIEWER_PASSWORD_RESET;
+		}
+
+
 		const credentials: PasswordReset = {
 			currentPassword: currentPassword,
 			newPassword: newPassword
 		};
 
-		const response = await fetch('/api/password-reset', {
+		const response = await fetchNoRefresh(url, {
 			method: 'POST',
-			credentials: 'include',
 			body: JSON.stringify(credentials)
 		});
 
@@ -137,6 +153,30 @@
 			{#if loading}
 				<InlineLoading description="submitting..." />
 			{/if}
+
+			<RadioButtonGroup selected="interviewer" required>
+				<div slot="legendText" style="display:flex;margin-top:20px">
+					Account Type
+					<Tooltip>
+						<p>Account type is determined by your administrator</p>
+					</Tooltip>
+				</div>
+				<RadioButton
+					labelText="Interviewer"
+					value="interviewer"
+					bind:checked={wantsInterviewer}
+					id="interviewer"
+					name="interviewer"
+					autofocus
+				/>
+				<RadioButton
+					labelText="Administrator"
+					value="admin"
+					bind:checked={wantsAdmin}
+					id="administrator"
+					name="administrator"
+				/>
+			</RadioButtonGroup>
 
 			<div class="form-element">
 				<PasswordInput

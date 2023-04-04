@@ -10,12 +10,14 @@
             "request": "launch",
             "mode": "debug",
             "program": "main.go", 
+            "args": ["serve"],
             "env":{
                 "DB_CONNECTION":"postgresql://libre_asi:libre_asi@192.168.122.1?sslmode=disable",
                 "ADMIN_EMAIL":"admin@example.com",
                 "ADMIN_PASSWORD":"admin",
                 "API_PORT":":3000",
-                "ADMIN_USERNAME":"admin"
+                "ADMIN_USERNAME":"admin",
+                "CORS_ORIGINS":"https://localhost:5173"
             }
         }
     ]

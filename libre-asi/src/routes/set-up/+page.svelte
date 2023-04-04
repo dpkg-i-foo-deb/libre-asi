@@ -16,6 +16,7 @@
 	} from 'carbon-components-svelte';
 	import { goto } from '$app/navigation';
 	import { API_URL, SET_UP } from '$lib/api/constants';
+	import { fetchNoRefresh } from '$lib/util/fetch';
 
 	let loading = false;
 
@@ -111,15 +112,9 @@
 			password: password
 		};
 
-		const response = await fetch(API_URL + SET_UP, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
+		const response = await fetchNoRefresh(API_URL + SET_UP, {
 			method: 'POST',
-			body: JSON.stringify(newAdmin),
-			credentials: 'include',
-			mode: 'cors'
+			body: JSON.stringify(newAdmin)
 		});
 
 		if (response.ok) {

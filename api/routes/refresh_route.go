@@ -6,5 +6,5 @@ import (
 )
 
 func refreshRoute() {
-	server.Post("/refresh", auth.ValidateRefreshToken, auth.ValidateRefreshTokenDate, handlers.RefreshHandler)
+	server.Post("/refresh", auth.ValidateRefreshToken, auth.ValidateRefreshTokenDate, handlers.Refresh)
 }

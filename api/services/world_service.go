@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func WorldService(c *fiber.Ctx) error {
+func GetWorld(c *fiber.Ctx) error {
 
 	var world []models.Country
 	var res models.Response

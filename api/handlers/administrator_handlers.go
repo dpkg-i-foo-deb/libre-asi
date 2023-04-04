@@ -5,13 +5,14 @@ import (
 	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetAdministratorsHandler(c *fiber.Ctx) error {
+func GetAdministrators(c *fiber.Ctx) error {
 
-	administrators, err := services.GetAdministratorsService()
+	administrators, err := services.GetAdministrators()
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -20,36 +21,53 @@ func GetAdministratorsHandler(c *fiber.Ctx) error {
 	return c.Status(200).JSON(administrators)
 }
 
-func RegisterAdministratorHandler(c *fiber.Ctx) error {
+func RegisterAdministrator(c *fiber.Ctx) error {
 
-	var newUser models.User
+	var newAdmin models.Administrator
 
-	err := c.BodyParser(&newUser)
-
-	if err != nil {
-		return util.HandleFiberError(c, err)
-	}
-
-	registeredUser, err := services.RegisterAdministratorService(newUser)
+	err := c.BodyParser(&newAdmin)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
-	return c.Status(201).JSON(registeredUser)
+	registeredAdmin, err := services.RegisterAdministrator(newAdmin, false)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(201).JSON(registeredAdmin)
 }
 
-func UpdateAdministratorHandler(c *fiber.Ctx) error {
+func UpdateAdministrator(c *fiber.Ctx) error {
 
-	var updatedAdmin models.User
+	var updatedAdmin models.Administrator
 
 	if c.BodyParser(&updatedAdmin) != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	if err := services.UpdateAdministratorService(updatedAdmin); err != nil {
+	if err := services.UpdateAdministrator(updatedAdmin); err != nil {
 		return util.HandleFiberError(c, err)
 	}
 
 	return util.SendSuccess(c, 200, "Updated")
+}
+
+func DeleteAdministrator(c *fiber.Ctx) error {
+
+	id := c.Params("id")
+
+	intId, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	if err := services.DeleteAdministrator(intId); err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return util.SendSuccess(c, 200, "Deleted")
 }

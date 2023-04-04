@@ -9,7 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func RefreshHandler(c *fiber.Ctx) error {
+func Refresh(c *fiber.Ctx) error {
 
 	var pair models.JWTPair
 	var email string
