@@ -88,3 +88,22 @@ func UpdatePatient(updatedPatient models.Patient) error {
 
 	return nil
 }
+
+func DeletePatient(id uint) error {
+
+	var found models.Patient
+
+	if err := database.DB.Where("ID = ?", id).First(&found).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Delete(&found).Error; err != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+}
