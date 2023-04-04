@@ -52,9 +52,20 @@ func GetPatients() ([]models.Patient, error) {
 
 	var patients []models.Patient
 
-	if database.DB.Find(&patients).Error != nil {
+	if database.DB.Omit("password").Find(&patients).Error != nil {
 		return nil, errors.ErrInternalError
 	}
 
 	return patients, nil
+}
+
+func GetPatient(id uint) (*models.Patient, error) {
+
+	var patient models.Patient
+
+	if database.DB.Omit("password").Where("ID = ?", id).First(&patient).Error != nil {
+		return nil, errors.ErrEntityNotFound
+	}
+
+	return &patient, nil
 }

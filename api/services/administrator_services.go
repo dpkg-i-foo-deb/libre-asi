@@ -46,7 +46,7 @@ func GetAdministrators() ([]models.Administrator, error) {
 
 	var admins []models.Administrator
 
-	if database.DB.Find(&admins).Error != nil {
+	if database.DB.Omit("password").Find(&admins).Error != nil {
 		return nil, errors.ErrInternalError
 	}
 
@@ -106,7 +106,7 @@ func UpdateAdministrator(updatedAdmin models.Administrator) error {
 		return errors.ErrInternalError
 	}
 
-	if err := database.DB.Model(&updatedAdmin).Updates(&updatedAdmin).Error; err != nil {
+	if err := database.DB.Omit("password").Save(&updatedAdmin).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
