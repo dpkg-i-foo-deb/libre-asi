@@ -11,4 +11,5 @@ func SetRoutes(app *fiber.App) {
 	adminRoutes()
 	refreshRoute()
 	sessionRoutes()
+	patientRoutes()
 }
