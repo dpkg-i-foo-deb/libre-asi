@@ -149,12 +149,20 @@
 				>
 					{#if $session.role == SessionRole.Admin}
 						<SideNavMenuItem
-							href="/management/admin"
+							href="/management/administrators"
 							text={$LL.navMenu.ADMINISTRATORS()}
-							isSelected={$page.url.pathname == '/management/admin'}
+							isSelected={$page.url.pathname == '/management/administrators'}
 						/>
 
 						<SideNavMenuItem text={$LL.navMenu.INTERVIEWERS()} />
+					{/if}
+
+					{#if $session.role == SessionRole.Admin || $session.role == SessionRole.Interviewer}
+						<SideNavMenuItem
+							href="/management/patients"
+							text="Patients"
+							isSelected={$page.url.pathname == '/management/patients'}
+						/>
 					{/if}
 				</SideNavMenu>
 			{/if}

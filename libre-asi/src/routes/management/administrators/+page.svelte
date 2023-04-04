@@ -208,11 +208,13 @@
 		if (response.ok) {
 			loadAdmins();
 			sendSuccess('Account deleted successfully', '');
+			isModalOpen = false;
 			return;
 		}
 
 		if (handleResponse(response.status, false)) {
 			sendError('Error trying to remove administrator', '');
+			isModalOpen = false;
 			return;
 		}
 	}

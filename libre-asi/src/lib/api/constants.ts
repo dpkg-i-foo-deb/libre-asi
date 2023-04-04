@@ -17,6 +17,7 @@ const INTERVIEWER_PASSWORD_RESET = 'password-reset/interviewer';
 const PASSWORD_RESET = 'password-reset/';
 const EDIT_ADMINS = 'administrators/';
 const DELETE_ADMIN = 'administrators/';
+const GET_PATIENTS = 'patients/';
 export {
 	API_URL,
 	INTERVIEWER_LOGIN,
@@ -31,4 +32,5 @@ export {
 	DELETE_ADMIN,
 	ADMIN_PASSWORD_RESET,
 	INTERVIEWER_PASSWORD_RESET,
+	GET_PATIENTS,
 };
