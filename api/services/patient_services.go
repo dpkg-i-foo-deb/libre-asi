@@ -69,3 +69,22 @@ func GetPatient(id uint) (*models.Patient, error) {
 
 	return &patient, nil
 }
+
+func UpdatePatient(updatedPatient models.Patient) error {
+
+	var found models.Patient
+
+	if err := database.DB.Where("ID = ?", updatedPatient.ID).First(&found).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Omit("password").Save(updatedPatient).Error; err != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+}
