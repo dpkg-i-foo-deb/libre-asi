@@ -47,3 +47,14 @@ func RegisterPatient(newPatient models.Patient) (*models.Patient, error) {
 
 	return &newPatient, gorm.ErrNotImplemented
 }
+
+func GetPatients() ([]models.Patient, error) {
+
+	var patients []models.Patient
+
+	if database.DB.Find(&patients).Error != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return patients, nil
+}
