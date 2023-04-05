@@ -8,11 +8,26 @@
 		TextInput,
 		Tile,
 		Breadcrumb,
-		Toggle
+		Toggle,
+		FileUploader
 	} from 'carbon-components-svelte';
 	import { ImageLoader } from 'carbon-components-svelte';
 
 	let showInfo = false;
+	let file: File | null = null;
+	let imageUrl: string | null = null;
+	let files: File[] = [];
+
+	function handleFileSelect(event: CustomEvent) {
+		const selectedFiles = event.detail;
+		if (selectedFiles && selectedFiles.length > 0) {
+			file = selectedFiles[0];
+			if (file) {
+				imageUrl = URL.createObjectURL(file);
+			}
+		}
+		files = [];
+	}
 </script>
 
 <main>
@@ -31,6 +46,29 @@
 					<h3>Datos básicos</h3>
 					<div class="subtitle">
 						<p class="bold">Estos son los datos mínimos para registrar un paciente</p>
+						<div class="profile-pinture" style="position: relative;">
+							<FileUploader
+								bind:files
+								on:add={handleFileSelect}
+								multiple
+								labelTitle="Upload files"
+								buttonLabel="Add files"
+								labelDescription="Only JPEG files are accepted."
+								accept={['.jpg', '.jpeg']}
+								status="complete"
+							/>
+
+							{#if imageUrl}
+								<!-- svelte-ignore a11y-img-redundant-alt -->
+								<img
+									src={imageUrl}
+									alt="Profile Picture"
+									width="200"
+									height="200"
+									style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin-right: 100px;"
+								/>
+							{/if}
+						</div>
 
 						<div class="text-field">
 							<TextInput
@@ -107,8 +145,6 @@
 				</div>
 			</Tile>
 		</div>
-
-		<ImageLoader src="" />
 	</div>
 </main>
 
@@ -149,5 +185,10 @@
 		grid-column: 2 / 6;
 		grid-row: 1 / 3;
 		margin-right: 10px;
+	}
+
+	.profile-pinture {
+		float: right;
+		margin-top: -70px;
 	}
 </style>
