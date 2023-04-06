@@ -8,12 +8,11 @@ import (
 
 type Interviewer struct {
 	gorm.Model
-	//TODO add person fields
-	User
 	Professions     []Profession `gorm:"many2many:interviewer_professions;" json:"professions"`
 	Interpretations []Interview  `json:"interpretations" gorm:"many2many:interview_interpretations"`
 	Reports         []Interview  `json:"reports" gorm:"many2many:interview_reports"`
 	RMA             string       `json:"rma"`
+	PersonID        uint         `json:"person" gorm:"not null;default:null"`
 }
 
 type InterviewInterpretations struct {

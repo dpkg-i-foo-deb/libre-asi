@@ -6,6 +6,7 @@ import (
 	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+	"libre-asi-api/view"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -18,9 +19,9 @@ func Login(c *fiber.Ctx) error {
 
 	switch c.Params("role") {
 	case string(models.ADMINISTRATOR):
-		_, tk, pk, err = loginAdmin(c)
+		tk, pk, err = loginAdmin(c)
 	case string(models.INTERVIEWER):
-		_, tk, pk, err = loginInterviewer(c)
+		tk, pk, err = loginInterviewer(c)
 	case "patient":
 		return util.HandleFiberError(c, errors.ErrNotImplemmented)
 	default:
@@ -98,21 +99,21 @@ func SetPassword(c *fiber.Ctx) error {
 	return util.SendSuccess(c, 200, "New password has been set")
 }
 
-func loginAdmin(c *fiber.Ctx) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
-	var a models.Administrator
+func loginAdmin(c *fiber.Ctx) (*models.JWTPair, *models.PasswordResetTk, error) {
+	var a view.Administrator
 
 	if c.BodyParser(&a) != nil {
-		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
+		return nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
 	return services.LoginAdmin(a)
 }
 
-func loginInterviewer(c *fiber.Ctx) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
-	var i models.Interviewer
+func loginInterviewer(c *fiber.Ctx) (*models.JWTPair, *models.PasswordResetTk, error) {
+	var i view.Interviewer
 
 	if c.BodyParser(&i) != nil {
-		return nil, nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
+		return nil, nil, util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
 	return services.LoginInterviewer(i)

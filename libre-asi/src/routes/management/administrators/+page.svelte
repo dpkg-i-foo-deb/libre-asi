@@ -37,8 +37,13 @@
 	let filteredRows: ReadonlyArray<DataTableRow>;
 	let isRegisterFormOpen = false;
 	let isSuccessRegisterOpen = false;
+
 	let email = '';
 	let username = '';
+
+	let editEmail = '';
+	let editUsername = '';
+
 	let invalidEmail = false;
 	let invalidUsername = false;
 	let invalidEmailCaption = '';
@@ -121,16 +126,15 @@
 			isRegisterFormOpen = false;
 			isSuccessRegisterOpen = true;
 			loadAdmins();
-			return;
 		}
 
-		if (handleResponse(response.status, false)) {
-			return;
-		}
+		if (handleResponse(response.status, false))
+			if (response.status == 409) {
+				duplicateCredentials = true;
+			}
 
-		if (response.status == 409) {
-			duplicateCredentials = true;
-		}
+		email = '';
+		username = '';
 	}
 
 	function handleSearch() {
@@ -152,8 +156,8 @@
 		let row = rows.find((row) => row.id === editingId);
 
 		if (row) {
-			email = row.email;
-			username = row.username;
+			editEmail = row.email;
+			editUsername = row.username;
 		}
 	}
 	function handleCancel() {
@@ -173,8 +177,8 @@
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 
-			email: email,
-			username: username,
+			email: editEmail,
+			username: editUsername,
 			password: ''
 		};
 
@@ -208,11 +212,13 @@
 		if (response.ok) {
 			loadAdmins();
 			sendSuccess('Account deleted successfully', '');
+			isModalOpen = false;
 			return;
 		}
 
 		if (handleResponse(response.status, false)) {
 			sendError('Error trying to remove administrator', '');
+			isModalOpen = false;
 			return;
 		}
 	}
@@ -334,7 +340,7 @@
 						placeholder="Enter email..."
 						on:blur={validateEmail}
 						bind:invalid={invalidEmail}
-						bind:value={email}
+						bind:value={editEmail}
 						bind:invalidText={invalidEmailCaption}
 					/>
 				</div>
@@ -345,7 +351,7 @@
 						placeholder="Enter user name..."
 						on:blur={validateUsername}
 						bind:invalid={invalidUsername}
-						bind:value={username}
+						bind:value={editUsername}
 						bind:invalidText={invalidUsernameCaption}
 					/>
 				</div>

@@ -4,5 +4,5 @@ import "gorm.io/gorm"
 
 type Administrator struct {
 	gorm.Model
-	User
+	UserID uint `json:"userID" gorm:"not null;default:null"`
 }

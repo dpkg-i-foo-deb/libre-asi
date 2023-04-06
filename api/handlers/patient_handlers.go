@@ -5,6 +5,7 @@ import (
 	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+	"libre-asi-api/view"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,7 +13,7 @@ import (
 
 func RegisterPatient(c *fiber.Ctx) error {
 
-	var newPatient *models.Patient
+	var newPatient *view.Patient
 
 	if err := c.BodyParser(&newPatient); err != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
