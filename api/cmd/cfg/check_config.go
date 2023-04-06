@@ -2,8 +2,8 @@ package cfg
 
 import (
 	"errors"
-	"libre-asi-api/database"
 	"libre-asi-api/models"
+	"libre-asi-api/pkg/database"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
