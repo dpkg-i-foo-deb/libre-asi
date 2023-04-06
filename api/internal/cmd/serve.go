@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"libre-asi-api/cmd/app"
-	"libre-asi-api/routes"
+	"libre-asi-api/cmd/routes"
 	"libre-asi-api/util"
 
 	"github.com/spf13/cobra"

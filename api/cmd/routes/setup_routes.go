@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"libre-asi-api/handlers"
+	"libre-asi-api/cmd/handlers"
 )
 
 func setupRoutes() {
