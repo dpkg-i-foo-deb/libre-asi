@@ -1,7 +1,7 @@
 package app
 
 import (
-	"libre-asi-api/cfg"
+	"libre-asi-api/cmd/cfg"
 	"log"
 	"os"
 	"strconv"

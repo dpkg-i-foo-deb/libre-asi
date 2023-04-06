@@ -1,7 +1,7 @@
 package services
 
 import (
-	"libre-asi-api/cfg"
+	"libre-asi-api/cmd/cfg"
 	"libre-asi-api/errors"
 	"libre-asi-api/view"
 )
