@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"libre-asi-api/errors"
 	"libre-asi-api/models"
+	"libre-asi-api/pkg/errors"
 	"libre-asi-api/util"
 	"time"
 

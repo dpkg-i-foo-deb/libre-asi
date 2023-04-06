@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/pkg/auth"
+	"libre-asi-api/pkg/errors"
 	"libre-asi-api/util"
 
 	"github.com/gofiber/fiber/v2"

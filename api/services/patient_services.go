@@ -1,9 +1,9 @@
 package services
 
 import (
-	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/pkg/database"
+	"libre-asi-api/pkg/errors"
 	"libre-asi-api/view"
 
 	"gorm.io/gorm"

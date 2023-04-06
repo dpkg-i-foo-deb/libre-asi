@@ -1,8 +1,8 @@
 package util
 
 import (
-	"libre-asi-api/errors"
 	"libre-asi-api/models"
+	"libre-asi-api/pkg/errors"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
