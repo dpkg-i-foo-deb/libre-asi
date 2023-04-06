@@ -3,10 +3,10 @@ package services
 import (
 	"libre-asi-api/cfg"
 	"libre-asi-api/errors"
-	"libre-asi-api/models"
+	"libre-asi-api/view"
 )
 
-func Setup(admin models.Administrator) error {
+func Setup(admin view.Administrator) error {
 	_, err := RegisterAdministrator(admin, true)
 
 	return err

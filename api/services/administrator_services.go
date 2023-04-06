@@ -6,64 +6,75 @@ import (
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
+	"libre-asi-api/view"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
-func LoginAdmin(a models.Administrator) (*models.Administrator, *models.JWTPair, *models.PasswordResetTk, error) {
+func LoginAdmin(a view.Administrator) (*models.JWTPair, *models.PasswordResetTk, error) {
 
-	var admin models.Administrator
+	var user models.User
+	var administrator models.Administrator
 
-	if database.DB.Where("email = ?", a.Email).First(&admin).Error != nil {
-		return nil, nil, nil, errors.ErrNoData
+	if database.DB.Where("email = ?", a.Email).First(&user).Error != nil {
+		return nil, nil, errors.ErrAccessDenied
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(a.Password)); err != nil {
-		return nil, nil, nil, errors.ErrAccessDenied
+	if database.DB.Where("user_id = ?", user.ID).First(&administrator).Error != nil {
+		return nil, nil, errors.ErrAccessDenied
 	}
 
-	if admin.NeedsPasswordReset {
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(a.Password)); err != nil {
+		return nil, nil, errors.ErrAccessDenied
+	}
+
+	if user.NeedsPasswordReset {
 		token, err := auth.GeneratePasswordResetToken(a.Email)
 
 		if err != nil {
-			return nil, nil, nil, errors.ErrInternalError
+			return nil, nil, errors.ErrInternalError
 		}
 
-		return &admin, nil, &token, errors.ErrrNeedsPasswordReset
+		return nil, &token, errors.ErrrNeedsPasswordReset
 	}
 
 	token, err := auth.GenerateJWTPair(a.Email, string(models.ADMINISTRATOR))
 
 	if err != nil {
-		return nil, nil, nil, errors.ErrInternalError
+		return nil, nil, errors.ErrInternalError
 	}
 
-	return &admin, &token, nil, nil
+	return &token, nil, nil
 }
 
-func GetAdministrators() ([]models.Administrator, error) {
+// TODO test this
+func GetAdministrators() ([]view.Administrator, error) {
 
-	var admins []models.Administrator
+	var admins []view.Administrator
 
-	if database.DB.Omit("password").Find(&admins).Error != nil {
+	if err := database.DB.Table("users").
+		Joins("JOIN administrators ON administrators.user_id = users.id").
+		Select("administrators.id, users.email, users.username, '', users.needs_password_reset").
+		Scan(&admins).Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
 
 	return admins, nil
+
 }
 
-func RegisterAdministrator(newAdmin models.Administrator, isFirst bool) (*models.Administrator, error) {
+func RegisterAdministrator(newAdmin view.Administrator, isFirst bool) (*view.Administrator, error) {
 
 	var p string
-	var queriedAdmin models.Administrator
+	var queriedUser models.User
 	var err error
 
-	if database.DB.Where("email = ?", newAdmin.Email).First(&queriedAdmin).Error != gorm.ErrRecordNotFound {
+	if database.DB.Where("email = ?", newAdmin.Email).First(&queriedUser).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
-	if database.DB.Where("username = ?", newAdmin.Username).First(&queriedAdmin).Error != gorm.ErrRecordNotFound {
+	if database.DB.Where("username = ?", newAdmin.Username).First(&queriedUser).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
@@ -86,45 +97,72 @@ func RegisterAdministrator(newAdmin models.Administrator, isFirst bool) (*models
 		return nil, errors.ErrInternalError
 	}
 
-	if err = database.DB.Create(&newAdmin).Error; err != nil {
+	if err = database.DB.Transaction(func(tx *gorm.DB) error {
+
+		var user models.User
+
+		user.Email = newAdmin.Email
+		user.Username = newAdmin.Username
+		user.Password = newAdmin.Password
+		user.NeedsPasswordReset = newAdmin.NeedsPasswordReset
+
+		if err := tx.Create(&user).Error; err != nil {
+			return err
+		}
+
+		var admin models.Administrator
+
+		admin.UserID = user.ID
+
+		if err := tx.Create(&admin).Error; err != nil {
+			return err
+		}
+
+		return nil
+
+	}); err != nil {
 		return nil, errors.ErrInternalError
 	}
-
-	newAdmin.Password = p
 
 	return &newAdmin, nil
 }
 
-func UpdateAdministrator(updatedAdmin models.Administrator) error {
+func UpdateAdministrator(a view.Administrator) (*view.Administrator, error) {
+	var admin models.Administrator
+	var user models.User
 
-	var found models.Administrator
-
-	if err := database.DB.Where("ID = ?", updatedAdmin.ID).First(&found).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return errors.ErrEntityNotFound
-		}
-		return errors.ErrInternalError
+	if database.DB.Where("ID = ?", a.ID).First(&admin).Error != nil {
+		return nil, errors.ErrEntityNotFound
 	}
 
-	if err := database.DB.Omit("password").Save(&updatedAdmin).Error; err != nil {
-		return errors.ErrInternalError
+	if database.DB.Where("ID = ?", admin.UserID).First(&user).Error != nil {
+		return nil, errors.ErrEntityNotFound
 	}
 
-	return nil
+	user.Username = a.Username
+
+	if err := database.DB.Omit("password").Save(&user).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return &view.Administrator{
+		ID:                 admin.ID,
+		Email:              user.Email,
+		Username:           user.Username,
+		Password:           "",
+		NeedsPasswordReset: false,
+	}, nil
 }
 
 func DeleteAdministrator(id int) error {
 
-	var found models.Administrator
+	var queriedAdmin models.Administrator
 
-	if err := database.DB.Where("ID = ?", id).First(&found).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return errors.ErrEntityNotFound
-		}
-		return errors.ErrInternalError
+	if database.DB.Where("ID = ?", id).First(&queriedAdmin).Error != nil {
+		return errors.ErrEntityNotFound
 	}
 
-	if err := database.DB.Delete(&found).Error; err != nil {
+	if err := database.DB.Delete(&queriedAdmin).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
@@ -133,16 +171,26 @@ func DeleteAdministrator(id int) error {
 
 func SetAdministratorPassword(email string, credentials models.PasswordChange) error {
 
-	var found models.Administrator
+	var queriedUser models.User
 
-	if err := database.DB.Where("email = ?", email).First(&found).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return errors.ErrEntityNotFound
-		}
-		return errors.ErrInternalError
+	if database.DB.Preload("AdministratorsCre").Where("email = ?", email).First(&queriedUser).Error != nil {
+		return errors.ErrEntityNotFound
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(found.Password), []byte(credentials.CurrentPassword)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(queriedUser.Password), []byte(credentials.CurrentPassword)); err != nil {
+		return errors.ErrAccessDenied
+	}
+
+	isAdmin := false
+
+	for _, admin := range queriedUser.Administrators {
+		if admin.UserID == queriedUser.ID {
+			isAdmin = true
+			break
+		}
+	}
+
+	if !isAdmin {
 		return errors.ErrAccessDenied
 	}
 
@@ -152,10 +200,9 @@ func SetAdministratorPassword(email string, credentials models.PasswordChange) e
 		return errors.ErrInternalError
 	}
 
-	found.Password = p
-	found.NeedsPasswordReset = false
+	queriedUser.Password = p
 
-	if err := database.DB.Save(&found).Error; err != nil {
+	if err := database.DB.Save(&queriedUser).Error; err != nil {
 		return errors.ErrInternalError
 	}
 

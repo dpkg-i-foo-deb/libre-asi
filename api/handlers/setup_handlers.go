@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"libre-asi-api/errors"
-	"libre-asi-api/models"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
+	"libre-asi-api/view"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -22,7 +22,7 @@ func CheckSetup(c *fiber.Ctx) error {
 
 func Setup(c *fiber.Ctx) error {
 
-	var user models.Administrator
+	var user view.Administrator
 
 	if c.BodyParser(&user) != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)

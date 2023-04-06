@@ -4,59 +4,91 @@ import (
 	"libre-asi-api/database"
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
-	"libre-asi-api/util"
+	"libre-asi-api/view"
 
 	"gorm.io/gorm"
 )
 
-func RegisterPatient(newPatient models.Patient) (*models.Patient, error) {
+func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 
-	var p string
-	var found models.Patient
-	var err error
+	var user models.User
+	var person models.Person
+	var patient models.Patient
 
-	if err = database.DB.Where("email = ?", newPatient.Email).First(&found).Error; err != gorm.ErrRecordNotFound {
+	if database.DB.Where("email = ?", newPatient.Email).First(&user).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
-	if database.DB.Where("username = ?", newPatient.Username).First(&found).Error != gorm.ErrRecordNotFound {
+	if database.DB.Where("personal_id = ?", newPatient.PersonalID).First(&person).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict
 	}
 
-	p, err = util.MakeRandomPassword()
+	if database.DB.Where("social_security_number = ?", newPatient.SocialSecurityNumber).First(&patient).Error != gorm.ErrRecordNotFound {
+		return nil, errors.ErrConflict
+	}
 
-	if err != nil {
+	user.Email = newPatient.Email
+	user.Password = "unhashed"
+	user.NeedsPasswordReset = true
+	user.Username = newPatient.Username
+
+	person.FirstName = newPatient.FirstName
+	person.LastName = newPatient.LastName
+	person.FirstSurname = newPatient.FirstSurname
+	person.LastSurname = newPatient.LastSurname
+	person.Birthdate = newPatient.Birthdate
+	person.Age = newPatient.Age
+	person.PersonalID = newPatient.PersonalID
+
+	//TODO race and religious preference
+	patient.SocialSecurityNumber = newPatient.SocialSecurityNumber
+	patient.Interviews = []models.Interview{}
+
+	if err := database.DB.Transaction(func(tx *gorm.DB) error {
+
+		if err := tx.Create(&user).Error; err != nil {
+			return err
+		}
+
+		person.UserID = user.ID
+
+		if err := tx.Create(&person).Error; err != nil {
+			return err
+		}
+
+		patient.PersonID = person.ID
+
+		if err := tx.Create(&patient).Error; err != nil {
+			return err
+		}
+
+		return nil
+
+	}); err != nil {
 		return nil, errors.ErrInternalError
 	}
 
-	newPatient.Password = p
+	return &newPatient, nil
 
-	newPatient.NeedsPasswordReset = true
-
-	newPatient.Password, err = util.HashPassword(newPatient.Password)
-
-	if err != nil {
-		return nil, errors.ErrInternalError
-	}
-
-	if err = database.DB.Create(&newPatient).Error; err != nil {
-		return nil, errors.ErrInternalError
-	}
-
-	newPatient.Password = p
-
-	return &newPatient, gorm.ErrNotImplemented
 }
 
-func GetPatients() ([]models.Patient, error) {
+func GetPatients() ([]view.Patient, error) {
 
-	var patients []models.Patient
+	//TODO test this
 
-	if database.DB.Omit("password").Find(&patients).Error != nil {
+	var patients []view.Patient
+
+	if err := database.DB.
+		Joins("LEFT JOIN people ON patients.person_id = people.id").
+		Joins("LEFT JOIN users ON people.user_id = users.id").
+		Select("patients.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset, patients.social_security_number").
+		Find(&patients).
+		Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
 
 	return patients, nil
+
 }
 
 func GetPatient(id uint) (*models.Patient, error) {

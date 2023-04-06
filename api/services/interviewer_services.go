@@ -6,53 +6,77 @@ import (
 	"libre-asi-api/errors"
 	"libre-asi-api/models"
 	"libre-asi-api/util"
+	"libre-asi-api/view"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
-func LoginInterviewer(i models.Interviewer) (*models.Interviewer, *models.JWTPair, *models.PasswordResetTk, error) {
+func LoginInterviewer(i view.Interviewer) (*models.JWTPair, *models.PasswordResetTk, error) {
+
+	var queriedUser models.User
 	var interviewer models.Interviewer
 
-	if database.DB.Where("email = ?", i.Email).First(&interviewer).Error != nil {
-		return nil, nil, nil, errors.ErrNoData
+	if database.DB.Where("email = ?", i.Email).First(&queriedUser).Error != nil {
+		return nil, nil, errors.ErrAccessDenied
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(interviewer.Password), []byte(i.Password)); err != nil {
-		return nil, nil, nil, errors.ErrAccessDenied
+	if database.DB.Where("user_id = ?", queriedUser.ID).First(&interviewer).Error != nil {
+		return nil, nil, errors.ErrAccessDenied
 	}
 
-	if interviewer.NeedsPasswordReset {
+	if err := bcrypt.CompareHashAndPassword([]byte(queriedUser.Password), []byte(i.Password)); err != nil {
+		return nil, nil, errors.ErrAccessDenied
+	}
+
+	if queriedUser.NeedsPasswordReset {
 		token, err := auth.GeneratePasswordResetToken(i.Email)
 
 		if err != nil {
-			return nil, nil, nil, errors.ErrInternalError
+			return nil, nil, errors.ErrInternalError
 		}
 
-		return &interviewer, nil, &token, nil
+		return nil, &token, errors.ErrrNeedsPasswordReset
 	}
 
 	token, err := auth.GenerateJWTPair(i.Email, string(models.INTERVIEWER))
 
 	if err != nil {
-		return nil, nil, nil, errors.ErrInternalError
+		return nil, nil, errors.ErrInternalError
 	}
 
-	return &interviewer, &token, nil, nil
+	return &token, nil, nil
+
 }
 
 func SetInterviewerPassword(email string, credentials models.PasswordChange) error {
 
-	var found models.Interviewer
+	var interviewer models.Interviewer
+	var user models.User
+	var person models.Person
 
-	if err := database.DB.Where("email = ?", email).First(&found).Error; err != nil {
+	if err := database.DB.Where("email = ?", email).First(&user).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return errors.ErrNoData
+			return errors.ErrEntityNotFound
 		}
 		return errors.ErrInternalError
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(found.Password), []byte(credentials.CurrentPassword)); err != nil {
+	if err := database.DB.Where("user_id", user.ID).First(&person).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("person_id", person.ID).First(&interviewer).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+		return errors.ErrInternalError
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.CurrentPassword)); err != nil {
 		return errors.ErrAccessDenied
 	}
 
@@ -62,9 +86,9 @@ func SetInterviewerPassword(email string, credentials models.PasswordChange) err
 		return errors.ErrInternalError
 	}
 
-	found.Password = p
+	user.Password = p
 
-	if err := database.DB.Save(&found).Error; err != nil {
+	if err := database.DB.Save(&user).Error; err != nil {
 		return errors.ErrInternalError
 	}
 
