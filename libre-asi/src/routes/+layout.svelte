@@ -84,7 +84,7 @@
 
 <Theme persist persistKey="__carbon-theme" />
 
-<Header bind:isSideNavOpen company="Libre-ASI" href="/">
+<Header bind:isSideNavOpen platformName="Libre-ASI" href="/">
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
