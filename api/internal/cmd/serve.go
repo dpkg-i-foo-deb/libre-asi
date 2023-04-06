@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"libre-asi-api/app"
+	"libre-asi-api/cmd/app"
 	"libre-asi-api/routes"
 	"libre-asi-api/util"
 
