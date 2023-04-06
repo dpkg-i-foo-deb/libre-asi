@@ -74,6 +74,15 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		status = 428
 		res.Status = string(models.DENIED)
 		res.Message = "You need to reset your password"
+	case errors.ErrBadContentType:
+		status = 415
+		res.Status = string(models.DENIED)
+		res.Message = "Check the content you're sending"
+	default:
+		status = 500
+		res.Status = string(models.ERROR)
+		res.Message = "Something went wrong on the server side"
+
 	}
 
 	return c.Status(status).JSON(res)

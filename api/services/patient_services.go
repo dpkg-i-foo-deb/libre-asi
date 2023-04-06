@@ -185,3 +185,33 @@ func SetPatientPicture(id int, imageData []byte) error {
 
 	return nil
 }
+
+func GetPatientPicture(id int) ([]byte, error) {
+
+	var patient models.Patient
+
+	var person models.Person
+
+	if err := database.DB.Where("ID = ?", id).First(&patient).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
+
+		return nil, errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("ID = ?", patient.PersonID).First(&person).Error; err != nil {
+
+		if err == gorm.ErrRecordNotFound {
+
+			return nil, errors.ErrEntityNotFound
+
+		}
+
+		return nil, errors.ErrInternalError
+
+	}
+
+	return person.Picture, nil
+
+}

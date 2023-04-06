@@ -19,4 +19,5 @@ const (
 	ErrInvalidCredentials  ApiError = "invalid credentials"
 	ErrrNeedsPasswordReset ApiError = "password reset needed"
 	ErrEntityNotFound      ApiError = "The requested entity was not found"
+	ErrBadContentType      ApiError = "Check the content you're sending"
 )

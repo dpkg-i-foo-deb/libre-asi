@@ -102,6 +102,13 @@ func SetPatientPicture(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrBadRoute)
 	}
 
+	contentType := c.Get("Content-Type")
+
+	if contentType != "image/jpeg" {
+		return util.HandleFiberError(c, errors.ErrBadContentType)
+
+	}
+
 	if err := services.SetPatientPicture(idInt, imageData); err != nil {
 		return util.HandleFiberError(c, err)
 
@@ -109,4 +116,25 @@ func SetPatientPicture(c *fiber.Ctx) error {
 
 	return util.SendSuccess(c, 200, "Picture set")
 
+}
+
+func GetPatientPicture(c *fiber.Ctx) error {
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	imageData, err := services.GetPatientPicture(idInt)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	c.Set("Content-Type", "image/jpeg")
+
+	return c.Status(200).Send(imageData)
 }
