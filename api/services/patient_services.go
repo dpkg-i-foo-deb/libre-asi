@@ -74,8 +74,6 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 
 func GetPatients() ([]view.Patient, error) {
 
-	//TODO test this
-
 	var patients []view.Patient
 
 	if err := database.DB.
@@ -91,12 +89,23 @@ func GetPatients() ([]view.Patient, error) {
 
 }
 
-func GetPatient(id uint) (*models.Patient, error) {
+func GetPatient(id uint) (*view.Patient, error) {
 
-	var patient models.Patient
+	var patient view.Patient
+	var dbPatient models.Patient
 
-	if database.DB.Omit("password").Where("ID = ?", id).First(&patient).Error != nil {
+	if database.DB.Where("ID = ?", id).First(&dbPatient).Error != nil {
 		return nil, errors.ErrEntityNotFound
+	}
+
+	if err := database.DB.
+		Joins("LEFT JOIN people ON patients.person_id = people.id").
+		Joins("LEFT JOIN users ON people.user_id = users.id").
+		Select("patients.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset, patients.social_security_number").
+		Where("patients.id = ?", id).
+		First(&patient).
+		Error; err != nil {
+		return nil, errors.ErrInternalError
 	}
 
 	return &patient, nil
@@ -138,4 +147,71 @@ func DeletePatient(id uint) error {
 	}
 
 	return nil
+}
+
+func SetPatientPicture(id int, imageData []byte) error {
+
+	var patient models.Patient
+
+	var person models.Person
+
+	if err := database.DB.Where("ID = ?", id).First(&patient).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("ID = ?", patient.PersonID).First(&person).Error; err != nil {
+
+		if err == gorm.ErrRecordNotFound {
+
+			return errors.ErrEntityNotFound
+
+		}
+
+		return errors.ErrInternalError
+
+	}
+
+	person.Picture = imageData
+
+	if err := database.DB.Save(&person).Error; err != nil {
+
+		return errors.ErrInternalError
+
+	}
+
+	return nil
+}
+
+func GetPatientPicture(id int) ([]byte, error) {
+
+	var patient models.Patient
+
+	var person models.Person
+
+	if err := database.DB.Where("ID = ?", id).First(&patient).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
+
+		return nil, errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("ID = ?", patient.PersonID).First(&person).Error; err != nil {
+
+		if err == gorm.ErrRecordNotFound {
+
+			return nil, errors.ErrEntityNotFound
+
+		}
+
+		return nil, errors.ErrInternalError
+
+	}
+
+	return person.Picture, nil
+
 }
