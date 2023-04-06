@@ -1,8 +1,8 @@
 package main
 
 import (
-	"libre-asi-api/cmd"
 	_ "libre-asi-api/database"
+	"libre-asi-api/internal/cmd"
 )
 
 func main() {
