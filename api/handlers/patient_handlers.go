@@ -89,3 +89,24 @@ func DeletePatient(c *fiber.Ctx) error {
 
 	return util.SendSuccess(c, 200, "Deleted")
 }
+
+func SetPatientPicture(c *fiber.Ctx) error {
+
+	imageData := c.Body()
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	if err := services.SetPatientPicture(idInt, imageData); err != nil {
+		return util.HandleFiberError(c, err)
+
+	}
+
+	return util.SendSuccess(c, 200, "Picture set")
+
+}

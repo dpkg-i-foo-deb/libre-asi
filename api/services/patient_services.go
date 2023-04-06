@@ -148,3 +148,40 @@ func DeletePatient(id uint) error {
 
 	return nil
 }
+
+func SetPatientPicture(id int, imageData []byte) error {
+
+	var patient models.Patient
+
+	var person models.Person
+
+	if err := database.DB.Where("ID = ?", id).First(&patient).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
+		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("ID = ?", patient.PersonID).First(&person).Error; err != nil {
+
+		if err == gorm.ErrRecordNotFound {
+
+			return errors.ErrEntityNotFound
+
+		}
+
+		return errors.ErrInternalError
+
+	}
+
+	person.Picture = imageData
+
+	if err := database.DB.Save(&person).Error; err != nil {
+
+		return errors.ErrInternalError
+
+	}
+
+	return nil
+}
