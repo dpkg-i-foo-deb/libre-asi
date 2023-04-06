@@ -2,8 +2,8 @@ package decoder
 
 import (
 	"encoding/json"
-	"libre-asi-api/models"
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/models"
+	"libre-asi-api/pkg/util"
 	"os"
 )
 
