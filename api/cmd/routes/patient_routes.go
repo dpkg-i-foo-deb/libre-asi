@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"libre-asi-api/auth"
 	"libre-asi-api/cmd/handlers"
+	"libre-asi-api/pkg/auth"
 )
 
 func patientRoutes() {
