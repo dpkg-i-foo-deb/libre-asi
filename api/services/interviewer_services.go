@@ -94,3 +94,15 @@ func SetInterviewerPassword(email string, credentials models.PasswordChange) err
 
 	return nil
 }
+
+func GetInterviewers() ([]view.Interviewer, error) {
+
+	var interviewers []view.Interviewer
+	if err := database.DB.Table("users").
+		Joins("JOIN interviewers ON interviewers.user_id = users.id").
+		Select("interviewers.id, users.email, users.username, '', users.needs_password_reset").
+		Scan(&interviewers).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+	return interviewers, nil
+}
