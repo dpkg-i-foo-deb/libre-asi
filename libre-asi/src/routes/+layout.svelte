@@ -84,7 +84,7 @@
 
 <Theme persist persistKey="__carbon-theme" />
 
-<Header persistentHamburgerMenu={$setup} bind:isSideNavOpen company="Libre-ASI">
+<Header bind:isSideNavOpen company="Libre-ASI">
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -137,12 +137,14 @@
 				href="/"
 				isSelected={$page.url.pathname == '/'}
 			/>
-			<SideNavLink
-				text={$LL.navMenu.HOME()}
-				href="/home"
-				isSelected={$page.url.pathname == '/home'}
-			/>
+
 			{#if $session.active}
+
+			<SideNavLink
+			text={$LL.navMenu.HOME()}
+			href="/home"
+			isSelected={$page.url.pathname == '/home'}
+		/>
 				<SideNavMenu
 					text={$LL.navMenu.MANAGEMENT()}
 					expanded={$page.url.pathname.toString().includes('/management/')}
@@ -201,4 +203,5 @@
 		right: 0;
 		margin: 10px;
 	}
+
 </style>
