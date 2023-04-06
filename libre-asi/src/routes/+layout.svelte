@@ -129,7 +129,7 @@
 	</HeaderUtilities>
 </Header>
 
-{#if $setup}
+{#if $setup && $page.url.pathname != '/setup' && $page.url.pathname != '/login'}
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
 			<SideNavLink
