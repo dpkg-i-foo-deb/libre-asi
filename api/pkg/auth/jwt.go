@@ -2,7 +2,7 @@ package auth
 
 import (
 	"errors"
-	"libre-asi-api/models"
+	"libre-asi-api/pkg/models"
 	"log"
 
 	"os"

@@ -1,10 +1,10 @@
 package services
 
 import (
-	"libre-asi-api/models"
 	"libre-asi-api/pkg/auth"
 	"libre-asi-api/pkg/database"
 	"libre-asi-api/pkg/errors"
+	"libre-asi-api/pkg/models"
 	"libre-asi-api/util"
 	"libre-asi-api/view"
 

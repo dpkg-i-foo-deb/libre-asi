@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"libre-asi-api/models"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/services"
 	"libre-asi-api/util"
@@ -60,7 +59,7 @@ func GetPatient(c *fiber.Ctx) error {
 
 func UpdatePatient(c *fiber.Ctx) error {
 
-	var updatedPatient *models.Patient
+	var updatedPatient *view.Patient
 
 	if c.BodyParser(&updatedPatient) != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)

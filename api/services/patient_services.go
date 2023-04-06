@@ -1,9 +1,9 @@
 package services
 
 import (
-	"libre-asi-api/models"
 	"libre-asi-api/pkg/database"
 	"libre-asi-api/pkg/errors"
+	"libre-asi-api/pkg/models"
 	"libre-asi-api/view"
 
 	"gorm.io/gorm"
@@ -111,7 +111,7 @@ func GetPatient(id uint) (*view.Patient, error) {
 	return &patient, nil
 }
 
-func UpdatePatient(updatedPatient models.Patient) error {
+func UpdatePatient(updatedPatient view.Patient) error {
 
 	var found models.Patient
 
