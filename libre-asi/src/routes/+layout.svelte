@@ -139,12 +139,11 @@
 			/>
 
 			{#if $session.active}
-
-			<SideNavLink
-			text={$LL.navMenu.HOME()}
-			href="/home"
-			isSelected={$page.url.pathname == '/home'}
-		/>
+				<SideNavLink
+					text={$LL.navMenu.HOME()}
+					href="/home"
+					isSelected={$page.url.pathname == '/home'}
+				/>
 				<SideNavMenu
 					text={$LL.navMenu.MANAGEMENT()}
 					expanded={$page.url.pathname.toString().includes('/management/')}
@@ -203,5 +202,4 @@
 		right: 0;
 		margin: 10px;
 	}
-
 </style>
