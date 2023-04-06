@@ -3,7 +3,7 @@ package services
 import (
 	"libre-asi-api/cmd/cfg"
 	"libre-asi-api/pkg/errors"
-	"libre-asi-api/view"
+	"libre-asi-api/pkg/view"
 )
 
 func Setup(admin view.Administrator) error {

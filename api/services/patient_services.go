@@ -4,7 +4,7 @@ import (
 	"libre-asi-api/pkg/database"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/models"
-	"libre-asi-api/view"
+	"libre-asi-api/pkg/view"
 
 	"gorm.io/gorm"
 )
