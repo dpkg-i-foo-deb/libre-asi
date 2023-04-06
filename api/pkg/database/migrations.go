@@ -2,7 +2,7 @@ package database
 
 import (
 	"libre-asi-api/pkg/models"
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/util"
 )
 
 func migrateModels() {

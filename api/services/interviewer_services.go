@@ -5,8 +5,8 @@ import (
 	"libre-asi-api/pkg/database"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/models"
+	"libre-asi-api/pkg/util"
 	"libre-asi-api/pkg/view"
-	"libre-asi-api/util"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"

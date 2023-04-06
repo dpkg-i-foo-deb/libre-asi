@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"libre-asi-api/pkg/util"
 	"libre-asi-api/services"
-	"libre-asi-api/util"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -1,7 +1,7 @@
 package database
 
 import (
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/util"
 	"os"
 
 	//FOR PRODUCTION

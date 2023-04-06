@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"libre-asi-api/cmd/app"
 	"libre-asi-api/cmd/routes"
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/util"
 
 	"github.com/spf13/cobra"
 )

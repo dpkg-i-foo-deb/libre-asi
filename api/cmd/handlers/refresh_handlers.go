@@ -4,7 +4,7 @@ import (
 	"libre-asi-api/pkg/auth"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/models"
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/util"
 
 	"github.com/gofiber/fiber/v2"
 )

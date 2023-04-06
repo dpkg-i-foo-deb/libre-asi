@@ -3,7 +3,7 @@ package auth
 import (
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/models"
-	"libre-asi-api/util"
+	"libre-asi-api/pkg/util"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
