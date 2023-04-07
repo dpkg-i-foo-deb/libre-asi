@@ -39,6 +39,10 @@
 			filteredRows = rows;
 		}
 	}
+
+	export function registerPatient() {
+		alert('EXAMPLE');
+	}
 </script>
 
 <main>
