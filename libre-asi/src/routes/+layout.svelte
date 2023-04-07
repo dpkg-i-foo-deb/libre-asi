@@ -84,7 +84,7 @@
 
 <Theme persist persistKey="__carbon-theme" />
 
-<Header bind:isSideNavOpen company="Libre-ASI">
+<Header bind:isSideNavOpen platformName="Libre-ASI" href="/">
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -129,7 +129,7 @@
 	</HeaderUtilities>
 </Header>
 
-{#if $setup}
+{#if $setup && $page.url.pathname != '/setup' && $page.url.pathname != '/login'}
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
 			<SideNavLink
