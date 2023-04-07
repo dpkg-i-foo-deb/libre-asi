@@ -155,7 +155,11 @@
 							isSelected={$page.url.pathname == '/management/administrators'}
 						/>
 
-						<SideNavMenuItem text={$LL.navMenu.INTERVIEWERS()} />
+						<SideNavMenuItem
+							text="{$LL.navMenu.INTERVIEWERS()}s"
+							href="/management/interviewers"
+							isSelected={$page.url.pathname == '/management/interviewers'}
+						/>
 					{/if}
 
 					{#if $session.role == SessionRole.Admin || $session.role == SessionRole.Interviewer}
