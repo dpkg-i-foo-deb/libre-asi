@@ -14,6 +14,8 @@
 		ButtonSet
 	} from 'carbon-components-svelte';
 	import { ImageLoader } from 'carbon-components-svelte';
+	import { goto } from '$app/navigation';
+
 	let showInfo = false;
 	let file: File | null = null;
 	let imageUrl: string | null = null;
@@ -40,6 +42,11 @@
 			imageUrl = null;
 			files = [];
 		}
+	}
+
+	function handleRegisterPatient() {
+		goto('/management/patients/+page.svelte/registerPatient');
+		alert('Hola');
 	}
 </script>
 
@@ -187,8 +194,7 @@
 							<Button
 								href=""
 								on:click={() => {
-									window.location.href = '';
-									//registerPatient();
+									handleRegisterPatient();
 								}}>Register Patient</Button
 							>
 						</ButtonSet>

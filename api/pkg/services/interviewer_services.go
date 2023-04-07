@@ -99,9 +99,9 @@ func GetInterviewers() ([]view.Interviewer, error) {
 
 	var interviewers []view.Interviewer
 	if err := database.DB.
-		Joins("LEFT JOIN people ON interviewer.person_id = people.id").
+		Joins("LEFT JOIN people ON interviewers.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
-		Select("interviewer.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset, patients.social_security_number").
+		Select("interviewers.id, users.email,users.username,'', users.needs_password_reset,people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id,interviewers.rma").
 		Find(&interviewers).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
