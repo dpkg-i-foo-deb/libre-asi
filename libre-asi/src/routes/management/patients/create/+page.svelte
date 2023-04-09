@@ -9,9 +9,12 @@
 		Tile,
 		Breadcrumb,
 		Toggle,
-		FileUploader
+		FileUploader,
+		Button,
+		ButtonSet
 	} from 'carbon-components-svelte';
 	import { ImageLoader } from 'carbon-components-svelte';
+	import { goto } from '$app/navigation';
 
 	let showInfo = false;
 	let file: File | null = null;
@@ -27,6 +30,22 @@
 			}
 		}
 		files = [];
+	}
+	function removeImage() {
+		imageUrl = null;
+		files = [];
+	}
+
+	function handleFileRemove(event: CustomEvent<readonly File[]>) {
+		const file = event.detail[0];
+		if (file === files[0]) {
+			imageUrl = null;
+			files = [];
+		}
+	}
+
+	function handleRegisterPatient() {
+		goto('/management/patients/');
 	}
 </script>
 
@@ -46,30 +65,55 @@
 					<h3>Datos básicos</h3>
 					<div class="subtitle">
 						<p class="bold">Estos son los datos mínimos para registrar un paciente</p>
-						<div class="profile-pinture" style="position: relative;">
-							<FileUploader
-								bind:files
-								on:add={handleFileSelect}
-								multiple
-								labelTitle="Upload files"
-								buttonLabel="Add files"
-								labelDescription="Only JPEG files are accepted."
-								accept={['.jpg', '.jpeg']}
-								status="complete"
-							/>
-
-							{#if imageUrl}
-								<!-- svelte-ignore a11y-img-redundant-alt -->
-								<img
-									src={imageUrl}
-									alt="Profile Picture"
-									width="100"
-									height="100"
-									style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin-right: 100px;"
+						<div class="image-container" style="display: flex; margin-top: 20px; padding: 70px;">
+							<div
+								class="file-uploader-container"
+								style="width: 100px; height: 100px; margin-right: 50px; padding: 5px; position: relative;"
+							>
+								<FileUploader
+									bind:files
+									on:add={handleFileSelect}
+									on:remove={handleFileRemove}
+									multiple={false}
+									labelTitle="Upload files"
+									buttonLabel="Add Picture"
+									labelDescription="Only JPEG files are accepted."
+									accept={['.jpg', '.jpeg']}
+									status="complete"
+									style="font-size: 10px;"
 								/>
-							{/if}
-						</div>
+							</div>
 
+							<div
+								class="image-preview-container"
+								style="width: 100px; height: 100px; margin-left: 20px; padding: 10px; border: 1px solid black; position: relative;"
+							>
+								{#if imageUrl}
+									<div style="position: relative;">
+										<!-- svelte-ignore a11y-img-redundant-alt -->
+										<img
+											src={imageUrl}
+											alt="Profile Picture"
+											style="width: 100%; height: 100%; object-fit: cover; margin-bottom: 10px;"
+										/>
+										<div
+											style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"
+										>
+											Profile Picture
+										</div>
+										{#if imageUrl}
+											<div
+												style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
+											>
+												<Button kind="danger" on:click={removeImage} style="margin: auto;"
+													>Remove</Button
+												>
+											</div>
+										{/if}
+									</div>
+								{/if}
+							</div>
+						</div>
 						<div class="text-field">
 							<TextInput
 								id="firstName"
@@ -88,6 +132,7 @@
 
 						<div class="text-field">
 							<TextInput
+								style="margin-bottom: 3rem"
 								id="email"
 								type="email"
 								labelText="Correo Electrónico"
@@ -142,6 +187,17 @@
 							</div>
 						</div>
 					{/if}
+					<div id="register-button">
+						<ButtonSet>
+							<Button kind="secondary">Cancel</Button>
+							<Button
+								href=""
+								on:click={() => {
+									handleRegisterPatient();
+								}}>Register Patient</Button
+							>
+						</ButtonSet>
+					</div>
 				</div>
 			</Tile>
 		</div>
@@ -151,6 +207,11 @@
 <style>
 	.other-data {
 		margin-top: 3rem;
+		margin-bottom: 5rem;
+	}
+
+	.basic-data {
+		margin-bottom: 3rem;
 	}
 
 	.title {
@@ -187,8 +248,8 @@
 		margin-right: 10px;
 	}
 
-	.profile-pinture {
-		float: right;
-		margin-top: -70px;
+	#register-button {
+		margin-bottom: 20px;
+		text-align: right;
 	}
 </style>

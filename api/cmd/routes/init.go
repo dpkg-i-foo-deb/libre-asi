@@ -12,4 +12,5 @@ func SetRoutes(app *fiber.App) {
 	refreshRoute()
 	sessionRoutes()
 	patientRoutes()
+	interviewerRoutes()
 }
