@@ -80,6 +80,7 @@ func GetPatients() ([]view.Patient, error) {
 		Joins("LEFT JOIN people ON patients.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("patients.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset, patients.social_security_number").
+		Where("patients.deleted_at is NULL").
 		Find(&patients).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
