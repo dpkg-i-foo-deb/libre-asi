@@ -11,6 +11,10 @@
 	} from 'carbon-components-svelte';
 	import { goto } from '$app/navigation';
 	import type Patient from '$lib/models/Patient';
+	import { API_URL, REGISTER_PATIENT } from '$lib/api/constants';
+	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
+	import { sendSuccess } from '$lib/util/notifications';
+	import { handleResponse } from '$lib/util/handleResponse';
 
 	let showInfo = false;
 	let file: File | null = null;
@@ -52,8 +56,20 @@
 		}
 	}
 
-	function handleRegisterPatient() {
-		goto('/management/patients/');
+	async function handleRegisterPatient() {
+		//TODO add validation
+
+		const response = await fetchWithRefresh(API_URL + REGISTER_PATIENT, {
+			method: 'POST',
+			body: JSON.stringify(newPatient)
+		});
+
+		if (response.ok) {
+			sendSuccess('Éxito', 'Paciente registrado exitosamente');
+			goto('/management/patients/');
+		}
+
+		handleResponse(response.status, false);
 	}
 </script>
 
