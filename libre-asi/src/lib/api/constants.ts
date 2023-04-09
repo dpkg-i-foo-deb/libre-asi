@@ -22,6 +22,9 @@ const GET_INTERVIEWERS = 'interviewers/';
 const REGISTER_INTERVIEWER = 'interviewers/';
 const EDIT_INTERVIEWER = 'interviewers/';
 const DELETE_INTERVIEWER = 'interviewers/';
+const REGISTER_PATIENT = 'patients/';
+const EDIT_PATIENTS = 'patients/';
+const DELETE_PATIENTS = 'patients/';
 
 export {
 	API_URL,
@@ -41,5 +44,8 @@ export {
 	GET_INTERVIEWERS,
 	REGISTER_INTERVIEWER,
 	EDIT_INTERVIEWER,
-	DELETE_INTERVIEWER
+	DELETE_INTERVIEWER,
+	REGISTER_PATIENT,
+	EDIT_PATIENTS,
+	DELETE_PATIENTS
 };

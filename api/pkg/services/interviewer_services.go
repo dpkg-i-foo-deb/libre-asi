@@ -98,11 +98,33 @@ func SetInterviewerPassword(email string, credentials models.PasswordChange) err
 func GetInterviewers() ([]view.Interviewer, error) {
 
 	var interviewers []view.Interviewer
-	if err := database.DB.Table("users").
-		Joins("JOIN interviewers ON interviewers.user_id = users.id").
-		Select("interviewers.id, users.email, users.username, '', users.needs_password_reset").
-		Scan(&interviewers).Error; err != nil {
+	if err := database.DB.
+		Joins("LEFT JOIN people ON interviewers.person_id = people.id").
+		Joins("LEFT JOIN users ON people.user_id = users.id").
+		Select("interviewers.id, users.email,users.username,'', users.needs_password_reset,people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id,interviewers.rma").
+		Find(&interviewers).
+		Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
 	return interviewers, nil
+}
+func GetInterviewer(id uint) (*view.Interviewer, error) {
+	var interviewer view.Interviewer
+	var dbInterviewer models.Interviewer
+
+	if database.DB.Where("ID = ?", id).First(&dbInterviewer).Error != nil {
+		return nil, errors.ErrEntityNotFound
+	}
+
+	if err := database.DB.
+		Joins("LEFT JOIN people ON interviewer.person_id = people.id").
+		Joins("LEFT JOIN users ON people.user_id = users.id").
+		Select("interviewers.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset").
+		Where("interviewers.id = ?", id).
+		First(&interviewer).
+		Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return &interviewer, nil
 }

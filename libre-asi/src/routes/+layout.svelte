@@ -156,7 +156,7 @@
 						/>
 
 						<SideNavMenuItem
-							text="{$LL.navMenu.INTERVIEWERS()}s"
+							text={$LL.navMenu.INTERVIEWERS()}
 							href="/management/interviewers"
 							isSelected={$page.url.pathname == '/management/interviewers'}
 						/>
