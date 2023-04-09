@@ -30,7 +30,7 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	user.Email = newPatient.Email
 	user.Password = "unhashed"
 	user.NeedsPasswordReset = true
-	user.Username = newPatient.Username
+	user.Username = newPatient.FirstName + newPatient.LastName
 
 	person.FirstName = newPatient.FirstName
 	person.LastName = newPatient.LastName
