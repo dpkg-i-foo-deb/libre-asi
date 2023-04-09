@@ -119,7 +119,6 @@
 
 <main>
 	{#if rows == undefined}
-		//TODO add headers
 		<DataTableSkeleton
 			headers={[
 				{ key: 'email', value: 'Email' },
