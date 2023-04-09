@@ -2,7 +2,7 @@ package view
 
 type Interviewer struct {
 	//TODO Interpretations, interviews and professions.
-	ID                 uint   `json:"id"`
+	ID                 uint   `json:"ID"`
 	Email              string `json:"email"`
 	Username           string `json:"username"`
 	Password           string `json:"password"`

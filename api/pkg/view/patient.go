@@ -3,7 +3,7 @@ package view
 import "time"
 
 type Patient struct {
-	ID                      uint      `json:"id"`
+	ID                      uint      `json:"ID"`
 	FirstName               string    `json:"firstName"`
 	LastName                string    `json:"lastName"`
 	FirstSurname            string    `json:"firstSurname"`
