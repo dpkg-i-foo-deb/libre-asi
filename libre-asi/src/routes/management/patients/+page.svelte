@@ -92,7 +92,12 @@
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
-						<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
+						<OverflowMenuItem
+							text="Edit"
+							on:click={function () {
+								goto('patients/' + row.id);
+							}}>Edit</OverflowMenuItem
+						>
 						<OverflowMenuItem
 							danger
 							text="Delete"
