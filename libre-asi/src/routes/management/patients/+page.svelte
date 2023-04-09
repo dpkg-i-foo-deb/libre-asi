@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-	import {
-		API_URL,
-		GET_PATIENTS,
-		REGISTER_PATIENT,
-		EDIT_PATIENTS,
-		DELETE_PATIENTS
-	} from '$lib/api/constants';
+	import { API_URL, GET_PATIENTS } from '$lib/api/constants';
 	import type Patient from '$lib/models/Patient';
 	import {
 		Button,
@@ -21,22 +15,9 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { checkEmail, checkUsername } from '$lib/util/formUtils';
-	import { handleResponse } from '$lib/util/handleResponse';
-
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
-	let duplicateCredentials = false;
 	let searchValue: string;
-	let isRegisterFormOpen = false;
-	let invalidEmailCaption = '';
-	let invalidUsernameCaption = '';
-	let invalidUsername = false;
-	let invalidEmail = false;
-	let newPatient: Patient;
-	let email = '';
-	let username = '';
-	let isSuccessRegisterOpen = false;
 
 	onMount(async function () {
 		await loadPatients();
@@ -54,66 +35,6 @@
 
 			filteredRows = rows;
 		}
-	}
-
-	function validateUsername(): boolean {
-		const usernameField = checkUsername(username);
-
-		invalidUsernameCaption = usernameField[0];
-		invalidUsername = !usernameField[1];
-
-		return usernameField[1];
-	}
-
-	function validateEmail(): boolean {
-		const emailField = checkEmail(email);
-
-		invalidEmailCaption = emailField[0];
-		invalidEmail = !emailField[1];
-
-		return emailField[1];
-	}
-	async function registerPatient() {
-		duplicateCredentials = false;
-
-		if (!validateEmail() || !validateUsername()) {
-			return;
-		}
-
-		newPatient = {
-			ID: 0,
-			CreatedAt: new Date(),
-			UpdatedAt: new Date(),
-			email: email,
-			username: username,
-			password: '',
-			firstName: '',
-			lastName: '',
-			firstSurname: '',
-			secondSurname: '',
-			birthdate: new Date(),
-			personalID: ''
-		};
-
-		const response = await fetchWithRefresh(API_URL + REGISTER_PATIENT, {
-			method: 'POST',
-			body: JSON.stringify(newPatient)
-		});
-
-		if (response.ok) {
-			newPatient = (await response.json()) as Patient;
-			isRegisterFormOpen = false;
-			isSuccessRegisterOpen = true;
-			loadPatients();
-		}
-
-		if (handleResponse(response.status, false))
-			if (response.status == 409) {
-				duplicateCredentials = true;
-			}
-
-		email = '';
-		username = '';
 	}
 </script>
 

@@ -1,25 +1,33 @@
 <script lang="ts">
 	import {
-		Column,
 		DatePicker,
 		DatePickerInput,
-		Grid,
-		Row,
 		TextInput,
 		Tile,
-		Breadcrumb,
 		Toggle,
 		FileUploader,
 		Button,
 		ButtonSet
 	} from 'carbon-components-svelte';
-	import { ImageLoader } from 'carbon-components-svelte';
 	import { goto } from '$app/navigation';
+	import type Patient from '$lib/models/Patient';
 
 	let showInfo = false;
 	let file: File | null = null;
 	let imageUrl: string | null = null;
 	let files: File[] = [];
+
+	let newPatient: Patient = {
+		email: '',
+		username: '',
+		password: '',
+		firstName: '',
+		lastName: '',
+		firstSurname: '',
+		lastSurname: '',
+		birthdate: new Date(),
+		personalID: ''
+	};
 
 	function handleFileSelect(event: CustomEvent) {
 		const selectedFiles = event.detail;
@@ -119,6 +127,7 @@
 								id="firstName"
 								labelText="Primer Nombre"
 								placeholder="Ingresa el primer nombre"
+								bind:value={newPatient.firstName}
 							/>
 						</div>
 
@@ -127,6 +136,7 @@
 								id="id"
 								labelText="Número de Identificación"
 								placeholder="Ingresa el número de identificación"
+								bind:value={newPatient.personalID}
 							/>
 						</div>
 
@@ -137,6 +147,7 @@
 								type="email"
 								labelText="Correo Electrónico"
 								placeholder="Ingresa el correo Electrónico"
+								bind:value={newPatient.email}
 							/>
 						</div>
 					</div>
@@ -154,6 +165,7 @@
 									id="secondname"
 									labelText="Segundo Nombre"
 									placeholder="Ingresa el segundo nombre"
+									bind:value={newPatient.lastName}
 								/>
 							</div>
 
@@ -162,6 +174,7 @@
 									id="firstSurname"
 									labelText="Primer Apellido"
 									placeholder="Ingresa el primer apellido"
+									bind:value={newPatient.firstSurname}
 								/>
 							</div>
 
@@ -170,20 +183,18 @@
 									id="secondSurname"
 									labelText="Segundo Apellido"
 									placeholder="Ingrese el segundo apellido"
+									bind:value={newPatient.lastSurname}
 								/>
 							</div>
 
 							<div class="text-field">
 								<DatePicker datePickerType="single" dateFormat="d/m/Y" on:change>
-									<DatePickerInput labelText="Fecha de nacimiento" placeholder="dd/mm/aaaa" />
+									<DatePickerInput
+										labelText="Fecha de nacimiento"
+										placeholder="dd/mm/aaaa"
+										bind:value={newPatient.birthdate}
+									/>
 								</DatePicker>
-							</div>
-							<div class="text-field">
-								<TextInput
-									id="phoneNumber"
-									labelText="Teléfono"
-									placeholder="Ingrese el teléfono"
-								/>
 							</div>
 						</div>
 					{/if}
