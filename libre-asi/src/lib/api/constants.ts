@@ -23,8 +23,8 @@ const REGISTER_INTERVIEWER = 'interviewers/';
 const EDIT_INTERVIEWER = 'interviewers/';
 const DELETE_INTERVIEWER = 'interviewers/';
 const REGISTER_PATIENT = 'patients/';
-const EDIT_PATIENTS = 'patients/';
-const DELETE_PATIENTS = 'patients/';
+const EDIT_PATIENT = 'patients/';
+const DELETE_PATIENT = 'patients/';
 
 export {
 	API_URL,
@@ -46,6 +46,6 @@ export {
 	EDIT_INTERVIEWER,
 	DELETE_INTERVIEWER,
 	REGISTER_PATIENT,
-	EDIT_PATIENTS,
-	DELETE_PATIENTS
+	EDIT_PATIENT,
+	DELETE_PATIENT
 };
