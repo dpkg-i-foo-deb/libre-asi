@@ -30,12 +30,20 @@
 			const existingPatients = (await response.json()) as Patient[];
 
 			rows = existingPatients.map(function (value: Patient) {
-				return { id: value.ID, email: value.email, username: value.username };
+				return {
+					id: value.ID,
+					email: value.email,
+					username: value.username,
+					firstName: value.firstName,
+					personalID: value.personalID
+				};
 			});
 
 			filteredRows = rows;
 		}
 	}
+
+	async function deletePatient() {}
 </script>
 
 <main>
@@ -64,7 +72,7 @@
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
 						<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
-						<OverflowMenuItem danger text="Delete" />
+						<OverflowMenuItem danger text="Delete" on:click={deletePatient} />
 					</OverflowMenu>
 				{:else}{cell.value}{/if}
 			</svelte:fragment>
