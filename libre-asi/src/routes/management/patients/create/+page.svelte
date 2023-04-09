@@ -45,8 +45,7 @@
 	}
 
 	function handleRegisterPatient() {
-		goto('/management/patients/+page.svelte/registerPatient');
-		alert('Hola');
+		goto('/management/patients/');
 	}
 </script>
 
