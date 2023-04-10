@@ -79,6 +79,8 @@
 
 			filteredRows = rows;
 		}
+
+		handleResponse(response.status, false);
 	}
 
 	function validateUsername(): boolean {

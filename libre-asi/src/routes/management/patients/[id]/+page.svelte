@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	let slug: string;
+	let id: string;
 
-    slug = $page.params.slug
+	id = $page.params.id;
 </script>
 
 <main>
-	<h1>{slug}</h1>
+	<h1>{id}</h1>
 </main>
