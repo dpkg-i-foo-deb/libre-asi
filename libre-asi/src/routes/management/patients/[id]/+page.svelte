@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { API_URL, GET_PATIENT } from '$lib/api/constants';
+	import { API_URL, EDIT_PATIENT, GET_PATIENT } from '$lib/api/constants';
 	import type Patient from '$lib/models/Patient';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
+	import { sendSuccess } from '$lib/util/notifications';
 	import {
 		Button,
 		ButtonSet,
@@ -54,7 +55,18 @@
 		handleResponse(response.status, false);
 	}
 
-	async function handleEditPatient() {}
+	async function handleSave() {
+		const response = await fetchWithRefresh(API_URL + EDIT_PATIENT, {
+			method: 'PATCH',
+			body: JSON.stringify(patient)
+		});
+
+		if (response.ok) {
+			sendSuccess('Éxito', 'Paciente editado correctamente, puede volver a la página anterior');
+		}
+
+		handleResponse(response.status, false);
+	}
 
 	function handleFileSelect() {}
 
@@ -85,7 +97,7 @@
 										goto('/management/patients');
 									}}>Cancelar</Button
 								>
-								<Button size="lg">Guardar</Button>
+								<Button size="lg" on:click={handleSave}>Guardar</Button>
 							</div>
 
 							<div class="attributes">
@@ -190,7 +202,7 @@
 										goto('/management/patients');
 									}}>Cancelar</Button
 								>
-								<Button size="lg">Guardar</Button>
+								<Button size="lg" on:click={handleSave}>Guardar</Button>
 							</div>
 
 							<div class="attributes">
