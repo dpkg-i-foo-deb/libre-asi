@@ -8,7 +8,6 @@
 		Button,
 		ProgressIndicator,
 		ProgressStep,
-		Toggle,
 		Grid,
 		Row,
 		Column
