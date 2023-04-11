@@ -8,7 +8,6 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import {
 		Button,
-		ButtonSet,
 		DatePicker,
 		DatePickerInput,
 		FileUploader,
@@ -83,80 +82,18 @@
 		</div>
 
 		<Tabs autoWidth>
-			<Tab label="Datos básicos" />
+			<Tab label="Datos mínimos" />
+			<Tab label="Foto" />
 			<Tab label="Datos extra" />
 
 			<svelte:fragment slot="content">
 				<TabContent style="padding:0;">
-					<Tile>
+					<Tile style="padding-bottom:0; padding-left:0; padding-right:0;">
 						<div class="content-container">
-							<div class="buttons-container">
-								<Button
-									kind="ghost"
-									size="lg"
-									on:click={function () {
-										goto('/management/patients');
-									}}>Cancelar</Button
-								>
-								<Button size="lg" on:click={handleSave}>Guardar</Button>
-							</div>
-
 							<div class="attributes">
 								<div class="basic-data">
 									<div class="subtitle">
 										<p class="bold">Estos son los datos mínimos para registrar un paciente</p>
-										<div
-											class="image-container"
-											style="display: flex; margin-top: 20px; padding: 70px;"
-										>
-											<div
-												class="file-uploader-container"
-												style="width: 100px; height: 100px; margin-right: 50px; padding: 5px; position: relative;"
-											>
-												<FileUploader
-													bind:files
-													on:add={handleFileSelect}
-													on:remove={handleFileRemove}
-													multiple={false}
-													labelTitle="Upload files"
-													buttonLabel="Add Picture"
-													labelDescription="Only JPEG files are accepted."
-													accept={['.jpg', '.jpeg']}
-													status="complete"
-													style="font-size: 10px;"
-												/>
-											</div>
-
-											<div
-												class="image-preview-container"
-												style="width: 100px; height: 100px; margin-left: 20px; padding: 10px; border: 1px solid black; position: relative;"
-											>
-												{#if imageUrl}
-													<div style="position: relative;">
-														<!-- svelte-ignore a11y-img-redundant-alt -->
-														<img
-															src={imageUrl}
-															alt="Profile Picture"
-															style="width: 100%; height: 100%; object-fit: cover; margin-bottom: 10px;"
-														/>
-														<div
-															style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"
-														>
-															Profile Picture
-														</div>
-														{#if imageUrl}
-															<div
-																style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
-															>
-																<Button kind="danger" on:click={removeImage} style="margin: auto;"
-																	>Remove</Button
-																>
-															</div>
-														{/if}
-													</div>
-												{/if}
-											</div>
-										</div>
 										<div class="text-field">
 											<TextInput
 												id="firstName"
@@ -177,7 +114,6 @@
 
 										<div class="text-field">
 											<TextInput
-												style="margin-bottom: 3rem"
 												id="email"
 												type="email"
 												labelText="Correo Electrónico"
@@ -189,23 +125,99 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="buttons-container">
+							<Button
+								kind="ghost"
+								size="lg"
+								on:click={function () {
+									goto('/management/patients');
+								}}>Cancelar</Button
+							>
+							<Button size="lg" on:click={handleSave}>Guardar</Button>
+						</div>
+					</Tile>
+				</TabContent>
+
+				<TabContent style="padding:0">
+					<Tile style="padding-bottom:0; padding-left:0; padding-right:0;">
+						<div class="content-container">
+							<div class="other-data">
+								<div class="subtitle">
+									<p class="bold">Establece una foto del paciente</p>
+
+									<div
+										class="image-container"
+										style="display: flex; margin-top: 20px; padding: 70px;"
+									>
+										<div
+											class="file-uploader-container"
+											style="width: 100px; height: 100px; margin-right: 50px; padding: 5px; position: relative;"
+										>
+											<FileUploader
+												bind:files
+												on:add={handleFileSelect}
+												on:remove={handleFileRemove}
+												multiple={false}
+												labelTitle="Upload files"
+												buttonLabel="Add Picture"
+												labelDescription="Only JPEG files are accepted."
+												accept={['.jpg', '.jpeg']}
+												status="complete"
+												style="font-size: 10px;"
+											/>
+										</div>
+
+										<div
+											class="image-preview-container"
+											style="width: 100px; height: 100px; margin-left: 20px; padding: 10px; border: 1px solid black; position: relative;"
+										>
+											{#if imageUrl}
+												<div style="position: relative;">
+													<!-- svelte-ignore a11y-img-redundant-alt -->
+													<img
+														src={imageUrl}
+														alt="Profile Picture"
+														style="width: 100%; height: 100%; object-fit: cover; margin-bottom: 10px;"
+													/>
+													<div
+														style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"
+													>
+														Profile Picture
+													</div>
+													{#if imageUrl}
+														<div
+															style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
+														>
+															<Button kind="danger" on:click={removeImage} style="margin: auto;"
+																>Remove</Button
+															>
+														</div>
+													{/if}
+												</div>
+											{/if}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="buttons-container">
+							<Button
+								kind="ghost"
+								size="lg"
+								on:click={function () {
+									goto('/management/patients');
+								}}>Cancelar</Button
+							>
+							<Button size="lg" on:click={handleSave}>Guardar</Button>
+						</div>
 					</Tile>
 				</TabContent>
 
 				<TabContent style="padding:0;"
-					><Tile>
+					><Tile style="padding-bottom:0; padding-left:0; padding-right:0;">
 						<div class="content-container">
-							<div class="buttons-container">
-								<Button
-									kind="ghost"
-									size="lg"
-									on:click={function () {
-										goto('/management/patients');
-									}}>Cancelar</Button
-								>
-								<Button size="lg" on:click={handleSave}>Guardar</Button>
-							</div>
-
 							<div class="attributes">
 								<div class="other-data">
 									<div class="subtitle">
@@ -251,8 +263,19 @@
 									</div>
 								</div>
 							</div>
-						</div></Tile
-					></TabContent
+						</div>
+
+						<div class="buttons-container">
+							<Button
+								kind="ghost"
+								size="lg"
+								on:click={function () {
+									goto('/management/patients');
+								}}>Cancelar</Button
+							>
+							<Button size="lg" on:click={handleSave}>Guardar</Button>
+						</div>
+					</Tile></TabContent
 				>
 			</svelte:fragment>
 		</Tabs>
@@ -296,11 +319,17 @@
 
 	.content-container {
 		display: block;
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 
 	.buttons-container {
 		display: flex;
+		flex-direction: row;
+		width: 100%;
 		align-items: right;
-		justify-content: flex-end;
+		justify-content: right;
+		margin-left: 0;
+		margin-right: 0;
 	}
 </style>

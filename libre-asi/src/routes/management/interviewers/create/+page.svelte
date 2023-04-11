@@ -43,14 +43,6 @@
 	}
 </script>
 
-<main>
-	<Tile>
-		<Grid>
-			<Row>
-				<Column />
-			</Row>
-		</Grid>
-	</Tile>
-</main>
+<main />
 
 <style></style>

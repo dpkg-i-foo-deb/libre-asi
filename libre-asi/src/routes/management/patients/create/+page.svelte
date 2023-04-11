@@ -60,18 +60,18 @@
 	}
 
 	async function handleNext() {
-		if (currentIndex == 0) {
-			submitButtonText = 'Registrar paciente';
-			currentIndex += 1;
-			return;
-		}
-
-		if (currentIndex > 1) {
+		if (currentIndex > 2) {
 			currentIndex = 0;
 			return;
 		}
 
-		if (currentIndex < 1) {
+		if (currentIndex == 1 && submitButtonText == 'Siguiente') {
+			currentIndex += 1;
+			submitButtonText = 'Registrar paciente';
+			return;
+		}
+
+		if (currentIndex < 2) {
 			currentIndex += 1;
 			return;
 		}
@@ -85,6 +85,7 @@
 		if (currentIndex > 0 && submitButtonText == 'Registrar paciente') {
 			currentIndex -= 1;
 			submitButtonText = 'Siguiente';
+			return;
 		}
 
 		if (currentIndex > 0) {
@@ -118,7 +119,8 @@
 		<div class="stepper">
 			<ProgressIndicator spaceEqually preventChangeOnClick bind:currentIndex>
 				<ProgressStep complete={currentIndex > 0} label="Datos mínimos" />
-				<ProgressStep complete={currentIndex > 1} label="Datos extra" />
+				<ProgressStep complete={currentIndex > 1} label="Foto" />
+				<ProgressStep complete={currentIndex > 2} label="Datos extra" />
 			</ProgressIndicator>
 		</div>
 
@@ -127,55 +129,7 @@
 				<div class="basic-data">
 					<div class="subtitle">
 						<p class="bold">Estos son los datos mínimos para registrar un paciente</p>
-						<div class="image-container" style="display: flex; margin-top: 20px; padding: 70px;">
-							<div
-								class="file-uploader-container"
-								style="width: 100px; height: 100px; margin-right: 50px; padding: 5px; position: relative;"
-							>
-								<FileUploader
-									bind:files
-									on:add={handleFileSelect}
-									on:remove={handleFileRemove}
-									multiple={false}
-									labelTitle="Upload files"
-									buttonLabel="Add Picture"
-									labelDescription="Only JPEG files are accepted."
-									accept={['.jpg', '.jpeg']}
-									status="complete"
-									style="font-size: 10px;"
-								/>
-							</div>
 
-							<div
-								class="image-preview-container"
-								style="width: 100px; height: 100px; margin-left: 20px; padding: 10px; border: 1px solid black; position: relative;"
-							>
-								{#if imageUrl}
-									<div style="position: relative;">
-										<!-- svelte-ignore a11y-img-redundant-alt -->
-										<img
-											src={imageUrl}
-											alt="Profile Picture"
-											style="width: 100%; height: 100%; object-fit: cover; margin-bottom: 10px;"
-										/>
-										<div
-											style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"
-										>
-											Profile Picture
-										</div>
-										{#if imageUrl}
-											<div
-												style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
-											>
-												<Button kind="danger" on:click={removeImage} style="margin: auto;"
-													>Remove</Button
-												>
-											</div>
-										{/if}
-									</div>
-								{/if}
-							</div>
-						</div>
 						<div class="text-field">
 							<TextInput
 								id="firstName"
@@ -196,7 +150,6 @@
 
 						<div class="text-field">
 							<TextInput
-								style="margin-bottom: 3rem"
 								id="email"
 								type="email"
 								labelText="Correo Electrónico"
@@ -209,6 +162,56 @@
 			{/if}
 
 			{#if currentIndex == 1}
+				<div class="image-container" style="display: flex; margin-top: 20px; padding: 70px;">
+					<div
+						class="file-uploader-container"
+						style="width: 100px; height: 100px; margin-right: 50px; padding: 5px; position: relative;"
+					>
+						<FileUploader
+							bind:files
+							on:add={handleFileSelect}
+							on:remove={handleFileRemove}
+							multiple={false}
+							labelTitle="Upload files"
+							buttonLabel="Add Picture"
+							labelDescription="Only JPEG files are accepted."
+							accept={['.jpg', '.jpeg']}
+							status="complete"
+							style="font-size: 10px;"
+						/>
+					</div>
+
+					<div
+						class="image-preview-container"
+						style="width: 100px; height: 100px; margin-left: 20px; padding: 10px; border: 1px solid black; position: relative;"
+					>
+						{#if imageUrl}
+							<div style="position: relative;">
+								<!-- svelte-ignore a11y-img-redundant-alt -->
+								<img
+									src={imageUrl}
+									alt="Profile Picture"
+									style="width: 100%; height: 100%; object-fit: cover; margin-bottom: 10px;"
+								/>
+								<div style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;">
+									Profile Picture
+								</div>
+								{#if imageUrl}
+									<div
+										style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
+									>
+										<Button kind="danger" on:click={removeImage} style="margin: auto;"
+											>Remove</Button
+										>
+									</div>
+								{/if}
+							</div>
+						{/if}
+					</div>
+				</div>
+			{/if}
+
+			{#if currentIndex == 2}
 				<div class="other-data">
 					<div class="subtitle">
 						<p class="bold">
@@ -284,13 +287,11 @@
 
 <style>
 	.other-data {
-		margin-bottom: 3rem;
 		margin-left: 1rem;
 		margin-right: 1rem;
 	}
 
 	.basic-data {
-		margin-bottom: 1rem;
 		margin-left: 1rem;
 		margin-right: 1rem;
 	}
@@ -308,13 +309,8 @@
 	}
 
 	.text-field {
-		margin-top: 3rem;
-	}
-
-	.form {
-		grid-column: 2 / 6;
-		grid-row: 1 / 3;
-		margin-right: 10px;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
 	}
 
 	.button-set-container {
