@@ -11,7 +11,7 @@ interface Interviewer {
 	lastSurName: string;
 	birthdate: Date;
 	age: number;
-	personalId: string;
+	personalID: string;
 }
 
 export default Interviewer;
