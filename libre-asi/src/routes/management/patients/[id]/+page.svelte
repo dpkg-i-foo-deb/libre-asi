@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { API_URL, GET_PATIENT } from '$lib/api/constants';
 	import type Patient from '$lib/models/Patient';
@@ -77,7 +78,13 @@
 					<Tile>
 						<div class="content-container">
 							<div class="buttons-container">
-								<Button kind="ghost" size="lg">Cancelar</Button>
+								<Button
+									kind="ghost"
+									size="lg"
+									on:click={function () {
+										goto('/management/patients');
+									}}>Cancelar</Button
+								>
 								<Button size="lg">Guardar</Button>
 							</div>
 
@@ -176,7 +183,13 @@
 					><Tile>
 						<div class="content-container">
 							<div class="buttons-container">
-								<Button kind="ghost" size="lg">Cancelar</Button>
+								<Button
+									kind="ghost"
+									size="lg"
+									on:click={function () {
+										goto('/management/patients');
+									}}>Cancelar</Button
+								>
 								<Button size="lg">Guardar</Button>
 							</div>
 
