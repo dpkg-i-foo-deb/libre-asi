@@ -152,8 +152,8 @@
 							<TextInput
 								id="email"
 								type="email"
-								labelText="Correo Electrónico"
-								placeholder="Ingresa el correo Electrónico"
+								labelText="Correo electrónico"
+								placeholder="Ingresa el correo electrónico"
 								bind:value={newPatient.email}
 							/>
 						</div>
@@ -220,8 +220,8 @@
 					</div>
 					<div class="text-field">
 						<TextInput
-							id="secondname"
-							labelText="Segundo Nombre"
+							id="lastName"
+							labelText="Segundo nombre"
 							placeholder="Ingresa el segundo nombre"
 							bind:value={newPatient.lastName}
 						/>
@@ -230,7 +230,7 @@
 					<div class="text-field">
 						<TextInput
 							id="firstSurname"
-							labelText="Primer Apellido"
+							labelText="Primer apellido"
 							placeholder="Ingresa el primer apellido"
 							bind:value={newPatient.firstSurname}
 						/>
@@ -238,8 +238,8 @@
 
 					<div class="text-field">
 						<TextInput
-							id="secondSurname"
-							labelText="Segundo Apellido"
+							id="lastSurname"
+							labelText="Segundo apellido"
 							placeholder="Ingrese el segundo apellido"
 							bind:value={newPatient.lastSurname}
 						/>
