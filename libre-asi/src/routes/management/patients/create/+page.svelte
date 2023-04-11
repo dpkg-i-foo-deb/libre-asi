@@ -66,6 +66,36 @@
 		}
 	}
 
+	async function handleNext() {
+		if (currentIndex == 0) {
+			submitButtonText = 'Registrar paciente';
+			currentIndex += 1;
+		}
+
+		if (currentIndex > 1) {
+			currentIndex = 0;
+		}
+
+		if (currentIndex < 1) {
+			currentIndex += 1;
+		}
+
+		if (currentIndex == 1) {
+			handleRegisterPatient();
+		}
+	}
+
+	function handleBack() {
+		if (currentIndex > 0 && submitButtonText == 'Registrar paciente') {
+			currentIndex -= 1;
+			submitButtonText = 'Siguiente';
+		}
+
+		if (currentIndex > 0) {
+			currentIndex -= 1;
+		}
+	}
+
 	async function handleRegisterPatient() {
 		//TODO add validation
 
@@ -98,10 +128,12 @@
 								<ProgressStep
 									label="Datos mínimos"
 									description="Datos mínimos para registrar a un paciente"
+									complete={currentIndex > 0}
 								/>
 								<ProgressStep
 									label="Datos extra"
 									description="Datos extra para identificar mejor al paciente"
+									complete={currentIndex > 1}
 								/>
 							</ProgressIndicator>
 						</div>
@@ -250,14 +282,21 @@
 							<Button style="width:100%" size="lg" kind="ghost">Cancelar</Button>
 						</div>
 						<div class="button">
-							<Button style="width:100%" size="lg" kind="secondary">Atrás</Button>
+							<Button
+								style="width:100%"
+								size="lg"
+								kind="secondary"
+								on:click={function () {
+									handleBack();
+								}}>Atrás</Button
+							>
 						</div>
 						<div class="button">
 							<Button
 								style="width:100%"
 								size="lg"
-								on:click={() => {
-									handleRegisterPatient();
+								on:click={function () {
+									handleNext();
 								}}>{submitButtonText}</Button
 							>
 						</div>
@@ -270,10 +309,10 @@
 
 <style>
 	.progress-indicator {
-		margin-top: 1rem;
+		margin-top: 3rem;
 	}
 	.other-data {
-		margin-bottom: 1rem;
+		margin-bottom: 3rem;
 	}
 
 	.basic-data {
