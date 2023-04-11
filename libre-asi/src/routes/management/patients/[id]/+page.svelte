@@ -35,7 +35,8 @@
 		birthdate: new Date(),
 		username: '',
 		password: '',
-		personalID: ''
+		personalID: '',
+		age: 0
 	};
 
 	onMount(async function () {
