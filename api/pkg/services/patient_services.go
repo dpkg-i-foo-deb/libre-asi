@@ -24,13 +24,17 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	}
 
 	if database.DB.Where("social_security_number = ?", newPatient.SocialSecurityNumber).First(&patient).Error != gorm.ErrRecordNotFound {
-		return nil, errors.ErrConflict
+
+		if patient.SocialSecurityNumber != "" {
+			return nil, errors.ErrConflict
+		}
+
 	}
 
 	user.Email = newPatient.Email
 	user.Password = "unhashed"
 	user.NeedsPasswordReset = true
-	user.Username = newPatient.Username
+	user.Username = newPatient.FirstName + newPatient.LastName
 
 	person.FirstName = newPatient.FirstName
 	person.LastName = newPatient.LastName
@@ -41,6 +45,7 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	person.PersonalID = newPatient.PersonalID
 
 	//TODO race and religious preference
+	patient = models.Patient{}
 	patient.SocialSecurityNumber = newPatient.SocialSecurityNumber
 	patient.Interviews = []models.Interview{}
 
@@ -80,6 +85,7 @@ func GetPatients() ([]view.Patient, error) {
 		Joins("LEFT JOIN people ON patients.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("patients.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset, patients.social_security_number").
+		Where("patients.deleted_at is NULL").
 		Find(&patients).
 		Error; err != nil {
 		return nil, errors.ErrInternalError

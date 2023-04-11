@@ -1,17 +1,12 @@
 <script lang="ts">
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-	import {
-		API_URL,
-		GET_PATIENTS,
-		REGISTER_PATIENT,
-		EDIT_PATIENTS,
-		DELETE_PATIENTS
-	} from '$lib/api/constants';
+	import { API_URL, DELETE_PATIENT, GET_PATIENTS } from '$lib/api/constants';
 	import type Patient from '$lib/models/Patient';
 	import {
 		Button,
 		DataTable,
 		DataTableSkeleton,
+		Modal,
 		OverflowMenu,
 		OverflowMenuItem,
 		Toolbar,
@@ -21,22 +16,15 @@
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { checkEmail, checkUsername } from '$lib/util/formUtils';
+	import { sendSuccess } from '$lib/util/notifications';
 	import { handleResponse } from '$lib/util/handleResponse';
+
+	let openDeleteModal = false;
+	let deletingId: number;
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
-	let duplicateCredentials = false;
 	let searchValue: string;
-	let isRegisterFormOpen = false;
-	let invalidEmailCaption = '';
-	let invalidUsernameCaption = '';
-	let invalidUsername = false;
-	let invalidEmail = false;
-	let newPatient: Patient;
-	let email = '';
-	let username = '';
-	let isSuccessRegisterOpen = false;
 
 	onMount(async function () {
 		await loadPatients();
@@ -49,77 +37,38 @@
 			const existingPatients = (await response.json()) as Patient[];
 
 			rows = existingPatients.map(function (value: Patient) {
-				return { id: value.ID, email: value.email, username: value.username };
+				return {
+					id: value.ID,
+					email: value.email,
+					username: value.username,
+					firstName: value.firstName,
+					personalID: value.personalID
+				};
 			});
 
 			filteredRows = rows;
 		}
 	}
 
-	function validateUsername(): boolean {
-		const usernameField = checkUsername(username);
-
-		invalidUsernameCaption = usernameField[0];
-		invalidUsername = !usernameField[1];
-
-		return usernameField[1];
-	}
-
-	function validateEmail(): boolean {
-		const emailField = checkEmail(email);
-
-		invalidEmailCaption = emailField[0];
-		invalidEmail = !emailField[1];
-
-		return emailField[1];
-	}
-	async function registerPatient() {
-		duplicateCredentials = false;
-
-		if (!validateEmail() || !validateUsername()) {
-			return;
-		}
-
-		newPatient = {
-			ID: 0,
-			CreatedAt: new Date(),
-			UpdatedAt: new Date(),
-			email: email,
-			username: username,
-			password: '',
-			firstName: '',
-			lastName: '',
-			firstSurname: '',
-			secondSurname: '',
-			birthdate: new Date(),
-			personalID: ''
-		};
-
-		const response = await fetchWithRefresh(API_URL + REGISTER_PATIENT, {
-			method: 'POST',
-			body: JSON.stringify(newPatient)
+	async function deletePatient() {
+		const response = await fetchWithRefresh(API_URL + DELETE_PATIENT + deletingId, {
+			method: 'DELETE'
 		});
 
 		if (response.ok) {
-			newPatient = (await response.json()) as Patient;
-			isRegisterFormOpen = false;
-			isSuccessRegisterOpen = true;
-			loadPatients();
+			sendSuccess('Éxito', 'Paciente eliminado exitosamente');
 		}
 
-		if (handleResponse(response.status, false))
-			if (response.status == 409) {
-				duplicateCredentials = true;
-			}
+		handleResponse(response.status, false);
 
-		email = '';
-		username = '';
+		openDeleteModal = false;
+
+		loadPatients();
 	}
 </script>
 
 <main>
 	{#if rows == undefined}
-		//TODO add headers
 		<DataTableSkeleton
 			headers={[
 				{ key: 'email', value: 'Email' },
@@ -143,8 +92,21 @@
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
-						<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
-						<OverflowMenuItem danger text="Delete" />
+						<OverflowMenuItem
+							text="Edit"
+							on:click={function () {
+								goto('patients/' + row.id);
+							}}>Edit</OverflowMenuItem
+						>
+						<OverflowMenuItem
+							danger
+							text="Delete"
+							on:click={function () {
+								openDeleteModal = true;
+
+								deletingId = row.id;
+							}}
+						/>
 					</OverflowMenu>
 				{:else}{cell.value}{/if}
 			</svelte:fragment>
@@ -160,6 +122,20 @@
 			</Toolbar>
 		</DataTable>
 	{/if}
+
+	<Modal
+		danger
+		bind:open={openDeleteModal}
+		modalHeading="Eliminar Paciente"
+		primaryButtonText="Eliminar"
+		secondaryButtonText="Cancelar"
+		on:click:button--secondary={() => (openDeleteModal = false)}
+		on:open
+		on:close
+		on:submit={deletePatient}
+	>
+		<p>Esta acción es permanente.</p>
+	</Modal>
 </main>
 
 <style>
