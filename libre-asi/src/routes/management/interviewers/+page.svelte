@@ -62,10 +62,9 @@
 {#if rows == undefined}
 	<DataTableSkeleton
 		headers={[
-			{ key: 'email', value: 'Email' },
-			{ key: 'username', value: 'Username' }
-			// { key: 'firstName', value: 'First Name' },
-			// { key: 'firstSurName', value: 'First Surname' }
+			{ key: 'email', value: 'Correo' },
+			{ key: 'firstName', value: 'Primer Nombre' },
+			{ key: 'personalID', value: 'Identificación' }
 		]}
 		rows={5}
 	/>
