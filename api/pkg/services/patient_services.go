@@ -24,7 +24,11 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	}
 
 	if database.DB.Where("social_security_number = ?", newPatient.SocialSecurityNumber).First(&patient).Error != gorm.ErrRecordNotFound {
-		return nil, errors.ErrConflict
+
+		if patient.SocialSecurityNumber != "" {
+			return nil, errors.ErrConflict
+		}
+
 	}
 
 	user.Email = newPatient.Email
@@ -41,6 +45,7 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	person.PersonalID = newPatient.PersonalID
 
 	//TODO race and religious preference
+	patient = models.Patient{}
 	patient.SocialSecurityNumber = newPatient.SocialSecurityNumber
 	patient.Interviews = []models.Interview{}
 

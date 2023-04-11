@@ -70,14 +70,17 @@
 		if (currentIndex == 0) {
 			submitButtonText = 'Registrar paciente';
 			currentIndex += 1;
+			return;
 		}
 
 		if (currentIndex > 1) {
 			currentIndex = 0;
+			return;
 		}
 
 		if (currentIndex < 1) {
 			currentIndex += 1;
+			return;
 		}
 
 		if (currentIndex == 1) {
