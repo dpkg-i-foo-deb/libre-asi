@@ -258,30 +258,24 @@
 			{/if}
 
 			<div class="button-set-container">
-				<div class="button">
-					<Button style="width:100%" size="lg" kind="ghost">Cancelar</Button>
-				</div>
-				<div class="button">
-					<Button
-						style="width:100%"
-						size="lg"
-						kind="secondary"
-						on:click={function () {
-							handleBack();
-						}}>Atrás</Button
-					>
-				</div>
-				<div class="button">
-					<Button
-						style="width:100%"
-						size="lg"
-						on:click={function () {
-							handleNext();
-						}}>{submitButtonText}</Button
-					>
-				</div>
-			</div>
-		</Tile>
+				<Button size="lg" kind="ghost">Cancelar</Button>
+
+				<Button
+					size="lg"
+					kind="secondary"
+					on:click={function () {
+						handleBack();
+					}}>Atrás</Button
+				>
+
+				<Button
+					size="lg"
+					on:click={function () {
+						handleNext();
+					}}>{submitButtonText}</Button
+				>
+			</div></Tile
+		>
 	</div>
 </main>
 
@@ -315,16 +309,8 @@
 
 	.button-set-container {
 		display: flex;
-		flex-direction: row;
-		width: 100%;
 		align-items: flex-end;
-		justify-content: right;
-	}
-
-	.button {
-		margin-left: 0;
-		margin-right: 0;
-		width: 100%;
+		justify-content: flex-end;
 	}
 
 	.stepper {
