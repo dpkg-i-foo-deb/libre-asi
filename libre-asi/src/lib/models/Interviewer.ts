@@ -7,8 +7,8 @@ interface Interviewer {
 	password: string;
 	firstName: string;
 	lastName: string;
-	firstSurName: string;
-	lastSurName: string;
+	firstSurname: string;
+	lastSurname: string;
 	birthdate: Date;
 	age: number;
 	personalID: string;

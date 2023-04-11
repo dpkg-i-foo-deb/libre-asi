@@ -35,7 +35,8 @@
 		firstSurname: '',
 		lastSurname: '',
 		birthdate: new Date(),
-		personalID: ''
+		personalID: '',
+		age: 0
 	};
 
 	function handleFileSelect(event: CustomEvent) {

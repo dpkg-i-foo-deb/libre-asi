@@ -11,4 +11,5 @@ export default interface Patient {
 	lastSurname: string;
 	birthdate: Date;
 	personalID: string;
+	age: number;
 }
