@@ -119,7 +119,11 @@ func GetPatient(id uint) (*view.Patient, error) {
 
 func UpdatePatient(updatedPatient view.Patient) error {
 
+	//TODO improve
+
 	var found models.Patient
+	var person models.Person
+	var user models.User
 
 	if err := database.DB.Where("ID = ?", updatedPatient.ID).First(&found).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
@@ -129,8 +133,51 @@ func UpdatePatient(updatedPatient view.Patient) error {
 		return errors.ErrInternalError
 	}
 
-	if err := database.DB.Omit("password").Save(updatedPatient).Error; err != nil {
+	if err := database.DB.Where("ID = ?", found.PersonID).First(&person).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
 		return errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("ID = ?", person.UserID).First(&user).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return errors.ErrEntityNotFound
+		}
+
+		return errors.ErrInternalError
+	}
+
+	found.SocialSecurityNumber = updatedPatient.SocialSecurityNumber
+
+	person.FirstName = updatedPatient.FirstName
+	person.LastName = updatedPatient.LastName
+	person.FirstSurname = updatedPatient.FirstSurname
+	person.LastSurname = updatedPatient.LastSurname
+	person.Age = updatedPatient.Age
+	person.Birthdate = updatedPatient.Birthdate
+	person.PersonalID = updatedPatient.PersonalID
+
+	user.Email = updatedPatient.Email
+
+	if err := database.DB.Transaction(func(tx *gorm.DB) error {
+
+		if err := tx.Save(&user).Error; err != nil {
+			return err
+		}
+
+		if err := tx.Save(&person).Error; err != nil {
+			return err
+		}
+
+		if err := tx.Save(&found).Error; err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return err
 	}
 
 	return nil
