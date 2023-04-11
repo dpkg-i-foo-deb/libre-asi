@@ -24,6 +24,8 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import { handleResponse } from '$lib/util/handleResponse';
 
+	let submitButtonText = 'Siguiente';
+
 	let file: File | null = null;
 	let imageUrl: string | null = null;
 	let files: File[] = [];
@@ -92,14 +94,14 @@
 				<Row>
 					<Column sm={3} md={4} lg={4}>
 						<div class="progress-indicator">
-							<ProgressIndicator vertical bind:currentIndex>
+							<ProgressIndicator vertical bind:currentIndex preventChangeOnClick>
 								<ProgressStep
 									label="Datos mínimos"
-									description="The progress indicator will listen for clicks on the steps"
+									description="Datos mínimos para registrar a un paciente"
 								/>
 								<ProgressStep
 									label="Datos extra"
-									description="The progress indicator will listen for clicks on the steps"
+									description="Datos extra para identificar mejor al paciente"
 								/>
 							</ProgressIndicator>
 						</div>
@@ -241,21 +243,26 @@
 						{/if}
 					</Column>
 				</Row>
-				<div class="button-set">
-					<Row>
-						<div class="button-set">
-							<ButtonSet>
-								<Button kind="secondary">Cancelar</Button>
-								<Button
-									href=""
-									on:click={() => {
-										handleRegisterPatient();
-									}}>Registrar Paciente</Button
-								>
-							</ButtonSet>
+
+				<Row>
+					<div class="button-set-container">
+						<div class="button">
+							<Button style="width:100%" size="lg" kind="ghost">Cancelar</Button>
 						</div>
-					</Row>
-				</div>
+						<div class="button">
+							<Button style="width:100%" size="lg" kind="secondary">Atrás</Button>
+						</div>
+						<div class="button">
+							<Button
+								style="width:100%"
+								size="lg"
+								on:click={() => {
+									handleRegisterPatient();
+								}}>{submitButtonText}</Button
+							>
+						</div>
+					</div>
+				</Row>
 			</Grid>
 		</Tile>
 	</div>
@@ -295,9 +302,16 @@
 		margin-right: 10px;
 	}
 
-	.button-set {
+	.button-set-container {
 		display: flex;
-		justify-content: flex-end;
-		margin-right: 2rem;
+		flex-direction: row;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.button {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 	}
 </style>
