@@ -6,45 +6,21 @@
 		ToolbarContent,
 		ToolbarSearch,
 		DataTableSkeleton,
-		ComposedModal,
-		ModalHeader,
-		ModalFooter,
-		ModalBody,
-		TextInput,
-		InlineNotification,
 		Modal,
-		CodeSnippet,
 		OverflowMenu,
 		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type Interviewer from '$lib/models/Interviewer';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { checkEmail, checkUsername } from '$lib/util/formUtils';
-	import { handleResponse } from '$lib/util/handleResponse';
-	import {
-		API_URL,
-		GET_INTERVIEWERS,
-		REGISTER_INTERVIEWER,
-		EDIT_INTERVIEWER,
-		DELETE_INTERVIEWER
-	} from '$lib/api/constants';
+	import { API_URL, GET_INTERVIEWERS } from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-	import { sendError, sendSuccess } from '$lib/util/notifications';
+	import { handleResponse } from '$lib/util/handleResponse';
+	import { goto } from '$app/navigation';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
 
-	let email = '';
-	let username = '';
-
-	let invalidEmail = false;
-	let invalidUsername = false;
-	let invalidEmailCaption = '';
-	let invalidUsernameCaption = '';
-	let duplicateCredentials = false;
-	let isEditionFormOpen = false;
-	let editingId = 0;
 	let deletingId = 0;
 	let isModalOpen = false;
 	let searchValue = '';
@@ -70,9 +46,9 @@
 
 			filteredRows = rows;
 		}
-	}
 
-	async function register() {}
+		handleResponse(response.status, false);
+	}
 
 	function handleSearch() {}
 
@@ -120,7 +96,11 @@
 		<Toolbar>
 			<ToolbarContent>
 				<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
-				<Button on:click={function () {}}>Register Interviewer</Button>
+				<Button
+					on:click={function () {
+						goto('/management/interviewers/create');
+					}}>Registrar Entrevistador</Button
+				>
 			</ToolbarContent>
 		</Toolbar>
 	</DataTable>
