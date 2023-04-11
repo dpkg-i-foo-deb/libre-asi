@@ -82,9 +82,9 @@
 			title="Patients"
 			description="Current Registered Patients"
 			headers={[
-				{ key: 'email', value: 'Email' },
-				{ key: 'firstName', value: 'First Name' },
-				{ key: 'personalID', value: 'Personal ID' },
+				{ key: 'email', value: 'Correo' },
+				{ key: 'firstName', value: 'Primer Nombre' },
+				{ key: 'personalID', value: 'Identificación' },
 				{ key: 'overflow', empty: true }
 			]}
 			bind:rows={filteredRows}
