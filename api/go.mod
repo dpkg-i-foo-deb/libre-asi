@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/glebarez/sqlite v1.7.0
-	github.com/gofiber/fiber/v2 v2.43.0
+	github.com/gofiber/fiber/v2 v2.44.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/spf13/cobra v1.7.0
 	golang.org/x/crypto v0.8.0
@@ -25,7 +25,7 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230126093431-47fa9a501578 // indirect
