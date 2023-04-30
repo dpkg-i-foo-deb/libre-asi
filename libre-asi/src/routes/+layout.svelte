@@ -84,7 +84,7 @@
 
 <Theme persist persistKey="__carbon-theme" />
 
-<Header persistentHamburgerMenu={$setup} bind:isSideNavOpen company="Libre-ASI">
+<Header bind:isSideNavOpen platformName="Libre-ASI" href="/">
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -129,7 +129,7 @@
 	</HeaderUtilities>
 </Header>
 
-{#if $setup}
+{#if $setup && $page.url.pathname != '/setup' && $page.url.pathname != '/login'}
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
 			<SideNavLink
@@ -137,24 +137,37 @@
 				href="/"
 				isSelected={$page.url.pathname == '/'}
 			/>
-			<SideNavLink
-				text={$LL.navMenu.HOME()}
-				href="/home"
-				isSelected={$page.url.pathname == '/home'}
-			/>
+
 			{#if $session.active}
+				<SideNavLink
+					text={$LL.navMenu.HOME()}
+					href="/home"
+					isSelected={$page.url.pathname == '/home'}
+				/>
 				<SideNavMenu
 					text={$LL.navMenu.MANAGEMENT()}
 					expanded={$page.url.pathname.toString().includes('/management/')}
 				>
 					{#if $session.role == SessionRole.Admin}
 						<SideNavMenuItem
-							href="/management/admin"
+							href="/management/administrators"
 							text={$LL.navMenu.ADMINISTRATORS()}
-							isSelected={$page.url.pathname == '/management/admin'}
+							isSelected={$page.url.pathname == '/management/administrators'}
 						/>
 
-						<SideNavMenuItem text={$LL.navMenu.INTERVIEWERS()} />
+						<SideNavMenuItem
+							text={$LL.navMenu.INTERVIEWERS()}
+							href="/management/interviewers"
+							isSelected={$page.url.pathname == '/management/interviewers'}
+						/>
+					{/if}
+
+					{#if $session.role == SessionRole.Admin || $session.role == SessionRole.Interviewer}
+						<SideNavMenuItem
+							href="/management/patients"
+							text="Patients"
+							isSelected={$page.url.pathname == '/management/patients'}
+						/>
 					{/if}
 				</SideNavMenu>
 			{/if}
@@ -163,9 +176,9 @@
 {/if}
 
 <Content>
-	<Grid>
+	<Grid padding={false} style="padding-left:0;">
 		<Row>
-			<Column>
+			<Column style="padding-left:0;">
 				{#if !canRender}
 					{#await checkSetup()}
 						<ProgressBar helperText={$LL.navMenu.LOADING()} />

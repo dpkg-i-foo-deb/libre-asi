@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { ADMIN_LOGIN, ADMIN_PASSWORD_RESET, API_URL, INTERVIEWER_LOGIN, INTERVIEWER_PASSWORD_RESET, PASSWORD_RESET } from '$lib/api/constants';
+	import {
+		ADMIN_LOGIN,
+		ADMIN_PASSWORD_RESET,
+		API_URL,
+		INTERVIEWER_LOGIN,
+		INTERVIEWER_PASSWORD_RESET,
+		PASSWORD_RESET
+	} from '$lib/api/constants';
 	import type PasswordReset from '$lib/models/PasswordReset';
 	import { fetchNoRefresh } from '$lib/util/fetch';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
@@ -77,7 +84,7 @@
 	async function resetPassword() {
 		loading = true;
 		invalidCredentials = false;
-		let url = API_URL
+		let url = API_URL;
 
 		if (!validateCurrentPassword()) {
 			return;
@@ -91,13 +98,12 @@
 			return;
 		}
 
-		if (wantsAdmin){
-			url += ADMIN_PASSWORD_RESET
-		} 
-		if (wantsInterviewer){
+		if (wantsAdmin) {
+			url += ADMIN_PASSWORD_RESET;
+		}
+		if (wantsInterviewer) {
 			url += INTERVIEWER_PASSWORD_RESET;
 		}
-
 
 		const credentials: PasswordReset = {
 			currentPassword: currentPassword,
