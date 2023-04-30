@@ -129,7 +129,7 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 	return &interviewer, nil
 }
 
-func CreateInterviewer(i view.Interviewer) (*view.Interviewer, error) {
+func RegisterInterviewer(i view.Interviewer) (*view.Interviewer, error) {
 
 	var user models.User
 	var person models.Person

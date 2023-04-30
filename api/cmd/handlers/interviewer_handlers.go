@@ -40,7 +40,7 @@ func GetInterviewers(c *fiber.Ctx) error {
 	return c.Status(200).JSON(interviewers)
 }
 
-func CreateInterviewer(c *fiber.Ctx) error {
+func RegisterInterviewer(c *fiber.Ctx) error {
 
 	var i view.Interviewer
 
@@ -50,7 +50,7 @@ func CreateInterviewer(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	interviewer, err := services.CreateInterviewer(i)
+	interviewer, err := services.RegisterInterviewer(i)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
