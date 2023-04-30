@@ -9,7 +9,7 @@ export default interface Patient {
 	lastName: string;
 	firstSurname: string;
 	lastSurname: string;
-	birthdate: Date;
+	birthdate?: Date;
 	personalID: string;
 	age: number;
 }

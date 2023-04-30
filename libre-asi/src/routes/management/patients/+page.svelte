@@ -1,14 +1,19 @@
 <script lang="ts">
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
-	import { API_URL, DELETE_PATIENT, GET_PATIENTS } from '$lib/api/constants';
+	import { API_URL, DELETE_PATIENT, GET_PATIENTS, REGISTER_PATIENT } from '$lib/api/constants';
 	import type Patient from '$lib/models/Patient';
 	import {
 		Button,
+		ComposedModal,
 		DataTable,
 		DataTableSkeleton,
 		Modal,
+		ModalBody,
+		ModalFooter,
+		ModalHeader,
 		OverflowMenu,
 		OverflowMenuItem,
+		TextInput,
 		Toolbar,
 		ToolbarContent,
 		ToolbarSearch
@@ -19,12 +24,27 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import { handleResponse } from '$lib/util/handleResponse';
 
-	let openDeleteModal = false;
+	let newPatient: Patient = {
+		email: '',
+		username: '',
+		age: 0,
+		firstName: '',
+		firstSurname: '',
+		lastName: '',
+		lastSurname: '',
+		password: '',
+		personalID: '',
+		ID: 0
+	};
+
+	let isDeleteModalOpen = false;
 	let deletingId: number;
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
 	let searchValue: string;
+
+	let isRegisterFormOpen = false;
 
 	onMount(async function () {
 		await loadPatients();
@@ -39,15 +59,30 @@
 			rows = existingPatients.map(function (value: Patient) {
 				return {
 					id: value.ID,
-					email: value.email,
-					username: value.username,
-					firstName: value.firstName,
+					firstName: value.firstName + value.lastName,
 					personalID: value.personalID
 				};
 			});
 
 			filteredRows = rows;
 		}
+
+		handleResponse(response.status, false);
+	}
+
+	async function handleRegister() {
+		const response = await fetchWithRefresh(API_URL + REGISTER_PATIENT, {
+			method: 'POST',
+			body: JSON.stringify(newPatient)
+		});
+
+		if (response.ok) {
+			await loadPatients();
+			isRegisterFormOpen = false;
+			sendSuccess('Paciente registrado', 'Paciente registrado exitosamente');
+		}
+
+		handleResponse(response.status, false);
 	}
 
 	async function deletePatient() {
@@ -56,12 +91,12 @@
 		});
 
 		if (response.ok) {
-			sendSuccess('Éxito', 'Paciente eliminado exitosamente');
+			sendSuccess('Paciente eliminado', 'Paciente eliminado exitosamente');
 		}
 
 		handleResponse(response.status, false);
 
-		openDeleteModal = false;
+		isDeleteModalOpen = false;
 
 		loadPatients();
 	}
@@ -71,19 +106,17 @@
 	{#if rows == undefined}
 		<DataTableSkeleton
 			headers={[
-				{ key: 'email', value: 'Email' },
-				{ key: 'firstName', value: 'First Name' },
-				{ key: 'personalID', value: 'Personal ID' }
+				{ key: 'firstName', value: 'Nombre' },
+				{ key: 'personalID', value: 'Identificación' }
 			]}
 			rows={5}
 		/>
 	{:else}
 		<DataTable
-			title="Patients"
-			description="Current Registered Patients"
+			title="Pacientes"
+			description="Pacientes registrados actualmente"
 			headers={[
-				{ key: 'email', value: 'Correo' },
-				{ key: 'firstName', value: 'Primer Nombre' },
+				{ key: 'firstName', value: 'Nombre' },
 				{ key: 'personalID', value: 'Identificación' },
 				{ key: 'overflow', empty: true }
 			]}
@@ -93,16 +126,16 @@
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
 						<OverflowMenuItem
-							text="Edit"
+							text="Editar"
 							on:click={function () {
 								goto('patients/' + row.id);
-							}}>Edit</OverflowMenuItem
+							}}>Editar</OverflowMenuItem
 						>
 						<OverflowMenuItem
 							danger
-							text="Delete"
+							text="Eliminar"
 							on:click={function () {
-								openDeleteModal = true;
+								isDeleteModalOpen = true;
 
 								deletingId = row.id;
 							}}
@@ -114,22 +147,73 @@
 				<ToolbarContent>
 					<ToolbarSearch bind:value={searchValue} />
 					<Button
-						on:click={() => {
-							goto('patients/create/');
-						}}>Register Patient</Button
+						on:click={function () {
+							isRegisterFormOpen = true;
+						}}>Registrar paciente</Button
 					>
 				</ToolbarContent>
 			</Toolbar>
 		</DataTable>
 	{/if}
 
+	<ComposedModal
+		bind:open={isRegisterFormOpen}
+		selectorPrimaryFocus="#firstName"
+		on:submit={handleRegister}
+	>
+		<ModalHeader label="Transacción" title="Registro de paciente" />
+
+		<ModalBody hasForm>
+			<form>
+				<h7 class="paragraph"> El registro provee únicamente los datos mínimos</h7>
+
+				<br />
+
+				<div class="input-field">
+					<TextInput
+						id="firstName"
+						labelText="Primer nombre"
+						placeholder="Ingrese el primer nombre"
+						bind:value={newPatient.firstName}
+					/>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="firstSurname"
+						labelText="Primer apellido"
+						placeholder="Ingrese el primer apellido"
+						bind:value={newPatient.firstSurname}
+					/>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="id"
+						labelText="Número de identificación"
+						placeholder="Ingrese el número de identificación"
+						bind:value={newPatient.personalID}
+					/>
+				</div>
+			</form>
+		</ModalBody>
+
+		<ModalFooter
+			primaryButtonText="Registrar paciente"
+			secondaryButtonText="Cancelar"
+			on:click:button--secondary={function () {
+				isRegisterFormOpen = false;
+			}}
+		/>
+	</ComposedModal>
+
 	<Modal
 		danger
-		bind:open={openDeleteModal}
+		bind:open={isDeleteModalOpen}
 		modalHeading="Eliminar Paciente"
 		primaryButtonText="Eliminar"
 		secondaryButtonText="Cancelar"
-		on:click:button--secondary={() => (openDeleteModal = false)}
+		on:click:button--secondary={() => (isDeleteModalOpen = false)}
 		on:open
 		on:close
 		on:submit={deletePatient}
