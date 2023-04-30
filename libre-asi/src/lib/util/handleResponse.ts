@@ -14,6 +14,9 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			goto('/');
 			break;
 
+		case 400:
+			sendError('Something went wrong', 'Bad request');
+
 		case 503:
 			goto('/cannot-connect');
 			setup.set(false);

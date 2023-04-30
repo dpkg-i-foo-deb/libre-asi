@@ -18,9 +18,10 @@
 	import { onMount } from 'svelte';
 	import type Interviewer from '$lib/models/Interviewer';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { API_URL, GET_INTERVIEWERS } from '$lib/api/constants';
+	import { API_URL, GET_INTERVIEWERS, REGISTER_INTERVIEWER } from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
+	import { sendSuccess } from '$lib/util/notifications';
 
 	let newInterviewer: Interviewer = {
 		email: '',
@@ -75,7 +76,20 @@
 		isModalOpen = false;
 	}
 
-	function handleRegister() {}
+	async function handleRegister() {
+		const response = await fetchWithRefresh(API_URL + REGISTER_INTERVIEWER, {
+			method: 'POST',
+			body: JSON.stringify(newInterviewer)
+		});
+
+		if (response.ok) {
+			await loadInterviewers();
+			isRegisterFormOpen = false;
+			sendSuccess('Entrevistador registrado', 'Entrevistador registrado exitosamente');
+		}
+
+		handleResponse(response.status, false);
+	}
 
 	function handleDelete() {}
 </script>

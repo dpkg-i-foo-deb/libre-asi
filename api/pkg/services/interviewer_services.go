@@ -135,12 +135,16 @@ func RegisterInterviewer(i view.Interviewer) (*view.Interviewer, error) {
 	var person models.Person
 	var interviewer models.Interviewer
 
-	if database.DB.Where("email = ?", i.Email).First(&user).Error != nil {
-		return nil, errors.ErrConflict
+	if err := database.DB.Where("email = ?", i.Email).First(&user).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			return nil, errors.ErrConflict
+		}
 	}
 
-	if database.DB.Where("personal_id = ?", i.PersonalID).First(&person).Error != nil {
-		return nil, errors.ErrConflict
+	if err := database.DB.Where("personal_id = ?", i.PersonalID).First(&person).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			return nil, errors.ErrConflict
+		}
 	}
 
 	user.Email = i.Email
@@ -172,6 +176,8 @@ func RegisterInterviewer(i view.Interviewer) (*view.Interviewer, error) {
 			return err
 
 		}
+
+		person.UserID = user.ID
 
 		if err := tx.Create(&person).Error; err != nil {
 			return err
