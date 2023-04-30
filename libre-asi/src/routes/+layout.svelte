@@ -176,9 +176,9 @@
 {/if}
 
 <Content>
-	<Grid>
+	<Grid padding={false} style="padding-left:0;">
 		<Row>
-			<Column>
+			<Column style="padding-left:0;">
 				{#if !canRender}
 					{#await checkSetup()}
 						<ProgressBar helperText={$LL.navMenu.LOADING()} />

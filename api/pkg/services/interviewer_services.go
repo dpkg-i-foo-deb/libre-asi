@@ -102,6 +102,7 @@ func GetInterviewers() ([]view.Interviewer, error) {
 		Joins("LEFT JOIN people ON interviewers.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("interviewers.id, users.email,users.username,'', users.needs_password_reset,people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id,interviewers.rma").
+		Where("interviewers.deleted_at IS NULL").
 		Find(&interviewers).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
@@ -120,11 +121,99 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 		Joins("LEFT JOIN people ON interviewer.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("interviewers.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset").
-		Where("interviewers.id = ?", id).
+		Where("interviewers.id = ? AND interviewers.deleted_at IS NULL", id).
 		First(&interviewer).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
 	}
 
 	return &interviewer, nil
+}
+
+func RegisterInterviewer(i view.Interviewer) (*view.Interviewer, error) {
+
+	var user models.User
+	var person models.Person
+	var interviewer models.Interviewer
+
+	if err := database.DB.Where("email = ?", i.Email).First(&user).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			return nil, errors.ErrConflict
+		}
+	}
+
+	if err := database.DB.Where("personal_id = ?", i.PersonalID).First(&person).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			return nil, errors.ErrConflict
+		}
+	}
+
+	user.Email = i.Email
+	p, err := util.MakeRandomPassword()
+
+	if err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	hash, err := util.HashPassword(p)
+
+	if err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	user.Password = hash
+	user.NeedsPasswordReset = true
+	user.Username = i.Username
+	user.Email = i.Email
+
+	person.FirstName = i.FirstName
+	person.PersonalID = i.PersonalID
+
+	interviewer = models.Interviewer{}
+
+	if err := database.DB.Transaction(func(tx *gorm.DB) error {
+
+		if err := tx.Create(&user).Error; err != nil {
+			return err
+
+		}
+
+		person.UserID = user.ID
+
+		if err := tx.Create(&person).Error; err != nil {
+			return err
+
+		}
+
+		interviewer.PersonID = person.ID
+
+		if err := tx.Create(&interviewer).Error; err != nil {
+			return err
+		}
+
+		return nil
+
+	}); err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	i.Password = p
+
+	return &i, nil
+
+}
+
+func DeleteInterviewer(id int) error {
+
+	var i models.Interviewer
+
+	if database.DB.Where("id = ?", id).First(&i).Error != nil {
+		return errors.ErrEntityNotFound
+	}
+
+	if database.DB.Delete(&i).Error != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
 }
