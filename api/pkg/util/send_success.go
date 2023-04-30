@@ -13,6 +13,6 @@ func SendSuccess(c *fiber.Ctx, status int, message string) error {
 		Message: message,
 	}
 
-	return c.Status(200).JSON(res)
+	return c.Status(status).JSON(res)
 
 }

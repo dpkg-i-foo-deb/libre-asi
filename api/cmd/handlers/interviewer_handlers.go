@@ -59,3 +59,19 @@ func RegisterInterviewer(c *fiber.Ctx) error {
 	return c.Status(201).JSON(interviewer)
 
 }
+
+func DeleteInterviewer(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return errors.ErrInternalError
+	}
+
+	if err := services.DeleteInterviewer(idInt); err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return util.SendSuccess(c, 200, "Interviewer deleted successfully")
+}

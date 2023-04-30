@@ -18,10 +18,15 @@
 	import { onMount } from 'svelte';
 	import type Interviewer from '$lib/models/Interviewer';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { API_URL, GET_INTERVIEWERS, REGISTER_INTERVIEWER } from '$lib/api/constants';
+	import {
+		API_URL,
+		DELETE_INTERVIEWER,
+		GET_INTERVIEWERS,
+		REGISTER_INTERVIEWER
+	} from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { sendSuccess } from '$lib/util/notifications';
+	import { sendInfo, sendSuccess } from '$lib/util/notifications';
 
 	let newInterviewer: Interviewer = {
 		email: '',
@@ -41,7 +46,7 @@
 	let filteredRows: ReadonlyArray<DataTableRow>;
 
 	let deletingId = 0;
-	let isModalOpen = false;
+	let isDeleteModalOpen = false;
 	let searchValue = '';
 
 	let isRegisterFormOpen = false;
@@ -73,7 +78,7 @@
 	function handleSearch() {}
 
 	function handleCancel() {
-		isModalOpen = false;
+		isDeleteModalOpen = false;
 	}
 
 	async function handleRegister() {
@@ -91,7 +96,19 @@
 		handleResponse(response.status, false);
 	}
 
-	function handleDelete() {}
+	async function handleDelete() {
+		const response = await fetchWithRefresh(API_URL + DELETE_INTERVIEWER + deletingId, {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			await loadInterviewers();
+			isDeleteModalOpen = false;
+			sendInfo('Entrevistador eliminado', 'Entrevistador eliminado exitosamente');
+		}
+
+		handleResponse(response.status, false);
+	}
 </script>
 
 {#if rows == undefined}
@@ -117,11 +134,11 @@
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
-						<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
+						<OverflowMenuItem text="Editar" on:click={function () {}}>Editar</OverflowMenuItem>
 						<OverflowMenuItem
 							danger
-							text="Delete"
-							on:click={() => ((isModalOpen = true), (deletingId = row.id))}
+							text="Eliminar"
+							on:click={() => ((isDeleteModalOpen = true), (deletingId = row.id))}
 						/>
 					</OverflowMenu>
 				{:else}{cell.value}{/if}
@@ -206,14 +223,14 @@
 
 	<Modal
 		danger
-		bind:open={isModalOpen}
-		modalHeading="Delete Interviewer"
-		primaryButtonText="Delete"
-		secondaryButtonText="Cancel"
+		bind:open={isDeleteModalOpen}
+		modalHeading="Eliminación de entrevistador"
+		primaryButtonText="Eliminar entrevistador"
+		secondaryButtonText="Cancelar"
 		on:submit={handleDelete}
 		on:click:button--secondary={handleCancel}
 	>
-		<p>Are you sure you want to delete this Interviewer?</p>
+		<p>¿Está seguro que desea eliminar este entrevistador?</p>
 	</Modal>
 {/if}
 

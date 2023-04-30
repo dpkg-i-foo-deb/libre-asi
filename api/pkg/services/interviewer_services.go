@@ -102,6 +102,7 @@ func GetInterviewers() ([]view.Interviewer, error) {
 		Joins("LEFT JOIN people ON interviewers.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("interviewers.id, users.email,users.username,'', users.needs_password_reset,people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id,interviewers.rma").
+		Where("interviewers.deleted_at IS NULL").
 		Find(&interviewers).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
@@ -120,7 +121,7 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 		Joins("LEFT JOIN people ON interviewer.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("interviewers.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset").
-		Where("interviewers.id = ?", id).
+		Where("interviewers.id = ? AND interviewers.deleted_at IS NULL", id).
 		First(&interviewer).
 		Error; err != nil {
 		return nil, errors.ErrInternalError
@@ -200,4 +201,19 @@ func RegisterInterviewer(i view.Interviewer) (*view.Interviewer, error) {
 
 	return &i, nil
 
+}
+
+func DeleteInterviewer(id int) error {
+
+	var i models.Interviewer
+
+	if database.DB.Where("id = ?", id).First(&i).Error != nil {
+		return errors.ErrEntityNotFound
+	}
+
+	if database.DB.Delete(&i).Error != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
 }
