@@ -8,5 +8,5 @@ import (
 func interviewerRoutes() {
 	server.Get("/interviewers/:id", auth.ValidateAccessToken, auth.ValidateAdministratorOrInterviewerRole, handlers.GetInterviewer)
 	server.Get("/interviewers", auth.ValidateAccessToken, auth.ValidateAdministratorOrInterviewerRole, handlers.GetInterviewers)
-
+	server.Post("/interviewers", auth.ValidateAccessToken, auth.ValidateAdministratorRole, handlers.CreateInterviewer)
 }

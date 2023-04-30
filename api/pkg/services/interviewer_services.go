@@ -129,28 +129,34 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 	return &interviewer, nil
 }
 
-func CreateInterviewer(i view.Interviewer) error {
+func CreateInterviewer(i view.Interviewer) (*view.Interviewer, error) {
 
 	var user models.User
 	var person models.Person
 	var interviewer models.Interviewer
 
 	if database.DB.Where("email = ?", i.Email).First(&user).Error != nil {
-		return errors.ErrConflict
+		return nil, errors.ErrConflict
 	}
 
 	if database.DB.Where("personal_id = ?", i.PersonalID).First(&person).Error != nil {
-		return errors.ErrConflict
+		return nil, errors.ErrConflict
 	}
 
 	user.Email = i.Email
 	p, err := util.MakeRandomPassword()
 
 	if err != nil {
-		return errors.ErrInternalError
+		return nil, errors.ErrInternalError
 	}
 
-	user.Password = p
+	hash, err := util.HashPassword(p)
+
+	if err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	user.Password = hash
 	user.NeedsPasswordReset = true
 	user.Username = i.Username
 	user.Email = i.Email
@@ -181,9 +187,11 @@ func CreateInterviewer(i view.Interviewer) error {
 		return nil
 
 	}); err != nil {
-		return errors.ErrInternalError
+		return nil, errors.ErrInternalError
 	}
 
-	return nil
+	i.Password = p
+
+	return &i, nil
 
 }
