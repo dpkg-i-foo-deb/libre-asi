@@ -178,15 +178,6 @@
 						bind:value={newInterviewer.firstName}
 					/>
 				</div>
-
-				<div class="input-field">
-					<TextInput
-						id="firstSurname"
-						labelText="Primer apellido"
-						placeholder="Ingrese el primer apellido"
-						bind:value={newInterviewer.firstSurname}
-					/>
-				</div>
 			</form>
 		</ModalBody>
 

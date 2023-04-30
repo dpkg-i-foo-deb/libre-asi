@@ -128,3 +128,62 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 
 	return &interviewer, nil
 }
+
+func CreateInterviewer(i view.Interviewer) error {
+
+	var user models.User
+	var person models.Person
+	var interviewer models.Interviewer
+
+	if database.DB.Where("email = ?", i.Email).First(&user).Error != nil {
+		return errors.ErrConflict
+	}
+
+	if database.DB.Where("personal_id = ?", i.PersonalID).First(&person).Error != nil {
+		return errors.ErrConflict
+	}
+
+	user.Email = i.Email
+	p, err := util.MakeRandomPassword()
+
+	if err != nil {
+		return errors.ErrInternalError
+	}
+
+	user.Password = p
+	user.NeedsPasswordReset = true
+	user.Username = i.Username
+	user.Email = i.Email
+
+	person.FirstName = i.FirstName
+	person.PersonalID = i.PersonalID
+
+	interviewer = models.Interviewer{}
+
+	if err := database.DB.Transaction(func(tx *gorm.DB) error {
+
+		if err := tx.Create(&user).Error; err != nil {
+			return err
+
+		}
+
+		if err := tx.Create(&person).Error; err != nil {
+			return err
+
+		}
+
+		interviewer.PersonID = person.ID
+
+		if err := tx.Create(&interviewer).Error; err != nil {
+			return err
+		}
+
+		return nil
+
+	}); err != nil {
+		return errors.ErrInternalError
+	}
+
+	return nil
+
+}
