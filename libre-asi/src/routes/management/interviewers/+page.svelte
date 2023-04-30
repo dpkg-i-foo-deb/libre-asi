@@ -8,7 +8,12 @@
 		DataTableSkeleton,
 		Modal,
 		OverflowMenu,
-		OverflowMenuItem
+		OverflowMenuItem,
+		ComposedModal,
+		ModalHeader,
+		ModalBody,
+		TextInput,
+		ModalFooter
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type Interviewer from '$lib/models/Interviewer';
@@ -16,7 +21,20 @@
 	import { API_URL, GET_INTERVIEWERS } from '$lib/api/constants';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { goto } from '$app/navigation';
+
+	let newInterviewer: Interviewer = {
+		email: '',
+		username: '',
+		age: 0,
+		birthdate: new Date(),
+		firstName: '',
+		lastName: '',
+		firstSurname: '',
+		lastSurname: '',
+		password: '',
+		personalID: '',
+		ID: 0
+	};
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -24,6 +42,8 @@
 	let deletingId = 0;
 	let isModalOpen = false;
 	let searchValue = '';
+
+	let isRegisterFormOpen = false;
 
 	onMount(async function () {
 		await loadInterviewers();
@@ -37,9 +57,8 @@
 			rows = existingInterviewers.map(function (value: Interviewer) {
 				return {
 					id: value.ID,
-					email: value.email,
 					username: value.username,
-					firstName: value.firstName,
+					firstName: value.firstName + value.lastName,
 					personalID: value.personalID
 				};
 			});
@@ -56,53 +75,129 @@
 		isModalOpen = false;
 	}
 
+	function handleRegister() {}
+
 	function handleDelete() {}
 </script>
 
 {#if rows == undefined}
 	<DataTableSkeleton
 		headers={[
-			{ key: 'email', value: 'Correo' },
 			{ key: 'firstName', value: 'Primer Nombre' },
 			{ key: 'personalID', value: 'Identificación' }
 		]}
 		rows={5}
 	/>
 {:else}
-	<DataTable
-		title="Entrevistadores"
-		description="Registrados actualmente"
-		headers={[
-			{ key: 'email', value: 'Correo' },
-			{ key: 'firstName', value: 'Primer Nombre' },
-			{ key: 'personalID', value: 'Identificación' },
-			{ key: 'overflow', empty: true }
-		]}
-		bind:rows={filteredRows}
+	<div class="data-table">
+		<DataTable
+			title="Entrevistadores"
+			description="Registrados actualmente"
+			headers={[
+				{ key: 'firstName', value: 'Nombre' },
+				{ key: 'personalID', value: 'Identificación' },
+				{ key: 'overflow', empty: true }
+			]}
+			bind:rows={filteredRows}
+		>
+			<svelte:fragment slot="cell" let:cell let:row>
+				{#if cell.key === 'overflow'}
+					<OverflowMenu flipped>
+						<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
+						<OverflowMenuItem
+							danger
+							text="Delete"
+							on:click={() => ((isModalOpen = true), (deletingId = row.id))}
+						/>
+					</OverflowMenu>
+				{:else}{cell.value}{/if}
+			</svelte:fragment>
+			<Toolbar>
+				<ToolbarContent>
+					<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
+					<Button
+						on:click={function () {
+							isRegisterFormOpen = true;
+						}}>Registrar Entrevistador</Button
+					>
+				</ToolbarContent>
+			</Toolbar>
+		</DataTable>
+	</div>
+
+	<ComposedModal
+		bind:open={isRegisterFormOpen}
+		selectorPrimaryFocus="#email"
+		on:submit={handleRegister}
 	>
-		<svelte:fragment slot="cell" let:cell let:row>
-			{#if cell.key === 'overflow'}
-				<OverflowMenu flipped>
-					<OverflowMenuItem text="Edit" on:click={function () {}}>Edit</OverflowMenuItem>
-					<OverflowMenuItem
-						danger
-						text="Delete"
-						on:click={() => ((isModalOpen = true), (deletingId = row.id))}
+		<ModalHeader label="Transacción" title="Registro de entrevistador" />
+
+		<ModalBody hasForm>
+			<form>
+				<h7 class="paragraph"> El registro provee únicamente los datos mínimos </h7>
+
+				<br />
+
+				<h6 class="paragraph">
+					La contraseña de la cuenta será generada automáticamente y el nuevo usuario tendrá que
+					actualizarla
+				</h6>
+
+				<div class="input-field">
+					<TextInput
+						id="email"
+						labelText="Correo electrónico"
+						placeholder="Ingrese el correo electrónico"
+						bind:value={newInterviewer.email}
 					/>
-				</OverflowMenu>
-			{:else}{cell.value}{/if}
-		</svelte:fragment>
-		<Toolbar>
-			<ToolbarContent>
-				<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
-				<Button
-					on:click={function () {
-						goto('/management/interviewers/create');
-					}}>Registrar Entrevistador</Button
-				>
-			</ToolbarContent>
-		</Toolbar>
-	</DataTable>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="username"
+						labelText="Nombre de usuario"
+						placeholder="Ingrese el nombre de usuario"
+						bind:value={newInterviewer.username}
+					/>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="id"
+						labelText="Número de documento de identidad"
+						placeholder="Ingrese el número de documento de identidad"
+						bind:value={newInterviewer.personalID}
+					/>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="firstName"
+						labelText="Primer nombre"
+						placeholder="Ingrese el primer nombre"
+						bind:value={newInterviewer.firstName}
+					/>
+				</div>
+
+				<div class="input-field">
+					<TextInput
+						id="firstSurname"
+						labelText="Primer apellido"
+						placeholder="Ingrese el primer apellido"
+						bind:value={newInterviewer.firstSurname}
+					/>
+				</div>
+			</form>
+		</ModalBody>
+
+		<ModalFooter
+			primaryButtonText="Registrar administrador"
+			secondaryButtonText="Cancelar"
+			on:click:button--secondary={function () {
+				isRegisterFormOpen = false;
+			}}
+		/>
+	</ComposedModal>
 
 	<Modal
 		danger
@@ -118,4 +213,17 @@
 {/if}
 
 <style>
+	.data-table {
+		padding-right: 0;
+	}
+
+	.input-field {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.paragraph {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 </style>
