@@ -1,0 +1,21 @@
+[
+	{
+		"special_id":"I12",
+		"statement":"¿Cuál es su estado civil actual?",
+		"order":1,
+		"type":"SAMCQN",
+		"category":"INF",
+		"options":[
+			{
+				"description":"Casado/a",
+				"order":1,
+				"value":1
+			},
+			{
+				"description":"Vive como si estuviera casado/a",
+				"order":2,
+				"value":2
+			}
+		]
+	}
+]
