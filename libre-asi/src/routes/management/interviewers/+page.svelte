@@ -27,6 +27,7 @@
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendInfo, sendSuccess } from '$lib/util/notifications';
+	import { goto } from '$app/navigation';
 
 	let newInterviewer: Interviewer = {
 		email: '',
@@ -134,7 +135,12 @@
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
-						<OverflowMenuItem text="Editar" on:click={function () {}}>Editar</OverflowMenuItem>
+						<OverflowMenuItem
+							text="Editar"
+							on:click={function () {
+								goto('interviewers/' + row.id);
+							}}>Editar</OverflowMenuItem
+						>
 						<OverflowMenuItem
 							danger
 							text="Eliminar"
