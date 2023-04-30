@@ -10,6 +10,4 @@ type Option struct {
 	Description           string       `json:"description"`
 	SimplifiedDescription string       `json:"simplifiedDescription"`
 	Help                  []OptionHelp `json:"help"`
-	DependencyID          *uint
-	Dependencies          []Option `json:"dependencies" gorm:"foreignKey:DependencyID"`
 }

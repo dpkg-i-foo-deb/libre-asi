@@ -1,0 +1,47 @@
+SAMCQN -> Single answer multiple choice question number: It means the user is presented
+a question with multiple option choices... Each of them has a number as the value and you
+put that number as the answer, only a single answer is allowed.
+Ref: ASI-6 I12
+
+OEYMQ -> Open Ended Year Month Question... The user is presented a text and they must answer
+the amount of years and months using integers
+Ref: ASI-6 I13
+
+MAMCN (EVALUATE) -> Multiple answer multiple choice number: It means the user is presented with two ways
+to answer the question... The first one means the last 6 months and the second one is on the last
+30 days... Both can be answered and only numbers are allowed
+Ref: ASI-6 A1
+
+BQ -> Binary question... The user is presented with a text and the only possible answers are yes or no
+yes=1 no =0, only a single answer is allowed
+Ref: ASI-6 A10
+
+TQ -> Ternary question... The same as BQ but introduces and "I don't know" option
+Ref: ASI-6 SF2
+
+MAMCQN -> Multiple answer multiple choice question number... The user is presented with a question with
+multiple options, multiple answers can be choosen and each one of them means a number for the results
+Ref: ASI-6 A11
+
+CBQ -> Checkbox binary question... The user is presented with a text and only answers with a checkbox
+yes or no... Yes = 1 no = 0
+Ref: ASI-6 SF3
+
+DNQ -> Days Number question... The user is presented a text and must answer with a number meaning the amount of days
+Ref: ASI-6 SF20
+
+TNQ -> Times number question... The same as DNQ but the number means "times"
+Ref:ASI-6 SF25A
+
+MNQ -> Months number question... The same as DNQ but the number means "months"
+
+WNQ -> Weeks number question... The same as DNQ but the number means "weeks"
+
+YNQ -> Years number question... The same as DNQ but the number means "years"
+
+SMA -> Single money answer... The question is presented as text and the user answers
+with money
+
+SAQ -> Single age question... The user is presented a text and they answer with their age...
+
+

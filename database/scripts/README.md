@@ -1,3 +1,3 @@
 # Scripts
-This are the scripts used to create the Postgres database, they
-should be executed in the right order
+This scripts are only used for development, they're most likely
+constrainted to be executed on Postgres

@@ -11,4 +11,6 @@ type Question struct {
 	Options              []Option               `json:"options"`
 	QuestionTypeID       uint                   `json:"type"`
 	AsiFormID            uint                   `json:"asiForm"`
+	DependencyID         *uint
+	Dependencies         []Question `json:"dependencies" gorm:"foreignKey:DependencyID"`
 }
