@@ -15,14 +15,14 @@ type Interview struct {
 	PatientID    uint          `json:"patient"`
 	Interviewers []Interviewer `json:"interviewer" gorm:"many2many:interviewer_interviews"`
 	Attendants   []Attendant   `json:"attendants" gorm:"many2many:attendants_interviews"`
-	Answers      []Question    `json:"answers" gorm:"many2many:interview_answers"`
+	Answers      []Option      `json:"answers" gorm:"many2many:interview_answers"`
 	AsiFormID    uint          `json:"AsiForm"`
 	Language     string        `json:"language"`
 }
 
 type InterviewAnswers struct {
 	InterviewID uint `json:"interview" gorm:"primaryKey"`
-	QuestionID  uint `json:"option" gorm:"primaryKey"`
+	OptionID    uint `json:"option" gorm:"primaryKey"`
 	CreatedAt   time.Time
 	DeletedAt   gorm.DeletedAt
 	Answer      string `json:"answer"`
