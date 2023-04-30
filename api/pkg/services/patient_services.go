@@ -16,8 +16,12 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	var patient models.Patient
 
 	if database.DB.Where("email = ?", newPatient.Email).First(&user).Error != gorm.ErrRecordNotFound {
-		return nil, errors.ErrConflict
+		if user.Email != "" {
+			return nil, errors.ErrConflict
+		}
 	}
+
+	user = models.User{}
 
 	if database.DB.Where("personal_id = ?", newPatient.PersonalID).First(&person).Error != gorm.ErrRecordNotFound {
 		return nil, errors.ErrConflict

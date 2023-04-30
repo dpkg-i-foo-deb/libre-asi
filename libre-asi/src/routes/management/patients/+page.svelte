@@ -223,4 +223,13 @@
 </main>
 
 <style>
+	.input-field {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.paragraph {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 </style>

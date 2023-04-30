@@ -241,10 +241,6 @@
 {/if}
 
 <style>
-	.data-table {
-		padding-right: 0;
-	}
-
 	.input-field {
 		padding-top: 10px;
 		padding-bottom: 10px;
