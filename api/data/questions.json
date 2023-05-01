@@ -41,7 +41,7 @@
 		"special_id": "I14",
 		"statement": "¿Quién le derivó el tratamiento?",
 		"order": 14,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "INF",
 		"options": [
 			{
@@ -672,7 +672,7 @@
 		"special_id": "SF17",
 		"statement": "¿Alguna vez le han prescrito medicación para alguna de esas enfermedades?",
 		"order": 17,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -720,7 +720,7 @@
 		"special_id": "SF19",
 		"statement": "En los últimos 30 días, ¿cómo diría que ha sido su salud física?",
 		"order": 19,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -782,7 +782,7 @@
 		"special_id": "SF22",
 		"statement": "¿Cuánto dolor o malestar físico ha experimentado?",
 		"order": 22,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -816,7 +816,7 @@
 		"special_id": "SF23",
 		"statement": "¿Cuánta preocupación ha tenido por culpa de su salud física o sus problemas médicos?",
 		"order": 23,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -850,7 +850,7 @@
 		"special_id": "SF24",
 		"statement": "¿Cuánta importancia tiene para usted el tratamiento (actual o adicional) para sus problemas de salud física?",
 		"order": 24,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -955,7 +955,7 @@
 		"special_id": "E1",
 		"statement": "¿Cuál es el máximo nivel de estudios alcanzado?",
 		"order": 1,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1013,7 +1013,7 @@
 		"special_id": "E3",
 		"statement": "¿Cuál es el último curso que completó?",
 		"order": 3,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1096,7 +1096,7 @@
 		"special_id": "E5",
 		"statement": "¿Actualmente cursa algún tipo de estudio académico o de formación laboral? ",
 		"order": 5,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1196,7 +1196,7 @@
 		"special_id": "E10",
 		"statement": "¿Cuál es su situación laboral actual?",
 		"order": 10,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1225,7 +1225,7 @@
 		"special_id": "E11",
 		"statement": "¿Cuál describe mejor su situación actual?",
 		"order": 11,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1269,7 +1269,7 @@
 		"special_id": "E12",
 		"statement": "¿Qué tipo de trabajo realiza (empleo principal)?",
 		"order": 12,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1395,7 +1395,7 @@
 		"special_id": "E16",
 		"statement": "¿Cuál era su empleo/ocupación entonces?",
 		"order": 16,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "EMP",
 		"options": [
 			{
@@ -1563,7 +1563,7 @@
 		"special_id": "E23",
 		"statement": "¿Cuánta importancia tiene para usted ahora cualquier tipo de orientación laboral (como asesoramiento, formación o educación) que le ayude a encontrar un empleo o a solucionar los problemas relacionados con el trabajo?",
 		"order": 23,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "MED",
 		"options": [
 			{
@@ -2079,7 +2079,7 @@
 		"special_id": "D12",
 		"statement": "En los últimos 6 meses, durante el mes que mas bebía, ¿con qué fecuencia bebía? ",
 		"order": 12,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2259,7 +2259,7 @@
 		"special_id": "D22",
 		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido por estos problemas relacionados con el alcohol? ",
 		"order": 22,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2293,7 +2293,7 @@
 		"special_id": "D23",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para dejar de beber?",
 		"order": 23,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2327,7 +2327,7 @@
 		"special_id": "D24",
 		"statement": "¿Cuánta importancia tiene para usted lograr/mantener la abstinencia total del alcohol (es decir, no beber nada)?",
 		"order": 24,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2408,7 +2408,7 @@
 		"special_id": "D25D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió marihuana?",
 		"order": 28,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2488,7 +2488,7 @@
 		"special_id": "D26D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió sedantes?",
 		"order": 33,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2568,7 +2568,7 @@
 		"special_id": "D27D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió cocaina?",
 		"order": 38,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2648,7 +2648,7 @@
 		"special_id": "D28D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió estimulantes?",
 		"order": 43,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2728,7 +2728,7 @@
 		"special_id": "D29D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió alucinógenos?",
 		"order": 48,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2808,7 +2808,7 @@
 		"special_id": "D30D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió heroína?",
 		"order": 53,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2888,7 +2888,7 @@
 		"special_id": "D31D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió metadona?",
 		"order": 58,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -2968,7 +2968,7 @@
 		"special_id": "D32D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió otros opiáceos?",
 		"order": 63,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
@@ -3048,7 +3048,7 @@
 		"special_id": "D33D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió inhalantes?",
 		"order": 68,
-		"type": "SANCQN",
+		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
 			{
