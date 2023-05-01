@@ -1,24 +1,5 @@
 [
 	{
-		"special_id": "I12",
-		"statement": "¿Cuál es su estado civil actual?",
-		"order": 1,
-		"type": "SAMCQN",
-		"category": "INF",
-		"options": [
-			{
-				"description": "Casado/a",
-				"order": 1,
-				"value": 1
-			},
-			{
-				"description": "Vive como si estuviera casado/a",
-				"order": 2,
-				"value": 2
-			}
-		]
-	},
-	{
 		"special_id": "P21",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para sus problemas psicológicos?",
 		"order": 21,
@@ -118,7 +99,7 @@
 		"special_id": "P17",
 		"statement": "¿Ha experimentado otros problemas emocionales o psicológicos no mencionados anteriormente?",
 		"order": 17,
-		"type:": "MAMCQN",
+		"type": "MAMCQN",
 		"category": "PSY",
 		"options": [
 			{
@@ -2719,6 +2700,921 @@
 				"description": "Años",
 				"order": 0,
 				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L2",
+		"statement": "¿Ha sido detenido alguna vez?",
+		"order": 2,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L1",
+		"statement": "¿Alguna vez ha estado en el calabozo/cárcel, incluso unas pocas horas?",
+		"order": 1,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D60",
+		"statement": "¿En los últimos 30 días ¿Cuántos días ha jugado a cualquier tipo de juego como lotería, cupón, quiniela, máquinas tragaperras, bingo, apuestas en las carreras, casinos... O a cualquier tipo de juego ilegal?",
+		"order": 60,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 0,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D59",
+		"statement": "¿Alguna vez ha sufrido algún problema económico debido al juego?",
+		"order": 59,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D58",
+		"statement": "En los últimos 30 días ¿Cuántos días ha fumado cigarrillos (O consumió tabaco de otras formas)?",
+		"order": 58,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 0,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D57",
+		"statement": "¿Cuántos años ha fumado cigarrillos (O consumido tabaco de otras formas) diariamente?",
+		"order": 57,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D56",
+		"statement": "¿Qué edad tenía la primera vez que fumó cigarrillos o consumió tabaco de otras formas?",
+		"order": 56,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D55",
+		"statement": "¿Cuándo fue la última vez que se hizo la prueba del VIH/SIDA?",
+		"order": 55,
+		"type": "OEYMQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			},
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D54",
+		"statement": "En los últimos 6 meses ¿Con cuántas personas distintas ha mantenido relaciones sexuales orales, anales o vaginales?",
+		"order": 54,
+		"type": "TNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Cantidad",
+				"order": 0,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D53",
+		"statement": "¿Cuándo fue la última vez que compartió jeringuillas o material para inyectarse?",
+		"order": 53,
+		"type": "OEYMQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			},
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D52",
+		"statement": "¿Alguna vez se ha inyectado drogas?",
+		"order": 52,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D51",
+		"statement": "¿Hace cuánto tiempo terminó este periodo de abstinencia?",
+		"order": 51,
+		"type": "OEYMQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			},
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D50",
+		"statement": "En los últimos 30 días. Desde que empezó a consumir ¿Ha estado alguna vez completamente abstinente de drogas y alcohol durante al menos un año?",
+		"order": 50,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D49",
+		"statement": "¿Cuánta importancia tiene para usted lograr/mantener la abstinencia total de drogas?",
+		"order": 49,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D48",
+		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para dejar de consumir drogas?",
+		"order": 48,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D47",
+		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido por culpa de estos problemas relacionados con las drogas?",
+		"order": 47,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D46",
+		"statement": "¿Cuántos días ha tenido estas u otras dificultades debido al consumo de drogas?",
+		"order": 46,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D45",
+		"statement": "¿El ansia o los impulsos de consumir drogas han supuesto un problema para usted?",
+		"order": 45,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D44",
+		"statement": "Debido a las drogas ¿Ha tenido problemas médicos o psicológicos; O en el trabajo (colegio) o en el hogar, o se ha visto envuelto en discusiones o problemas con la ley?",
+		"order": 44,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D43",
+		"statement": "¿Ha tenido algún problema para controlar, disminuir o dejar de consumir alguna droga; o ha empleado la mayor parte del día consumiendo alguna droga, recuperándose de sus efectos o intentando conseguirla?",
+		"order": 43,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D42",
+		"statement": "¿Ha experimentado síntomas de abstinencia (se ha sentido enfermo) tras disminuir o dejar de consumir alguna droga?",
+		"order": 42,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D41",
+		"statement": "En los últimos 30 días ¿Cuánto dinero gastó en drogas?",
+		"order": 41,
+		"type": "SMA",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Dinero",
+				"order": 1,
+				"value": 9999
+			}
+		]
+	},
+	{
+		"special_id": "D40",
+		"statement": "¿Cuándo consumió por última vez drogas ilegales o abusó de la medicación prescrita?",
+		"order": 40,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D39",
+		"statement": "En los últimos 30 días ¿Cuántos días ha consumido drogas ilegales o ha abusado de la medicación prescrita?",
+		"order": 39,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D38",
+		"statement": "En los últimos 6 meses, en el mes de máximo consumo de drogas ilegales (y/o abuso de la medicación prescrita) ¿Con qué frecuencia estuvo consumiendo drogas?",
+		"order": 38,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "No consumo",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "De 1 a 3 veces al mes",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "De 1 a 2 veces a la semana",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "De 3 a 6 veces a la semana",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Diariamente",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D37",
+		"statement": "¿Cuántos años ha consumido 3 o más días a la semana drogas ilegales (excluyendo alcohol) o ha abusado de la medicación prescrita?",
+		"order": 37,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D36",
+		"statement": "¿Cuál de las siguientes sustancias es para usted la tercera más problemática y puede haberle llevado a iniciar el tratamiento?",
+		"order": 36,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Alcohol",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Marihuana",
+				"order": 2,
+				"value:": 2
+			},
+			{
+				"description": "Sedantes",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Cocaína/Crack",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Estimulantes",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Alucinógenos",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Heroína",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Metadona",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Otros opiáceos",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Inhalantes",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Otros",
+				"order": 11,
+				"value": 11
+			},
+			{
+				"description": "Ninguno",
+				"order": 12,
+				"value": 12
+			}
+		]
+	},
+	{
+		"special_id": "D36B",
+		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
+		"order": 36,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "D36C",
+		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
+		"order": 36,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "D35",
+		"statement": "¿Cuál de las siguientes sustancias es para usted la segunda más problemática y puede haberle llevado a iniciar el tratamiento?",
+		"order": 35,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Alcohol",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Marihuana",
+				"order": 2,
+				"value:": 2
+			},
+			{
+				"description": "Sedantes",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Cocaína/Crack",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Estimulantes",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Alucinógenos",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Heroína",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Metadona",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Otros opiáceos",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Inhalantes",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Otros",
+				"order": 11,
+				"value": 11
+			},
+			{
+				"description": "Ninguno",
+				"order": 12,
+				"value": 12
+			}
+		]
+	},
+	{
+		"special_id": "D35B",
+		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
+		"order": 35,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "D35C",
+		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
+		"order": 35,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "D34",
+		"statement": "¿Cuál de las siguientes sustancias es para usted la más problemática y puede haberle llevado a iniciar el tratamiento?",
+		"order": 34,
+		"type": "SAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Alcohol",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Marihuana",
+				"order": 2,
+				"value:": 2
+			},
+			{
+				"description": "Sedantes",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Cocaína/Crack",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Estimulantes",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Alucinógenos",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Heroína",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Metadona",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Otros opiáceos",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Inhalantes",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Otros",
+				"order": 11,
+				"value": 11
+			},
+			{
+				"description": "Ninguno",
+				"order": 12,
+				"value": 12
+			}
+		]
+	},
+	{
+		"special_id": "D34B",
+		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
+		"order": 34,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "D34C",
+		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
+		"order": 34,
+		"type": "MAMCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Oral",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Inhalada",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Fumada",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Inyectada",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 5,
+				"value": 5
 			}
 		]
 	}
