@@ -1908,5 +1908,818 @@
 				"value": 0
 			}
 		]
+	},
+	{
+		"special_id": "L32",
+		"statement": "¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
+		"order": 32,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L31",
+		"statement": "En los últimos 30 días ¿Cuántos días ha estado involucrado en alguno de los delitos anteriores?",
+		"order": 31,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "L30E",
+		"statement": "¿En los últimos 6 meses ¿Cuántos días ha realizado juego ilegal?",
+		"order": 30,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L30D",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado prostitución/proxenetismo?",
+		"order": 30,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L30C",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha poseído armas de manera ilícita?",
+		"order": 30,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L30",
+		"statement": "¿Cuántos días ha comedito algún otro acto ilegal?",
+		"order": 30,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29H",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha cometido otro tipo de delitos?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29G",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado homicidio?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29F",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión sexual?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29E",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión sin arma",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29D",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión con arma?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29C",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado amenaza sin agresión física?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29",
+		"statement": "¿Cuántos días ha amenazado o agredido a alguien?",
+		"order": 29,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28J",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado otros delitos de robo/contra la propiedad?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28I",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha provocado incendios?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28H",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado vandalismo?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28G",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado fraude?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28F",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado falsificación?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28E",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robo de vehículos?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28D",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robos/allanamiento?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28C",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robos a tiendas?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L28",
+		"statement": "¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
+		"order": 28,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L27",
+		"statement": "¿Cuántos días ha robado a alguien?",
+		"order": 27,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L26",
+		"statement": "¿Cuántos días ha vendido o fabricado drogas?",
+		"order": 26,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "30 días",
+				"order": 1,
+				"value": 30
+			},
+			{
+				"description": "6 meses",
+				"order": 2,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L25",
+		"statement": "¿Cuánta gravedad tienen para usted sus problemas legales actuales?",
+		"order": 25,
+		"type": "SAMCQN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "L24",
+		"statement": "¿Se encuentra en otra situación legal no mencionada anteriomente?",
+		"order": 24,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L23",
+		"statement": "¿Se encuentra participando en un programa de reinserción?",
+		"order": 23,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L22",
+		"statement": "¿Se encuentra pendiente de sentencia?",
+		"order": 22,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L21",
+		"statement": "¿Se encuentra pendiente de juicio o cargos?",
+		"order": 21,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L20",
+		"statement": "¿Se encuentra pendiente de libertad condicional?",
+		"order": 20,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L19",
+		"statement": "¿Se encuentra en libertad provisional?",
+		"order": 19,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L18",
+		"statement": "¿Su admisión a tratamiento es judicial?",
+		"order": 18,
+		"type": "BQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Si",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "L17",
+		"statement": "Desde los 18 años ¿Cuánto tiempo ha pasado en la cárcel o prisión?",
+		"order": 17,
+		"type": "OEYMQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Años",
+				"order": 2,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L16",
+		"statement": "¿Cuántas veces le han condenado por un delito cometido después de los 18 años de edad?",
+		"order": 16,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L15",
+		"statement": "¿Hace cuánto que le detuvieron por última vez?",
+		"order": 15,
+		"type": "OEYMQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Años",
+				"order": 2,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L14",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal?",
+		"order": 14,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L13",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas?",
+		"order": 13,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L12",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal?",
+		"order": 12,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L11",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos?",
+		"order": 11,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L10",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad?",
+		"order": 10,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L9",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco?",
+		"order": 9,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L8",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas?",
+		"order": 8,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L7",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de drogas?",
+		"order": 7,
+		"type": "MAMCN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Veces en total",
+				"order": 2,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L6",
+		"statement": "Antes de los 18 años ¿Cuánto tiempo estuvo en un calabozo, en un centro de rehabilitación, en un centro de rehabilitación de menores o en un reformatorio?",
+		"order": 6,
+		"type": "MNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L5",
+		"statement": "¿Cuántas veces le han condenado por un delito cometido antes de los 18 años de edad?",
+		"order": 5,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Veces",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L4",
+		"statement": "Antes de los 18 años ¿Alguna vez fue realmente detenido (tiene antecedentes penales) por?",
+		"order": 4,
+		"type": "SAMCQN",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Delitos violentos o contra personas",
+				"order": 0,
+				"value": 1
+			},
+			{
+				"description": "Delitos de drogas",
+				"order": 1,
+				"value": 2
+			},
+			{
+				"description": "Delitos con ánimo de lucro o contra la propiedad",
+				"order": 2,
+				"value": 3
+			},
+			{
+				"description": "Delitos sólo aplicables a menores de edad",
+				"order": 3,
+				"value": 4
+			},
+			{
+				"description": "Otros delitos",
+				"order": 4,
+				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "L3",
+		"statement": "¿Qué edad tenía la primera vez que fue detenido?",
+		"order": 3,
+		"type": "SAQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Años",
+				"order": 0,
+				"value": 99
+			}
+		]
 	}
 ]
