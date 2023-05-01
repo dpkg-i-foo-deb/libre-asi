@@ -406,7 +406,7 @@
 		"special_id": "SF3",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado hipertensión arterial?",
 		"order": 3,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -425,7 +425,7 @@
 		"special_id": "SF4",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado diabetes?",
 		"order": 4,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -444,7 +444,7 @@
 		"special_id": "SF5",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado enfermedades cardíacas?",
 		"order": 5,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -463,7 +463,7 @@
 		"special_id": "SF6",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado accidente cerebrovascular?",
 		"order": 6,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -482,7 +482,7 @@
 		"special_id": "SF7",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado epilepsia o convulsiones?",
 		"order": 7,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -501,7 +501,7 @@
 		"special_id": "SF8",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado cáncer?",
 		"order": 8,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -520,7 +520,7 @@
 		"special_id": "SF9",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado VIH/SIDA?",
 		"order": 9,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -539,7 +539,7 @@
 		"special_id": "SF10",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado tuberculosis o test positivo de tuberculina?",
 		"order": 10,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -558,7 +558,7 @@
 		"special_id": "SF11",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado hepatitis?",
 		"order": 11,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -577,7 +577,7 @@
 		"special_id": "SF12",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado cirrosis u otras enfermedades hepáticas crónica?",
 		"order": 12,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -596,7 +596,7 @@
 		"special_id": "SF13",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado nefropatía crónica?",
 		"order": 13,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -615,7 +615,7 @@
 		"special_id": "SF14",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado enfermedad respiratoria crónica?",
 		"order": 14,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -634,7 +634,7 @@
 		"special_id": "SF15",
 		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado otras enfermedades crónicas ?",
 		"order": 15,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
@@ -653,7 +653,7 @@
 		"special_id": "SF16",
 		"statement": "¿Tiene algún tipo de discapacidad física que afecte gravemente a su visión, audición o movilidad?",
 		"order": 16,
-		"type": "SBQ",
+		"type": "BQ",
 		"category": "MED",
 		"options": [
 			{
