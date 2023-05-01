@@ -9,9 +9,25 @@ import (
 )
 
 func CheckPreconditions() {
+	checkAsiForms()
 	checkQuestionCategories()
 	checkQuestionTypes()
 	checkQuestions()
+}
+
+func checkAsiForms() {
+	form := models.AsiForm{}
+
+	if err := database.DB.First(&form).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			log.Println("AsiForms not found... Trying to create")
+			registerAsiForms()
+			log.Println("AsiForms created")
+		} else {
+			log.Fatal("Error while checking AsiForms", err)
+		}
+	}
+
 }
 
 func checkQuestionCategories() {

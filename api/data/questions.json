@@ -1,5 +1,3083 @@
 [
 	{
+		"special_id": "I12",
+		"statement": "¿Cuál es su estado civil actual?",
+		"order": 12,
+		"type": "SAMCQN",
+		"category": "INF",
+		"options": [
+			{
+				"description": "Casado/a",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Vive como si estuviera casado/a",
+				"order": 2,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "I13",
+		"statement": "¿Cuánto tiempo lleva?",
+		"order": 13,
+		"type": "OEYMQ",
+		"category": "INF",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "meses",
+				"order": 2,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "I14",
+		"statement": "¿Quién le derivó el tratamiento?",
+		"order": 14,
+		"type": "SANCQN",
+		"category": "INF",
+		"options": [
+			{
+				"description": "Usted mismo, familia o amigos",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Servicio o unidad de tratamiento de toxicomanías o alcoholismo",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Médico de Asistencia Primaria",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Otros servicios sanitarios",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Sistema educativo",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Mutua laboral",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Agentes sociales (INEM, centro de acogida, iglesia, etc.)",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Sistema legal o judicial",
+				"order": 8,
+				"value": 8
+			}
+		]
+	},
+	{
+		"special_id": "A1",
+		"statement": "En los últimos 6 meses, ¿cuántas noches ha permanecido en un hospital, en una unidad de hospitalización para alcohol, drogas o psiquiátrica, cárcel, comunidad terapéutica o piso protegido?",
+		"order": 1,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A2",
+		"statement": "De esas noches, cuántas fueron en una unidad residencial para alcohol o drogas?",
+		"order": 2,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A3",
+		"statement": "De esas noches, cuántas fueron en un servicio de hospital general distinto de psiquiatría?",
+		"order": 3,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A4",
+		"statement": "De esas noches, cuántas fueron en un servicio de psiquiatría?",
+		"order": 4,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A5",
+		"statement": "De esas noches, cuántas fueron en una comisaría / prisión?",
+		"order": 5,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A6",
+		"statement": "De esas noches, cuántas fueron en un piso protegido o intermedio?",
+		"order": 6,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A7",
+		"statement": "De esas noches, cuántas fueron en otro tipo de alojamiento restringido o supervisado?",
+		"order": 7,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 6
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A8",
+		"statement": "¿Cuántas noches ha estado en un albergue para gente sin hogar?",
+		"order": 8,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 6
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A9",
+		"statement": "¿Cuántas noches ha pasado en la calle, o en lugares como edificios abandonados, coches o parques porque no tenía otro lugar para quedarse?",
+		"order": 9,
+		"type": "MAMCN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "últimos 6 meses",
+				"order": 1,
+				"value": 6
+			},
+			{
+				"description": "30 días",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A10",
+		"statement": "¿Alguna vez se ha quedado en un albergue para gente sin hogar o ha vivido en la calle (edificios abandonados, coches, o parques) porque no tenía otro lugar para quedarse?",
+		"order": 10,
+		"type": "BQ",
+		"category": "AL",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "A11",
+		"statement": "En los últimos 30 días (cuando NO estaba en un alojamiento restringido/supervisado o albergue), ha vivido con:",
+		"order": 11,
+		"type": "MAMCQN",
+		"category": "AL",
+		"options": [
+			{
+				"description": "Solo",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Cónyuge/pareja",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Hijo/s < 18 años",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Padres",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otros familiares adultos",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Otros adultos no familiares",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "No contestado",
+				"order": 7,
+				"value": 7
+			}
+		]
+	},
+	{
+		"special_id": "A12",
+		"statement": "En los últimos 30 días (cuando NO estaba en un alojamiento restringido/supervisado o albergue), ¿ha vivido con alguien que tenga actualmente problemas con el alcohol o que consuma drogas? ",
+		"order": 12,
+		"type": "BQ",
+		"category": "AL",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF1",
+		"statement": "¿Qué tipo de seguro médico tiene?",
+		"order": 1,
+		"type": "MAMCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Ninguno",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Seguro privado (ASISA, IMESA, Sanitas...)",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Seguro de salud de las Fuerzas Armadas, MUFACE",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Seguridad social (Régimen normal)",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Otro",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "No respuesta",
+				"order": 7,
+				"value": 7
+			}
+		]
+	},
+	{
+		"special_id": "SF2",
+		"statement": "¿Está embarazada?",
+		"order": 2,
+		"type": "TQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			},
+			{
+				"description": "No Sabe",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "SF3",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado hipertensión arterial?",
+		"order": 3,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF4",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado diabetes?",
+		"order": 4,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF5",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado enfermedades cardíacas?",
+		"order": 5,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF6",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado accidente cerebrovascular?",
+		"order": 6,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF7",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado epilepsia o convulsiones?",
+		"order": 7,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF8",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado cáncer?",
+		"order": 8,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF9",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado VIH/SIDA?",
+		"order": 9,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF10",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado tuberculosis o test positivo de tuberculina?",
+		"order": 10,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF11",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado hepatitis?",
+		"order": 11,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF12",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado cirrosis u otras enfermedades hepáticas crónica?",
+		"order": 12,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF13",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado nefropatía crónica?",
+		"order": 13,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF14",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado enfermedad respiratoria crónica?",
+		"order": 14,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF15",
+		"statement": "¿Alguna vez un médico o un profesional sanitario le ha diagnosticado otras enfermedades crónicas ?",
+		"order": 15,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF16",
+		"statement": "¿Tiene algún tipo de discapacidad física que afecte gravemente a su visión, audición o movilidad?",
+		"order": 16,
+		"type": "SBQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF17",
+		"statement": "¿Alguna vez le han prescrito medicación para alguna de esas enfermedades?",
+		"order": 17,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí,todavia tomo todos los medicamentos prescritos",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí,debería estar tomando la medicación pero no la tomo",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Sí,pero me ha dicho (un DR.) que la medicación ya no es necesaria",
+				"order": 4,
+				"value": 3
+			}
+		]
+	},
+	{
+		"special_id": "SF18",
+		"statement": "¿Recibe algún tipo de pensión (o paga) por una enfermedad o discapacidad física?",
+		"order": 18,
+		"type": "BQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "SF19",
+		"statement": "En los últimos 30 días, ¿cómo diría que ha sido su salud física?",
+		"order": 19,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Excelente",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Muy buena",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Buena",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Regular",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Mala",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "SF20",
+		"statement": "¿Cuántos días ha tenido algún problema de salud física?",
+		"order": 20,
+		"type": "DNQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "SF21",
+		"statement": "¿Cuántos días ha sido incapaz de realizar sus actividades cotidianas debido a problemas de salud física? ",
+		"order": 21,
+		"type": "DNQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "SF22",
+		"statement": "¿Cuánto dolor o malestar físico ha experimentado?",
+		"order": 22,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Ninguno",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderado",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extremo",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "SF23",
+		"statement": "¿Cuánta preocupación ha tenido por culpa de su salud física o sus problemas médicos?",
+		"order": 23,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderado",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "SF24",
+		"statement": "¿Cuánta importancia tiene para usted el tratamiento (actual o adicional) para sus problemas de salud física?",
+		"order": 24,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderado",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "SF25",
+		"statement": "¿Cuántas veces en su vida ha estado hospitalizado (al menos una noche) por problemas de salud física?",
+		"order": 25,
+		"type": "TNQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Veces",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "SF26",
+		"statement": "¿Cuántas veces ha acudido a un servicio de urgencias por cualquier problema de salud fisíca?",
+		"order": 26,
+		"type": "MAMCN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "SF27",
+		"statement": "¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
+		"order": 27,
+		"type": "MAMCN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "SF28",
+		"statement": "¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
+		"order": 28,
+		"type": "MAMCN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "E1",
+		"statement": "¿Cuál es el máximo nivel de estudios alcanzado?",
+		"order": 1,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Obligatoria(primaria y secundaria)",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Bachillerato/FP",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Diplomatura",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Licenciatura",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Postgrado (Máster/Doctorado)",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Ninguno",
+				"order": 6,
+				"value": 6
+			}
+		]
+	},
+	{
+		"special_id": "E2",
+		"statement": "¿Tiene algún otro titulo, diploma o certificado de enseñanzas regladas?",
+		"order": 2,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E3",
+		"statement": "¿Cuál es el último curso que completó?",
+		"order": 3,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "1° de Primaria",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "2° de Primaria...",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "2° ESO/Graduado Escolar (antiguo)",
+				"order": 3,
+				"value": 8
+			},
+			{
+				"description": "4° ESO/Graduado en Educación Secuntaria",
+				"order": 4,
+				"value": 10
+			},
+			{
+				"description": "2° de Bachillerato/FP",
+				"order": 5,
+				"value": 12
+			},
+			{
+				"description": "1° Carrera/Estudios Superiores",
+				"order": 6,
+				"value": 13
+			},
+			{
+				"description": "2° Carrera",
+				"order": 7,
+				"value": 14
+			},
+			{
+				"description": "Diplomatura",
+				"order": 8,
+				"value": 15
+			},
+			{
+				"description": "Licenciatura",
+				"order": 9,
+				"value": 17
+			},
+			{
+				"description": "1° curso Doctorado/Máster",
+				"order": 10,
+				"value": 18
+			},
+			{
+				"description": "2° curso...",
+				"order": 11,
+				"value": 19
+			}
+		]
+	},
+	{
+		"special_id": "E4",
+		"statement": "¿Ha servido alguna vez en las Fuerzas Armadas?",
+		"order": 4,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E5",
+		"statement": "¿Actualmente cursa algún tipo de estudio académico o de formación laboral? ",
+		"order": 5,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Tiempo parcial",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Tiempo completo",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "E6",
+		"statement": "¿Tiene carnet de conducir en vigor?",
+		"order": 6,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E7",
+		"statement": "¿Tiene coche propio?",
+		"order": 7,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E8",
+		"statement": "Actualmente, ¿le resulta difícil acudir al tratamiento, al trabajo/estudios, o encontrar trabajo por culpa del transporte?",
+		"order": 8,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E9",
+		"statement": "¿Lee/escribe (español) lo suficientemente bien como para rellenar una solicitud de empleo?",
+		"order": 9,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E10",
+		"statement": "¿Cuál es su situación laboral actual?",
+		"order": 10,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Tiempo completo (>= 35 hrs/sem)",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Tiempo parcial (< 35 hrs/sem)",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Paro y buscando empleo activamente (suspendido temporalmente por falta de trabajo)",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Fuera del mercado laboral",
+				"order": 4,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "E11",
+		"statement": "¿Cuál describe mejor su situación actual?",
+		"order": 11,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Ama de casa",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Estudiante",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Incapacitado",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Jubilado",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "No busca empleo",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Institucionalizado",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Otro",
+				"order": 7,
+				"value": 7
+			}
+		]
+	},
+	{
+		"special_id": "E12",
+		"statement": "¿Qué tipo de trabajo realiza (empleo principal)?",
+		"order": 12,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Profesiones especializadas y técnicas",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Ejecutivos, administrativos y directivos",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Ventas",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Oficinistas y apoyo administrativo",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Producción precisa, oficios y reparaciones",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Operadores de maquinaria, ensambladores y supervisores",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Transportistas y mudanzas",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Trabajadores manuales, equipos de limpieza, ayudantes y peones",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Servicios, excepto empleado/a del servicio doméstico",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Granjero/director de granja",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Empleado de granja",
+				"order": 11,
+				"value": 11
+			},
+			{
+				"description": "Fuerzas Armadas",
+				"order": 12,
+				"value": 12
+			},
+			{
+				"description": "Empleado/a del servicio doméstico ",
+				"order": 13,
+				"value": 13
+			},
+			{
+				"description": "Otros",
+				"order": 14,
+				"value": 14
+			}
+		]
+	},
+	{
+		"special_id": "E13",
+		"statement": "Ese trabajo, ¿es un empleo sumergido?",
+		"order": 13,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E14",
+		"statement": "¿Cuánto duró el periodo más largo de empleo a tiempo completo?",
+		"order": 14,
+		"type": "MNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "E15",
+		"statement": "¿Hace cuánto que finalizó ese empleo?",
+		"order": 15,
+		"type": "MNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Meses",
+				"order": 1,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "E16",
+		"statement": "¿Cuál era su empleo/ocupación entonces?",
+		"order": 16,
+		"type": "SANCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Profesiones especializadas y técnicas",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Ejecutivos, administrativos y directivos",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Ventas",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Oficinistas y apoyo administrativo",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Producción precisa, oficios y reparaciones",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Operadores de maquinaria, ensambladores y supervisores",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Transportistas y mudanzas",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Trabajadores manuales, equipos de limpieza, ayudantes y peones",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Servicios, excepto empleado/a del servicio doméstico",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Granjero/director de granja",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Empleado de granja",
+				"order": 11,
+				"value": 11
+			},
+			{
+				"description": "Fuerzas Armadas",
+				"order": 12,
+				"value": 12
+			},
+			{
+				"description": "Empleado/a del servicio doméstico ",
+				"order": 13,
+				"value": 13
+			},
+			{
+				"description": "Otros",
+				"order": 14,
+				"value": 14
+			}
+		]
+	},
+	{
+		"special_id": "E17",
+		"statement": "En los últimos meses, ¿Cuántas semanas ha trabajado remuneradamente?",
+		"order": 17,
+		"type": "WNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Semanas",
+				"order": 1,
+				"value": 26
+			}
+		]
+	},
+	{
+		"special_id": "E18",
+		"statement": "En los últimos meses, ¿Cuál era su sueldo bruto?",
+		"order": 18,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E19",
+		"statement": "En los últimos 30 días, ¿Cuántos días ha trabajado remuneradamente?",
+		"order": 19,
+		"type": "DNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "E20",
+		"statement": "En los últimos 30 días, ¿Cuál era su sueldo bruto?",
+		"order": 20,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E21",
+		"statement": "En los últimos 30 días,  ¿Cuántos días ha tenido problemas laborales?",
+		"order": 21,
+		"type": "DNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Dias",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "E22",
+		"statement": "¿Ha solicitado algún empleo?",
+		"order": 22,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E23",
+		"statement": "¿Cuánta importancia tiene para usted ahora cualquier tipo de orientación laboral (como asesoramiento, formación o educación) que le ayude a encontrar un empleo o a solucionar los problemas relacionados con el trabajo?",
+		"order": 23,
+		"type": "SANCQN",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extremo",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "E24",
+		"statement": "¿Vive en un alojamiento pagado por el gobierno o recibe algún tipo de subvención para la vivienda?",
+		"order": 24,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E25",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de pensión, seguridad social o paro?",
+		"order": 25,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E25b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de pensión, seguridad social o paro?",
+		"order": 26,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E26",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de servicios sociales?",
+		"order": 27,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E26b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de servicios sociales",
+		"order": 28,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E27",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de otras ayudas institucionales?",
+		"order": 29,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E27b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de otras ayudas institucionales?",
+		"order": 30,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E28",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de pensión alimenticia y compensatoria?",
+		"order": 31,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E28b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de pensión alimenticia y compensatoria?",
+		"order": 32,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E29",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de actividades ilegales?",
+		"order": 33,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E29b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de actividades ilegales?",
+		"order": 34,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E30",
+		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de cualquier otra fuente?",
+		"order": 35,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E30b",
+		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de cualquier otra fuente?",
+		"order": 36,
+		"type": "SMA",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sueldo bruto",
+				"order": 1,
+				"value": 99999
+			}
+		]
+	},
+	{
+		"special_id": "E31",
+		"statement": "¿Cuáles son en la actualidad sus fuentes de ingresos para los gastos de vivienda, alimentación y otros gastos?",
+		"order": 37,
+		"type": "MAMCQN",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Empleo",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Jubilación",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Incapacidad",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Paro",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Servicios sociales",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Pensión alimenticia o compensatoria",
+				"order": 6,
+				"value": 6
+			},
+			{
+				"description": "Familia, amigos o asociados",
+				"order": 7,
+				"value": 7
+			},
+			{
+				"description": "Ingresos ilegales",
+				"order": 8,
+				"value": 8
+			},
+			{
+				"description": "Institución o alojamiento supervisado",
+				"order": 9,
+				"value": 9
+			},
+			{
+				"description": "Otros",
+				"order": 10,
+				"value": 10
+			},
+			{
+				"description": "Ninguno",
+				"order": 11,
+				"value": 11
+			}
+		]
+	},
+	{
+		"special_id": "E34",
+		"statement": "¿Lleva más de un mes de retraso en alguno de sus pagos habituales?",
+		"order": 38,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E35",
+		"statement": "¿Cuántas personas (excluyéndose) dependen actualmente de usted económicamente?",
+		"order": 39,
+		"type": "TNQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Personas",
+				"order": 1,
+				"value": 9
+			}
+		]
+	},
+	{
+		"special_id": "E36",
+		"statement": "¿Tiene suficientes ingresos para pagar sus necesidades básicas como vivienda, alimentación y vestido, y las de las personas a su cargo?",
+		"order": 40,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D1",
+		"statement": "¿Cuántas veces ha estado en tratamiento por el uso de alcohol/drogas?",
+		"order": 1,
+		"type": "TNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Veces",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D2",
+		"statement": "¿Cuántos de esos tratamientos fueron sólo de desintoxicación?",
+		"order": 2,
+		"type": "TNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Tratamientos",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D3",
+		"statement": "¿Qué edad tenía la primera vez que entró en un tratamiento para abuso de alcohol/drogas",
+		"order": 3,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D4",
+		"statement": "¿Cuántos días ha acudido a un programaa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
+		"order": 4,
+		"type": "MAMCN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Utimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 dias",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D5",
+		"statement": "¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
+		"order": 5,
+		"type": "MAMCN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Utimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 dias",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D6",
+		"statement": "¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
+		"order": 6,
+		"type": "MAMCN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Utimos 6 meses",
+				"order": 1,
+				"value": 180
+			},
+			{
+				"description": "30 dias",
+				"order": 2,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D7",
+		"statement": "¿Cuánto duró el período de tiempo continuado más largo que estuvo acudiendo a grupos de autoayuda al menos 2 días por semana? ",
+		"order": 7,
+		"type": "OEYMQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			},
+			{
+				"description": "Meses",
+				"order": 2,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D8",
+		"statement": "¿Cuántos años ha bebido alcohol de forma regular, 3 o más días a la semana? ",
+		"order": 8,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D9",
+		"statement": "¿Cuántos años ha bebido al menos (5-hombres, 4-muejeres) bebidas al día de forma regular, 3 o más días a la semana? ",
+		"order": 9,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D10",
+		"statement": "¿Ha bebido al menos (5-hombres. 4-mujeres) bebidas en un día, 50 o más días de su vida? ",
+		"order": 10,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D11",
+		"statement": "¿Qué edad tenía la primera vez que bebió alcohol y notó sus efectos? ",
+		"order": 11,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D12",
+		"statement": "En los últimos 6 meses, durante el mes que mas bebía, ¿con qué fecuencia bebía? ",
+		"order": 12,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Abstinente",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "1-3 veces al mes",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "1-2 veces a la semana",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "3-6 veces a la semana",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Diariamente",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D13",
+		"statement": "En los últimos 30 días, ¿cuántos días ha bebido alcohol? ",
+		"order": 13,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D14",
+		"statement": "¿cuándo bebío por última vez? ",
+		"order": 14,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D15",
+		"statement": "En los últimos 30 días, ¿cuántos días ha tomado al menos (5-hombres, 4-mujeres) bebidas en un día? ",
+		"order": 15,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D16",
+		"statement": "En los últimos 30 días, ¿cuánto dinero ha gastado en alcohol para usted mismo? ",
+		"order": 16,
+		"type": "SMA",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "$",
+				"order": 1,
+				"value": 999999999
+			}
+		]
+	},
+	{
+		"special_id": "D17",
+		"statement": "¿Ha experimentado síntomas de abstinencia (se ha sentido enfermo) tras disminuir el consumo o dejar de beber? ",
+		"order": 17,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D18",
+		"statement": "¿Ha tenido algún problema para controlar, disminuir o abstenerse de beber alcohol; o ha empleado la mayor parte del día bebiendo? ",
+		"order": 18,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D19",
+		"statement": "Debido a la bebida ¿Ha tenido problemas médicos o psicológicos; o en el trabajo (colegio) o en el hogar, o se ha visto envuelto en discusiones o problemas con la ley? ",
+		"order": 19,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D20",
+		"statement": "¿El ansia o los impulsos de beber han supuesto un problema para usted? ",
+		"order": 20,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D21",
+		"statement": "¿Cuántos días ha tenido estas u otras dificultades debido al consumo de alcohol? ",
+		"order": 21,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D22",
+		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido por estos problemas relacionados con el alcohol? ",
+		"order": 22,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D23",
+		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para dejar de beber?",
+		"order": 23,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D24",
+		"statement": "¿Cuánta importancia tiene para usted lograr/mantener la abstinencia total del alcohol (es decir, no beber nada)?",
+		"order": 24,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Ninguna",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Leve",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Moderada",
+				"order": 3,
+				"value": 2
+			},
+			{
+				"description": "Considerable",
+				"order": 4,
+				"value": 3
+			},
+			{
+				"description": "Extrema",
+				"order": 5,
+				"value": 4
+			}
+		]
+	},
+	{
+		"special_id": "D25A",
+		"statement": "¿Qué edad tenía la primera vez que consumió marihuna?",
+		"order": 25,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D25B",
+		"statement": "¿Cuántos años en su vida ha consumido marihuna?",
+		"order": 26,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D25C",
+		"statement": "¿Ha consumido marihuana durante 50 o más días de su vida?",
+		"order": 27,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D25D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió marihuana?",
+		"order": 28,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D25E",
+		"statement": "En los últimos 30 días,¿consumió marihuana?",
+		"order": 29,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D26A",
+		"statement": "¿Qué edad tenía la primera vez que consumió sedantes?",
+		"order": 30,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D26B",
+		"statement": "¿Cuántos años en su vida ha consumido sedantes?",
+		"order": 31,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D26C",
+		"statement": "¿Ha consumido sedantes durante 50 o más días de su vida?",
+		"order": 32,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D26D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió sedantes?",
+		"order": 33,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D26E",
+		"statement": "En los últimos 30 días,¿consumió sedantes?",
+		"order": 34,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D27A",
+		"statement": "¿Qué edad tenía la primera vez que consumió cocaina?",
+		"order": 35,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D27B",
+		"statement": "¿Cuántos años en su vida ha consumido cocaina?",
+		"order": 36,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D27C",
+		"statement": "¿Ha consumido cocaina durante 50 o más días de su vida?",
+		"order": 37,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D27D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió cocaina?",
+		"order": 38,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D27E",
+		"statement": "En los últimos 30 días,¿consumió cocaina?",
+		"order": 39,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D28A",
+		"statement": "¿Qué edad tenía la primera vez que consumió estimulantes?",
+		"order": 40,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D28B",
+		"statement": "¿Cuántos años en su vida ha consumido estimulantes?",
+		"order": 41,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D28C",
+		"statement": "¿Ha consumido estimulantes durante 50 o más días de su vida?",
+		"order": 42,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D28D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió estimulantes?",
+		"order": 43,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D28E",
+		"statement": "En los últimos 30 días,¿consumió estimulantes?",
+		"order": 44,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D29A",
+		"statement": "¿Qué edad tenía la primera vez que consumió alucinógenos?",
+		"order": 45,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D29B",
+		"statement": "¿Cuántos años en su vida ha consumido alucinógenos?",
+		"order": 46,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D29C",
+		"statement": "¿Ha consumido alucinógenos durante 50 o más días de su vida?",
+		"order": 47,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D29D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió alucinógenos?",
+		"order": 48,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D29E",
+		"statement": "En los últimos 30 días,¿consumió alucinógenos?",
+		"order": 49,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D30A",
+		"statement": "¿Qué edad tenía la primera vez que consumió heroína?",
+		"order": 50,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D30B",
+		"statement": "¿Cuántos años en su vida ha consumido heroína?",
+		"order": 51,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D30C",
+		"statement": "¿Ha consumido heroína durante 50 o más días de su vida?",
+		"order": 52,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D30D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió heroína?",
+		"order": 53,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D30E",
+		"statement": "En los últimos 30 días,¿consumió heroína?",
+		"order": 54,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D31A",
+		"statement": "¿Qué edad tenía la primera vez que consumió metadona?",
+		"order": 55,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D31B",
+		"statement": "¿Cuántos años en su vida ha consumido metadona?",
+		"order": 56,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D31C",
+		"statement": "¿Ha consumido metadona durante 50 o más días de su vida?",
+		"order": 57,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D31D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió metadona?",
+		"order": 58,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D31E",
+		"statement": "En los últimos 30 días,¿consumió metadona?",
+		"order": 59,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D32A",
+		"statement": "¿Qué edad tenía la primera vez que consumió otros opiáceos?",
+		"order": 60,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D32B",
+		"statement": "¿Cuántos años en su vida ha consumido otros opiáceos?",
+		"order": 61,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D32C",
+		"statement": "¿Ha consumido otros opiáceos durante 50 o más días de su vida?",
+		"order": 62,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D32D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió otros opiáceos?",
+		"order": 63,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D32E",
+		"statement": "En los últimos 30 días,¿consumió otros opiáceos?",
+		"order": 64,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
+		"special_id": "D33A",
+		"statement": "¿Qué edad tenía la primera vez que consumió inhalantes",
+		"order": 65,
+		"type": "SAQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D33B",
+		"statement": "¿Cuántos años en su vida ha consumido inhalantes?",
+		"order": 66,
+		"type": "YNQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "años",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "D33C",
+		"statement": "¿Ha consumido inhalantes durante 50 o más días de su vida?",
+		"order": 67,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "D33D",
+		"statement": "En los últimos 30 días,¿cuántos días consumió inhalantes?",
+		"order": 68,
+		"type": "SANCQN",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "D33E",
+		"statement": "En los últimos 30 días,¿consumió inhalantes?",
+		"order": 69,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
 		"special_id": "P21",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para sus problemas psicológicos?",
 		"order": 21,
