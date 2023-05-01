@@ -71,11 +71,17 @@ func registerQuestions() {
 
 	questionCategories := []models.QuestionCategory{}
 
+	asiForm := models.AsiForm{}
+
 	if err := database.DB.Find(&questionTypes).Error; err != nil {
 		util.HandleErrorStop(err)
 	}
 
 	if err := database.DB.Find(&questionCategories).Error; err != nil {
+		util.HandleErrorStop(err)
+	}
+
+	if err := database.DB.First(&asiForm).Error; err != nil {
 		util.HandleErrorStop(err)
 	}
 
@@ -99,6 +105,7 @@ func registerQuestions() {
 
 		questionDb.SpecialCode = question.SpecialID
 		questionDb.Order = question.Order
+		questionDb.AsiFormID = asiForm.ID
 
 		for _, questionType := range questionTypes {
 			if questionType.Type == question.Type {
