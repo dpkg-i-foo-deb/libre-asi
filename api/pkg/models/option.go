@@ -8,8 +8,7 @@ type Option struct {
 	Language              string       `json:"language"`
 	Order                 int          `json:"order"`
 	Description           string       `json:"description"`
+	Value                 int          `json:"value"`
 	SimplifiedDescription string       `json:"simplifiedDescription"`
 	Help                  []OptionHelp `json:"help"`
-	DependencyID          *uint
-	Dependencies          []Option `json:"dependencies" gorm:"foreignKey:DependencyID"`
 }
