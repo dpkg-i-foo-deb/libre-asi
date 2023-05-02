@@ -1,6 +1,6 @@
 package view
 
-type QuestionParam struct {
+type Question struct {
 	SpecialID string        `json:"special_id"`
 	Statement string        `json:"statement"`
 	Order     int           `json:"order"`

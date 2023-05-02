@@ -30,17 +30,3 @@ type InterviewAnswers struct {
 	Answer      string `json:"answer"`
 	Commentary  string `json:"commentary"`
 }
-
-func (i *Interview) NextQuestion() uint {
-
-	switch i.CurrentSection {
-	case "INF":
-
-	}
-
-	return 0
-}
-
-func handleINF() uint {
-	return 0
-}
