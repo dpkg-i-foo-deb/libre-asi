@@ -25,6 +25,8 @@
 
 	let imageUrl: string;
 
+	let date = '';
+
 	let patient: Patient = {
 		firstName: '',
 		lastName: '',
@@ -49,7 +51,10 @@
 
 		if (response.ok) {
 			patient = (await response.json()) as Patient;
-			console.log(patient);
+
+			const patientDate = new Date(patient.birthdate ?? '');
+
+			date = patientDate.toString();
 		}
 
 		handleResponse(response.status, false);
@@ -253,12 +258,13 @@
 									</div>
 
 									<div class="text-field">
-										<DatePicker datePickerType="single" dateFormat="d/m/Y" on:change>
-											<DatePickerInput
-												labelText="Fecha de nacimiento"
-												placeholder="dd/mm/aaaa"
-												bind:value={patient.birthdate}
-											/>
+										<DatePicker
+											datePickerType="single"
+											dateFormat="d/m/Y"
+											on:change
+											bind:value={date}
+										>
+											<DatePickerInput labelText="Fecha de nacimiento" placeholder="dd/mm/aaaa" />
 										</DatePicker>
 									</div>
 								</div>

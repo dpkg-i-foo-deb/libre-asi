@@ -8,16 +8,18 @@ import (
 
 type Interview struct {
 	gorm.Model
-	StartDate    time.Time     `json:"startDate"`
-	EndDate      time.Time     `json:"endDate"`
-	PauseAt      time.Time     `json:"pausedAt"`
-	ResumedAt    time.Time     `json:"resumedAt"`
-	PatientID    uint          `json:"patient"`
-	Interviewers []Interviewer `json:"interviewer" gorm:"many2many:interviewer_interviews"`
-	Attendants   []Attendant   `json:"attendants" gorm:"many2many:attendants_interviews"`
-	Answers      []Option      `json:"answers" gorm:"many2many:interview_answers"`
-	AsiFormID    uint          `json:"AsiForm"`
-	Language     string        `json:"language"`
+	StartDate       time.Time     `json:"startDate"`
+	EndDate         time.Time     `json:"endDate"`
+	PauseAt         time.Time     `json:"pausedAt"`
+	ResumedAt       time.Time     `json:"resumedAt"`
+	PatientID       uint          `json:"patient"`
+	Interviewers    []Interviewer `json:"interviewer" gorm:"many2many:interviewer_interviews"`
+	Attendants      []Attendant   `json:"attendants" gorm:"many2many:attendants_interviews"`
+	Answers         []Option      `json:"answers" gorm:"many2many:interview_answers"`
+	AsiFormID       uint          `json:"AsiForm"`
+	Language        string        `json:"language"`
+	CurrentSection  string        `json:"currentSection"`
+	CurrentQuestion string        `json:"currentQuestion"`
 }
 
 type InterviewAnswers struct {

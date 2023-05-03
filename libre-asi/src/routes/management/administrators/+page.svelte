@@ -236,8 +236,8 @@
 	/>
 {:else}
 	<DataTable
-		title="Administrators"
-		description="Current Registered Administrators"
+		title="Administradores"
+		description="Administradores registrados"
 		headers={[
 			{ key: 'email', value: 'Email' },
 			{ key: 'username', value: 'Username' },

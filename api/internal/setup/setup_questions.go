@@ -93,7 +93,7 @@ func registerQuestions() {
 
 	decoder := json.NewDecoder(file)
 
-	questions := []view.QuestionParam{}
+	questions := []view.Question{}
 
 	err = decoder.Decode(&questions)
 
