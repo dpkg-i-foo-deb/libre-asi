@@ -15,6 +15,26 @@
 				"description": "Vive como si estuviera casado/a",
 				"order": 2,
 				"value": 2
+			},
+			{
+				"description": "Viudo/a",
+				"order": 3,
+				"value": 3
+			},
+			{
+				"description": "Divorciado/a",
+				"order": 4,
+				"value": 4
+			},
+			{
+				"description": "Separado/a",
+				"order": 5,
+				"value": 5
+			},
+			{
+				"description": "Nunca casado/a",
+				"order": 5,
+				"value": 5
 			}
 		]
 	},
