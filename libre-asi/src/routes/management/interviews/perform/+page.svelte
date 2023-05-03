@@ -14,6 +14,7 @@
 	import { Button, DataTable, DataTableSkeleton, Tile } from 'carbon-components-svelte';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
+	import QuestionSamcqn from '../../../../components/QuestionSAMCQN.svelte';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -26,7 +27,7 @@
 
 	let newInterview: Interview = {};
 
-	let currentQuestion: Question = {};
+	let currentQuestion: Question;
 
 	onMount(async function () {
 		await loadPatients();
@@ -85,8 +86,6 @@
 		if (nextQuestionResponse.ok) {
 			newInterview = (await nextQuestionResponse.json()) as Interview;
 
-			console.log(newInterview);
-
 			const questionResponse = await fetchWithRefresh(
 				API_URL + GET_QUESTION + newInterview.currentQuestion,
 				{
@@ -95,8 +94,6 @@
 			);
 
 			if (questionResponse.ok) {
-				console.log(questionResponse);
-
 				currentQuestion = (await questionResponse.json()) as Question;
 			}
 
@@ -142,7 +139,13 @@
 			{/if}
 
 			{#if isGeneral}
-				<h4>Olis</h4>
+				<h4>Preguntas generales</h4>
+			{/if}
+
+			{#if currentQuestion}
+				{#if currentQuestion.type == 'SAMCQN' ?? ''}
+					<QuestionSamcqn question={currentQuestion} />
+				{/if}
 			{/if}
 		</div>
 
