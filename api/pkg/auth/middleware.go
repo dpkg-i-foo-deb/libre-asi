@@ -124,6 +124,25 @@ func ValidateAdministratorRole(c *fiber.Ctx) error {
 	return c.Next()
 }
 
+func ValidateInterviewerRole(c *fiber.Ctx) error {
+
+	//This should run AFTER validating the access token
+
+	tk := c.Cookies("access-token")
+
+	role, err := RoleFromToken(tk)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrInternalError)
+	}
+
+	if role == string(models.INTERVIEWER) {
+		return c.Next()
+	}
+
+	return util.HandleFiberError(c, errors.ErrAccessDenied)
+}
+
 func ValidateAdministratorOrInterviewerRole(c *fiber.Ctx) error {
 	//This should run AFTER validating the access token
 
