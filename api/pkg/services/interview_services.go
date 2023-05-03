@@ -18,7 +18,7 @@ func GetInterviews() (*[]view.Interview, error) {
 
 	interviewsDB := []models.Interview{}
 
-	if err := database.DB.Find(&interviewsDB).Error; err != nil {
+	if err := database.DB.Preload("Interviewers").Find(&interviewsDB).Error; err != nil {
 
 		if err != gorm.ErrRecordNotFound {
 			return nil, errors.ErrInternalError
@@ -57,7 +57,7 @@ func StartInterview(patientID int, interviewerID int) (int, error) {
 
 	interviewer := models.Interviewer{}
 
-	if err := database.DB.Where("id = ?", interviewerID).First(&interviewer).Error; err != nil {
+	if err := database.DB.First(&interviewer).Error; err != nil {
 		return -1, errors.ErrEntityNotFound
 	}
 
@@ -74,6 +74,8 @@ func StartInterview(patientID int, interviewerID int) (int, error) {
 	i.StartDate = time.Now()
 
 	i.Language = "ES"
+
+	i.CurrentQuestion = ""
 
 	if err := database.DB.Create(&i).Error; err != nil {
 		return -1, errors.ErrInternalError
@@ -138,6 +140,10 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 
 		return nil, errors.ErrEntityNotFound
 
+	}
+
+	if i.CurrentQuestion == "" {
+		i.CurrentQuestion = "I12"
 	}
 
 	handleNextQuestion(i)

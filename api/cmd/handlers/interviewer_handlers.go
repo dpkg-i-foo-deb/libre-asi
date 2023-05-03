@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/services"
 	"libre-asi-api/pkg/util"
@@ -25,6 +26,8 @@ func GetInterviewer(c *fiber.Ctx) error {
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
+
+	fmt.Println(interviewer)
 
 	return c.Status(200).JSON(interviewer)
 }

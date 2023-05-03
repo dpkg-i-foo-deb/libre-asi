@@ -8,8 +8,8 @@ type Interview struct {
 	EndDate         time.Time `json:"endDate"`
 	PauseAt         time.Time `json:"pausedAt"`
 	ResumedAt       time.Time `json:"resumedAt"`
-	PatientID       uint      `json:"patient"`
-	InterviewerID   uint      `json:"interviewer"`
+	PatientID       uint      `json:"patientID"`
+	InterviewerID   uint      `json:"interviewerID"`
 	AsiFormID       uint      `json:"AsiForm"`
 	CurrentQuestion string    `json:"currentQuestion"`
 }

@@ -118,7 +118,7 @@ func GetInterviewer(id uint) (*view.Interviewer, error) {
 	}
 
 	if err := database.DB.
-		Joins("LEFT JOIN people ON interviewer.person_id = people.id").
+		Joins("LEFT JOIN people ON interviewers.person_id = people.id").
 		Joins("LEFT JOIN users ON people.user_id = users.id").
 		Select("interviewers.id, people.first_name, people.last_name, people.first_surname, people.last_surname, people.birthdate, people.age, people.personal_id, users.email, users.username, users.needs_password_reset").
 		Where("interviewers.id = ? AND interviewers.deleted_at IS NULL", id).
