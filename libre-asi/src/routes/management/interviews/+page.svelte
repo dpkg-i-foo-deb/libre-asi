@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { API_URL, GET_INTERVIEWERS, GET_INTERVIEWS, GET_PATIENT } from '$lib/api/constants';
 	import type { Interview } from '$lib/models/Interview';
 	import type Interviewer from '$lib/models/Interviewer';
@@ -26,9 +27,9 @@
 
 	onMount(async function () {
 		newInterview = {
-			ID: 0,
-			AsiFormID: 0,
-			CurrentQuestion: ''
+			id: 0,
+			asiFormID: 0,
+			currentQuestion: ''
 		};
 
 		await loadInterviews();
@@ -42,10 +43,15 @@
 
 			rows = await Promise.all(
 				existingInterviews.map(async function (value: Interview) {
-					const patientResponse = await fetchWithRefresh(API_URL + GET_PATIENT + value.PatientID);
+					const patientResponse = await fetchWithRefresh(API_URL + GET_PATIENT + value.patientID, {
+						method: 'GET'
+					});
 
 					const interviewerResponse = await fetchWithRefresh(
-						API_URL + GET_INTERVIEWERS + value.InterviewerID
+						API_URL + GET_INTERVIEWERS + value.interviewerID,
+						{
+							method: 'GET'
+						}
 					);
 
 					let patient: Patient = {};
@@ -60,8 +66,8 @@
 					handleResponse(interviewerResponse.status, false);
 
 					return {
-						id: value.ID,
-						date: value.StartDate,
+						id: value.id,
+						date: value.startDate,
 						interviewver: interviewer.firstName ?? '' + interviewer.firstSurname ?? '',
 						patient: patient.firstName ?? '' + patient.firstSurname ?? ''
 					};
@@ -105,7 +111,11 @@
 			<Toolbar>
 				<ToolbarContent>
 					<ToolbarSearch bind:value={searchValue} />
-					<Button on:click={() => {}}>Realizar entrevista</Button>
+					<Button
+						on:click={function () {
+							goto('interviews/perform');
+						}}>Realizar entrevista</Button
+					>
 				</ToolbarContent>
 			</Toolbar>
 		</DataTable>

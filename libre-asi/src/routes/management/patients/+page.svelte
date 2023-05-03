@@ -59,7 +59,7 @@
 			rows = existingPatients.map(function (value: Patient) {
 				return {
 					id: value.ID,
-					firstName: value.firstName + value.lastName,
+					firstName: value.firstName ?? '' + value.lastName ?? '',
 					personalID: value.personalID
 				};
 			});
@@ -99,6 +99,18 @@
 		isDeleteModalOpen = false;
 
 		loadPatients();
+	}
+	function handleSearch() {
+		const query = searchValue;
+
+		if (searchValue == '') {
+			filteredRows = rows;
+			return;
+		}
+
+		filteredRows = rows.filter((row) => {
+			return row.firstName.toLocaleLowerCase().includes(query) || row.personalID.includes(query);
+		});
 	}
 </script>
 
@@ -145,7 +157,7 @@
 			</svelte:fragment>
 			<Toolbar>
 				<ToolbarContent>
-					<ToolbarSearch bind:value={searchValue} />
+					<ToolbarSearch bind:value={searchValue} on:input={handleSearch} />
 					<Button
 						on:click={function () {
 							isRegisterFormOpen = true;

@@ -1,13 +1,13 @@
 export interface Interview {
-    ID?: number;
-    StartDate?: Date;
-    EndDate?: Date;
-    PauseAt?: Date;
-    ResumedAt?: Date;
-    PatientID?: number;
-    InterviewerID?: number;
-    AsiFormID?: number;
-    CurrentQuestion?: string;
+    id?: number;
+    startDate?: Date;
+    endDate?: Date;
+    pauseAt?: Date;
+    resumedAt?: Date;
+    patientID?: Number;
+    interviewerID?: Number;
+    asiFormID?: Number;
+    currentQuestion?: string;
 
 
 }

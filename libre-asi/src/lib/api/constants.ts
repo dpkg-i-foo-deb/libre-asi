@@ -28,6 +28,9 @@ const REGISTER_PATIENT = 'patients/';
 const EDIT_PATIENT = 'patients/';
 const DELETE_PATIENT = 'patients/';
 const GET_INTERVIEWS = 'interviews/';
+const START_INTERVIEW = 'interviews/start/'
+const NEXT_QUESTION = 'interviews/next-question/'
+const GET_QUESTION = 'questions/'
 
 export {
 	API_URL,
@@ -53,5 +56,8 @@ export {
 	EDIT_PATIENT,
 	DELETE_PATIENT,
 	GET_PATIENT,
-	GET_INTERVIEWS
+	GET_INTERVIEWS,
+	START_INTERVIEW,
+	NEXT_QUESTION,
+	GET_QUESTION
 };
