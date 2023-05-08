@@ -33,14 +33,14 @@
 			},
 			{
 				"description": "Nunca casado/a",
-				"order": 5,
-				"value": 5
+				"order": 6,
+				"value": 6
 			}
 		]
 	},
 	{
 		"special_id": "I13",
-		"statement": "¿Cuánto tiempo lleva?",
+		"statement": "¿Cuánto tiempo lleva en dicho estado civil?",
 		"order": 13,
 		"type": "OEYMQ",
 		"category": "INF",

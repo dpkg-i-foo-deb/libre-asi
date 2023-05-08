@@ -1,9 +1,11 @@
+import type QuestionOption from "./Option";
+
 export interface Question {
-    specialID?: string;
+    special_id?: string;
     statement?: string;
     order?: Number;
     type?: string;
     category?: string;
-    options?: Array<typeof Option>;
+    options?: QuestionOption[];
 
 }
