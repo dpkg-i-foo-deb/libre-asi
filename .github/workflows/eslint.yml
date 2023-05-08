@@ -44,7 +44,7 @@ jobs:
         run: npx eslint .
           --config .eslintrc.cjs
           --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif | true
+          --output-file eslint-results.sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
