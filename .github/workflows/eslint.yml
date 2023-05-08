@@ -36,6 +36,7 @@ jobs:
           npm install @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
+        working-directory: libre-asi
         run: npx eslint .
           --config .eslintrc.js
           --ext .js,.jsx,.ts,.tsx
