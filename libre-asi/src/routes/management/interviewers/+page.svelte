@@ -65,7 +65,7 @@
 				return {
 					id: value.ID,
 					username: value.username,
-					firstName: value.firstName + value.lastName,
+					firstName: value.firstName ?? '' + value.lastName ?? '',
 					personalID: value.personalID
 				};
 			});
@@ -76,7 +76,18 @@
 		handleResponse(response.status, false);
 	}
 
-	function handleSearch() {}
+	function handleSearch() {
+		const query = searchValue;
+
+		if (searchValue == '') {
+			filteredRows = rows;
+			return;
+		}
+
+		filteredRows = rows.filter((row) => {
+			return row.firstName.toLocaleLowerCase().includes(query) || row.personalID.includes(query);
+		});
+	}
 
 	function handleCancel() {
 		isDeleteModalOpen = false;

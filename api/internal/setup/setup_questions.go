@@ -1,4 +1,4 @@
-package cmd
+package setup
 
 import (
 	"encoding/json"
@@ -7,25 +7,71 @@ import (
 	"libre-asi-api/pkg/util"
 	"libre-asi-api/pkg/view"
 	"os"
-
-	"github.com/spf13/cobra"
 )
 
-var registerQuestionCmd = &cobra.Command{
-	Use:   "register-question",
-	Short: "Register a question",
-	Run:   registerQuestion,
+func registerQuestionCategories() {
+	questionCategories := []view.QuestionCategoryParam{}
+
+	fileName := "data/question_categories.json"
+
+	file, err := os.Open(fileName)
+
+	util.HandleErrorStop(err)
+
+	decoder := json.NewDecoder(file)
+
+	err = decoder.Decode(&questionCategories)
+
+	util.HandleErrorStop(err)
+
+	for _, questionCategory := range questionCategories {
+
+		questionCategoryDb := models.QuestionCategory{}
+
+		questionCategoryDb.Category = questionCategory.Name
+
+		err := database.DB.Create(&questionCategoryDb).Error
+
+		util.HandleErrorStop(err)
+	}
 }
 
-func init() {
-	rootCmd.AddCommand(registerQuestionCmd)
+func registerQuestionTypes() {
+
+	questionTypes := []view.QuestionTypeParam{}
+
+	fileName := "data/question_types.json"
+
+	file, err := os.Open(fileName)
+
+	util.HandleErrorStop(err)
+
+	decoder := json.NewDecoder(file)
+
+	err = decoder.Decode(&questionTypes)
+
+	util.HandleErrorStop(err)
+
+	for _, questionType := range questionTypes {
+
+		questionTypeDb := models.QuestionType{}
+
+		questionTypeDb.Type = questionType.Name
+
+		err := database.DB.Create(&questionTypeDb).Error
+
+		util.HandleErrorStop(err)
+	}
+
 }
 
-func registerQuestion(cmd *cobra.Command, args []string) {
+func registerQuestions() {
 
 	questionTypes := []models.QuestionType{}
 
 	questionCategories := []models.QuestionCategory{}
+
+	asiForm := models.AsiForm{}
 
 	if err := database.DB.Find(&questionTypes).Error; err != nil {
 		util.HandleErrorStop(err)
@@ -35,7 +81,11 @@ func registerQuestion(cmd *cobra.Command, args []string) {
 		util.HandleErrorStop(err)
 	}
 
-	fileName := args[0]
+	if err := database.DB.First(&asiForm).Error; err != nil {
+		util.HandleErrorStop(err)
+	}
+
+	fileName := "data/questions.json"
 
 	file, err := os.Open(fileName)
 
@@ -43,7 +93,7 @@ func registerQuestion(cmd *cobra.Command, args []string) {
 
 	decoder := json.NewDecoder(file)
 
-	questions := []view.QuestionParam{}
+	questions := []view.Question{}
 
 	err = decoder.Decode(&questions)
 
@@ -55,6 +105,7 @@ func registerQuestion(cmd *cobra.Command, args []string) {
 
 		questionDb.SpecialCode = question.SpecialID
 		questionDb.Order = question.Order
+		questionDb.AsiFormID = asiForm.ID
 
 		for _, questionType := range questionTypes {
 			if questionType.Type == question.Type {
