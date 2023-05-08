@@ -35,6 +35,7 @@ jobs:
           npm install eslint@8.10.0
           npm install @microsoft/eslint-formatter-sarif@2.1.7
           npm install @typescript-eslint/eslint-plugin@latest
+          npm install eslint-config-prettier
 
       - name: Run ESLint
         working-directory: libre-asi
