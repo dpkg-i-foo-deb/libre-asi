@@ -16,6 +16,7 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 
 		case 400:
 			sendError('Something went wrong', 'Bad request');
+			break;
 
 		case 503:
 			goto('/cannot-connect');

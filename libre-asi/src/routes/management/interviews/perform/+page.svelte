@@ -20,7 +20,7 @@
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
 
-	let selectedRowIds: Number[] = [];
+	let selectedRowIds: number[] = [];
 
 	let isSelectingPatient = true;
 

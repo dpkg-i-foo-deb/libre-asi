@@ -73,11 +73,7 @@
 		handleResponse(response.status, false);
 	}
 
-	function handleFileSelect() {}
-
-	function handleFileRemove() {}
-
-	function removeImage() {}
+	//TODO implement patient pictures
 </script>
 
 <main>
@@ -161,8 +157,6 @@
 										>
 											<FileUploader
 												bind:files
-												on:add={handleFileSelect}
-												on:remove={handleFileRemove}
 												multiple={false}
 												labelTitle="Upload files"
 												buttonLabel="Add Picture"
@@ -194,9 +188,7 @@
 														<div
 															style="position: absolute; bottom: -50px; left: 0; right: 0; text-align: center;"
 														>
-															<Button kind="danger" on:click={removeImage} style="margin: auto;"
-																>Remove</Button
-															>
+															<Button kind="danger" style="margin: auto;">Remove</Button>
 														</div>
 													{/if}
 												</div>
