@@ -17,8 +17,6 @@
 		Tooltip
 	} from 'carbon-components-svelte';
 
-	//TODO use stepper widget
-
 	let currentPassword = '';
 	let invalidCurrentPassword = false;
 	let invalidCurrentPasswordCaption = '';

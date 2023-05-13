@@ -9,9 +9,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+const ACCESS_TOKEN_NAME = "access-token"
+const REFRESH_TOKEN_NAME = "refresh-token"
+
 func ValidateAccessToken(c *fiber.Ctx) error {
 
-	accessToken := c.Cookies("access-token")
+	accessToken := c.Cookies(ACCESS_TOKEN_NAME)
 	var response models.Response
 
 	response.Status = string(models.DENIED)
@@ -34,7 +37,7 @@ func ValidateAccessToken(c *fiber.Ctx) error {
 }
 
 func ValidateRefreshToken(c *fiber.Ctx) error {
-	tk := c.Cookies("refresh-token")
+	tk := c.Cookies(REFRESH_TOKEN_NAME)
 
 	var res models.Response
 	res.Status = string(models.DENIED)
@@ -81,7 +84,7 @@ func ValidateRefreshTokenDate(c *fiber.Ctx) error {
 	res.Status = string(models.DENIED)
 	res.Message = "The refresh token is still valid"
 
-	tk := c.Cookies("refresh-token")
+	tk := c.Cookies(REFRESH_TOKEN_NAME)
 
 	claims, err := GetTokenClaims(tk)
 
@@ -104,7 +107,7 @@ func ValidateAdministratorRole(c *fiber.Ctx) error {
 
 	var res models.Response
 
-	tk := c.Cookies("access-token")
+	tk := c.Cookies(ACCESS_TOKEN_NAME)
 
 	res.Status = string(models.DENIED)
 	res.Message = "Not enough privileges"
@@ -128,7 +131,7 @@ func ValidateInterviewerRole(c *fiber.Ctx) error {
 
 	//This should run AFTER validating the access token
 
-	tk := c.Cookies("access-token")
+	tk := c.Cookies(ACCESS_TOKEN_NAME)
 
 	role, err := RoleFromToken(tk)
 
@@ -146,7 +149,7 @@ func ValidateInterviewerRole(c *fiber.Ctx) error {
 func ValidateAdministratorOrInterviewerRole(c *fiber.Ctx) error {
 	//This should run AFTER validating the access token
 
-	tk := c.Cookies("access-token")
+	tk := c.Cookies(ACCESS_TOKEN_NAME)
 
 	role, err := RoleFromToken(tk)
 

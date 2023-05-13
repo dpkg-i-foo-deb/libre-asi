@@ -79,9 +79,9 @@ func HandleFiberError(c *fiber.Ctx, err error) error {
 		res.Status = string(models.DENIED)
 		res.Message = "Check the content you're sending"
 	default:
-		status = 500
-		res.Status = string(models.ERROR)
-		res.Message = "Something went wrong on the server side"
+		status = 200
+		res.Status = string(models.OK)
+		res.Message = "OK"
 
 	}
 
