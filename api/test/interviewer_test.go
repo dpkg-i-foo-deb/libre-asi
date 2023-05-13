@@ -74,11 +74,6 @@ func TestUpdateInterviewer(t *testing.T) {
 		t.Fatal(err)
 	}
 	// update the Interviewer
-	newFirstName := "Maria"
-	person.FirstName = newFirstName
-	if err := DB.Save(person).Error; err != nil {
-		t.Fatal(err)
-	}
 	newPersonID := uint(222)
 	interviewer.PersonID = newPersonID
 	if err := DB.Save(interviewer).Error; err != nil {
@@ -87,7 +82,7 @@ func TestUpdateInterviewer(t *testing.T) {
 
 	// check if the Interviewer was updated successfully
 	var result models.Interviewer
-	if err := DB.First(&result, user.ID).Error; err != nil {
+	if err := DB.First(&result, interviewer.ID).Error; err != nil {
 		t.Fatal(err)
 	}
 	if result.PersonID != newPersonID {

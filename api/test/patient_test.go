@@ -74,11 +74,6 @@ func TestUpdatePatient(t *testing.T) {
 	}
 
 	// update the Patient
-	newUserID := uint(333)
-	person.UserID = newUserID
-	if err := DB.Save(person).Error; err != nil {
-		t.Fatal(err)
-	}
 	newPersonID := uint(444)
 	patient.PersonID = newPersonID
 	if err := DB.Save(patient).Error; err != nil {
@@ -86,7 +81,7 @@ func TestUpdatePatient(t *testing.T) {
 	}
 	// check if the patient was updated successfully
 	var result models.Patient
-	if err := DB.First(&result, user.ID).Error; err != nil {
+	if err := DB.First(&result, patient.ID).Error; err != nil {
 		t.Fatal(err)
 	}
 	if result.PersonID != newPersonID {
