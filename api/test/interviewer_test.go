@@ -74,8 +74,8 @@ func TestUpdateInterviewer(t *testing.T) {
 		t.Fatal(err)
 	}
 	// update the Interviewer
-	newUserID := uint(111)
-	person.UserID = newUserID
+	newFirstName := "Maria"
+	person.FirstName = newFirstName
 	if err := DB.Save(person).Error; err != nil {
 		t.Fatal(err)
 	}
