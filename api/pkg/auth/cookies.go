@@ -9,7 +9,7 @@ import (
 
 func GenerateAccessCookie(value string) *fiber.Cookie {
 	accessCookie := &fiber.Cookie{
-		Name:     "access-token",
+		Name:     ACCESS_TOKEN_NAME,
 		HTTPOnly: true,
 		Expires:  time.Now().Add(time.Minute * 15),
 		Value:    value,
@@ -23,7 +23,7 @@ func GenerateAccessCookie(value string) *fiber.Cookie {
 
 func GenerateRefreshCookie(value string) *fiber.Cookie {
 	refreshCookie := &fiber.Cookie{
-		Name:     "refresh-token",
+		Name:     REFRESH_TOKEN_NAME,
 		HTTPOnly: true,
 		Expires:  time.Now().Add(time.Hour * 24),
 		Value:    value,
@@ -51,7 +51,7 @@ func GeneratePasswordResetCookie(value string) *fiber.Cookie {
 
 func GenerateFakeAccessCookie() *fiber.Cookie {
 	accessCookie := &fiber.Cookie{
-		Name:     "access-token",
+		Name:     ACCESS_TOKEN_NAME,
 		HTTPOnly: true,
 		Expires:  time.Now().Add(time.Minute),
 		Value:    "",
@@ -65,7 +65,7 @@ func GenerateFakeAccessCookie() *fiber.Cookie {
 }
 func GenerateFakeRefreshCookie() *fiber.Cookie {
 	refreshCookie := &fiber.Cookie{
-		Name:     "refresh-token",
+		Name:     REFRESH_TOKEN_NAME,
 		HTTPOnly: true,
 		Expires:  time.Now().Add(time.Minute),
 		Value:    "",

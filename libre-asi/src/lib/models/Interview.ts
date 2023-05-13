@@ -4,9 +4,9 @@ export interface Interview {
     endDate?: Date;
     pauseAt?: Date;
     resumedAt?: Date;
-    patientID?: Number;
-    interviewerID?: Number;
-    asiFormID?: Number;
+    patientID?: number;
+    interviewerID?: number;
+    asiFormID?: number;
     currentQuestion?: string;
 
 

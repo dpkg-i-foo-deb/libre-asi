@@ -12,7 +12,7 @@
 
 <p class="text">
 	{$LL.welcome.VISIT()}
-	<a target="_blank" rel="noreferrer" href="https://github.com/dpkg-i-foo-deb/libre-asi"
+	<a target="_blank" rel="noopener" href="https://github.com/dpkg-i-foo-deb/libre-asi"
 		>{$LL.welcome.GITHUB_REPOSITORY()}
 	</a>
 	{$LL.welcome.KNOW()}

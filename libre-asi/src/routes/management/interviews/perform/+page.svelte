@@ -14,19 +14,22 @@
 	import { Button, DataTable, DataTableSkeleton, Tile } from 'carbon-components-svelte';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
+	import QuestionSamcqn from '../../../../components/QuestionSAMCQN.svelte';
+	import QuestionOeymq from '../../../../components/QuestionOEYMQ.svelte';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
 
-	let selectedRowIds: Number[] = [];
+	let selectedRowIds: number[] = [];
 
 	let isSelectingPatient = true;
 
 	let isGeneral = false;
+	let isAccommodation = false;
 
 	let newInterview: Interview = {};
 
-	let currentQuestion: Question = {};
+	let currentQuestion: Question;
 
 	onMount(async function () {
 		await loadPatients();
@@ -73,6 +76,12 @@
 			}
 
 			handleResponse(response.status, false);
+		} else {
+			nextQuestion();
+
+			if (currentQuestion.category == 'AL') {
+				isAccommodation = true;
+			}
 		}
 	}
 
@@ -85,8 +94,6 @@
 		if (nextQuestionResponse.ok) {
 			newInterview = (await nextQuestionResponse.json()) as Interview;
 
-			console.log(newInterview);
-
 			const questionResponse = await fetchWithRefresh(
 				API_URL + GET_QUESTION + newInterview.currentQuestion,
 				{
@@ -95,8 +102,6 @@
 			);
 
 			if (questionResponse.ok) {
-				console.log(questionResponse);
-
 				currentQuestion = (await questionResponse.json()) as Question;
 			}
 
@@ -142,19 +147,32 @@
 			{/if}
 
 			{#if isGeneral}
-				<h4>Olis</h4>
+				<div class="title">
+					<h2>Preguntas generales</h2>
+				</div>
+			{/if}
+
+			{#if currentQuestion}
+				{#if currentQuestion.type == 'SAMCQN' ?? ''}
+					<QuestionSamcqn bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'OEYMQ' ?? ''}
+					<QuestionOeymq bind:question={currentQuestion} />
+				{/if}
 			{/if}
 		</div>
 
-		<Button size="lg" style="width:100%;" kind="secondary">Volver</Button>
+		<div class="button-container">
+			<Button size="default" kind="secondary">Volver</Button>
 
-		<Button
-			size="lg"
-			style="width:100%;"
-			on:click={function () {
-				handleNext();
-			}}>Siguiente</Button
-		>
+			<Button
+				size="default"
+				on:click={function () {
+					handleNext();
+				}}>Siguiente</Button
+			>
+		</div>
 	</Tile>
 </main>
 
@@ -172,8 +190,9 @@
 		margin-bottom: 4rem;
 	}
 
-	.progress {
-		margin-top: 4rem;
-		margin-bottom: 4rem;
+	.button-container {
+		display: flex;
+		flex-direction: row;
+		margin-top: 2rem;
 	}
 </style>

@@ -67,9 +67,9 @@ func registerQuestionTypes() {
 
 func registerQuestions() {
 
-	questionTypes := []models.QuestionType{}
+	questionTypes := []*models.QuestionType{}
 
-	questionCategories := []models.QuestionCategory{}
+	questionCategories := []*models.QuestionCategory{}
 
 	asiForm := models.AsiForm{}
 
@@ -85,9 +85,21 @@ func registerQuestions() {
 		util.HandleErrorStop(err)
 	}
 
-	fileName := "data/questions.json"
+	questions := readQuestionsFromJSON("data/questions.json")
 
-	file, err := os.Open(fileName)
+	for _, question := range questions {
+
+		questionDb := createQuestionModel(question, questionTypes, questionCategories, asiForm.ID)
+
+		if err := database.DB.Create(&questionDb).Error; err != nil {
+			util.HandleErrorStop(err)
+		}
+
+	}
+}
+
+func readQuestionsFromJSON(filename string) []view.Question {
+	file, err := os.Open(filename)
 
 	util.HandleErrorStop(err)
 
@@ -99,44 +111,43 @@ func registerQuestions() {
 
 	util.HandleErrorStop(err)
 
-	for _, question := range questions {
+	return questions
+}
 
-		questionDb := models.Question{}
+func createQuestionModel(question view.Question, questionTypes []*models.QuestionType, questionCategories []*models.QuestionCategory, asiFormID uint) models.Question {
+	questionDb := models.Question{}
 
-		questionDb.SpecialCode = question.SpecialID
-		questionDb.Order = question.Order
-		questionDb.AsiFormID = asiForm.ID
+	questionDb.SpecialCode = question.SpecialID
+	questionDb.Order = question.Order
+	questionDb.AsiFormID = asiFormID
 
-		for _, questionType := range questionTypes {
-			if questionType.Type == question.Type {
-				questionDb.QuestionTypeID = questionType.ID
-			}
+	for _, questionType := range questionTypes {
+		if questionType.Type == question.Type {
+			questionDb.QuestionTypeID = questionType.ID
+			break
 		}
-
-		for _, questionCategory := range questionCategories {
-			if questionCategory.Category == question.Category {
-				questionDb.QuestionCategoryID = questionCategory.ID
-			}
-		}
-
-		questionDb.QuestionTranslations = []models.QuestionTranslations{
-			{Language: "ES", Statement: question.Statement, IsDefault: false},
-		}
-
-		questionDb.Options = []models.Option{}
-
-		for _, option := range question.Options {
-			questionDb.Options = append(questionDb.Options, models.Option{
-				Language:    "ES",
-				Order:       option.Order,
-				Value:       option.Value,
-				Description: option.Description})
-		}
-
-		if err := database.DB.Create(&questionDb).Error; err != nil {
-			util.HandleErrorStop(err)
-		}
-
 	}
 
+	for _, questionCategory := range questionCategories {
+		if questionCategory.Category == question.Category {
+			questionDb.QuestionCategoryID = questionCategory.ID
+			break
+		}
+	}
+
+	questionDb.QuestionTranslations = []models.QuestionTranslations{
+		{Language: "ES", Statement: question.Statement, IsDefault: false},
+	}
+
+	questionDb.Options = []models.Option{}
+
+	for _, option := range question.Options {
+		questionDb.Options = append(questionDb.Options, models.Option{
+			Language:    "ES",
+			Order:       option.Order,
+			Value:       option.Value,
+			Description: option.Description})
+	}
+
+	return questionDb
 }

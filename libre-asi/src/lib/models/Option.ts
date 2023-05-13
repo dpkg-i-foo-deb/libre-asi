@@ -1,6 +1,6 @@
-export interface Option {
+export interface QuestionOption {
     description?: string;
-    order?: Number;
-    value?: Number;
+    order?: number;
+    value?: number;
 }
-export default Option;
+export default QuestionOption;

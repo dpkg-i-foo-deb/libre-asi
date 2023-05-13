@@ -75,7 +75,8 @@ func StartInterview(patientID int, interviewerID int) (int, error) {
 
 	i.Language = "ES"
 
-	i.CurrentQuestion = ""
+	i.CurrentQuestion = "I12"
+	i.CurrentSection = "INF"
 
 	if err := database.DB.Create(&i).Error; err != nil {
 		return -1, errors.ErrInternalError
@@ -146,15 +147,21 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 		i.CurrentQuestion = "I12"
 	}
 
-	handleNextQuestion(i)
+	if err := handleNextQuestion(&i); err != nil {
+		return nil, err
+	}
 
 	interview.CurrentQuestion = i.CurrentQuestion
+
+	if err := database.DB.Save(&i).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
 
 	return interview, nil
 
 }
 
-func handleNextQuestion(i models.Interview) error {
+func handleNextQuestion(i *models.Interview) error {
 
 	switch i.CurrentSection {
 	case "INF":
@@ -165,7 +172,7 @@ func handleNextQuestion(i models.Interview) error {
 	return nil
 }
 
-func handleINF(i models.Interview) error {
+func handleINF(i *models.Interview) error {
 
 	if len(INFQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").

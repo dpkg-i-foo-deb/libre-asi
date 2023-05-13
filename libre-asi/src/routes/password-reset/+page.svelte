@@ -1,13 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import {
-		ADMIN_LOGIN,
-		ADMIN_PASSWORD_RESET,
-		API_URL,
-		INTERVIEWER_LOGIN,
-		INTERVIEWER_PASSWORD_RESET,
-		PASSWORD_RESET
-	} from '$lib/api/constants';
+	import { ADMIN_PASSWORD_RESET, API_URL, INTERVIEWER_PASSWORD_RESET } from '$lib/api/constants';
 	import type PasswordReset from '$lib/models/PasswordReset';
 	import { fetchNoRefresh } from '$lib/util/fetch';
 	import { checkPassword, checkPasswordConfirm } from '$lib/util/formUtils';
@@ -23,8 +16,6 @@
 		RadioButtonGroup,
 		Tooltip
 	} from 'carbon-components-svelte';
-
-	//TODO use stepper widget
 
 	let currentPassword = '';
 	let invalidCurrentPassword = false;
