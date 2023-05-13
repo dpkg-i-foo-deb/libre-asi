@@ -72,17 +72,34 @@
 				isGeneral = true;
 				isSelectingPatient = false;
 
-				nextQuestion();
+				await getQuestion();
 			}
 
 			handleResponse(response.status, false);
 		} else {
-			nextQuestion();
+			await nextQuestion();
 
 			if (currentQuestion.category == 'AL') {
 				isAccommodation = true;
 			}
 		}
+	}
+
+	async function getQuestion() {
+		console.log(newInterview);
+
+		const questionResponse = await fetchWithRefresh(
+			API_URL + GET_QUESTION + newInterview.currentQuestion,
+			{
+				method: 'GET'
+			}
+		);
+
+		if (questionResponse.ok) {
+			currentQuestion = (await questionResponse.json()) as Question;
+		}
+
+		handleResponse(questionResponse.status, false);
 	}
 
 	async function nextQuestion() {
@@ -94,18 +111,7 @@
 		if (nextQuestionResponse.ok) {
 			newInterview = (await nextQuestionResponse.json()) as Interview;
 
-			const questionResponse = await fetchWithRefresh(
-				API_URL + GET_QUESTION + newInterview.currentQuestion,
-				{
-					method: 'GET'
-				}
-			);
-
-			if (questionResponse.ok) {
-				currentQuestion = (await questionResponse.json()) as Question;
-			}
-
-			handleResponse(questionResponse.status, false);
+			await getQuestion();
 		}
 
 		handleResponse(nextQuestionResponse.status, false);

@@ -43,14 +43,16 @@ func GetInterviews() (*[]view.Interview, error) {
 	return &interviews, nil
 }
 
-func StartInterview(patientID int, interviewerID int) (int, error) {
+func StartInterview(patientID int, interviewerID int) (*view.Interview, error) {
 
 	i := models.Interview{}
+
+	iv := view.Interview{}
 
 	asiForm := models.AsiForm{}
 
 	if err := database.DB.First(&asiForm).Error; err != nil {
-		return -1, errors.ErrInternalError
+		return nil, errors.ErrInternalError
 	}
 
 	i.AsiFormID = asiForm.ID
@@ -58,13 +60,13 @@ func StartInterview(patientID int, interviewerID int) (int, error) {
 	interviewer := models.Interviewer{}
 
 	if err := database.DB.First(&interviewer).Error; err != nil {
-		return -1, errors.ErrEntityNotFound
+		return nil, errors.ErrEntityNotFound
 	}
 
 	patient := models.Patient{}
 
 	if err := database.DB.Where("id = ?", patientID).First(&patient).Error; err != nil {
-		return -1, errors.ErrEntityNotFound
+		return nil, errors.ErrEntityNotFound
 	}
 
 	i.PatientID = patient.ID
@@ -79,10 +81,20 @@ func StartInterview(patientID int, interviewerID int) (int, error) {
 	i.CurrentSection = "INF"
 
 	if err := database.DB.Create(&i).Error; err != nil {
-		return -1, errors.ErrInternalError
+		return nil, errors.ErrInternalError
 	}
 
-	return int(i.ID), nil
+	iv.ID = i.ID
+	iv.StartDate = i.StartDate
+	iv.EndDate = i.EndDate
+	iv.PauseAt = i.PauseAt
+	iv.ResumedAt = i.ResumedAt
+	iv.PatientID = i.PatientID
+	iv.InterviewerID = i.Interviewers[0].ID
+	iv.AsiFormID = i.AsiFormID
+	iv.CurrentQuestion = i.CurrentQuestion
+
+	return &iv, nil
 }
 
 func GetQuestion(code string) (*view.Question, error) {

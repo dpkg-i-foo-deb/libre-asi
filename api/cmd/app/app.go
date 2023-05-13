@@ -31,7 +31,9 @@ func SetUp() *fiber.App {
 		MaxAge:           0,
 	}))
 
-	app.Use(limiter.New())
+	app.Use(limiter.New(limiter.Config{
+		Max: 100,
+	}))
 
 	app.Use(cfg.New(cfg.ConfigDefault))
 

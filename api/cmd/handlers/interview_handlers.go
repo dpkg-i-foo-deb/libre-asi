@@ -11,21 +11,19 @@ import (
 
 func StartInterview(c *fiber.Ctx) error {
 
-	i := view.Interview{}
+	i := &view.Interview{}
 
-	err := c.BodyParser(&i)
+	err := c.BodyParser(i)
 
 	if err != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	id, err := services.StartInterview(int(i.PatientID), int(i.InterviewerID))
+	i, err = services.StartInterview(int(i.PatientID), int(i.InterviewerID))
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
-
-	i.ID = uint(id)
 
 	return c.Status(201).JSON(i)
 
