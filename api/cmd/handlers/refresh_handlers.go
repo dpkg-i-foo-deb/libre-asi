@@ -18,13 +18,13 @@ func Refresh(c *fiber.Ctx) error {
 	var refreshTk *fiber.Cookie
 	var err error
 
-	email, err = auth.EmailFromToken(c.Cookies("refresh-token"))
+	email, err = auth.EmailFromToken(c.Cookies(auth.REFRESH_TOKEN_NAME))
 
 	if err != nil {
 		return util.HandleFiberError(c, errors.ErrInternalError)
 	}
 
-	role, err = auth.RoleFromToken(c.Cookies("refresh-token"))
+	role, err = auth.RoleFromToken(c.Cookies(auth.REFRESH_TOKEN_NAME))
 
 	if err != nil {
 		return util.HandleFiberError(c, errors.ErrInternalError)

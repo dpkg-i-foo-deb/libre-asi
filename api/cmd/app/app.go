@@ -8,6 +8,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -30,8 +31,7 @@ func SetUp() *fiber.App {
 		MaxAge:           0,
 	}))
 
-	//TODO enable limiter when frontend is stable
-	//app.Use(limiter.New())
+	app.Use(limiter.New())
 
 	app.Use(cfg.New(cfg.ConfigDefault))
 
