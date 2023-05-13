@@ -35,7 +35,7 @@
 		"svelte-check": "^3.2.0",
 		"tslib": "^2.5.0",
 		"typesafe-i18n": "^5.24.2",
-		"typescript": "^4.9.5",
+		"typescript": "^5.0.4",
 		"vite": "^4.2.1",
 		"vite-plugin-mkcert": "^1.15.0",
 		"vitest": "^0.29.2"
