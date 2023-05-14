@@ -182,6 +182,18 @@
 				{#if currentQuestion?.category == 'LAW' ?? false}
 					<h2>Estado legal</h2>
 				{/if}
+
+				{#if currentQuestion?.category == 'FAM' ?? false}
+					<h2>Familia/Relaciones</h2>
+				{/if}
+
+				{#if currentQuestion?.category == 'PSY'}
+					<h2>Estado Mental</h2>
+				{/if}
+
+				{#if currentQuestion?.category == 'VAL'}
+					<h2>Valoración</h2>
+				{/if}
 			</div>
 			{#if currentQuestion}
 				{#if currentQuestion.type == 'SAMCQN' ?? ''}
