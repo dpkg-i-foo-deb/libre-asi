@@ -12,6 +12,8 @@ import (
 
 var INFQuestions = []models.Question{}
 var ALQuestions = []models.Question{}
+var MEDQuestions = []models.Question{}
+var EMPQuestions = []models.Question{}
 
 func GetInterviews() (*[]view.Interview, error) {
 
@@ -177,6 +179,10 @@ func handleNextQuestion(i *models.Interview) error {
 		return handleINF(i)
 	case "AL":
 		return handleAL(i)
+	case "MED":
+		return handleMED(i)
+	case "EMP":
+		return handleEMP(i)
 
 	}
 
@@ -234,6 +240,64 @@ func handleAL(i *models.Interview) error {
 
 		if question.SpecialCode == i.CurrentQuestion {
 			i.CurrentQuestion = ALQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+}
+
+func handleMED(i *models.Interview) error {
+
+	if len(MEDQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'MED'").
+			Find(&MEDQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "SF28" {
+		i.CurrentSection = "EMP"
+		i.CurrentQuestion = "E1"
+		return nil
+	}
+
+	for index, question := range MEDQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = MEDQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+}
+
+func handleEMP(i *models.Interview) error {
+
+	if len(EMPQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'EMP'").
+			Find(&EMPQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "E36" {
+		i.CurrentSection = "DRU"
+		i.CurrentQuestion = "D1"
+		return nil
+	}
+
+	for index, question := range EMPQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = EMPQuestions[index+1].SpecialCode
 			break
 		}
 

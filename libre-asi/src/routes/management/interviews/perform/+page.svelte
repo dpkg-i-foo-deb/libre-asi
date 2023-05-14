@@ -20,6 +20,9 @@
 	import QuestionBq from '../../../../components/QuestionBQ.svelte';
 	import QuestionMamcqn from '../../../../components/QuestionMAMCQN.svelte';
 	import QuestionSkeleton from '../../../../components/QuestionSkeleton.svelte';
+	import QuestionTq from '../../../../components/QuestionTQ.svelte';
+	import QuestionDnq from '../../../../components/QuestionDNQ.svelte';
+	import QuestionTnq from '../../../../components/QuestionTNQ.svelte';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -167,6 +170,12 @@
 					<h2>Estado médico</h2>
 				</div>
 			{/if}
+
+			{#if currentQuestion?.category == 'EMP' ?? false}
+				<div class="title">
+					<h2>Empleo/Sustento</h2>
+				</div>
+			{/if}
 			{#if currentQuestion}
 				{#if currentQuestion.type == 'SAMCQN' ?? ''}
 					<QuestionSamcqn bind:question={currentQuestion} />
@@ -188,7 +197,19 @@
 					<QuestionMamcqn bind:question={currentQuestion} />
 				{/if}
 
-				{#if currentQuestion.type == 'NIL'}
+				{#if currentQuestion.type == 'TQ' ?? ''}
+					<QuestionTq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'DNQ' ?? ''}
+					<QuestionDnq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'TNQ' ?? ''}
+					<QuestionTnq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'NIL' ?? ''}
 					<QuestionSkeleton />
 				{/if}
 			{/if}
