@@ -5,6 +5,7 @@ import (
 	"libre-asi-api/pkg/services"
 	"libre-asi-api/pkg/util"
 	"libre-asi-api/pkg/view"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -37,6 +38,25 @@ func GetInterviews(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(interviews)
+}
+
+func GetInterview(c *fiber.Ctx) error {
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	interview, err := services.GetInterview(uint(idInt))
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(interview)
 }
 
 func NextQuestion(c *fiber.Ctx) error {

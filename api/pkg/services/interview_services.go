@@ -39,7 +39,7 @@ func GetInterviews() (*[]view.Interview, error) {
 			ID:              interview.ID,
 			StartDate:       interview.StartDate,
 			EndDate:         interview.EndDate,
-			PauseAt:         interview.PauseAt,
+			PausedAt:        interview.PausedAt,
 			ResumedAt:       interview.ResumedAt,
 			PatientID:       interview.PatientID,
 			InterviewerID:   interview.Interviewers[0].ID,
@@ -49,6 +49,26 @@ func GetInterviews() (*[]view.Interview, error) {
 	}
 
 	return &interviews, nil
+}
+
+func GetInterview(id uint) (*view.Interview, error) {
+
+	interview := view.Interview{}
+
+	if err := database.DB.Table("interviews").
+		Select("interviews.id", "interviews.start_date", "interviews.end_date", "interviews.paused_at", "interviews.resumed_at",
+			"interviews.patient_id", "interviews.asi_form_id", "interviews.current_question").
+		Where("interviews.id = ?", id).
+		Scan(&interview).
+		Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		} else {
+			return nil, errors.ErrInternalError
+		}
+	}
+
+	return &interview, nil
 }
 
 func StartInterview(patientID int, interviewerID int) (*view.Interview, error) {
@@ -95,7 +115,7 @@ func StartInterview(patientID int, interviewerID int) (*view.Interview, error) {
 	iv.ID = i.ID
 	iv.StartDate = i.StartDate
 	iv.EndDate = i.EndDate
-	iv.PauseAt = i.PauseAt
+	iv.PausedAt = i.PausedAt
 	iv.ResumedAt = i.ResumedAt
 	iv.PatientID = i.PatientID
 	iv.InterviewerID = i.Interviewers[0].ID
