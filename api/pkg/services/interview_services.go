@@ -14,6 +14,11 @@ var INFQuestions = []models.Question{}
 var ALQuestions = []models.Question{}
 var MEDQuestions = []models.Question{}
 var EMPQuestions = []models.Question{}
+var DRUQuestions = []models.Question{}
+var LAWQuestions = []models.Question{}
+var FAMQuestions = []models.Question{}
+var PSYQuestions = []models.Question{}
+var VALQuestions = []models.Question{}
 
 func GetInterviews() (*[]view.Interview, error) {
 
@@ -183,6 +188,16 @@ func handleNextQuestion(i *models.Interview) error {
 		return handleMED(i)
 	case "EMP":
 		return handleEMP(i)
+	case "DRU":
+		return handleDRU(i)
+	case "LAW":
+		return handleLAW(i)
+	case "FAM":
+		return handleFAM(i)
+	case "PSY":
+		return handlePSY(i)
+	case "VAL":
+		return handleVAL(i)
 
 	}
 
@@ -304,4 +319,151 @@ func handleEMP(i *models.Interview) error {
 	}
 
 	return nil
+}
+
+func handleDRU(i *models.Interview) error {
+
+	if len(DRUQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'DRU'").
+			Find(&DRUQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "D60" {
+		i.CurrentQuestion = "L1"
+		i.CurrentSection = "LAW"
+		return nil
+	}
+
+	for index, question := range DRUQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = DRUQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+
+}
+
+func handleLAW(i *models.Interview) error {
+
+	if len(LAWQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'LAW'").
+			Find(&LAWQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "L32" {
+		i.CurrentQuestion = "F1"
+		i.CurrentSection = "FAM"
+		return nil
+	}
+
+	for index, question := range LAWQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = LAWQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+
+}
+
+func handleFAM(i *models.Interview) error {
+
+	if len(FAMQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'FAM'").
+			Find(&FAMQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "F54" {
+		i.CurrentQuestion = "P1"
+		i.CurrentSection = "PSY"
+		return nil
+	}
+
+	for index, question := range FAMQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = FAMQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+}
+
+func handlePSY(i *models.Interview) error {
+
+	if len(PSYQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'PSY'").
+			Find(&PSYQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "P21" {
+		i.CurrentQuestion = "V1"
+		i.CurrentSection = "VAL"
+	}
+
+	for index, question := range PSYQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = PSYQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+}
+
+func handleVAL(i *models.Interview) error {
+
+	if len(VALQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'VAL'").
+			Find(&VALQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "V1" {
+		i.CurrentQuestion = "#"
+		i.CurrentSection = "END"
+		return nil
+	}
+
+	for index, question := range VALQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = VALQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
+
 }
