@@ -23,6 +23,11 @@
 	import QuestionTq from '../../../../components/QuestionTQ.svelte';
 	import QuestionDnq from '../../../../components/QuestionDNQ.svelte';
 	import QuestionTnq from '../../../../components/QuestionTNQ.svelte';
+	import QuestionMnq from '../../../../components/QuestionMNQ.svelte';
+	import QuestionWnq from '../../../../components/Question.WNQ.svelte';
+	import QuestionSma from '../../../../components/QuestionSMA.svelte';
+	import QuestionSaq from '../../../../components/QuestionSAQ.svelte';
+	import QuestionYnq from '../../../../components/QuestionYNQ.svelte';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -153,29 +158,31 @@
 				</div>
 			{/if}
 
-			{#if currentQuestion?.category == 'INF'}
-				<div class="title">
+			<div class="title">
+				{#if currentQuestion?.category == 'INF'}
 					<h2>Preguntas generales</h2>
-				</div>
-			{/if}
+				{/if}
 
-			{#if currentQuestion?.category == 'AL' ?? false}
-				<div class="title">
+				{#if currentQuestion?.category == 'AL' ?? false}
 					<h2>Alojamiento</h2>
-				</div>
-			{/if}
+				{/if}
 
-			{#if currentQuestion?.category == 'MED' ?? false}
-				<div class="title">
+				{#if currentQuestion?.category == 'MED' ?? false}
 					<h2>Estado médico</h2>
-				</div>
-			{/if}
+				{/if}
 
-			{#if currentQuestion?.category == 'EMP' ?? false}
-				<div class="title">
+				{#if currentQuestion?.category == 'EMP' ?? false}
 					<h2>Empleo/Sustento</h2>
-				</div>
-			{/if}
+				{/if}
+
+				{#if currentQuestion?.category == 'DRU' ?? false}
+					<h2>Drogas/Alcohol</h2>
+				{/if}
+
+				{#if currentQuestion?.category == 'LAW' ?? false}
+					<h2>Estado legal</h2>
+				{/if}
+			</div>
 			{#if currentQuestion}
 				{#if currentQuestion.type == 'SAMCQN' ?? ''}
 					<QuestionSamcqn bind:question={currentQuestion} />
@@ -207,6 +214,26 @@
 
 				{#if currentQuestion.type == 'TNQ' ?? ''}
 					<QuestionTnq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'MNQ' ?? ''}
+					<QuestionMnq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'WNQ' ?? ''}
+					<QuestionWnq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'SMA' ?? ''}
+					<QuestionSma bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'SAQ' ?? ''}
+					<QuestionSaq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'YNQ' ?? ''}
+					<QuestionYnq bind:question={currentQuestion} />
 				{/if}
 
 				{#if currentQuestion.type == 'NIL' ?? ''}
