@@ -29,6 +29,7 @@ const EDIT_PATIENT = 'patients/';
 const DELETE_PATIENT = 'patients/';
 const GET_INTERVIEWS = 'interviews/';
 const START_INTERVIEW = 'interviews/start/';
+const GET_INTERVIEW = 'interviews/';
 const NEXT_QUESTION = 'interviews/next-question/';
 const GET_QUESTION = 'questions/';
 
@@ -59,5 +60,6 @@ export {
 	GET_INTERVIEWS,
 	START_INTERVIEW,
 	NEXT_QUESTION,
-	GET_QUESTION
+	GET_QUESTION,
+	GET_INTERVIEW
 };
