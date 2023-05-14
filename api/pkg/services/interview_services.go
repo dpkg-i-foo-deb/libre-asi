@@ -209,6 +209,7 @@ func handleINF(i *models.Interview) error {
 	if len(INFQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'INF'").
+			Order(`questions."order" ASC`).
 			Find(&INFQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -239,6 +240,7 @@ func handleAL(i *models.Interview) error {
 	if len(ALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'AL'").
+			Order(`questions."order" ASC`).
 			Find(&ALQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -268,6 +270,7 @@ func handleMED(i *models.Interview) error {
 	if len(MEDQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'MED'").
+			Order(`questions."order" ASC`).
 			Find(&MEDQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -297,6 +300,7 @@ func handleEMP(i *models.Interview) error {
 	if len(EMPQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'EMP'").
+			Order(`questions."order" ASC`).
 			Find(&EMPQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -326,6 +330,7 @@ func handleDRU(i *models.Interview) error {
 	if len(DRUQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'DRU'").
+			Order(`questions."order" ASC`).
 			Find(&DRUQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -356,6 +361,7 @@ func handleLAW(i *models.Interview) error {
 	if len(LAWQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'LAW'").
+			Order(`questions."order" ASC`).
 			Find(&LAWQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -386,6 +392,7 @@ func handleFAM(i *models.Interview) error {
 	if len(FAMQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'FAM'").
+			Order(`questions."order" ASC`).
 			Find(&FAMQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -415,6 +422,7 @@ func handlePSY(i *models.Interview) error {
 	if len(PSYQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'PSY'").
+			Order(`questions."order" ASC`).
 			Find(&PSYQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
@@ -443,6 +451,7 @@ func handleVAL(i *models.Interview) error {
 	if len(VALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
 			Where("qc.category = 'VAL'").
+			Order(`questions."order" ASC`).
 			Find(&VALQuestions).
 			Error; err != nil {
 			return errors.ErrInternalError
