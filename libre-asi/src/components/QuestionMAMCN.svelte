@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Question } from '$lib/models/Question';
-	import { NumberInput, TextInput } from 'carbon-components-svelte';
+	import { NumberInput } from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 
 	export let question: Question;
