@@ -11,6 +11,7 @@ import (
 )
 
 var INFQuestions = []models.Question{}
+var ALQuestions = []models.Question{}
 
 func GetInterviews() (*[]view.Interview, error) {
 
@@ -155,10 +156,6 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 
 	}
 
-	if i.CurrentQuestion == "" {
-		i.CurrentQuestion = "I12"
-	}
-
 	if err := handleNextQuestion(&i); err != nil {
 		return nil, err
 	}
@@ -178,6 +175,8 @@ func handleNextQuestion(i *models.Interview) error {
 	switch i.CurrentSection {
 	case "INF":
 		return handleINF(i)
+	case "AL":
+		return handleAL(i)
 
 	}
 
@@ -212,4 +211,33 @@ func handleINF(i *models.Interview) error {
 
 	return nil
 
+}
+
+func handleAL(i *models.Interview) error {
+
+	if len(ALQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'AL'").
+			Find(&ALQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "A12" {
+		i.CurrentSection = "MED"
+		i.CurrentQuestion = "SF1"
+		return nil
+	}
+
+	for index, question := range ALQuestions {
+
+		if question.SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = ALQuestions[index+1].SpecialCode
+			break
+		}
+
+	}
+
+	return nil
 }

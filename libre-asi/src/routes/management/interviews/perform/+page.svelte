@@ -16,6 +16,10 @@
 	import { onMount } from 'svelte';
 	import QuestionSamcqn from '../../../../components/QuestionSAMCQN.svelte';
 	import QuestionOeymq from '../../../../components/QuestionOEYMQ.svelte';
+	import QuestionMamcn from '../../../../components/QuestionMAMCN.svelte';
+	import QuestionBq from '../../../../components/QuestionBQ.svelte';
+	import QuestionMamcqn from '../../../../components/QuestionMAMCQN.svelte';
+	import QuestionSkeleton from '../../../../components/QuestionSkeleton.svelte';
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -24,12 +28,9 @@
 
 	let isSelectingPatient = true;
 
-	let isGeneral = false;
-	let isAccommodation = false;
-
 	let newInterview: Interview = {};
 
-	let currentQuestion: Question;
+	let currentQuestion: Question = {};
 
 	onMount(async function () {
 		await loadPatients();
@@ -69,7 +70,6 @@
 			if (response.ok) {
 				newInterview = (await response.json()) as Interview;
 
-				isGeneral = true;
 				isSelectingPatient = false;
 
 				await getQuestion();
@@ -78,15 +78,11 @@
 			handleResponse(response.status, false);
 		} else {
 			await nextQuestion();
-
-			if (currentQuestion.category == 'AL') {
-				isAccommodation = true;
-			}
 		}
 	}
 
 	async function getQuestion() {
-		console.log(newInterview);
+		currentQuestion.type = 'NIL';
 
 		const questionResponse = await fetchWithRefresh(
 			API_URL + GET_QUESTION + newInterview.currentQuestion,
@@ -98,6 +94,8 @@
 		if (questionResponse.ok) {
 			currentQuestion = (await questionResponse.json()) as Question;
 		}
+
+		console.log(currentQuestion);
 
 		handleResponse(questionResponse.status, false);
 	}
@@ -152,12 +150,23 @@
 				</div>
 			{/if}
 
-			{#if isGeneral}
+			{#if currentQuestion?.category == 'INF'}
 				<div class="title">
 					<h2>Preguntas generales</h2>
 				</div>
 			{/if}
 
+			{#if currentQuestion?.category == 'AL' ?? false}
+				<div class="title">
+					<h2>Alojamiento</h2>
+				</div>
+			{/if}
+
+			{#if currentQuestion?.category == 'MED' ?? false}
+				<div class="title">
+					<h2>Estado médico</h2>
+				</div>
+			{/if}
 			{#if currentQuestion}
 				{#if currentQuestion.type == 'SAMCQN' ?? ''}
 					<QuestionSamcqn bind:question={currentQuestion} />
@@ -165,6 +174,22 @@
 
 				{#if currentQuestion.type == 'OEYMQ' ?? ''}
 					<QuestionOeymq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'MAMCN' ?? ''}
+					<QuestionMamcn bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'BQ' ?? ''}
+					<QuestionBq bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'MAMCQN' ?? ''}
+					<QuestionMamcqn bind:question={currentQuestion} />
+				{/if}
+
+				{#if currentQuestion.type == 'NIL'}
+					<QuestionSkeleton />
 				{/if}
 			{/if}
 		</div>
