@@ -6658,5 +6658,29 @@
 				"value": 5
 			}
 		]
+	},
+	{
+		"special_id": "V1",
+		"statement": "Valore la capacidad aparente y la buena voluntad del entrevistado para comprender las preguntas, proporcionar estimaciones exactas y reflexivas, y responder honestamente. En general, la información proporcionada por el entrevistado es:",
+		"order": 1,
+		"type": "SAMCQN",
+		"category": "VAL",
+		"options": [
+			{
+				"description": "Mala",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Regular",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Buena",
+				"order": 3,
+				"value": 3
+			}
+		]
 	}
 ]
