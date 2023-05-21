@@ -1,5 +1,5 @@
 package view
 
-type QuestionCategoryParam struct {
+type QuestionCategory struct {
 	Name string `json:"name"`
 }

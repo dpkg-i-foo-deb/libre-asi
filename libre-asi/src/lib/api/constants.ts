@@ -32,6 +32,7 @@ const START_INTERVIEW = 'interviews/start/';
 const GET_INTERVIEW = 'interviews/';
 const NEXT_QUESTION = 'interviews/next-question/';
 const GET_QUESTION = 'questions/';
+const ANSWER_QUESTION = 'interviews/answer/';
 
 export {
 	API_URL,
@@ -61,5 +62,6 @@ export {
 	START_INTERVIEW,
 	NEXT_QUESTION,
 	GET_QUESTION,
-	GET_INTERVIEW
+	GET_INTERVIEW,
+	ANSWER_QUESTION,
 };

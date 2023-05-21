@@ -150,6 +150,8 @@ func GetQuestion(code string) (*view.Question, error) {
 
 	question := view.Question{}
 
+	question.ID = q.ID
+
 	question.SpecialID = q.SpecialCode
 
 	question.Statement = q.QuestionTranslations[0].Statement
@@ -162,7 +164,8 @@ func GetQuestion(code string) (*view.Question, error) {
 
 	for _, option := range q.Options {
 
-		question.Options = append(question.Options, view.OptionParam{
+		question.Options = append(question.Options, view.Option{
+			ID:          option.ID,
 			Order:       option.Order,
 			Value:       option.Value,
 			Description: option.Description,
@@ -195,6 +198,57 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 
 	return interview, nil
 
+}
+
+func AnswerQuestion(answers []view.Answer, interviewID uint) error {
+
+	if err := database.DB.Transaction(func(tx *gorm.DB) error {
+
+		for _, answer := range answers {
+			i := models.Interview{}
+			q := models.Question{}
+			o := models.Option{}
+
+			if err := database.DB.Where("id = ?", interviewID).First(&i).Error; err != nil {
+				if err == gorm.ErrRecordNotFound {
+					return errors.ErrEntityNotFound
+				}
+				return errors.ErrInternalError
+			}
+
+			if err := database.DB.Where("id = ?", answer.OptionID).First(&o).Error; err != nil {
+				if err == gorm.ErrRecordNotFound {
+					return errors.ErrEntityNotFound
+				}
+				return errors.ErrInternalError
+			}
+
+			if err := database.DB.Where("id = ?", answer.QuestionID).First(&q).Error; err != nil {
+				if err == gorm.ErrRecordNotFound {
+					return errors.ErrEntityNotFound
+				}
+				return errors.ErrInternalError
+			}
+
+			ans := models.InterviewAnswers{
+				InterviewID: interviewID,
+				OptionID:    uint(answer.OptionID),
+				QuestionID:  uint(answer.QuestionID),
+				Answer:      answer.Value,
+				Commentary:  answer.Comment,
+			}
+
+			if err := database.DB.Save(&ans).Error; err != nil {
+				return errors.ErrInternalError
+			}
+		}
+
+		return nil
+	}); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func handleNextQuestion(i *models.Interview) error {

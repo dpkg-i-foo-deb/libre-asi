@@ -24,9 +24,10 @@ type Interview struct {
 
 type InterviewAnswers struct {
 	InterviewID uint `json:"interview" gorm:"primaryKey"`
+	QuestionID  uint `json:"questionID" gorm:"primaryKey"`
 	OptionID    uint `json:"option" gorm:"primaryKey"`
 	CreatedAt   time.Time
 	DeletedAt   gorm.DeletedAt
-	Answer      string `json:"answer"`
+	Answer      int    `json:"answer"`
 	Commentary  string `json:"commentary"`
 }

@@ -11,4 +11,5 @@ func interviewRoutes() {
 	server.Get("/interviews/:id", auth.ValidateAccessToken, auth.ValidateAdministratorOrInterviewerRole, handlers.GetInterview)
 	server.Post("/interviews/next-question", auth.ValidateAccessToken, auth.ValidateAdministratorOrInterviewerRole, handlers.NextQuestion)
 	server.Get("/questions/:code", handlers.GetQuestion)
+	server.Post("/interviews/answer/:id", auth.ValidateAccessToken, auth.ValidateAdministratorOrInterviewerRole, handlers.AnswerQuestion)
 }

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/services"
 	"libre-asi-api/pkg/util"
@@ -90,4 +91,34 @@ func GetQuestion(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(question)
+}
+
+func AnswerQuestion(c *fiber.Ctx) error {
+
+	a := []view.Answer{}
+
+	err := c.BodyParser(&a)
+
+	if err != nil {
+
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	fmt.Println(a[0].Comment)
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	err = services.AnswerQuestion(a, uint(idInt))
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.SendStatus(201)
 }

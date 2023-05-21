@@ -4,7 +4,8 @@
 		START_INTERVIEW,
 		GET_QUESTION,
 		NEXT_QUESTION,
-		GET_INTERVIEW
+		GET_INTERVIEW,
+		ANSWER_QUESTION
 	} from '$lib/api/constants';
 	import type Interview from '$lib/models/Interview';
 	import type { Question } from '$lib/models/Question';
@@ -32,7 +33,7 @@
 
 	let interview: Interview = {};
 
-	let currentQuestion: Question = {};
+	let currentQuestion: Question = { valid: false, answers: [] };
 
 	onMount(async function () {
 		await loadInterview();
@@ -53,7 +54,23 @@
 	}
 
 	async function handleNext() {
-		await nextQuestion();
+		answerQuestion();
+	}
+
+	async function answerQuestion() {
+		const response = await fetchWithRefresh(API_URL + ANSWER_QUESTION + interviewID, {
+			method: 'POST',
+			body: JSON.stringify(currentQuestion.answers)
+		});
+
+		if (response.ok) {
+			currentQuestion.answers = [];
+			currentQuestion.valid = false;
+
+			await nextQuestion();
+		}
+
+		handleResponse(response.status, false);
 	}
 
 	async function getQuestion() {
@@ -193,6 +210,7 @@
 
 			<Button
 				size="default"
+				disabled={!currentQuestion.valid}
 				on:click={function () {
 					handleNext();
 				}}>Siguiente</Button

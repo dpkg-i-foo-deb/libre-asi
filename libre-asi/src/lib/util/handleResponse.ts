@@ -18,6 +18,10 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			sendError('Something went wrong', 'Bad request');
 			break;
 
+		case 404:
+			sendError('Objeto no encontrado', 'Verifique la consola');
+			break;
+
 		case 503:
 			goto('/cannot-connect');
 			setup.set(false);
