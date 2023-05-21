@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		API_URL,
-		START_INTERVIEW,
 		GET_QUESTION,
 		NEXT_QUESTION,
 		GET_INTERVIEW,
@@ -23,7 +22,7 @@
 	import QuestionSma from '../../../../../components/QuestionSMA.svelte';
 	import QuestionSkeleton from '../../../../../components/QuestionSkeleton.svelte';
 	import QuestionTnq from '../../../../../components/QuestionTNQ.svelte';
-	import QuestionWnq from '../../../../../components/QuestionTNQ.svelte';
+	import QuestionWnq from '../../../../../components/QuestionWNQ.svelte';
 	import QuestionTq from '../../../../../components/QuestionTQ.svelte';
 	import QuestionYnq from '../../../../../components/QuestionYNQ.svelte';
 	import { onMount } from 'svelte';
