@@ -1960,7 +1960,7 @@
 	},
 	{
 		"special_id": "D4",
-		"statement": "¿Cuántos días ha acudido a un programaa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
+		"statement": "¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
 		"order": 4,
 		"type": "MAMCN",
 		"category": "DRU",
