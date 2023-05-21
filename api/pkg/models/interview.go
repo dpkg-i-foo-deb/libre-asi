@@ -10,7 +10,7 @@ type Interview struct {
 	gorm.Model
 	StartDate       time.Time     `json:"startDate"`
 	EndDate         time.Time     `json:"endDate"`
-	PauseAt         time.Time     `json:"pausedAt"`
+	PausedAt        time.Time     `json:"pausedAt"`
 	ResumedAt       time.Time     `json:"resumedAt"`
 	PatientID       uint          `json:"patient"`
 	Interviewers    []Interviewer `json:"interviewer" gorm:"many2many:interviewer_interviews"`
@@ -24,9 +24,10 @@ type Interview struct {
 
 type InterviewAnswers struct {
 	InterviewID uint `json:"interview" gorm:"primaryKey"`
+	QuestionID  uint `json:"questionID" gorm:"primaryKey"`
 	OptionID    uint `json:"option" gorm:"primaryKey"`
 	CreatedAt   time.Time
 	DeletedAt   gorm.DeletedAt
-	Answer      string `json:"answer"`
+	Answer      int    `json:"answer"`
 	Commentary  string `json:"commentary"`
 }
