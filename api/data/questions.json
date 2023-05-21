@@ -1584,7 +1584,7 @@
 		"statement": "¿Cuánta importancia tiene para usted ahora cualquier tipo de orientación laboral (como asesoramiento, formación o educación) que le ayude a encontrar un empleo o a solucionar los problemas relacionados con el trabajo?",
 		"order": 23,
 		"type": "SAMCQN",
-		"category": "MED",
+		"category": "EMP",
 		"options": [
 			{
 				"description": "Ninguna",
