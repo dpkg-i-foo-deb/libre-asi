@@ -38,7 +38,7 @@
 		"typescript": "^5.0.4",
 		"vite": "^4.2.1",
 		"vite-plugin-mkcert": "^1.15.0",
-		"vitest": "^0.29.2"
+		"vitest": "^0.31.1"
 	},
 	"type": "module",
 	"dependencies": {
