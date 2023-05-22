@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/glebarez/sqlite v1.8.0
-	github.com/gofiber/fiber/v2 v2.45.0
+	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/spf13/cobra v1.7.0
 	golang.org/x/crypto v0.9.0
