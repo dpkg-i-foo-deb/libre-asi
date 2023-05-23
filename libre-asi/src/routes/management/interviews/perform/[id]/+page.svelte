@@ -32,7 +32,7 @@
 
 	let interview: Interview = {};
 
-	let currentQuestion: Question = { valid: false, answers: [] };
+	let currentQuestion: Question = { valid: false, answers: [], type: 'NIL' };
 
 	onMount(async function () {
 		await loadInterview();
@@ -205,15 +205,20 @@
 		</div>
 
 		<div class="button-container">
-			<Button size="default" kind="secondary">Volver</Button>
+			{#if currentQuestion.type == 'NIL'}
+				<Button skeleton size="default" />
+				<Button skeleton size="default" />
+			{:else}
+				<Button size="default" kind="secondary">Volver</Button>
 
-			<Button
-				size="default"
-				disabled={!currentQuestion.valid}
-				on:click={function () {
-					handleNext();
-				}}>Siguiente</Button
-			>
+				<Button
+					size="default"
+					disabled={!currentQuestion.valid}
+					on:click={function () {
+						handleNext();
+					}}>Siguiente</Button
+				>
+			{/if}
 		</div>
 	</Tile>
 </main>
