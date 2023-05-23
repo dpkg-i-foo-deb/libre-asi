@@ -120,7 +120,7 @@ func TestDoInterview(t *testing.T) {
 
 	//Create answers for Interview
 	answer := &models.InterviewAnswers{
-		Answer:      "Cuál es su estado civil actual?",
+		Answer:      2,
 		InterviewID: interview.ID,
 	}
 	if err := DB.Create(&answer).Error; err != nil {
