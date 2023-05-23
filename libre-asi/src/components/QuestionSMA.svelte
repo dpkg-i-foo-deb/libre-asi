@@ -8,26 +8,23 @@
 	export let question: Question;
 
 	let statement = '';
+
 	let comment = '';
 
 	onMount(function () {
-		statement = question.special_id ?? '';
-		statement += ': ' + question.statement ?? '';
-
 		if (question.options == null) {
-			question.options = [{}, {}];
+			question.options = [{}];
 		}
 
-		question.answers = [
-			{ value: 0, questionID: question.id, optionID: question.options[0].id },
-			{ value: 0, questionID: question.id, optionID: question.options[1].id }
-		];
+		question.answers = [{ value: 0, questionID: question.id, optionID: question.options[0].id }];
 
 		question.options?.forEach(function (value: QuestionOption) {
 			value.value = 0;
 		});
 
 		question.valid = true;
+		statement = question.special_id ?? '';
+		statement += ': ' + question.statement ?? '';
 	});
 
 	function setComment() {
@@ -37,26 +34,14 @@
 	}
 
 	function update(option: QuestionOption) {
-		console.log(question.answers);
-
-		if (question.answers == null) {
-			question.answers = [
-				{ value: 0, questionID: question.id },
-				{ value: 0, questionID: question.id }
-			];
-		}
-
-		if (option.order == 1) {
-			question.answers[0].value = option.value;
-			question.answers[0].optionID = option.id;
-		}
-
-		if (option.order == 2) {
-			question.answers[1].value = option.value;
-			question.answers[1].optionID = option.id;
-		}
-
-		question.valid = true;
+		question.answers = [
+			{
+				comment: comment,
+				optionID: option.id,
+				questionID: question.id,
+				value: option.value
+			}
+		];
 	}
 </script>
 
@@ -72,7 +57,7 @@
 			<NumberInput
 				label={option.description?.toUpperCase()}
 				bind:value={option.value}
-				on:input={function () {
+				on:change={function () {
 					update(option);
 				}}
 			/>

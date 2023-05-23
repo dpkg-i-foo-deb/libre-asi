@@ -10,7 +10,7 @@ import (
 )
 
 func registerQuestionCategories() {
-	questionCategories := []view.QuestionCategoryParam{}
+	questionCategories := []view.QuestionCategory{}
 
 	fileName := "data/question_categories.json"
 
@@ -38,7 +38,7 @@ func registerQuestionCategories() {
 
 func registerQuestionTypes() {
 
-	questionTypes := []view.QuestionTypeParam{}
+	questionTypes := []view.QuestionType{}
 
 	fileName := "data/question_types.json"
 

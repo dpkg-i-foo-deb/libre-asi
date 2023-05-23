@@ -1,6 +1,8 @@
 export interface QuestionOption {
-    description?: string;
-    order?: number;
-    value?: number;
+	id?: number;
+	description?: string;
+	order?: number;
+	value?: number;
+	checked?: false;
 }
 export default QuestionOption;

@@ -1584,7 +1584,7 @@
 		"statement": "¿Cuánta importancia tiene para usted ahora cualquier tipo de orientación laboral (como asesoramiento, formación o educación) que le ayude a encontrar un empleo o a solucionar los problemas relacionados con el trabajo?",
 		"order": 23,
 		"type": "SAMCQN",
-		"category": "MED",
+		"category": "EMP",
 		"options": [
 			{
 				"description": "Ninguna",
@@ -1960,7 +1960,7 @@
 	},
 	{
 		"special_id": "D4",
-		"statement": "¿Cuántos días ha acudido a un programaa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
+		"statement": "¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
 		"order": 4,
 		"type": "MAMCN",
 		"category": "DRU",
@@ -2394,7 +2394,7 @@
 	{
 		"special_id": "D25B",
 		"statement": "¿Cuántos años en su vida ha consumido marihuna?",
-		"order": 26,
+		"order": 25,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2408,7 +2408,7 @@
 	{
 		"special_id": "D25C",
 		"statement": "¿Ha consumido marihuana durante 50 o más días de su vida?",
-		"order": 27,
+		"order": 25,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2427,8 +2427,8 @@
 	{
 		"special_id": "D25D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió marihuana?",
-		"order": 28,
-		"type": "SAMCQN",
+		"order": 25,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2441,7 +2441,7 @@
 	{
 		"special_id": "D25E",
 		"statement": "En los últimos 30 días,¿consumió marihuana?",
-		"order": 29,
+		"order": 25,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2460,7 +2460,7 @@
 	{
 		"special_id": "D26A",
 		"statement": "¿Qué edad tenía la primera vez que consumió sedantes?",
-		"order": 30,
+		"order": 26,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2474,7 +2474,7 @@
 	{
 		"special_id": "D26B",
 		"statement": "¿Cuántos años en su vida ha consumido sedantes?",
-		"order": 31,
+		"order": 26,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2488,7 +2488,7 @@
 	{
 		"special_id": "D26C",
 		"statement": "¿Ha consumido sedantes durante 50 o más días de su vida?",
-		"order": 32,
+		"order": 26,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2507,8 +2507,8 @@
 	{
 		"special_id": "D26D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió sedantes?",
-		"order": 33,
-		"type": "SAMCQN",
+		"order": 26,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2519,28 +2519,9 @@
 		]
 	},
 	{
-		"special_id": "D26E",
-		"statement": "En los últimos 30 días,¿consumió sedantes?",
-		"order": 34,
-		"type": "BQ",
-		"category": "DRU",
-		"options": [
-			{
-				"description": "Como prescrito",
-				"order": 1,
-				"value": 0
-			},
-			{
-				"description": "No como prescrito",
-				"order": 2,
-				"value": 1
-			}
-		]
-	},
-	{
 		"special_id": "D27A",
 		"statement": "¿Qué edad tenía la primera vez que consumió cocaina?",
-		"order": 35,
+		"order": 27,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2554,7 +2535,7 @@
 	{
 		"special_id": "D27B",
 		"statement": "¿Cuántos años en su vida ha consumido cocaina?",
-		"order": 36,
+		"order": 27,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2568,7 +2549,7 @@
 	{
 		"special_id": "D27C",
 		"statement": "¿Ha consumido cocaina durante 50 o más días de su vida?",
-		"order": 37,
+		"order": 27,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2587,8 +2568,8 @@
 	{
 		"special_id": "D27D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió cocaina?",
-		"order": 38,
-		"type": "SAMCQN",
+		"order": 27,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2599,28 +2580,9 @@
 		]
 	},
 	{
-		"special_id": "D27E",
-		"statement": "En los últimos 30 días,¿consumió cocaina?",
-		"order": 39,
-		"type": "BQ",
-		"category": "DRU",
-		"options": [
-			{
-				"description": "Como prescrito",
-				"order": 1,
-				"value": 0
-			},
-			{
-				"description": "No como prescrito",
-				"order": 2,
-				"value": 1
-			}
-		]
-	},
-	{
 		"special_id": "D28A",
 		"statement": "¿Qué edad tenía la primera vez que consumió estimulantes?",
-		"order": 40,
+		"order": 28,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2634,7 +2596,7 @@
 	{
 		"special_id": "D28B",
 		"statement": "¿Cuántos años en su vida ha consumido estimulantes?",
-		"order": 41,
+		"order": 28,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2648,7 +2610,7 @@
 	{
 		"special_id": "D28C",
 		"statement": "¿Ha consumido estimulantes durante 50 o más días de su vida?",
-		"order": 42,
+		"order": 28,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2667,8 +2629,8 @@
 	{
 		"special_id": "D28D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió estimulantes?",
-		"order": 43,
-		"type": "SAMCQN",
+		"order": 28,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2681,7 +2643,7 @@
 	{
 		"special_id": "D28E",
 		"statement": "En los últimos 30 días,¿consumió estimulantes?",
-		"order": 44,
+		"order": 28,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2700,7 +2662,7 @@
 	{
 		"special_id": "D29A",
 		"statement": "¿Qué edad tenía la primera vez que consumió alucinógenos?",
-		"order": 45,
+		"order": 29,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2714,7 +2676,7 @@
 	{
 		"special_id": "D29B",
 		"statement": "¿Cuántos años en su vida ha consumido alucinógenos?",
-		"order": 46,
+		"order": 29,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2728,7 +2690,7 @@
 	{
 		"special_id": "D29C",
 		"statement": "¿Ha consumido alucinógenos durante 50 o más días de su vida?",
-		"order": 47,
+		"order": 29,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2747,8 +2709,8 @@
 	{
 		"special_id": "D29D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió alucinógenos?",
-		"order": 48,
-		"type": "SAMCQN",
+		"order": 29,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2759,28 +2721,9 @@
 		]
 	},
 	{
-		"special_id": "D29E",
-		"statement": "En los últimos 30 días,¿consumió alucinógenos?",
-		"order": 49,
-		"type": "BQ",
-		"category": "DRU",
-		"options": [
-			{
-				"description": "Como prescrito",
-				"order": 1,
-				"value": 0
-			},
-			{
-				"description": "No como prescrito",
-				"order": 2,
-				"value": 1
-			}
-		]
-	},
-	{
 		"special_id": "D30A",
 		"statement": "¿Qué edad tenía la primera vez que consumió heroína?",
-		"order": 50,
+		"order": 30,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2794,7 +2737,7 @@
 	{
 		"special_id": "D30B",
 		"statement": "¿Cuántos años en su vida ha consumido heroína?",
-		"order": 51,
+		"order": 30,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2808,7 +2751,7 @@
 	{
 		"special_id": "D30C",
 		"statement": "¿Ha consumido heroína durante 50 o más días de su vida?",
-		"order": 52,
+		"order": 30,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2827,8 +2770,8 @@
 	{
 		"special_id": "D30D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió heroína?",
-		"order": 53,
-		"type": "SAMCQN",
+		"order": 30,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2839,28 +2782,9 @@
 		]
 	},
 	{
-		"special_id": "D30E",
-		"statement": "En los últimos 30 días,¿consumió heroína?",
-		"order": 54,
-		"type": "BQ",
-		"category": "DRU",
-		"options": [
-			{
-				"description": "Como prescrito",
-				"order": 1,
-				"value": 0
-			},
-			{
-				"description": "No como prescrito",
-				"order": 2,
-				"value": 1
-			}
-		]
-	},
-	{
 		"special_id": "D31A",
 		"statement": "¿Qué edad tenía la primera vez que consumió metadona?",
-		"order": 55,
+		"order": 31,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2874,7 +2798,7 @@
 	{
 		"special_id": "D31B",
 		"statement": "¿Cuántos años en su vida ha consumido metadona?",
-		"order": 56,
+		"order": 31,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2888,7 +2812,7 @@
 	{
 		"special_id": "D31C",
 		"statement": "¿Ha consumido metadona durante 50 o más días de su vida?",
-		"order": 57,
+		"order": 31,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2907,8 +2831,8 @@
 	{
 		"special_id": "D31D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió metadona?",
-		"order": 58,
-		"type": "SAMCQN",
+		"order": 31,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -2921,7 +2845,7 @@
 	{
 		"special_id": "D31E",
 		"statement": "En los últimos 30 días,¿consumió metadona?",
-		"order": 59,
+		"order": 31,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2940,7 +2864,7 @@
 	{
 		"special_id": "D32A",
 		"statement": "¿Qué edad tenía la primera vez que consumió otros opiáceos?",
-		"order": 60,
+		"order": 32,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2954,7 +2878,7 @@
 	{
 		"special_id": "D32B",
 		"statement": "¿Cuántos años en su vida ha consumido otros opiáceos?",
-		"order": 61,
+		"order": 32,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2968,7 +2892,7 @@
 	{
 		"special_id": "D32C",
 		"statement": "¿Ha consumido otros opiáceos durante 50 o más días de su vida?",
-		"order": 62,
+		"order": 32,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2987,8 +2911,8 @@
 	{
 		"special_id": "D32D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió otros opiáceos?",
-		"order": 63,
-		"type": "SAMCQN",
+		"order": 32,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -3001,7 +2925,7 @@
 	{
 		"special_id": "D32E",
 		"statement": "En los últimos 30 días,¿consumió otros opiáceos?",
-		"order": 64,
+		"order": 32,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3020,7 +2944,7 @@
 	{
 		"special_id": "D33A",
 		"statement": "¿Qué edad tenía la primera vez que consumió inhalantes",
-		"order": 65,
+		"order": 33,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -3034,7 +2958,7 @@
 	{
 		"special_id": "D33B",
 		"statement": "¿Cuántos años en su vida ha consumido inhalantes?",
-		"order": 66,
+		"order": 33,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -3048,7 +2972,7 @@
 	{
 		"special_id": "D33C",
 		"statement": "¿Ha consumido inhalantes durante 50 o más días de su vida?",
-		"order": 67,
+		"order": 33,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3067,8 +2991,8 @@
 	{
 		"special_id": "D33D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió inhalantes?",
-		"order": 68,
-		"type": "SAMCQN",
+		"order": 33,
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
@@ -3081,7 +3005,7 @@
 	{
 		"special_id": "D33E",
 		"statement": "En los últimos 30 días,¿consumió inhalantes?",
-		"order": 69,
+		"order": 33,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3817,7 +3741,7 @@
 	},
 	{
 		"special_id": "F43",
-		"statement": "¿Cuántos de sus hijo se hayan actualmente en régimen de acogimiento por orden judicial?",
+		"statement": "¿Cuántos de sus hijos se hayan actualmente en régimen de acogimiento por orden judicial?",
 		"order": 43,
 		"type": "TNQ",
 		"category": "FAM",
@@ -6713,6 +6637,30 @@
 				"description": "Otro",
 				"order": 5,
 				"value": 5
+			}
+		]
+	},
+	{
+		"special_id": "V1",
+		"statement": "Valore la capacidad aparente y la buena voluntad del entrevistado para comprender las preguntas, proporcionar estimaciones exactas y reflexivas, y responder honestamente. En general, la información proporcionada por el entrevistado es:",
+		"order": 1,
+		"type": "SAMCQN",
+		"category": "VAL",
+		"options": [
+			{
+				"description": "Mala",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "Regular",
+				"order": 2,
+				"value": 2
+			},
+			{
+				"description": "Buena",
+				"order": 3,
+				"value": 3
 			}
 		]
 	}

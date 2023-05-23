@@ -1,31 +1,31 @@
 package handlers
 
 import (
+	"fmt"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/services"
 	"libre-asi-api/pkg/util"
 	"libre-asi-api/pkg/view"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func StartInterview(c *fiber.Ctx) error {
 
-	i := view.Interview{}
+	i := &view.Interview{}
 
-	err := c.BodyParser(&i)
+	err := c.BodyParser(i)
 
 	if err != nil {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	id, err := services.StartInterview(int(i.PatientID), int(i.InterviewerID))
+	i, err = services.StartInterview(int(i.PatientID), int(i.InterviewerID))
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
 	}
-
-	i.ID = uint(id)
 
 	return c.Status(201).JSON(i)
 
@@ -39,6 +39,25 @@ func GetInterviews(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(interviews)
+}
+
+func GetInterview(c *fiber.Ctx) error {
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	interview, err := services.GetInterview(uint(idInt))
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(interview)
 }
 
 func NextQuestion(c *fiber.Ctx) error {
@@ -72,4 +91,34 @@ func GetQuestion(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(question)
+}
+
+func AnswerQuestion(c *fiber.Ctx) error {
+
+	a := []view.Answer{}
+
+	err := c.BodyParser(&a)
+
+	if err != nil {
+
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	fmt.Println(a[0].Comment)
+
+	id := c.Params("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrBadRoute)
+	}
+
+	err = services.AnswerQuestion(a, uint(idInt))
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.SendStatus(201)
 }

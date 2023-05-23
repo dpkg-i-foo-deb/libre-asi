@@ -8,6 +8,7 @@
 	export let question: Question;
 
 	let statement = '';
+
 	let comment = '';
 
 	onMount(function () {
@@ -31,7 +32,7 @@
 	});
 
 	function setComment() {
-		question.answers.forEach(function (value: Answer) {
+		question.answers?.forEach(function (value: Answer) {
 			value.comment = comment;
 		});
 	}
@@ -68,9 +69,9 @@
 	</div>
 
 	{#each question.options ?? [] as option}
-		<div class="number-input-container">
+		<div class="text-input-container">
 			<NumberInput
-				label={option.description?.toUpperCase()}
+				label={option.description}
 				bind:value={option.value}
 				on:input={function () {
 					update(option);
@@ -90,12 +91,7 @@
 </main>
 
 <style>
-	.title {
-		margin-top: 1rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.number-input-container {
+	.text-input-container {
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}

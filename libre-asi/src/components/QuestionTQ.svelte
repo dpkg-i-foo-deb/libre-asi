@@ -8,6 +8,7 @@
 	export let question: Question;
 
 	let statement = '';
+
 	let comment = '';
 
 	onMount(function () {
@@ -42,21 +43,23 @@
 		</h4>
 	</div>
 
-	<RadioButtonGroup>
-		<div class="radio-button-container">
-			{#each question.options ?? [] as option}
-				<div class="radio-button">
-					<RadioButton
-						labelText={option.description}
-						value={option.value?.toString()}
-						on:change={function () {
-							update(option);
-						}}
-					/>
-				</div>
-			{/each}
-		</div>
-	</RadioButtonGroup>
+	<div class="bq-container">
+		<RadioButtonGroup>
+			<div class="radio-button-container">
+				{#each question.options ?? [] as option}
+					<div class="radio-button">
+						<RadioButton
+							labelText={option.description}
+							value={option.value?.toString()}
+							on:change={function () {
+								update(option);
+							}}
+						/>
+					</div>
+				{/each}
+			</div>
+		</RadioButtonGroup>
+	</div>
 
 	<div class="comment-container">
 		<TextInput
