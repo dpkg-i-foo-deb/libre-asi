@@ -230,7 +230,7 @@
 		</ModalBody>
 
 		<ModalFooter
-			primaryButtonText="Registrar administrador"
+			primaryButtonText="Registrar entrevistador"
 			secondaryButtonText="Cancelar"
 			on:click:button--secondary={function () {
 				isRegisterFormOpen = false;
