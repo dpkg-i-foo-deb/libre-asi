@@ -612,6 +612,12 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		return nil, err
 	}
 
+	famProblemTMRAW, err := computeFamilyProblemTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
 	results := view.Results{
 		DrugScale:                float32(druTMRAW),
 		FamilyChildScale:         float32(famChildTMRAW),
@@ -621,6 +627,7 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		LegalScale:               float32(lawTMRAW),
 		EmploymentScale:          float32(empTMRAW),
 		FamilySocialSupportScale: float32(famSupportTMRAW),
+		FamilySocialProblemScale: float32(famProblemTMRAW),
 	}
 
 	return &results, nil
@@ -1184,7 +1191,7 @@ func computeFamilySupportTMRAW(answers []models.InterviewAnswers) (float64, erro
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category='EMP'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("id = ? AND qc.category='FAM'", answer.QuestionID).First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return -1, errors.ErrEntityNotFound
 			}
@@ -1215,6 +1222,50 @@ func computeFamilySupportTMRAW(answers []models.InterviewAnswers) (float64, erro
 	famSupportTMRAW += ff9 * math.Sqrt(1.6)
 
 	return famSupportTMRAW, nil
+}
+
+func computeFamilyProblemTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	famProblemTMRAW := 0.0
+
+	ff6 := 0.0
+	ff7 := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND qc.category='FAM'", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "F11" {
+			famProblemTMRAW += float64(answer.Answer) * math.Sqrt(8)
+		}
+
+		if q.SpecialCode == "F14" || q.SpecialCode == "F15" {
+			famProblemTMRAW += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "F6A" || q.SpecialCode == "F6B" || q.SpecialCode == "F6C" {
+			ff6 += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "F7A" || q.SpecialCode == "F7B" || q.SpecialCode == "F7C" {
+			ff7 += float64(answer.Answer)
+		}
+
+	}
+
+	famProblemTMRAW += ff6 * math.Sqrt(1.6)
+	famProblemTMRAW += ff7 * math.Sqrt(1.6)
+
+	return famProblemTMRAW, nil
 }
 
 func min(a []int) int {
