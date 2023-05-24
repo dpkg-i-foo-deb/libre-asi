@@ -13,7 +13,8 @@
 		OverflowMenu,
 		Toolbar,
 		ToolbarContent,
-		ToolbarSearch
+		ToolbarSearch,
+		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
@@ -105,12 +106,20 @@
 		>
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
-					<OverflowMenu flipped />
+					<OverflowMenu flipped>
+						<OverflowMenuItem
+							text="Computar resultados"
+							on:click={function () {
+								goto('interviews/results/' + row.id);
+							}}
+						/>
+					</OverflowMenu>
 				{:else}{cell.value}{/if}
 			</svelte:fragment>
 			<Toolbar>
 				<ToolbarContent>
 					<ToolbarSearch bind:value={searchValue} />
+
 					<Button
 						on:click={function () {
 							goto('interviews/perform');

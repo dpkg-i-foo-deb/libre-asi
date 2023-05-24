@@ -122,3 +122,23 @@ func AnswerQuestion(c *fiber.Ctx) error {
 
 	return c.SendStatus(201)
 }
+
+func ComputeResults(c *fiber.Ctx) error {
+
+	i := &view.Interview{}
+
+	err := c.BodyParser(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	r, err := services.ComputeResults(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(r)
+
+}
