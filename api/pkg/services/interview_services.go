@@ -594,12 +594,26 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		return nil, err
 	}
 
+	lawTMRAW, err := computeLawTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
+	empTMRAW, err := computeEmpTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
 	results := view.Results{
 		DrugScale:        float32(druTMRAW),
 		FamilyChildScale: float32(famChildTMRAW),
 		AlcoholScale:     float32(alcoholTMRAW),
 		PsychScale:       float32(psyTMRAW),
 		MedicalScale:     float32(medTMRAW),
+		LegalScale:       float32(lawTMRAW),
+		EmploymentScale:  float32(empTMRAW),
 	}
 
 	return &results, nil
@@ -965,7 +979,7 @@ func computeMedTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("id = ? AND (qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return -1, errors.ErrEntityNotFound
 			}
@@ -1003,6 +1017,149 @@ func computeMedTMRAW(answers []models.InterviewAnswers) (float64, error) {
 	}
 
 	return medTMRAW, nil
+}
+
+func computeLawTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	lawTMRAW := 0.0
+
+	l27_29bn := 0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND (qc.category='LAW' OR qc.category='EMP')", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "E29" {
+			if answer.Answer >= 1 && answer.Answer <= 180000 {
+				lawTMRAW += 1
+			}
+
+			if answer.Answer >= 181001 && answer.Answer <= 370000 {
+				lawTMRAW += 2
+			}
+
+			if answer.Answer >= 370001 && answer.Answer <= 1000000 {
+				lawTMRAW += 3
+			}
+
+			if answer.Answer >= 1000001 {
+				lawTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "L26B" || q.SpecialCode == "L28B" || q.SpecialCode == "L30B" {
+			if answer.Answer >= 1 {
+				lawTMRAW += math.Sqrt(8)
+			}
+		}
+
+		if q.SpecialCode == "L27B" || q.SpecialCode == "L29B" {
+			if answer.Answer > 1 {
+				l27_29bn = 1
+			}
+		}
+
+		if q.SpecialCode == "L31" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				lawTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				lawTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				lawTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				lawTMRAW += 4
+			}
+		}
+
+	}
+
+	lawTMRAW += math.Sqrt(8) * float64(l27_29bn)
+
+	return lawTMRAW, nil
+}
+
+func computeEmpTMRAW(answers []models.InterviewAnswers) (float64, error) {
+	empTMRAW := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND (qc.category='LAW' OR qc.category='EMP')", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "E10" {
+			if answer.Answer >= 3 && answer.Answer <= 4 {
+				empTMRAW += 1
+			}
+		}
+
+		if q.SpecialCode == "E19" {
+			if answer.Answer >= 16 && answer.Answer <= 22 {
+				empTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				empTMRAW += 2
+			}
+
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				empTMRAW += 3
+			}
+		}
+
+		if q.SpecialCode == "E20" {
+			if answer.Answer >= 370001 && answer.Answer <= 1000000 {
+				empTMRAW += 1
+			}
+
+			if answer.Answer >= 181001 && answer.Answer <= 370000 {
+				empTMRAW += 2
+			}
+
+			if answer.Answer >= 1 && answer.Answer <= 180000 {
+				empTMRAW += 3
+			}
+
+			if answer.Answer == 0 {
+				empTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "E21" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				empTMRAW += math.Sqrt(1.6)
+			}
+
+			if answer.Answer >= 6 {
+				empTMRAW += math.Sqrt(1.6) * 2
+			}
+		}
+
+	}
+
+	return empTMRAW, nil
 }
 
 func min(a []int) int {
