@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import {
-		API_URL,
-		COMPUTE_RESULTS,
-		GET_INTERVIEWERS,
-		GET_INTERVIEWS,
-		GET_PATIENT
-	} from '$lib/api/constants';
+	import { API_URL, GET_INTERVIEWERS, GET_INTERVIEWS, GET_PATIENT } from '$lib/api/constants';
 	import type { Interview } from '$lib/models/Interview';
 	import type Interviewer from '$lib/models/Interviewer';
 	import type Patient from '$lib/models/Patient';
@@ -20,9 +14,7 @@
 		Toolbar,
 		ToolbarContent,
 		ToolbarSearch,
-		OverflowMenuItem,
-		InlineLoading,
-		Loading
+		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import type { DataTableRow } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { onMount } from 'svelte';
@@ -33,8 +25,6 @@
 	let filteredRows: ReadonlyArray<DataTableRow>;
 
 	let newInterview: Interview;
-
-	let loading = false;
 
 	onMount(async function () {
 		newInterview = {
@@ -90,28 +80,9 @@
 
 		handleResponse(response.status, false);
 	}
-
-	async function computeResults(id: number) {
-		loading = true;
-
-		const interview: Interview = { id: id };
-
-		const response = await fetchWithRefresh(API_URL + COMPUTE_RESULTS, {
-			body: JSON.stringify(interview),
-			method: 'POST'
-		});
-
-		handleResponse(response.status, false);
-
-		loading = false;
-	}
 </script>
 
 <main>
-	{#if loading}
-		<Loading />
-	{/if}
-
 	{#if rows == undefined}
 		<DataTableSkeleton
 			headers={[
@@ -139,7 +110,7 @@
 						<OverflowMenuItem
 							text="Computar resultados"
 							on:click={function () {
-								computeResults(row.id);
+								goto('interviews/results/' + row.id);
 							}}
 						/>
 					</OverflowMenu>
