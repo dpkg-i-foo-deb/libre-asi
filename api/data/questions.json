@@ -2654,6 +2654,25 @@
 		]
 	},
 	{
+		"special_id": "D26E",
+		"statement": "En los últimos 30 días,¿consumió sedantes?",
+		"order": 25,
+		"type": "BQ",
+		"category": "DRU",
+		"options": [
+			{
+				"description": "Como prescrito",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "No como prescrito",
+				"order": 2,
+				"value": 1
+			}
+		]
+	},
+	{
 		"special_id": "D27A",
 		"statement": "¿Qué edad tenía la primera vez que consumió cocaina?",
 		"order": 27,
