@@ -107,172 +107,253 @@
 		]
 	},
 	{
-		"special_id": "A1",
-		"statement": "En los últimos 6 meses, ¿cuántas noches ha permanecido en un hospital, en una unidad de hospitalización para alcohol, drogas o psiquiátrica, cárcel, comunidad terapéutica o piso protegido?",
+		"special_id": "A1A",
+		"statement": "En los últimos 6 meses, ¿Cuántas noches ha permanecido en un hospital, en una unidad de hospitalización para alcohol, drogas o psiquiátrica, cárcel, comunidad terapéutica o piso protegido?",
 		"order": 1,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "A1B",
+		"statement": "En los últimos 30 días, ¿Cuántas noches ha permanecido en un hospital, en una unidad de hospitalización para alcohol, drogas o psiquiátrica, cárcel, comunidad terapéutica o piso protegido?",
+		"order": 1,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A2",
-		"statement": "De esas noches, cuántas fueron en una unidad residencial para alcohol o drogas?",
+		"special_id": "A2A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en una unidad residencial para alcohol o drogas?",
 		"order": 2,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "A2B",
+		"statement": "De esas noches en los últimos 30 días  ¿Cuántas fueron en una unidad residencial para alcohol o drogas?",
+		"order": 2,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A3",
-		"statement": "De esas noches, cuántas fueron en un servicio de hospital general distinto de psiquiatría?",
+		"special_id": "A3A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en un servicio de hospital general distinto de psiquiatría?",
 		"order": 3,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 180
-			},
-			{
-				"description": "30 días",
-				"order": 2,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A4",
-		"statement": "De esas noches, cuántas fueron en un servicio de psiquiatría?",
+		"special_id": "A3B",
+		"statement": "De esas noches en los últimos 30 días ¿Cuántas fueron en un servicio de hospital general distinto de psiquiatría?",
+		"order": 3,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
+			{
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "A4A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en un servicio de psiquiatría?",
 		"order": 4,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "A4B",
+		"statement": "De esas noches en los últimos 30 días ¿Cuántas fueron en un servicio de psiquiatría?",
+		"order": 4,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A5",
-		"statement": "De esas noches, cuántas fueron en una comisaría / prisión?",
+		"special_id": "A5A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en una comisaría / prisión?",
 		"order": 5,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "A5B",
+		"statement": "De esas noches en los últimos 30 días ¿Cuántas fueron en una comisaría / prisión?",
+		"order": 5,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A6",
-		"statement": "De esas noches, cuántas fueron en un piso protegido o intermedio?",
+		"special_id": "A6A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en un piso protegido o intermedio?",
 		"order": 6,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "A6B",
+		"statement": "De esas noches en los últimos 30 días ¿Cuántas fueron en un piso protegido o intermedio?",
+		"order": 6,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A7",
-		"statement": "De esas noches, cuántas fueron en otro tipo de alojamiento restringido o supervisado?",
+		"special_id": "A7A",
+		"statement": "De esas noches en los últimos 6 meses ¿Cuántas fueron en otro tipo de alojamiento restringido o supervisado?",
 		"order": 7,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 6
-			},
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "A7B",
+		"statement": "De esas noches en los últimos 30 días ¿Cuántas fueron en otro tipo de alojamiento restringido o supervisado?",
+		"order": 7,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A8",
-		"statement": "¿Cuántas noches ha estado en un albergue para gente sin hogar?",
+		"special_id": "A8A",
+		"statement": "En los últimos 6 meses ¿Cuántas noches ha estado en un albergue para gente sin hogar?",
 		"order": 8,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 6
-			},
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "A8B",
+		"statement": "En los últimos 30 días ¿Cuántas noches ha estado en un albergue para gente sin hogar?",
+		"order": 8,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "A9",
-		"statement": "¿Cuántas noches ha pasado en la calle, o en lugares como edificios abandonados, coches o parques porque no tenía otro lugar para quedarse?",
+		"special_id": "A9A",
+		"statement": "En los últimos 6 meses ¿Cuántas noches ha pasado en la calle, o en lugares como edificios abandonados, coches o parques porque no tenía otro lugar para quedarse?",
 		"order": 9,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "AL",
 		"options": [
 			{
-				"description": "últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 6
-			},
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "A9B",
+		"statement": "En los últimos 30 días ¿Cuántas noches ha pasado en la calle, o en lugares como edificios abandonados, coches o parques porque no tenía otro lugar para quedarse?",
+		"order": 9,
+		"type": "DNQ",
+		"category": "AL",
+		"options": [
 			{
-				"description": "30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
@@ -915,57 +996,84 @@
 		]
 	},
 	{
-		"special_id": "SF26",
-		"statement": "¿Cuántas veces ha acudido a un servicio de urgencias por cualquier problema de salud fisíca?",
+		"special_id": "SF26A",
+		"statement": "En los últimos 6 meses ¿Cuántas veces ha acudido a un servicio de urgencias por cualquier problema de salud fisíca?",
 		"order": 26,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "MED",
 		"options": [
 			{
-				"description": "Meses",
+				"description": "Cantidad de veces",
 				"order": 1,
-				"value": 180
-			},
-			{
-				"description": "Dias",
-				"order": 1,
-				"value": 30
+				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "SF27",
-		"statement": "¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
+		"special_id": "SF26B",
+		"statement": "En los últimos 30 días ¿Cuántas veces ha acudido a un servicio de urgencias por cualquier problema de salud fisíca?",
+		"order": 26,
+		"type": "TNQ",
+		"category": "MED",
+		"options": [
+			{
+				"description": "Cantidad de veces",
+				"order": 1,
+				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "SF27A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
 		"order": 27,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "MED",
 		"options": [
 			{
-				"description": "Meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "SF27B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
+		"order": 27,
+		"type": "DNQ",
+		"category": "MED",
+		"options": [
 			{
-				"description": "Dias",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "SF28",
-		"statement": "¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
+		"special_id": "SF28A",
+		"statement": "En los últimos 6 meses ¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
 		"order": 28,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "MED",
 		"options": [
 			{
-				"description": "Meses",
+				"description": "Cantidad de veces",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "SF28B",
+		"statement": "En los últimos 30 días ¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
+		"order": 28,
+		"type": "TNQ",
+		"category": "MED",
+		"options": [
 			{
-				"description": "Dias",
+				"description": "Cantidad de veces",
 				"order": 1,
 				"value": 30
 			}
@@ -1959,58 +2067,85 @@
 		]
 	},
 	{
-		"special_id": "D4",
-		"statement": "¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
+		"special_id": "D4A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
 		"order": 4,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Utimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "D4B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
+		"order": 4,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
 			{
-				"description": "30 dias",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "D5",
-		"statement": "¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
+		"special_id": "D5A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
 		"order": 5,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Utimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "D5B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
+		"order": 5,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
 			{
-				"description": "30 dias",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "D6",
-		"statement": "¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
+		"special_id": "D6A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
 		"order": 6,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Utimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "D6B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
+		"order": 6,
+		"type": "DNQ",
+		"category": "DRU",
+		"options": [
 			{
-				"description": "30 dias",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
@@ -2137,7 +2272,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2151,7 +2286,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2165,7 +2300,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2269,7 +2404,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2432,7 +2567,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2512,7 +2647,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2573,7 +2708,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2634,7 +2769,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2714,7 +2849,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2775,7 +2910,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2836,7 +2971,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2916,7 +3051,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -2996,7 +3131,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -3097,7 +3232,7 @@
 		"category": "PSY",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -3111,7 +3246,7 @@
 		"category": "PSY",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -3391,20 +3526,29 @@
 		]
 	},
 	{
-		"special_id": "P5",
-		"statement": "¿Cuántas consultas ambulatorias ha tenido?",
+		"special_id": "P5A",
+		"statement": "En los últimos 6 meses ¿Cuántas consultas ambulatorias ha tenido?",
 		"order": 5,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "Últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "P5B",
+		"statement": "En los últimos 30 días ¿Cuántas consultas ambulatorias ha tenido?",
+		"order": 5,
+		"type": "TNQ",
+		"category": "PSY",
+		"options": [
 			{
-				"description": "Últimos 30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
@@ -3444,20 +3588,29 @@
 		]
 	},
 	{
-		"special_id": "P3",
-		"statement": "¿Cuántos días ha tomado medicación para tratar problemas emocionales o psicológicos?",
+		"special_id": "P3A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha tomado medicación para tratar problemas emocionales o psicológicos?",
 		"order": 3,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "Últimos 6 meses",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
-			},
+			}
+		]
+	},
+	{
+		"special_id": "P3B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha tomado medicación para tratar problemas emocionales o psicológicos?",
+		"order": 3,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
 			{
-				"description": "Últimos 30 días",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 30
 			}
 		]
@@ -4913,21 +5066,30 @@
 		]
 	},
 	{
-		"special_id": "L32",
-		"statement": "¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
+		"special_id": "L32A",
+		"statement": "En los últimos 6 meses ¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
 		"order": 32,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L32B",
+		"statement": "En los últimos 30 días ¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
+		"order": 32,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
-			},
-			{
-				"description": "6 meses",
-				"order": 2,
-				"value": 180
 			}
 		]
 	},
@@ -4939,7 +5101,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
 			}
@@ -4953,7 +5115,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -4967,7 +5129,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -4981,28 +5143,37 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
 		]
 	},
 	{
-		"special_id": "L30",
-		"statement": "¿Cuántos días ha comedito algún otro acto ilegal?",
+		"special_id": "L30A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha cometido algún otro acto ilegal?",
 		"order": 30,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L30B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha cometido algún otro acto ilegal?",
+		"order": 30,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
-			},
-			{
-				"description": "6 meses",
-				"order": 2,
-				"value": 180
 			}
 		]
 	},
@@ -5014,7 +5185,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5028,7 +5199,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5042,7 +5213,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5056,7 +5227,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5070,7 +5241,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5084,28 +5255,37 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
 		]
 	},
 	{
-		"special_id": "L29",
-		"statement": "¿Cuántos días ha amenazado o agredido a alguien?",
+		"special_id": "L29A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha amenazado o agredido a alguien?",
 		"order": 29,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L29B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha amenazado o agredido a alguien?",
+		"order": 29,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 30
-			},
-			{
-				"description": "6 meses",
-				"order": 2,
-				"value": 180
 			}
 		]
 	},
@@ -5117,7 +5297,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5131,7 +5311,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5145,7 +5325,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5159,7 +5339,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5173,7 +5353,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5187,7 +5367,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5201,7 +5381,7 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
@@ -5215,66 +5395,93 @@
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 180
 			}
 		]
 	},
 	{
-		"special_id": "L28",
-		"statement": "¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
+		"special_id": "L28A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
 		"order": 28,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 30
-			},
-			{
-				"description": "6 meses",
-				"order": 2,
 				"value": 180
 			}
 		]
 	},
 	{
-		"special_id": "L27",
-		"statement": "¿Cuántos días ha robado a alguien?",
+		"special_id": "L28B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
+		"order": 28,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 30
+			}
+		]
+	},
+	{
+		"special_id": "L27A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha robado a alguien?",
 		"order": 27,
-		"type": "MAMCN",
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantidad de días",
 				"order": 1,
-				"value": 30
-			},
-			{
-				"description": "6 meses",
-				"order": 2,
 				"value": 180
 			}
 		]
 	},
 	{
-		"special_id": "L26",
-		"statement": "¿Cuántos días ha vendido o fabricado drogas?",
-		"order": 26,
-		"type": "MAMCN",
+		"special_id": "L27B",
+		"statement": "En los úlimos 30 días ¿Cuántos días ha robado a alguien?",
+		"order": 27,
+		"type": "DNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "30 días",
+				"description": "Cantiad de días",
 				"order": 1,
 				"value": 30
-			},
+			}
+		]
+	},
+	{
+		"special_id": "L26A",
+		"statement": "En los últimos 6 meses ¿Cuántos días ha vendido o fabricado drogas?",
+		"order": 26,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
 			{
-				"description": "6 meses",
-				"order": 2,
+				"description": "Cantidad de días",
+				"order": 1,
 				"value": 180
+			}
+		]
+	},
+	{
+		"special_id": "L26B",
+		"statement": "En los últimos 30 días ¿Cuántos días ha vendido o fabricado drogas?",
+		"order": 26,
+		"type": "DNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de días",
+				"order": 1,
+				"value": 30
 			}
 		]
 	},
@@ -5498,154 +5705,226 @@
 		]
 	},
 	{
-		"special_id": "L14",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal?",
+		"special_id": "L14A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal en total?",
 		"order": 14,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L13",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas?",
+		"special_id": "L14B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal en los últimos 6 meses?",
+		"order": 14,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L13A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas en total?",
 		"order": 13,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L12",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal?",
+		"special_id": "L13B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas en los últimos 6 meses?",
+		"order": 13,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L12A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal en total?",
 		"order": 12,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L11",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos?",
+		"special_id": "L12B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal en los últimos 6 meses?",
+		"order": 12,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L11A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos en total?",
 		"order": 11,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
 				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
-				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L10",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad?",
+		"special_id": "L11B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos en los últimos 6 meses?",
+		"order": 11,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L10A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad en total?",
 		"order": 10,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en los últimos 6 meses",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L9",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco?",
+		"special_id": "L10B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad en los últimos 6 meses?",
+		"order": 10,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L9A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco en total?",
 		"order": 9,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L8",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas?",
+		"special_id": "L9B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco en los últimos 6 meses?",
+		"order": 9,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
+			}
+		]
+	},
+	{
+		"special_id": "L8A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas en total?",
 		"order": 8,
-		"type": "MAMCN",
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en total",
 				"order": 1,
-				"value": 99
-			},
-			{
-				"description": "Veces en total",
-				"order": 2,
 				"value": 999
 			}
 		]
 	},
 	{
-		"special_id": "L7",
-		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de drogas?",
-		"order": 7,
-		"type": "MAMCN",
+		"special_id": "L8B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas en los últimos 6 meses?",
+		"order": 8,
+		"type": "TNQ",
 		"category": "LAW",
 		"options": [
 			{
-				"description": "Veces en los últimos 6 meses",
+				"description": "Cantidad de veces en los últimos 6 meses",
 				"order": 1,
 				"value": 99
-			},
+			}
+		]
+	},
+	{
+		"special_id": "L7A",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de drogas en total?",
+		"order": 7,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
 			{
-				"description": "Veces en total",
-				"order": 2,
+				"description": "Cantidad de veces en total",
+				"order": 1,
 				"value": 999
+			}
+		]
+	},
+	{
+		"special_id": "L7B",
+		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de drogas en los últimos 6 meses?",
+		"order": 7,
+		"type": "TNQ",
+		"category": "LAW",
+		"options": [
+			{
+				"description": "Cantidad de veces en los últimos 6 meses",
+				"order": 1,
+				"value": 99
 			}
 		]
 	},
@@ -5771,7 +6050,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 0,
 				"value": 99
 			}
@@ -5804,7 +6083,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 0,
 				"value": 99
 			}
@@ -6161,7 +6440,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 99
 			}
@@ -6175,7 +6454,7 @@
 		"category": "DRU",
 		"options": [
 			{
-				"description": "Días",
+				"description": "Cantidad de días",
 				"order": 1,
 				"value": 99
 			}
