@@ -5,6 +5,7 @@ import (
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/models"
 	"libre-asi-api/pkg/view"
+	"math"
 	"time"
 
 	"gorm.io/gorm"
@@ -549,4 +550,314 @@ func handleVAL(i *models.Interview) error {
 
 	return nil
 
+}
+
+func ComputeResults(i *view.Interview) (*view.Results, error) {
+
+	answers := []models.InterviewAnswers{}
+
+	if err := database.DB.Where("interview_id = ?", i.ID).Find(answers).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
+		return nil, errors.ErrInternalError
+	}
+
+	druTMRAW, err := computeDruTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+
+	}
+
+	famChildTMRAW, err := computeFamilyChildTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
+	results := view.Results{
+		DrugScale:        float32(druTMRAW),
+		FamilyChildScale: float32(famChildTMRAW),
+	}
+
+	return &results, nil
+
+}
+
+func computeDruTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	druTMRAW := 0.0
+
+	d25_33dn := 0
+
+	d25_33en := 0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND qc.category = 'DRU'", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "D25D" || q.SpecialCode == "D25E" || q.SpecialCode == "D26E" || q.SpecialCode == "D27D" || q.SpecialCode == "D28D" || q.SpecialCode == "D28E" || q.SpecialCode == "D29D" || q.SpecialCode == "D30D" || q.SpecialCode == "D31D" || q.SpecialCode == "D31E" || q.SpecialCode == "D32D" || q.SpecialCode == "D32E" || q.SpecialCode == "D33D" || q.SpecialCode == "D33E" || q.SpecialCode == "D47" || q.SpecialCode == "D48" {
+			d25_33dn += answer.Answer
+		}
+
+		if q.SpecialCode == "D25E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D26E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D27D" {
+			if answer.Answer > 1 {
+				d25_33en += 1
+			}
+		}
+
+		if q.SpecialCode == "D28E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D29D" {
+			if answer.Answer > 1 {
+				d25_33en += 1
+			}
+		}
+
+		if q.SpecialCode == "D30D" {
+			if answer.Answer > 1 {
+				d25_33en += 1
+			}
+		}
+
+		if q.SpecialCode == "D31E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D32E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D33E" {
+			d25_33en += answer.Answer
+		}
+
+		if q.SpecialCode == "D39" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				druTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				druTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				druTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				druTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "D40" {
+			if answer.Answer >= 15 && answer.Answer <= 30 {
+				druTMRAW += 1
+			}
+
+			if answer.Answer >= 8 && answer.Answer <= 14 {
+				druTMRAW += 2
+			}
+
+			if answer.Answer >= 4 && answer.Answer <= 7 {
+				druTMRAW += 3
+			}
+
+			if answer.Answer >= 0 && answer.Answer <= 3 {
+				druTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "D41" {
+			if answer.Answer >= 1 && answer.Answer <= 299999 {
+				druTMRAW += 1
+			}
+
+			if answer.Answer >= 300000 && answer.Answer <= 600000 {
+				druTMRAW += 2
+			}
+
+			if answer.Answer >= 600001 && answer.Answer <= 1000000 {
+				druTMRAW += 3
+			}
+
+			if answer.Answer >= 1000001 {
+				druTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "D42" || q.SpecialCode == "D43" || q.SpecialCode == "D44" || q.SpecialCode == "D45" {
+			druTMRAW += math.Sqrt(8) * float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "D46" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				druTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				druTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				druTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				druTMRAW += 4
+			}
+		}
+
+	}
+
+	if d25_33dn >= 1 && d25_33dn <= 15 {
+		druTMRAW += 1
+	}
+
+	if d25_33dn >= 16 && d25_33dn <= 30 {
+		druTMRAW += 2
+	}
+
+	if d25_33dn >= 31 && d25_33dn <= 60 {
+		druTMRAW += 3
+	}
+
+	if d25_33dn >= 61 {
+		druTMRAW += 4
+	}
+
+	druTMRAW += float64(d25_33en)
+
+	return druTMRAW, nil
+}
+
+func computeFamilyChildTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	familyChildTMRAW := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND qc.category = 'FAM'", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "F46" || q.SpecialCode == "F49" {
+
+			if answer.Answer >= 1 {
+				familyChildTMRAW += math.Sqrt(8)
+			}
+
+		}
+
+		if q.SpecialCode == "F47" || q.SpecialCode == "F48" || q.SpecialCode == "F49" {
+			familyChildTMRAW += float64(answer.Answer)
+		}
+
+	}
+
+	return familyChildTMRAW, nil
+}
+
+func computeAlcoholTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	alcoholTMRAW := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND qc.category = 'DRU'", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "D13" || q.SpecialCode == "D15" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				alcoholTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				alcoholTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				alcoholTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				alcoholTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "D14" {
+			if answer.Answer >= 15 && answer.Answer <= 30 {
+				alcoholTMRAW += 1
+			}
+
+			if answer.Answer >= 8 && answer.Answer <= 14 {
+				alcoholTMRAW += 2
+			}
+
+			if answer.Answer >= 4 && answer.Answer <= 7 {
+				alcoholTMRAW += 3
+			}
+
+			if answer.Answer >= 0 && answer.Answer <= 3 {
+				alcoholTMRAW += 4
+			}
+		}
+
+		if q.SpecialCode == "D16" {
+
+			if answer.Answer >= 1 && answer.Answer <= 60000 {
+				alcoholTMRAW += 1
+			}
+
+			if answer.Answer >= 60001 && answer.Answer <= 150000 {
+				alcoholTMRAW += 2
+			}
+
+			if answer.Answer >= 150001 && answer.Answer <= 400000 {
+				alcoholTMRAW += 3
+			}
+
+			if answer.Answer >= 400001 {
+				alcoholTMRAW += 4
+			}
+		}
+
+	}
+
+	return alcoholTMRAW, nil
 }
