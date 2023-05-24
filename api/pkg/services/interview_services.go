@@ -576,9 +576,23 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		return nil, err
 	}
 
+	alcoholTMRAW, err := computeAlcoholTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
+	psyTMRAW, err := computePsyTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
 	results := view.Results{
 		DrugScale:        float32(druTMRAW),
 		FamilyChildScale: float32(famChildTMRAW),
+		AlcoholScale:     float32(alcoholTMRAW),
+		PsychScale:       float32(psyTMRAW),
 	}
 
 	return &results, nil
@@ -802,7 +816,7 @@ func computeAlcoholTMRAW(answers []models.InterviewAnswers) (float64, error) {
 			return -1, errors.ErrInternalError
 		}
 
-		if q.SpecialCode == "D13" || q.SpecialCode == "D15" {
+		if q.SpecialCode == "D13" || q.SpecialCode == "D15" || q.SpecialCode == "D21" {
 			if answer.Answer >= 1 && answer.Answer <= 5 {
 				alcoholTMRAW += 1
 			}
@@ -857,7 +871,91 @@ func computeAlcoholTMRAW(answers []models.InterviewAnswers) (float64, error) {
 			}
 		}
 
+		if q.SpecialCode == "D17" || q.SpecialCode == "D18" || q.SpecialCode == "D19" || q.SpecialCode == "D20" {
+			if answer.Answer == 1 {
+				alcoholTMRAW += math.Sqrt(8)
+			}
+		}
+
+		if q.SpecialCode == "D22" || q.SpecialCode == "D23" {
+			alcoholTMRAW += float64(answer.Answer)
+		}
+
 	}
 
 	return alcoholTMRAW, nil
+}
+
+func computePsyTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	psyTMRAW := 0.0
+
+	p16dn := make([]int, 0)
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM')", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "A4B" {
+			if answer.Answer > 1 {
+				psyTMRAW += math.Sqrt(8)
+			}
+		}
+
+		if q.SpecialCode == "F8B" || q.SpecialCode == "F39" || q.SpecialCode == "P20" || q.SpecialCode == "P21" {
+			psyTMRAW += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "P8B" || q.SpecialCode == "P9B" || q.SpecialCode == "P10B" || q.SpecialCode == "P11B" || q.SpecialCode == "P12B" || q.SpecialCode == "P13B" || q.SpecialCode == "P14B" || q.SpecialCode == "P15B" || q.SpecialCode == "P16B" {
+			psyTMRAW += math.Sqrt(3) * float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "P11C" || q.SpecialCode == "P13C" || q.SpecialCode == "P14C" || q.SpecialCode == "P15C" || q.SpecialCode == "P16C" {
+			p16dn = append(p16dn, answer.Answer)
+		}
+
+		if q.SpecialCode == "P18" || q.SpecialCode == "P19" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				psyTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				psyTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				psyTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				psyTMRAW += 4
+			}
+		}
+
+	}
+
+	psyTMRAW += float64(min(p16dn))
+
+	return psyTMRAW, nil
+}
+
+func min(a []int) int {
+	minVal := math.MaxInt
+
+	for _, v := range a {
+		if v < minVal {
+			minVal = v
+		}
+	}
+
+	return minVal
 }
