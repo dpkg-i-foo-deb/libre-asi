@@ -10,7 +10,7 @@
 	import type { Question } from '$lib/models/Question';
 	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
 	import { handleResponse } from '$lib/util/handleResponse';
-	import { Tile, Button } from 'carbon-components-svelte';
+	import { Tile, Button, InlineLoading } from 'carbon-components-svelte';
 	import QuestionBq from '../../../../../components/QuestionBQ.svelte';
 	import QuestionDnq from '../../../../../components/QuestionDNQ.svelte';
 	import QuestionMamcn from '../../../../../components/QuestionMAMCN.svelte';
@@ -31,6 +31,8 @@
 	const interviewID = $page.params.id;
 
 	let interview: Interview = {};
+
+	let answering = false;
 
 	let currentQuestion: Question = { valid: false, answers: [], type: 'NIL' };
 
@@ -57,10 +59,14 @@
 	}
 
 	async function answerQuestion() {
+		answering = true;
+
 		const response = await fetchWithRefresh(API_URL + ANSWER_QUESTION + interviewID, {
 			method: 'POST',
 			body: JSON.stringify(currentQuestion.answers)
 		});
+
+		answering = false;
 
 		if (response.ok) {
 			currentQuestion.answers = [];
@@ -145,6 +151,13 @@
 					<h2>Valoración</h2>
 				{/if}
 			</div>
+
+			{#if answering}
+				<div class="loading">
+					<InlineLoading description="Guardando respuesta..." />
+				</div>
+			{/if}
+
 			{#if currentQuestion}
 				{#if currentQuestion.type == 'SAMCQN' ?? ''}
 					<QuestionSamcqn bind:question={currentQuestion} />
@@ -213,7 +226,7 @@
 
 				<Button
 					size="default"
-					disabled={!currentQuestion.valid}
+					disabled={!currentQuestion.valid || answering}
 					on:click={function () {
 						handleNext();
 					}}>Siguiente</Button
