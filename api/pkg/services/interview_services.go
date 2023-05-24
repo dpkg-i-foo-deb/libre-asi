@@ -562,7 +562,7 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 
 	answers := []models.InterviewAnswers{}
 
-	if err := database.DB.Where("interview_id = ?", i.ID).Find(answers).Error; err != nil {
+	if err := database.DB.Where("interview_id = ?", i.ID).Find(&answers).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, errors.ErrEntityNotFound
 		}
@@ -654,9 +654,10 @@ func computeDruTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category = 'DRU'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category = 'DRU'", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -816,9 +817,10 @@ func computeFamilyChildTMRAW(answers []models.InterviewAnswers) (float64, error)
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category = 'FAM'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category = 'FAM'", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -850,9 +852,10 @@ func computeAlcoholTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category = 'DRU'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category = 'DRU'", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -939,10 +942,10 @@ func computePsyTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).
+			Where("questions.id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).
 			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -1000,9 +1003,10 @@ func computeMedTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND (qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -1052,9 +1056,10 @@ func computeLawTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category='LAW' OR qc.category='EMP')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND (qc.category='LAW' OR qc.category='EMP')", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -1123,9 +1128,11 @@ func computeEmpTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category='EMP'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category='EMP'", answer.QuestionID).
+			First(&q).
+			Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -1198,9 +1205,10 @@ func computeFamilySupportTMRAW(answers []models.InterviewAnswers) (float64, erro
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category='FAM'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category='FAM'", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}
@@ -1244,9 +1252,10 @@ func computeFamilyProblemTMRAW(answers []models.InterviewAnswers) (float64, erro
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND qc.category='FAM'", answer.QuestionID).First(&q).Error; err != nil {
+			Where("questions.id = ? AND qc.category='FAM'", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
-				return -1, errors.ErrEntityNotFound
+				continue
 			}
 			return -1, errors.ErrInternalError
 		}

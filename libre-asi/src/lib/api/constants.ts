@@ -33,6 +33,7 @@ const GET_INTERVIEW = 'interviews/';
 const NEXT_QUESTION = 'interviews/next-question/';
 const GET_QUESTION = 'questions/';
 const ANSWER_QUESTION = 'interviews/answer/';
+const COMPUTE_RESULTS = 'interviews/compute/'
 
 export {
 	API_URL,
@@ -64,4 +65,5 @@ export {
 	GET_QUESTION,
 	GET_INTERVIEW,
 	ANSWER_QUESTION,
+	COMPUTE_RESULTS
 };
