@@ -933,7 +933,8 @@ func computePsyTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).
+			First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return -1, errors.ErrEntityNotFound
 			}
