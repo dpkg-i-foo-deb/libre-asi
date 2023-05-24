@@ -140,12 +140,18 @@ func GetQuestion(code string) (*view.Question, error) {
 	questionType := models.QuestionType{}
 
 	if err := database.DB.Where("id = ?", q.QuestionTypeID).First(&questionType).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
 		return nil, errors.ErrInternalError
 	}
 
 	questionCategory := models.QuestionCategory{}
 
 	if err := database.DB.Where("id = ?", q.QuestionCategoryID).First(&questionCategory).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
 		return nil, errors.ErrInternalError
 	}
 
@@ -293,7 +299,7 @@ func handleINF(i *models.Interview) error {
 
 	if i.CurrentQuestion == "I14" {
 		i.CurrentSection = "AL"
-		i.CurrentQuestion = "A1"
+		i.CurrentQuestion = "A1A"
 		return nil
 	}
 
@@ -352,7 +358,7 @@ func handleMED(i *models.Interview) error {
 		}
 	}
 
-	if i.CurrentQuestion == "SF28" {
+	if i.CurrentQuestion == "SF28B" {
 		i.CurrentSection = "EMP"
 		i.CurrentQuestion = "E1"
 		return nil
@@ -443,7 +449,7 @@ func handleLAW(i *models.Interview) error {
 		}
 	}
 
-	if i.CurrentQuestion == "L32" {
+	if i.CurrentQuestion == "L32B" {
 		i.CurrentQuestion = "F1"
 		i.CurrentSection = "FAM"
 		return nil

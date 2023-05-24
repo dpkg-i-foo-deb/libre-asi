@@ -1741,7 +1741,7 @@
 		]
 	},
 	{
-		"special_id": "E25",
+		"special_id": "E25A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de pensión, seguridad social o paro?",
 		"order": 25,
 		"type": "SMA",
@@ -1755,7 +1755,7 @@
 		]
 	},
 	{
-		"special_id": "E25b",
+		"special_id": "E25B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de pensión, seguridad social o paro?",
 		"order": 26,
 		"type": "SMA",
@@ -1769,7 +1769,7 @@
 		]
 	},
 	{
-		"special_id": "E26",
+		"special_id": "E26A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de servicios sociales?",
 		"order": 27,
 		"type": "SMA",
@@ -1783,7 +1783,7 @@
 		]
 	},
 	{
-		"special_id": "E26b",
+		"special_id": "E26B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de servicios sociales",
 		"order": 28,
 		"type": "SMA",
@@ -1797,7 +1797,7 @@
 		]
 	},
 	{
-		"special_id": "E27",
+		"special_id": "E27A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de otras ayudas institucionales?",
 		"order": 29,
 		"type": "SMA",
@@ -1811,7 +1811,7 @@
 		]
 	},
 	{
-		"special_id": "E27b",
+		"special_id": "E27B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de otras ayudas institucionales?",
 		"order": 30,
 		"type": "SMA",
@@ -1825,7 +1825,7 @@
 		]
 	},
 	{
-		"special_id": "E28",
+		"special_id": "E28A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de pensión alimenticia y compensatoria?",
 		"order": 31,
 		"type": "SMA",
@@ -1839,7 +1839,7 @@
 		]
 	},
 	{
-		"special_id": "E28b",
+		"special_id": "E28B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de pensión alimenticia y compensatoria?",
 		"order": 32,
 		"type": "SMA",
@@ -1853,7 +1853,7 @@
 		]
 	},
 	{
-		"special_id": "E29",
+		"special_id": "E29A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de actividades ilegales?",
 		"order": 33,
 		"type": "SMA",
@@ -1867,7 +1867,7 @@
 		]
 	},
 	{
-		"special_id": "E29b",
+		"special_id": "E29B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de actividades ilegales?",
 		"order": 34,
 		"type": "SMA",
@@ -1881,7 +1881,7 @@
 		]
 	},
 	{
-		"special_id": "E30",
+		"special_id": "E30A",
 		"statement": "En los últimos 30 días, ¿Cuánto dinero ha recibido de cualquier otra fuente?",
 		"order": 35,
 		"type": "SMA",
@@ -1895,7 +1895,7 @@
 		]
 	},
 	{
-		"special_id": "E30b",
+		"special_id": "E30B",
 		"statement": "En los últimos 6 meses, ¿Cuánto dinero ha recibido de cualquier otra fuente?",
 		"order": 36,
 		"type": "SMA",
@@ -3272,242 +3272,504 @@
 		]
 	},
 	{
-		"special_id": "P17",
-		"statement": "¿Ha experimentado otros problemas emocionales o psicológicos no mencionados anteriormente?",
+		"special_id": "P17B",
+		"statement": "En los últimos 30 días ¿Ha experimentado otros problemas emocionales o psicológicos no mencionados anteriormente? (Especifique en los comentarios)",
 		"order": 17,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
 			}
 		]
 	},
 	{
-		"special_id": "P16",
-		"statement": "¿Ha intentado suicidarse?",
+		"special_id": "P16A",
+		"statement": "A lo largo de su vida ¿Ha intentado suicidarse?",
 		"order": 16,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P16B",
+		"statement": "En los últimos 30 días ¿Ha intentado suicidarse?",
+		"order": 16,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P16C",
+		"statement": "Hace cuántos días por última vez ha intentado suicidarse?",
+		"order": 16,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
 			{
 				"description": "Cantidad de días desde la última vez",
-				"order": 3,
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "P15",
-		"statement": "¿Ha pensado seriamente en suicidarse?",
+		"special_id": "P15A",
+		"statement": "A lo largo de su vida ¿Ha pensado seriamente en suicidarse?",
 		"order": 15,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P15B",
+		"statement": "En los últimos 30 días ¿Ha pensado seriamente en suicidarse?",
+		"order": 15,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P15C",
+		"statement": "¿Hace cuántos días por última vez ha pensado seriamente en suicidarse?",
+		"order": 15,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
 			{
 				"description": "Cantidad de días desde la última vez",
-				"order": 3,
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "P14",
+		"special_id": "P14A",
 		"statement": "Desde que cumplió los 18 años ¿Ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
 		"order": 14,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
 			}
 		]
 	},
 	{
-		"special_id": "P13",
+		"special_id": "P14B",
+		"statement": "Desde que cumplió los 18 años y en los últimos 30 días ¿Ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
+		"order": 14,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P14C",
+		"statement": "¿Hace cuántos días por última vez ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
+		"order": 14,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "Cantidad de días desde la última vez",
+				"order": 1,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "P13A",
 		"statement": "Desde que cumplió los 18 años ¿Ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
 		"order": 13,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P13B",
+		"statement": "Desde que cumplió los 18 años, y en los últimos 30 días ¿Ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
+		"order": 13,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P13C",
+		"statement": "Hace cuántos días ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
+		"order": 13,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
 			{
 				"description": "Cantidad de días desde la última vez",
-				"order": 3,
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "P12",
-		"statement": "¿Ha tenido dificultad para pensar, concentrarse, comprender o recordar hasta el punto de causarle problemas?",
+		"special_id": "P12A",
+		"statement": "A lo largo de su vida ¿Ha tenido dificultad para pensar, concentrarse, comprender o recordar hasta el punto de causarle problemas?",
 		"order": 12,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
 			}
 		]
 	},
 	{
-		"special_id": "P11",
-		"statement": "¿Ha tenido alucinaciones?",
+		"special_id": "P12B",
+		"statement": "En los últimos 30 días ¿Ha tenido dificultad para pensar, concentrarse, comprender o recordar hasta el punto de causarle problemas?",
+		"order": 12,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P11A",
+		"statement": "A lo largo de su vida ¿Ha tenido alucinaciones?",
 		"order": 11,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 2
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
-				"value": 2
+				"value": 1
 			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P11B",
+		"statement": "En los últimos 30 días ¿Ha tenido alucinaciones?",
+		"order": 11,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P11C",
+		"statement": "¿Hace cuántos días por última vez tuvo alucinaciones?",
+		"order": 11,
+		"type": "DNQ",
+		"category": "PSY",
+		"options": [
 			{
 				"description": "Cantidad de días desde la última vez",
-				"order": 3,
+				"order": 1,
 				"value": 30
 			}
 		]
 	},
 	{
-		"special_id": "P10",
-		"statement": "¿Se ha sentido ansioso, nervioso o preocupado la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
+		"special_id": "P10A",
+		"statement": "A lo largo de su vida ¿Se ha sentido ansioso, nervioso o preocupado la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
 		"order": 10,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 1
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
 				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
 			}
 		]
 	},
 	{
-		"special_id": "P9",
-		"statement": "¿Se ha sentido deprimido o bajo de ánimo la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
+		"special_id": "P10B",
+		"statement": "En los últimos 30 días ¿Se ha sentido ansioso, nervioso o preocupado la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
+		"order": 10,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P9A",
+		"statement": "A lo largo de su vida ¿Se ha sentido deprimido o bajo de ánimo la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
 		"order": 9,
-		"type": "MAMCQN",
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 1
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
 				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
 			}
 		]
 	},
 	{
-		"special_id": "P8",
-		"statement": "¿Ha tenido problemas para dormirse, permanecer dormido o despertarse demasiado temprano?",
-		"order": 8,
-		"type": "MAMCQN",
+		"special_id": "P9B",
+		"statement": "En los últimos 30 días ¿Se ha sentido deprimido o bajo de ánimo la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
+		"order": 9,
+		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
 			{
-				"description": "A lo largo de su vida",
+				"description": "No",
 				"order": 1,
-				"value": 1
+				"value": 0
 			},
 			{
-				"description": "En los últimos 30 días",
+				"description": "Sí",
 				"order": 2,
 				"value": 1
 			},
 			{
-				"description": "Cantidad de días desde la última vez",
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
 				"order": 3,
-				"value": 30
+				"value": 2
+			}
+		]
+	},
+	{
+		"special_id": "P8B",
+		"statement": "En los últimos 30 días ¿Ha tenido problemas para dormirse, permanecer dormido o despertarse demasiado temprano?",
+		"order": 8,
+		"type": "SAMCQN",
+		"category": "PSY",
+		"options": [
+			{
+				"description": "No",
+				"order": 1,
+				"value": 0
+			},
+			{
+				"description": "Sí",
+				"order": 2,
+				"value": 1
+			},
+			{
+				"description": "Sí, pero sólo estando intoxicado o en abstinencia",
+				"order": 3,
+				"value": 2
 			}
 		]
 	},
