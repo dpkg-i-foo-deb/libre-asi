@@ -606,14 +606,21 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		return nil, err
 	}
 
+	famSupportTMRAW, err := computeFamilySupportTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
 	results := view.Results{
-		DrugScale:        float32(druTMRAW),
-		FamilyChildScale: float32(famChildTMRAW),
-		AlcoholScale:     float32(alcoholTMRAW),
-		PsychScale:       float32(psyTMRAW),
-		MedicalScale:     float32(medTMRAW),
-		LegalScale:       float32(lawTMRAW),
-		EmploymentScale:  float32(empTMRAW),
+		DrugScale:                float32(druTMRAW),
+		FamilyChildScale:         float32(famChildTMRAW),
+		AlcoholScale:             float32(alcoholTMRAW),
+		PsychScale:               float32(psyTMRAW),
+		MedicalScale:             float32(medTMRAW),
+		LegalScale:               float32(lawTMRAW),
+		EmploymentScale:          float32(empTMRAW),
+		FamilySocialSupportScale: float32(famSupportTMRAW),
 	}
 
 	return &results, nil
@@ -1102,7 +1109,7 @@ func computeEmpTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category='LAW' OR qc.category='EMP')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("id = ? AND qc.category='EMP'", answer.QuestionID).First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return -1, errors.ErrEntityNotFound
 			}
@@ -1160,6 +1167,54 @@ func computeEmpTMRAW(answers []models.InterviewAnswers) (float64, error) {
 	}
 
 	return empTMRAW, nil
+}
+
+func computeFamilySupportTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	famSupportTMRAW := 0.0
+
+	ff3 := 0.0
+	ff4 := 0.0
+	ff5 := 0.0
+	ff9 := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND qc.category='EMP'", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "F3A" || q.SpecialCode == "F3B" || q.SpecialCode == "F3C" {
+			ff3 += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "F4A" || q.SpecialCode == "F4B" || q.SpecialCode == "F4C" {
+			ff4 += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "F5A" || q.SpecialCode == "F5B" || q.SpecialCode == "F5C" {
+			ff5 += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "F9A" || q.SpecialCode == "F9B" || q.SpecialCode == "F9C" {
+			ff9 += float64(answer.Answer)
+		}
+
+	}
+
+	famSupportTMRAW += ff3 * math.Sqrt(1.6)
+	famSupportTMRAW += ff4 * math.Sqrt(1.6)
+	famSupportTMRAW += ff5 * math.Sqrt(1.6)
+	famSupportTMRAW += ff9 * math.Sqrt(1.6)
+
+	return famSupportTMRAW, nil
 }
 
 func min(a []int) int {
