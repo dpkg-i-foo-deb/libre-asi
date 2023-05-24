@@ -588,11 +588,18 @@ func ComputeResults(i *view.Interview) (*view.Results, error) {
 		return nil, err
 	}
 
+	medTMRAW, err := computeMedTMRAW(answers)
+
+	if err != nil {
+		return nil, err
+	}
+
 	results := view.Results{
 		DrugScale:        float32(druTMRAW),
 		FamilyChildScale: float32(famChildTMRAW),
 		AlcoholScale:     float32(alcoholTMRAW),
 		PsychScale:       float32(psyTMRAW),
+		MedicalScale:     float32(medTMRAW),
 	}
 
 	return &results, nil
@@ -898,7 +905,7 @@ func computePsyTMRAW(answers []models.InterviewAnswers) (float64, error) {
 
 		if err := database.DB.
 			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
-			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM')", answer.QuestionID).First(&q).Error; err != nil {
+			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
 			if err == gorm.ErrRecordNotFound {
 				return -1, errors.ErrEntityNotFound
 			}
@@ -946,6 +953,56 @@ func computePsyTMRAW(answers []models.InterviewAnswers) (float64, error) {
 	psyTMRAW += float64(min(p16dn))
 
 	return psyTMRAW, nil
+}
+
+func computeMedTMRAW(answers []models.InterviewAnswers) (float64, error) {
+
+	medTMRAW := 0.0
+
+	for _, answer := range answers {
+
+		q := models.Question{}
+
+		if err := database.DB.
+			Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("id = ? AND (qc.category = 'DRU' OR qc.category = 'PSY' OR qc.category = 'FAM' OR qc.category = 'AL')", answer.QuestionID).First(&q).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return -1, errors.ErrEntityNotFound
+			}
+			return -1, errors.ErrInternalError
+		}
+
+		if q.SpecialCode == "A3B" {
+			if answer.Answer > 1 {
+				medTMRAW += 1
+			}
+		}
+
+		if q.SpecialCode == "F49" || q.SpecialCode == "SF22" || q.SpecialCode == "SF23" || q.SpecialCode == "SF24" {
+			medTMRAW += float64(answer.Answer)
+		}
+
+		if q.SpecialCode == "SF20" || q.SpecialCode == "SF21" {
+			if answer.Answer >= 1 && answer.Answer <= 5 {
+				medTMRAW += 1
+			}
+
+			if answer.Answer >= 6 && answer.Answer <= 15 {
+				medTMRAW += 2
+			}
+
+			if answer.Answer >= 16 && answer.Answer <= 25 {
+				medTMRAW += 3
+			}
+
+			if answer.Answer >= 26 {
+				medTMRAW += 4
+			}
+		}
+
+	}
+
+	return medTMRAW, nil
 }
 
 func min(a []int) int {
