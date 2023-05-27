@@ -222,7 +222,9 @@
 				<Button skeleton size="default" />
 				<Button skeleton size="default" />
 			{:else}
-				<Button size="default" kind="secondary">Volver</Button>
+				<Button size="default" kind="secondary" disabled={currentQuestion.special_id == 'I12'}
+					>Volver</Button
+				>
 
 				<Button
 					size="default"

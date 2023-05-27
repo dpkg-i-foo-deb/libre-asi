@@ -255,17 +255,31 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 				return errors.ErrInternalError
 			}
 
-			ans := models.InterviewAnswers{
-				InterviewID: interviewID,
-				OptionID:    uint(answer.OptionID),
-				QuestionID:  uint(answer.QuestionID),
-				Answer:      answer.Value,
-				Commentary:  answer.Comment,
+			ans := models.InterviewAnswers{}
+
+			if err := database.DB.
+				Where("interview_id = ? AND question_id = ? ", interviewID, answer.QuestionID).
+				First(&ans).
+				Error; err != nil {
+				if err != gorm.ErrRecordNotFound {
+					return errors.ErrInternalError
+				}
+			} else {
+				if err := database.DB.Unscoped().Delete(&ans).Error; err != nil {
+					return errors.ErrInternalError
+				}
 			}
+
+			ans.InterviewID = interviewID
+			ans.OptionID = uint(answer.OptionID)
+			ans.QuestionID = uint(answer.QuestionID)
+			ans.Answer = answer.Value
+			ans.Commentary = answer.Comment
 
 			if err := database.DB.Save(&ans).Error; err != nil {
 				return errors.ErrInternalError
 			}
+
 		}
 
 		return nil
