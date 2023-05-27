@@ -15,13 +15,18 @@ import (
 func LoginInterviewer(i view.Interviewer) (*models.JWTPair, *models.PasswordResetTk, error) {
 
 	var queriedUser models.User
+	var queriedPerson models.Person
 	var interviewer models.Interviewer
 
 	if database.DB.Where("email = ?", i.Email).First(&queriedUser).Error != nil {
 		return nil, nil, errors.ErrAccessDenied
 	}
 
-	if database.DB.Where("user_id = ?", queriedUser.ID).First(&interviewer).Error != nil {
+	if database.DB.Where("user_id = ?", queriedUser.ID).First(&queriedPerson).Error != nil {
+		return nil, nil, errors.ErrAccessDenied
+	}
+
+	if database.DB.Where("person_id = ?", queriedPerson.ID).First(&interviewer).Error != nil {
 		return nil, nil, errors.ErrAccessDenied
 	}
 

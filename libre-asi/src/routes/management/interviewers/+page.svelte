@@ -13,7 +13,8 @@
 		ModalHeader,
 		ModalBody,
 		TextInput,
-		ModalFooter
+		ModalFooter,
+		CodeSnippet
 	} from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 	import type Interviewer from '$lib/models/Interviewer';
@@ -51,6 +52,8 @@
 	let searchValue = '';
 
 	let isRegisterFormOpen = false;
+
+	let isSuccessRegisterOpen = false;
 
 	onMount(async function () {
 		await loadInterviewers();
@@ -103,6 +106,11 @@
 			await loadInterviewers();
 			isRegisterFormOpen = false;
 			sendSuccess('Entrevistador registrado', 'Entrevistador registrado exitosamente');
+
+			newInterviewer = (await response.json()) as Interviewer;
+
+			isRegisterFormOpen = false;
+			isSuccessRegisterOpen = true;
 		}
 
 		handleResponse(response.status, false);
@@ -249,6 +257,27 @@
 	>
 		<p>¿Está seguro que desea eliminar este entrevistador?</p>
 	</Modal>
+
+	<Modal
+		passiveModal
+		on:close={function () {
+			isSuccessRegisterOpen = false;
+		}}
+		bind:open={isSuccessRegisterOpen}
+		modalHeading="Entrevistador registrado"
+		primaryButtonText="Finalizar"
+	>
+		<p>El entrevistador ha sido registrado y una contraseña aleatoria ha sido generada.</p>
+		<br />
+		<p class="bold">
+			El nuevo entrevistador tendrá que establecer su contraseña cuando inicie sesión.
+		</p>
+		<br />
+		<p>La contraseña generada es:</p>
+		<div class="password-container">
+			<CodeSnippet code={newInterviewer.password} />
+		</div>
+	</Modal>
 {/if}
 
 <style>
@@ -260,5 +289,14 @@
 	.paragraph {
 		padding-top: 5px;
 		padding-bottom: 5px;
+	}
+
+	.password-container {
+		margin-top: 10px;
+		padding-bottom: 40px;
+	}
+
+	.bold {
+		font-weight: bold;
 	}
 </style>
