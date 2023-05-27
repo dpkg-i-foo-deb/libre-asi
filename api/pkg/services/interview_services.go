@@ -231,7 +231,9 @@ func PreviousQuestion(interview *view.Interview) (*view.Interview, error) {
 		return nil, errors.ErrEntityNotFound
 	}
 
-	//Handle previous question
+	if err := handlePreviousQuestion(&i); err != nil {
+		return nil, err
+	}
 
 	interview.CurrentQuestion = i.CurrentQuestion
 
@@ -311,6 +313,22 @@ func handlePreviousQuestion(i *models.Interview) error {
 	switch i.CurrentQuestion {
 	case "INF":
 		return handlePreviousINF(i)
+	case "AL":
+		return handlePreviousAL(i)
+	case "MED":
+		return handlePreviousMED(i)
+	case "EMP":
+		return handlePreviousMED(i)
+	case "DRU":
+		return HandlePreviousDRU(i)
+	case "LAW":
+		return handlePreviousLAW(i)
+	case "FAM":
+		return handlePreviousFAM(i)
+	case "PSY":
+		return handlePreviousPSY(i)
+	case "VAL":
+		return handlePreviousVAL(i)
 	}
 
 	return nil
