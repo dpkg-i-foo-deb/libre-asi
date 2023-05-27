@@ -102,6 +102,7 @@ func SetInterviewerPassword(email string, credentials models.PasswordChange) err
 	}
 
 	user.Password = p
+	user.NeedsPasswordReset = false
 
 	if err := database.DB.Save(&user).Error; err != nil {
 		return errors.ErrInternalError
