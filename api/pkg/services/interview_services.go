@@ -72,7 +72,7 @@ func GetInterview(id uint) (*view.Interview, error) {
 	return &interview, nil
 }
 
-func StartInterview(patientID int, interviewerID int) (*view.Interview, error) {
+func StartInterview(patientID int, interviewerEmail string) (*view.Interview, error) {
 
 	i := models.Interview{}
 
@@ -86,10 +86,28 @@ func StartInterview(patientID int, interviewerID int) (*view.Interview, error) {
 
 	i.AsiFormID = asiForm.ID
 
+	id := 0
+
 	interviewer := models.Interviewer{}
 
-	if err := database.DB.First(&interviewer).Error; err != nil {
-		return nil, errors.ErrEntityNotFound
+	if err := database.DB.Table("interviewers").
+		Select("interviewers.id").
+		Joins("join people p ON interviewers.person_id = p.id").
+		Joins("join users u ON p.user_id = u.id").
+		Where("u.email = ?", interviewerEmail).
+		Scan(&id).
+		Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
+		return nil, errors.ErrInternalError
+	}
+
+	if err := database.DB.Where("id = ?", id).First(&interviewer).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrEntityNotFound
+		}
+		return nil, errors.ErrInternalError
 	}
 
 	patient := models.Patient{}

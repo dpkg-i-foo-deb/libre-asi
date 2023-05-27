@@ -374,16 +374,16 @@
 			isSuccessRegisterOpen = false;
 		}}
 		bind:open={isSuccessRegisterOpen}
-		modalHeading="Administrator Registered"
-		primaryButtonText="Finish"
+		modalHeading="Administrador registrado"
+		primaryButtonText="Finalizar"
 	>
-		<p>The account has been created and a random password has been generated.</p>
+		<p>La cuenta ha sido registrada y una contraseña aleatoria ha sido generada.</p>
 		<br />
 		<p class="bold">
-			The new user will be prompted to change their password once they try to log in.
+			El nuevo administrador tendrá que establecer su propia contraseña cuando inicie sesión.
 		</p>
 		<br />
-		<p>The generated password is:</p>
+		<p>La contraseña generada es:</p>
 		<div class="password-container">
 			<CodeSnippet code={newAdministrator.password} />
 		</div>
