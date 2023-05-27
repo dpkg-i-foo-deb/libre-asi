@@ -39,6 +39,16 @@ func LoginInterviewer(i view.Interviewer) (*models.JWTPair, *models.PasswordRese
 		return nil, &token, errors.ErrrNeedsPasswordReset
 	}
 
+	if queriedUser.NeedsPasswordReset {
+		token, err := auth.GeneratePasswordResetToken(i.Email)
+
+		if err != nil {
+			return nil, nil, errors.ErrInternalError
+		}
+
+		return nil, &token, errors.ErrrNeedsPasswordReset
+	}
+
 	token, err := auth.GenerateJWTPair(i.Email, string(models.INTERVIEWER))
 
 	if err != nil {
