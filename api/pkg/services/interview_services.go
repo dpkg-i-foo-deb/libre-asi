@@ -206,9 +206,7 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 	i := models.Interview{}
 
 	if err := database.DB.Where("id = ?", interview.ID).First(&i).Error; err != nil {
-
 		return nil, errors.ErrEntityNotFound
-
 	}
 
 	if err := handleNextQuestion(&i); err != nil {
@@ -223,6 +221,25 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 
 	return interview, nil
 
+}
+
+func PreviousQuestion(interview *view.Interview) (*view.Interview, error) {
+
+	i := models.Interview{}
+
+	if err := database.DB.Where("id = ?", interview.ID).First(&i).Error; err != nil {
+		return nil, errors.ErrEntityNotFound
+	}
+
+	//Handle previous question
+
+	interview.CurrentQuestion = i.CurrentQuestion
+
+	if err := database.DB.Save(&i).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return interview, nil
 }
 
 func AnswerQuestion(answers []view.Answer, interviewID uint) error {
@@ -279,7 +296,6 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 			if err := database.DB.Save(&ans).Error; err != nil {
 				return errors.ErrInternalError
 			}
-
 		}
 
 		return nil
@@ -294,30 +310,30 @@ func handleNextQuestion(i *models.Interview) error {
 
 	switch i.CurrentSection {
 	case "INF":
-		return handleINF(i)
+		return handleNextINF(i)
 	case "AL":
-		return handleAL(i)
+		return handleNextAL(i)
 	case "MED":
-		return handleMED(i)
+		return handleNextMED(i)
 	case "EMP":
-		return handleEMP(i)
+		return handleNextEMP(i)
 	case "DRU":
-		return handleDRU(i)
+		return handleNextDRU(i)
 	case "LAW":
-		return handleLAW(i)
+		return handleNextLAW(i)
 	case "FAM":
-		return handleFAM(i)
+		return handleNextFAM(i)
 	case "PSY":
-		return handlePSY(i)
+		return handleNextPSY(i)
 	case "VAL":
-		return handleVAL(i)
+		return handleNextVAL(i)
 
 	}
 
 	return nil
 }
 
-func handleINF(i *models.Interview) error {
+func handleNextINF(i *models.Interview) error {
 
 	if len(INFQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -348,7 +364,7 @@ func handleINF(i *models.Interview) error {
 
 }
 
-func handleAL(i *models.Interview) error {
+func handleNextAL(i *models.Interview) error {
 
 	if len(ALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -378,7 +394,7 @@ func handleAL(i *models.Interview) error {
 	return nil
 }
 
-func handleMED(i *models.Interview) error {
+func handleNextMED(i *models.Interview) error {
 
 	if len(MEDQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -408,7 +424,7 @@ func handleMED(i *models.Interview) error {
 	return nil
 }
 
-func handleEMP(i *models.Interview) error {
+func handleNextEMP(i *models.Interview) error {
 
 	if len(EMPQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -438,7 +454,7 @@ func handleEMP(i *models.Interview) error {
 	return nil
 }
 
-func handleDRU(i *models.Interview) error {
+func handleNextDRU(i *models.Interview) error {
 
 	if len(DRUQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -469,7 +485,7 @@ func handleDRU(i *models.Interview) error {
 
 }
 
-func handleLAW(i *models.Interview) error {
+func handleNextLAW(i *models.Interview) error {
 
 	if len(LAWQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -500,7 +516,7 @@ func handleLAW(i *models.Interview) error {
 
 }
 
-func handleFAM(i *models.Interview) error {
+func handleNextFAM(i *models.Interview) error {
 
 	if len(FAMQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -530,7 +546,7 @@ func handleFAM(i *models.Interview) error {
 	return nil
 }
 
-func handlePSY(i *models.Interview) error {
+func handleNextPSY(i *models.Interview) error {
 
 	if len(PSYQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -559,7 +575,7 @@ func handlePSY(i *models.Interview) error {
 	return nil
 }
 
-func handleVAL(i *models.Interview) error {
+func handleNextVAL(i *models.Interview) error {
 
 	if len(VALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
