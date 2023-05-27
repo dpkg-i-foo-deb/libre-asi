@@ -89,6 +89,24 @@ func NextQuestion(c *fiber.Ctx) error {
 
 }
 
+func PreviousQuestion(c *fiber.Ctx) error {
+	i := &view.Interview{}
+
+	err := c.BodyParser(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	i, err = services.PreviousQuestion(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(i)
+}
+
 func GetQuestion(c *fiber.Ctx) error {
 
 	code := c.Params("code")
