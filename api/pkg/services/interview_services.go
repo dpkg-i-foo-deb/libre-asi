@@ -246,6 +246,26 @@ func PreviousQuestion(interview *view.Interview) (*view.Interview, error) {
 
 func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 
+	for _, answer := range answers {
+		ans := []models.InterviewAnswers{}
+
+		if err := database.DB.
+			Where("interview_id = ? AND question_id = ? ", interviewID, answer.QuestionID).
+			Find(&ans).
+			Error; err != nil {
+			if err != gorm.ErrRecordNotFound {
+				return errors.ErrInternalError
+			}
+		} else {
+			if len(ans) > 0 {
+				if err := database.DB.Unscoped().Delete(&ans).Error; err != nil {
+					return errors.ErrInternalError
+				}
+			}
+
+		}
+	}
+
 	if err := database.DB.Transaction(func(tx *gorm.DB) error {
 
 		for _, answer := range answers {
@@ -275,19 +295,6 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 			}
 
 			ans := models.InterviewAnswers{}
-
-			if err := database.DB.
-				Where("interview_id = ? AND question_id = ? ", interviewID, answer.QuestionID).
-				First(&ans).
-				Error; err != nil {
-				if err != gorm.ErrRecordNotFound {
-					return errors.ErrInternalError
-				}
-			} else {
-				if err := database.DB.Unscoped().Delete(&ans).Error; err != nil {
-					return errors.ErrInternalError
-				}
-			}
 
 			ans.InterviewID = interviewID
 			ans.OptionID = uint(answer.OptionID)
@@ -468,6 +475,7 @@ func handlePreviousAL(i *models.Interview) error {
 	for index := len(ALQuestions) - 1; index >= 0; index-- {
 		if ALQuestions[index].SpecialCode == i.CurrentQuestion {
 			i.CurrentQuestion = ALQuestions[index-1].SpecialCode
+			break
 		}
 	}
 	return nil
