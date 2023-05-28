@@ -468,6 +468,7 @@ func handlePreviousAL(i *models.Interview) error {
 	for index := len(ALQuestions) - 1; index >= 0; index-- {
 		if ALQuestions[index].SpecialCode == i.CurrentQuestion {
 			i.CurrentQuestion = ALQuestions[index-1].SpecialCode
+			break
 		}
 	}
 	return nil
