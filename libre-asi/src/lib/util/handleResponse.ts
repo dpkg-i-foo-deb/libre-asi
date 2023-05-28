@@ -48,6 +48,10 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			sendInfo('You need to set a new password to continue', 'Set new password');
 			goto('/password-reset');
 			break;
+		case 503:
+			sendInfo('Se esperó demasiado', 'Intenta más tarde')
+			goto('/try-again-later')
+			break;
 		default:
 			shouldNavigate = false;
 	}

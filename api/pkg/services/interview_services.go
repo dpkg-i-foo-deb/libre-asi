@@ -206,9 +206,7 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 	i := models.Interview{}
 
 	if err := database.DB.Where("id = ?", interview.ID).First(&i).Error; err != nil {
-
 		return nil, errors.ErrEntityNotFound
-
 	}
 
 	if err := handleNextQuestion(&i); err != nil {
@@ -223,6 +221,27 @@ func NextQuestion(interview *view.Interview) (*view.Interview, error) {
 
 	return interview, nil
 
+}
+
+func PreviousQuestion(interview *view.Interview) (*view.Interview, error) {
+
+	i := models.Interview{}
+
+	if err := database.DB.Where("id = ?", interview.ID).First(&i).Error; err != nil {
+		return nil, errors.ErrEntityNotFound
+	}
+
+	if err := handlePreviousQuestion(&i); err != nil {
+		return nil, err
+	}
+
+	interview.CurrentQuestion = i.CurrentQuestion
+
+	if err := database.DB.Save(&i).Error; err != nil {
+		return nil, errors.ErrInternalError
+	}
+
+	return interview, nil
 }
 
 func AnswerQuestion(answers []view.Answer, interviewID uint) error {
@@ -255,13 +274,26 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 				return errors.ErrInternalError
 			}
 
-			ans := models.InterviewAnswers{
-				InterviewID: interviewID,
-				OptionID:    uint(answer.OptionID),
-				QuestionID:  uint(answer.QuestionID),
-				Answer:      answer.Value,
-				Commentary:  answer.Comment,
+			ans := models.InterviewAnswers{}
+
+			if err := database.DB.
+				Where("interview_id = ? AND question_id = ? ", interviewID, answer.QuestionID).
+				First(&ans).
+				Error; err != nil {
+				if err != gorm.ErrRecordNotFound {
+					return errors.ErrInternalError
+				}
+			} else {
+				if err := database.DB.Unscoped().Delete(&ans).Error; err != nil {
+					return errors.ErrInternalError
+				}
 			}
+
+			ans.InterviewID = interviewID
+			ans.OptionID = uint(answer.OptionID)
+			ans.QuestionID = uint(answer.QuestionID)
+			ans.Answer = answer.Value
+			ans.Commentary = answer.Comment
 
 			if err := database.DB.Save(&ans).Error; err != nil {
 				return errors.ErrInternalError
@@ -276,34 +308,60 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 	return nil
 }
 
+func handlePreviousQuestion(i *models.Interview) error {
+
+	switch i.CurrentSection {
+	case "INF":
+		return handlePreviousINF(i)
+	case "AL":
+		return handlePreviousAL(i)
+	case "MED":
+		return handlePreviousMED(i)
+	case "EMP":
+		return handlePreviousMED(i)
+	case "DRU":
+		return HandlePreviousDRU(i)
+	case "LAW":
+		return handlePreviousLAW(i)
+	case "FAM":
+		return handlePreviousFAM(i)
+	case "PSY":
+		return handlePreviousPSY(i)
+	case "VAL":
+		return handlePreviousVAL(i)
+	}
+
+	return nil
+}
+
 func handleNextQuestion(i *models.Interview) error {
 
 	switch i.CurrentSection {
 	case "INF":
-		return handleINF(i)
+		return handleNextINF(i)
 	case "AL":
-		return handleAL(i)
+		return handleNextAL(i)
 	case "MED":
-		return handleMED(i)
+		return handleNextMED(i)
 	case "EMP":
-		return handleEMP(i)
+		return handleNextEMP(i)
 	case "DRU":
-		return handleDRU(i)
+		return handleNextDRU(i)
 	case "LAW":
-		return handleLAW(i)
+		return handleNextLAW(i)
 	case "FAM":
-		return handleFAM(i)
+		return handleNextFAM(i)
 	case "PSY":
-		return handlePSY(i)
+		return handleNextPSY(i)
 	case "VAL":
-		return handleVAL(i)
+		return handleNextVAL(i)
 
 	}
 
 	return nil
 }
 
-func handleINF(i *models.Interview) error {
+func handleNextINF(i *models.Interview) error {
 
 	if len(INFQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -334,7 +392,33 @@ func handleINF(i *models.Interview) error {
 
 }
 
-func handleAL(i *models.Interview) error {
+func handlePreviousINF(i *models.Interview) error {
+
+	if len(INFQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'INF'").
+			Order(`questions."order" ASC`).
+			Find(&INFQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "I12" {
+		return nil
+	}
+
+	for index := len(INFQuestions) - 1; index >= 0; index-- {
+		if INFQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = INFQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+}
+
+func handleNextAL(i *models.Interview) error {
 
 	if len(ALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -364,7 +448,33 @@ func handleAL(i *models.Interview) error {
 	return nil
 }
 
-func handleMED(i *models.Interview) error {
+func handlePreviousAL(i *models.Interview) error {
+	if len(ALQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'AL'").
+			Order(`questions."order" ASC`).
+			Find(&ALQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "A1A" {
+		i.CurrentSection = "INF"
+		i.CurrentQuestion = "I14"
+		return nil
+	}
+
+	for index := len(ALQuestions) - 1; index >= 0; index-- {
+		if ALQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = ALQuestions[index-1].SpecialCode
+		}
+	}
+	return nil
+
+}
+
+func handleNextMED(i *models.Interview) error {
 
 	if len(MEDQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -394,7 +504,35 @@ func handleMED(i *models.Interview) error {
 	return nil
 }
 
-func handleEMP(i *models.Interview) error {
+func handlePreviousMED(i *models.Interview) error {
+
+	if len(MEDQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'MED'").
+			Order(`questions."order" ASC`).
+			Find(&MEDQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "SF1" {
+		i.CurrentSection = "AL"
+		i.CurrentQuestion = "A12"
+		return nil
+	}
+
+	for index := len(MEDQuestions) - 1; index >= 0; index-- {
+		if MEDQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = MEDQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+}
+
+func handleNextEMP(i *models.Interview) error {
 
 	if len(EMPQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -424,7 +562,33 @@ func handleEMP(i *models.Interview) error {
 	return nil
 }
 
-func handleDRU(i *models.Interview) error {
+func HandlePreviousEMP(i *models.Interview) error {
+
+	if len(EMPQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'EMP'").
+			Order(`questions."order" ASC`).
+			Find(&EMPQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "E1" {
+		i.CurrentSection = "MED"
+		i.CurrentQuestion = "SF28B"
+	}
+
+	for index := len(EMPQuestions) - 1; index >= 0; index-- {
+		if EMPQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = EMPQuestions[index-1].SpecialCode
+			break
+		}
+	}
+	return nil
+}
+
+func handleNextDRU(i *models.Interview) error {
 
 	if len(DRUQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -455,7 +619,35 @@ func handleDRU(i *models.Interview) error {
 
 }
 
-func handleLAW(i *models.Interview) error {
+func HandlePreviousDRU(i *models.Interview) error {
+
+	if len(DRUQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'DRU'").
+			Order(`questions."order" ASC`).
+			Find(&DRUQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "D1" {
+		i.CurrentSection = "EMP"
+		i.CurrentQuestion = "E36"
+		return nil
+	}
+
+	for index := len(DRUQuestions) - 1; index >= 0; index-- {
+		if DRUQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = DRUQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+}
+
+func handleNextLAW(i *models.Interview) error {
 
 	if len(LAWQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -486,7 +678,38 @@ func handleLAW(i *models.Interview) error {
 
 }
 
-func handleFAM(i *models.Interview) error {
+func handlePreviousLAW(i *models.Interview) error {
+
+	if len(LAWQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'LAW'").
+			Order(`questions."order" ASC`).
+			Find(&LAWQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+
+		}
+
+	}
+
+	if i.CurrentQuestion == "L1" {
+		i.CurrentSection = "DRU"
+		i.CurrentQuestion = "D60"
+		return nil
+	}
+
+	for index := len(LAWQuestions) - 1; index >= 0; index-- {
+		if LAWQuestions[index].SpecialCode == i.CurrentQuestion {
+			i.CurrentQuestion = LAWQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+
+}
+
+func handleNextFAM(i *models.Interview) error {
 
 	if len(FAMQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -516,7 +739,35 @@ func handleFAM(i *models.Interview) error {
 	return nil
 }
 
-func handlePSY(i *models.Interview) error {
+func handlePreviousFAM(i *models.Interview) error {
+
+	if len(FAMQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'FAM'").
+			Order(`questions."order" ASC`).
+			Find(&FAMQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "F1" {
+		i.CurrentSection = "LAW"
+		i.CurrentQuestion = "L32B"
+		return nil
+	}
+
+	for index := len(FAMQuestions) - 1; index >= 0; index-- {
+		if i.CurrentQuestion == FAMQuestions[index].SpecialCode {
+			i.CurrentQuestion = FAMQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+}
+
+func handleNextPSY(i *models.Interview) error {
 
 	if len(PSYQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -545,7 +796,35 @@ func handlePSY(i *models.Interview) error {
 	return nil
 }
 
-func handleVAL(i *models.Interview) error {
+func handlePreviousPSY(i *models.Interview) error {
+
+	if len(PSYQuestions) == 0 {
+		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
+			Where("qc.category = 'PSY'").
+			Order(`questions."order" ASC`).
+			Find(&PSYQuestions).
+			Error; err != nil {
+			return errors.ErrInternalError
+		}
+	}
+
+	if i.CurrentQuestion == "P1" {
+		i.CurrentSection = "FAM"
+		i.CurrentQuestion = "F54"
+		return nil
+	}
+
+	for index := len(PSYQuestions) - 1; index >= 0; index-- {
+		if i.CurrentQuestion == PSYQuestions[index].SpecialCode {
+			i.CurrentQuestion = PSYQuestions[index-1].SpecialCode
+			break
+		}
+	}
+
+	return nil
+}
+
+func handleNextVAL(i *models.Interview) error {
 
 	if len(VALQuestions) == 0 {
 		if err := database.DB.Joins("JOIN question_categories qc ON qc.id = questions.question_category_id").
@@ -574,6 +853,12 @@ func handleVAL(i *models.Interview) error {
 
 	return nil
 
+}
+
+func handlePreviousVAL(i *models.Interview) error {
+	i.CurrentSection = "PSY"
+	i.CurrentQuestion = "P21"
+	return nil
 }
 
 func ComputeResults(i *view.Interview) (*view.Results, error) {
