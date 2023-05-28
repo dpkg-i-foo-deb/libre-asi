@@ -55,6 +55,7 @@ func GetAdministrators() ([]view.Administrator, error) {
 
 	if err := database.DB.Table("users").
 		Joins("JOIN administrators ON administrators.user_id = users.id").
+		Where("administrators.deleted_at IS NULL").
 		Select("administrators.id, users.email, users.username, '', users.needs_password_reset").
 		Scan(&admins).Error; err != nil {
 		return nil, errors.ErrInternalError
@@ -122,6 +123,12 @@ func RegisterAdministrator(newAdmin view.Administrator, isFirst bool) (*view.Adm
 
 	}); err != nil {
 		return nil, errors.ErrInternalError
+	}
+
+	if !isFirst {
+		newAdmin.Password = p
+	} else {
+		newAdmin.Password = ""
 	}
 
 	return &newAdmin, nil
