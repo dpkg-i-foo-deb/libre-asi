@@ -57,7 +57,7 @@
 
 	onMount(async function () {
 		newAdministrator = {
-			ID: 0,
+			id: 0,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 			email: '',
@@ -74,7 +74,7 @@
 			const existingAdmins = (await response.json()) as Administrator[];
 
 			rows = existingAdmins.map(function (value: Administrator) {
-				return { id: value.ID, email: value.email, username: value.username };
+				return { id: value.id, email: value.email, username: value.username };
 			});
 
 			filteredRows = rows;
@@ -110,7 +110,7 @@
 		}
 
 		newAdministrator = {
-			ID: 0,
+			id: 0,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 			email: email,
@@ -175,7 +175,7 @@
 		}
 
 		editedAdministrator = {
-			ID: editingId,
+			id: editingId,
 			CreatedAt: new Date(),
 			UpdatedAt: new Date(),
 
