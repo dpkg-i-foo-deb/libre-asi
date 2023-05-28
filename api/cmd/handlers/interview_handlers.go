@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"libre-asi-api/pkg/auth"
 	"libre-asi-api/pkg/errors"
 	"libre-asi-api/pkg/services"
 	"libre-asi-api/pkg/util"
@@ -21,7 +22,15 @@ func StartInterview(c *fiber.Ctx) error {
 		return util.HandleFiberError(c, errors.ErrCheckRequest)
 	}
 
-	i, err = services.StartInterview(int(i.PatientID), int(i.InterviewerID))
+	tk := c.Cookies("access-token")
+
+	email, err := auth.EmailFromToken(tk)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrAccessDenied)
+	}
+
+	i, err = services.StartInterview(int(i.PatientID), email)
 
 	if err != nil {
 		return util.HandleFiberError(c, err)
@@ -78,6 +87,24 @@ func NextQuestion(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(i)
 
+}
+
+func PreviousQuestion(c *fiber.Ctx) error {
+	i := &view.Interview{}
+
+	err := c.BodyParser(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, errors.ErrCheckRequest)
+	}
+
+	i, err = services.PreviousQuestion(i)
+
+	if err != nil {
+		return util.HandleFiberError(c, err)
+	}
+
+	return c.Status(200).JSON(i)
 }
 
 func GetQuestion(c *fiber.Ctx) error {

@@ -31,6 +31,7 @@ const GET_INTERVIEWS = 'interviews/';
 const START_INTERVIEW = 'interviews/start/';
 const GET_INTERVIEW = 'interviews/';
 const NEXT_QUESTION = 'interviews/next-question/';
+const PREVIOUS_QUESTION = 'interviews/previous-question/';
 const GET_QUESTION = 'questions/';
 const ANSWER_QUESTION = 'interviews/answer/';
 const COMPUTE_RESULTS = 'interviews/compute/'
@@ -65,5 +66,6 @@ export {
 	GET_QUESTION,
 	GET_INTERVIEW,
 	ANSWER_QUESTION,
-	COMPUTE_RESULTS
+	COMPUTE_RESULTS,
+	PREVIOUS_QUESTION,
 };
