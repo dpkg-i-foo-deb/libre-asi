@@ -1,5 +1,5 @@
 interface Administrator {
-	ID?: number;
+	id?: number;
 	CreatedAt?: Date;
 	UpdatedAt?: Date;
 	email: string;

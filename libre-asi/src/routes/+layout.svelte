@@ -35,6 +35,8 @@
 	import { sendSuccess } from '$lib/util/notifications';
 	import { onMount, tick } from 'svelte';
 	import { handleResponse } from '$lib/util/handleResponse';
+	import { fetchWithRefresh } from '$lib/util/fetchRefresh';
+	import { API_URL, SET_UP } from '$lib/api/constants';
 
 	let isSideNavOpen = false;
 	let isUserMenuOpen = false;
@@ -50,7 +52,7 @@
 	});
 
 	async function checkSetup() {
-		const response = await fetch('/api/set-up', { method: 'GET' });
+		const response = await fetchWithRefresh(API_URL + SET_UP, { method: 'GET' });
 
 		if (response.ok) {
 			$setup = true;
