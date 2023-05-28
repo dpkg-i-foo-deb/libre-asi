@@ -4,7 +4,8 @@
 		GET_QUESTION,
 		NEXT_QUESTION,
 		GET_INTERVIEW,
-		ANSWER_QUESTION
+		ANSWER_QUESTION,
+		PREVIOUS_QUESTION
 	} from '$lib/api/constants';
 	import type Interview from '$lib/models/Interview';
 	import type { Question } from '$lib/models/Question';
@@ -55,7 +56,12 @@
 	}
 
 	async function handleNext() {
-		answerQuestion();
+		await answerQuestion();
+		await nextQuestion();
+	}
+
+	async function handlePrevious() {
+		await previousQuestion();
 	}
 
 	async function answerQuestion() {
@@ -71,8 +77,6 @@
 		if (response.ok) {
 			currentQuestion.answers = [];
 			currentQuestion.valid = false;
-
-			await nextQuestion();
 		}
 
 		handleResponse(response.status, false);
@@ -108,6 +112,21 @@
 		}
 
 		handleResponse(nextQuestionResponse.status, false);
+	}
+
+	async function previousQuestion() {
+		const previousQuestionResponse = await fetchWithRefresh(API_URL + PREVIOUS_QUESTION, {
+			method: 'POST',
+			body: JSON.stringify(interview)
+		});
+
+		if (previousQuestionResponse.ok) {
+			interview = (await previousQuestionResponse.json()) as Interview;
+
+			await getQuestion();
+		}
+
+		handleResponse(previousQuestionResponse.status, false);
 	}
 </script>
 
@@ -222,8 +241,13 @@
 				<Button skeleton size="default" />
 				<Button skeleton size="default" />
 			{:else}
-				<Button size="default" kind="secondary" disabled={currentQuestion.special_id == 'I12'}
-					>Volver</Button
+				<Button
+					size="default"
+					kind="secondary"
+					disabled={currentQuestion.special_id == 'I12'}
+					on:click={function () {
+						handlePrevious();
+					}}>Volver</Button
 				>
 
 				<Button

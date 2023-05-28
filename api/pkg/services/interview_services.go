@@ -310,7 +310,7 @@ func AnswerQuestion(answers []view.Answer, interviewID uint) error {
 
 func handlePreviousQuestion(i *models.Interview) error {
 
-	switch i.CurrentQuestion {
+	switch i.CurrentSection {
 	case "INF":
 		return handlePreviousINF(i)
 	case "AL":
