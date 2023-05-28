@@ -29,6 +29,7 @@
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendInfo, sendSuccess } from '$lib/util/notifications';
 	import { goto } from '$app/navigation';
+	import { ValueVariable } from 'carbon-icons-svelte';
 
 	let newInterviewer: Interviewer = {
 		email: '',
@@ -43,6 +44,12 @@
 		personalID: '',
 		ID: 0
 	};
+
+	let invalidEmail = false;
+	let invalidUsername = false;
+	let invalidPersonalId = false;
+	let invalidFirstname = false;
+	let invalidForm = true;
 
 	let rows: ReadonlyArray<DataTableRow>;
 	let filteredRows: ReadonlyArray<DataTableRow>;
@@ -59,16 +66,43 @@
 		await loadInterviewers();
 	});
 
+	function validateForm() {
+		invalidForm = true;
+
+		if (!invalidEmail && !invalidFirstname && !invalidPersonalId && !invalidUsername) {
+			invalidForm = false;
+		}
+
+		if (
+			newInterviewer.email == '' ||
+			newInterviewer.username == '' ||
+			newInterviewer.personalID == '' ||
+			newInterviewer.firstName == ''
+		) {
+			invalidForm = true;
+		}
+	}
+
 	async function loadInterviewers() {
 		const response = await fetchWithRefresh(API_URL + GET_INTERVIEWERS, { method: 'GET' });
 		if (response.ok) {
 			const existingInterviewers = (await response.json()) as Interviewer[];
 
 			rows = existingInterviewers.map(function (value: Interviewer) {
+				let name = value.firstName + ' ' + value.lastName;
+
+				if (name.length > 10) {
+					name = name.substring(0, 10) + '...';
+				}
+
+				if (value.personalID?.length ?? 0 > 15) {
+					value.personalID = value.personalID?.substring(0, 15) + '...';
+				}
+
 				return {
 					id: value.ID,
 					username: value.username,
-					firstName: value.firstName ?? '' + value.lastName ?? '',
+					firstName: name,
 					personalID: value.personalID
 				};
 			});
@@ -204,7 +238,16 @@
 						id="email"
 						labelText="Correo electrónico"
 						placeholder="Ingrese el correo electrónico"
+						invalidText="Ingrese un correo electrónico válido"
+						bind:invalid={invalidEmail}
 						bind:value={newInterviewer.email}
+						on:blur={function () {
+							invalidEmail = false;
+							if (newInterviewer.email == '') {
+								invalidEmail = true;
+							}
+							validateForm();
+						}}
 					/>
 				</div>
 
@@ -213,6 +256,15 @@
 						id="username"
 						labelText="Nombre de usuario"
 						placeholder="Ingrese el nombre de usuario"
+						bind:invalid={invalidUsername}
+						invalidText="Ingrese un nombre de usuario válido"
+						on:blur={function () {
+							invalidUsername = false;
+							if (newInterviewer.username == '') {
+								invalidUsername = true;
+							}
+							validateForm();
+						}}
 						bind:value={newInterviewer.username}
 					/>
 				</div>
@@ -222,6 +274,15 @@
 						id="id"
 						labelText="Número de documento de identidad"
 						placeholder="Ingrese el número de documento de identidad"
+						bind:invalid={invalidPersonalId}
+						invalidText="Ingrese un documento de identidad válido"
+						on:blur={function () {
+							invalidPersonalId = false;
+							if (newInterviewer.personalID == '') {
+								invalidPersonalId = true;
+							}
+							validateForm();
+						}}
 						bind:value={newInterviewer.personalID}
 					/>
 				</div>
@@ -231,6 +292,16 @@
 						id="firstName"
 						labelText="Primer nombre"
 						placeholder="Ingrese el primer nombre"
+						bind:invalid={invalidFirstname}
+						invalidText="Este campo es requerido"
+						on:blur={function () {
+							invalidFirstname = false;
+
+							if (newInterviewer.firstName == '') {
+								invalidFirstname = true;
+							}
+							validateForm();
+						}}
 						bind:value={newInterviewer.firstName}
 					/>
 				</div>
@@ -238,6 +309,11 @@
 		</ModalBody>
 
 		<ModalFooter
+			primaryButtonDisabled={invalidEmail ||
+				invalidFirstname ||
+				invalidPersonalId ||
+				invalidUsername ||
+				invalidForm}
 			primaryButtonText="Registrar entrevistador"
 			secondaryButtonText="Cancelar"
 			on:click:button--secondary={function () {
