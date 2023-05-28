@@ -1598,6 +1598,10 @@ func computeFamilyProblemTMRAW(answers []models.InterviewAnswers) (float64, erro
 func min(a []int) int {
 	minVal := math.MaxInt
 
+	if len(a) == 0 {
+		return 0
+	}
+
 	for _, v := range a {
 		if v < minVal {
 			minVal = v
