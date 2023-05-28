@@ -28,6 +28,8 @@
 	import QuestionYnq from '../../../../../components/QuestionYNQ.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { sendInfo } from '$lib/util/notifications';
+	import { goto } from '$app/navigation';
 
 	const interviewID = $page.params.id;
 
@@ -108,7 +110,12 @@
 		if (nextQuestionResponse.ok) {
 			interview = (await nextQuestionResponse.json()) as Interview;
 
-			await getQuestion();
+			if (interview.currentQuestion == '#') {
+				sendInfo('Entrevista finalizada', 'Ahora puede ver los resultados');
+				goto('/management/interviews/results/' + interview.id);
+			} else {
+				await getQuestion();
+			}
 		}
 
 		handleResponse(nextQuestionResponse.status, false);
