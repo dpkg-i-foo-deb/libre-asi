@@ -29,7 +29,6 @@
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendInfo, sendSuccess } from '$lib/util/notifications';
 	import { goto } from '$app/navigation';
-	import { ValueVariable } from 'carbon-icons-svelte';
 
 	let newInterviewer: Interviewer = {
 		email: '',
