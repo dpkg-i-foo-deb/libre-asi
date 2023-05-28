@@ -29,6 +29,7 @@
 	import { handleResponse } from '$lib/util/handleResponse';
 	import { sendInfo, sendSuccess } from '$lib/util/notifications';
 	import { goto } from '$app/navigation';
+	import { ValueVariable } from 'carbon-icons-svelte';
 
 	let newInterviewer: Interviewer = {
 		email: '',
@@ -88,10 +89,20 @@
 			const existingInterviewers = (await response.json()) as Interviewer[];
 
 			rows = existingInterviewers.map(function (value: Interviewer) {
+				let name = value.firstName + ' ' + value.lastName;
+
+				if (name.length > 10) {
+					name = name.substring(0, 10) + '...';
+				}
+
+				if (value.personalID?.length ?? 0 > 15) {
+					value.personalID = value.personalID?.substring(0, 15) + '...';
+				}
+
 				return {
 					id: value.ID,
 					username: value.username,
-					firstName: value.firstName ?? '' + value.lastName ?? '',
+					firstName: name,
 					personalID: value.personalID
 				};
 			});
