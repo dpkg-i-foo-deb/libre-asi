@@ -23,8 +23,8 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			break;
 
 		case 503:
-			sendInfo('Se esperó demasiado', 'Intenta más tarde')
-			goto('/try-again-later')
+			goto('/cannot-connect');
+			setup.set(false);
 			break;
 		case 500:
 			sendError('Something went wrong', 'Internal server error');
@@ -48,7 +48,10 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			sendInfo('You need to set a new password to continue', 'Set new password');
 			goto('/password-reset');
 			break;
-
+		case 504:
+			sendInfo('Se esperó demasiado', 'Intenta más tarde')
+			goto('/try-again-later')
+			break;
 		default:
 			shouldNavigate = false;
 	}
