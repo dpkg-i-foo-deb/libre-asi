@@ -5387,7 +5387,7 @@
 	{
 		"special_id": "L32A",
 		"statement": "En los últimos 6 meses ¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
-		"order": 32,
+		"order": 64,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5401,7 +5401,7 @@
 	{
 		"special_id": "L32B",
 		"statement": "En los últimos 30 días ¿Cuántos días en total ha conducido bajo los efectos del alcohol o drogas?",
-		"order": 32,
+		"order": 65,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5415,7 +5415,7 @@
 	{
 		"special_id": "L31",
 		"statement": "En los últimos 30 días ¿Cuántos días ha estado involucrado en alguno de los delitos anteriores?",
-		"order": 31,
+		"order": 63,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5429,7 +5429,7 @@
 	{
 		"special_id": "L30E",
 		"statement": "¿En los últimos 6 meses ¿Cuántos días ha realizado juego ilegal?",
-		"order": 30,
+		"order": 62,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5443,7 +5443,7 @@
 	{
 		"special_id": "L30D",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado prostitución/proxenetismo?",
-		"order": 30,
+		"order": 61,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5457,7 +5457,7 @@
 	{
 		"special_id": "L30C",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha poseído armas de manera ilícita?",
-		"order": 30,
+		"order": 60,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5471,7 +5471,7 @@
 	{
 		"special_id": "L30A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha cometido algún otro acto ilegal?",
-		"order": 30,
+		"order": 58,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5485,7 +5485,7 @@
 	{
 		"special_id": "L30B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha cometido algún otro acto ilegal?",
-		"order": 30,
+		"order": 59,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5499,7 +5499,7 @@
 	{
 		"special_id": "L29H",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha cometido otro tipo de delitos?",
-		"order": 29,
+		"order": 57,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5513,7 +5513,7 @@
 	{
 		"special_id": "L29G",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado homicidio?",
-		"order": 29,
+		"order": 56,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5527,7 +5527,7 @@
 	{
 		"special_id": "L29F",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión sexual?",
-		"order": 29,
+		"order": 55,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5541,7 +5541,7 @@
 	{
 		"special_id": "L29E",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión sin arma",
-		"order": 29,
+		"order": 54,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5555,7 +5555,7 @@
 	{
 		"special_id": "L29D",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado agresión con arma?",
-		"order": 29,
+		"order": 53,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5569,7 +5569,7 @@
 	{
 		"special_id": "L29C",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado amenaza sin agresión física?",
-		"order": 29,
+		"order": 52,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5583,7 +5583,7 @@
 	{
 		"special_id": "L29A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha amenazado o agredido a alguien?",
-		"order": 29,
+		"order": 50,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5597,7 +5597,7 @@
 	{
 		"special_id": "L29B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha amenazado o agredido a alguien?",
-		"order": 29,
+		"order": 51,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5611,7 +5611,7 @@
 	{
 		"special_id": "L28J",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado otros delitos de robo/contra la propiedad?",
-		"order": 28,
+		"order": 49,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5625,7 +5625,7 @@
 	{
 		"special_id": "L28I",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha provocado incendios?",
-		"order": 28,
+		"order": 48,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5639,7 +5639,7 @@
 	{
 		"special_id": "L28H",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado vandalismo?",
-		"order": 28,
+		"order": 47,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5653,7 +5653,7 @@
 	{
 		"special_id": "L28G",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado fraude?",
-		"order": 28,
+		"order": 46,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5667,7 +5667,7 @@
 	{
 		"special_id": "L28F",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado falsificación?",
-		"order": 28,
+		"order": 45,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5681,7 +5681,7 @@
 	{
 		"special_id": "L28E",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robo de vehículos?",
-		"order": 28,
+		"order": 44,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5695,7 +5695,7 @@
 	{
 		"special_id": "L28D",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robos/allanamiento?",
-		"order": 28,
+		"order": 43,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5709,7 +5709,7 @@
 	{
 		"special_id": "L28C",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha realizado robos a tiendas?",
-		"order": 28,
+		"order": 42,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5723,7 +5723,7 @@
 	{
 		"special_id": "L28A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
-		"order": 28,
+		"order": 40,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5737,7 +5737,7 @@
 	{
 		"special_id": "L28B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha robado algo, vendido objetos robados, falsificado recetas o cheques, destruido propiedades o provocado incendios?",
-		"order": 28,
+		"order": 41,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5751,7 +5751,7 @@
 	{
 		"special_id": "L27A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha robado a alguien?",
-		"order": 27,
+		"order": 36,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5765,7 +5765,7 @@
 	{
 		"special_id": "L27B",
 		"statement": "En los úlimos 30 días ¿Cuántos días ha robado a alguien?",
-		"order": 27,
+		"order": 37,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5779,7 +5779,7 @@
 	{
 		"special_id": "L26A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha vendido o fabricado drogas?",
-		"order": 26,
+		"order": 34,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5793,7 +5793,7 @@
 	{
 		"special_id": "L26B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha vendido o fabricado drogas?",
-		"order": 26,
+		"order": 35,
 		"type": "DNQ",
 		"category": "LAW",
 		"options": [
@@ -5807,7 +5807,7 @@
 	{
 		"special_id": "L25",
 		"statement": "¿Cuánta gravedad tienen para usted sus problemas legales actuales?",
-		"order": 25,
+		"order": 33,
 		"type": "SAMCQN",
 		"category": "LAW",
 		"options": [
@@ -5841,7 +5841,7 @@
 	{
 		"special_id": "L24",
 		"statement": "¿Se encuentra en otra situación legal no mencionada anteriomente?",
-		"order": 24,
+		"order": 32,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5860,7 +5860,7 @@
 	{
 		"special_id": "L23",
 		"statement": "¿Se encuentra participando en un programa de reinserción?",
-		"order": 23,
+		"order": 31,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5879,7 +5879,7 @@
 	{
 		"special_id": "L22",
 		"statement": "¿Se encuentra pendiente de sentencia?",
-		"order": 22,
+		"order": 30,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5898,7 +5898,7 @@
 	{
 		"special_id": "L21",
 		"statement": "¿Se encuentra pendiente de juicio o cargos?",
-		"order": 21,
+		"order": 29,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5917,7 +5917,7 @@
 	{
 		"special_id": "L20",
 		"statement": "¿Se encuentra pendiente de libertad condicional?",
-		"order": 20,
+		"order": 28,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5936,7 +5936,7 @@
 	{
 		"special_id": "L19",
 		"statement": "¿Se encuentra en libertad provisional?",
-		"order": 19,
+		"order": 27,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5955,7 +5955,7 @@
 	{
 		"special_id": "L18",
 		"statement": "¿Su admisión a tratamiento es judicial?",
-		"order": 18,
+		"order": 26,
 		"type": "BQ",
 		"category": "LAW",
 		"options": [
@@ -5974,7 +5974,7 @@
 	{
 		"special_id": "L17",
 		"statement": "Desde los 18 años ¿Cuánto tiempo ha pasado en la cárcel o prisión?",
-		"order": 17,
+		"order": 25,
 		"type": "OEYMQ",
 		"category": "LAW",
 		"options": [
@@ -5993,7 +5993,7 @@
 	{
 		"special_id": "L16",
 		"statement": "¿Cuántas veces le han condenado por un delito cometido después de los 18 años de edad?",
-		"order": 16,
+		"order": 24,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6007,7 +6007,7 @@
 	{
 		"special_id": "L15",
 		"statement": "¿Hace cuánto que le detuvieron por última vez?",
-		"order": 15,
+		"order": 23,
 		"type": "OEYMQ",
 		"category": "LAW",
 		"options": [
@@ -6026,7 +6026,7 @@
 	{
 		"special_id": "L14A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal en total?",
-		"order": 14,
+		"order": 21,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6040,7 +6040,7 @@
 	{
 		"special_id": "L14B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por cualquier otro delito penal en los últimos 6 meses?",
-		"order": 14,
+		"order": 22,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6054,7 +6054,7 @@
 	{
 		"special_id": "L13A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas en total?",
-		"order": 13,
+		"order": 19,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6068,7 +6068,7 @@
 	{
 		"special_id": "L13B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por conducir bajo los efectos de alcohol o drogas en los últimos 6 meses?",
-		"order": 13,
+		"order": 20,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6082,7 +6082,7 @@
 	{
 		"special_id": "L12A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal en total?",
-		"order": 12,
+		"order": 17,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6096,7 +6096,7 @@
 	{
 		"special_id": "L12B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de armas, prostitución, o juego ilegal en los últimos 6 meses?",
-		"order": 12,
+		"order": 18,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6110,7 +6110,7 @@
 	{
 		"special_id": "L11A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos en total?",
-		"order": 11,
+		"order": 15,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6124,7 +6124,7 @@
 	{
 		"special_id": "L11B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por delitos violentos en los últimos 6 meses?",
-		"order": 11,
+		"order": 16,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6138,7 +6138,7 @@
 	{
 		"special_id": "L10A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad en total?",
-		"order": 10,
+		"order": 13,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6152,7 +6152,7 @@
 	{
 		"special_id": "L10B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por otros delitos contra la propiedad en los últimos 6 meses?",
-		"order": 10,
+		"order": 14,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6166,7 +6166,7 @@
 	{
 		"special_id": "L9A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco en total?",
-		"order": 9,
+		"order": 11,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6180,7 +6180,7 @@
 	{
 		"special_id": "L9B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por atraco en los últimos 6 meses?",
-		"order": 9,
+		"order": 12,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6194,7 +6194,7 @@
 	{
 		"special_id": "L8A",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas en total?",
-		"order": 8,
+		"order": 9,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6208,7 +6208,7 @@
 	{
 		"special_id": "L8B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por venta o fabricación de drogas en los últimos 6 meses?",
-		"order": 8,
+		"order": 10,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
@@ -6236,7 +6236,7 @@
 	{
 		"special_id": "L7B",
 		"statement": "Desde los 18 años ¿Cuántas veces le han detenido por posesión de drogas en los últimos 6 meses?",
-		"order": 7,
+		"order": 8,
 		"type": "TNQ",
 		"category": "LAW",
 		"options": [
