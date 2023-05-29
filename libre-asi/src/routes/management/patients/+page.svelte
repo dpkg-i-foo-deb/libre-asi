@@ -46,9 +46,31 @@
 
 	let isRegisterFormOpen = false;
 
+	let invalidFirstName = false;
+	let invalidFirstSurname = false;
+	let invalidPersonalId = false;
+
+	let invalidForm = true;
+
 	onMount(async function () {
 		await loadPatients();
 	});
+
+	function validateForm() {
+		invalidForm = true;
+
+		if (!invalidFirstName && !invalidFirstSurname && !invalidPersonalId) {
+			invalidForm = false;
+		}
+
+		if (
+			newPatient.firstName == '' ||
+			newPatient.firstSurname == '' ||
+			newPatient.personalID == ''
+		) {
+			invalidForm = true;
+		}
+	}
 
 	async function loadPatients() {
 		const response = await fetchWithRefresh(API_URL + GET_PATIENTS, { method: 'GET' });
@@ -186,7 +208,19 @@
 						id="firstName"
 						labelText="Primer nombre"
 						placeholder="Ingrese el primer nombre"
+						bind:invalid={invalidFirstName}
+						invalidText="Ingrese un nombre válido"
+						on:blur={function () {
+							invalidFirstName = false;
+
+							if (newPatient.firstName == '') {
+								invalidFirstName = true;
+							}
+						}}
 						bind:value={newPatient.firstName}
+						on:input={function () {
+							validateForm();
+						}}
 					/>
 				</div>
 
@@ -195,6 +229,18 @@
 						id="firstSurname"
 						labelText="Primer apellido"
 						placeholder="Ingrese el primer apellido"
+						bind:invalid={invalidFirstSurname}
+						invalidText="Ingrese un apellido válido"
+						on:blur={function () {
+							invalidFirstSurname = false;
+
+							if (newPatient.firstSurname == '') {
+								invalidFirstSurname = true;
+							}
+						}}
+						on:input={function () {
+							validateForm();
+						}}
 						bind:value={newPatient.firstSurname}
 					/>
 				</div>
@@ -204,6 +250,18 @@
 						id="id"
 						labelText="Número de identificación"
 						placeholder="Ingrese el número de identificación"
+						bind:invalid={invalidPersonalId}
+						invalidText="Ingrese una identificación válida"
+						on:blur={function () {
+							invalidPersonalId = false;
+
+							if (newPatient.personalID == '') {
+								invalidPersonalId = true;
+							}
+						}}
+						on:input={function () {
+							validateForm();
+						}}
 						bind:value={newPatient.personalID}
 					/>
 				</div>
@@ -211,6 +269,7 @@
 		</ModalBody>
 
 		<ModalFooter
+			primaryButtonDisabled={invalidForm}
 			primaryButtonText="Registrar paciente"
 			secondaryButtonText="Cancelar"
 			on:click:button--secondary={function () {
