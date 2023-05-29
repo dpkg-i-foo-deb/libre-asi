@@ -3216,7 +3216,7 @@
 	{
 		"special_id": "P21",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para sus problemas psicológicos?",
-		"order": 21,
+		"order": 36,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3250,7 +3250,7 @@
 	{
 		"special_id": "P20",
 		"statement": "¿Cuánta molestia o preocupación ha tenido por estos problemas psicológicos o emocionales?",
-		"order": 20,
+		"order": 35,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3284,7 +3284,7 @@
 	{
 		"special_id": "P19",
 		"statement": "¿Cuántos días ha sido incapaz de realizar sus actividades normales debido a problemas o síntomas psicológicos/emocionales?",
-		"order": 19,
+		"order": 34,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3298,7 +3298,7 @@
 	{
 		"special_id": "P18",
 		"statement": "¿Cuántos días ha experimentado estos problemas emocionales o psicológicos?",
-		"order": 18,
+		"order": 33,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3312,7 +3312,7 @@
 	{
 		"special_id": "P17B",
 		"statement": "En los últimos 30 días ¿Ha experimentado otros problemas emocionales o psicológicos no mencionados anteriormente? (Especifique en los comentarios)",
-		"order": 17,
+		"order": 32,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3336,7 +3336,7 @@
 	{
 		"special_id": "P16A",
 		"statement": "A lo largo de su vida ¿Ha intentado suicidarse?",
-		"order": 16,
+		"order": 29,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3360,7 +3360,7 @@
 	{
 		"special_id": "P16B",
 		"statement": "En los últimos 30 días ¿Ha intentado suicidarse?",
-		"order": 16,
+		"order": 30,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3384,7 +3384,7 @@
 	{
 		"special_id": "P16C",
 		"statement": "Hace cuántos días por última vez ha intentado suicidarse?",
-		"order": 16,
+		"order": 31,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3398,7 +3398,7 @@
 	{
 		"special_id": "P15A",
 		"statement": "A lo largo de su vida ¿Ha pensado seriamente en suicidarse?",
-		"order": 15,
+		"order": 26,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3422,7 +3422,7 @@
 	{
 		"special_id": "P15B",
 		"statement": "En los últimos 30 días ¿Ha pensado seriamente en suicidarse?",
-		"order": 15,
+		"order": 27,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3446,7 +3446,7 @@
 	{
 		"special_id": "P15C",
 		"statement": "¿Hace cuántos días por última vez ha pensado seriamente en suicidarse?",
-		"order": 15,
+		"order": 28,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3460,7 +3460,7 @@
 	{
 		"special_id": "P14A",
 		"statement": "Desde que cumplió los 18 años ¿Ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
-		"order": 14,
+		"order": 23,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3484,7 +3484,7 @@
 	{
 		"special_id": "P14B",
 		"statement": "Desde que cumplió los 18 años y en los últimos 30 días ¿Ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
-		"order": 14,
+		"order": 24,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3508,7 +3508,7 @@
 	{
 		"special_id": "P14C",
 		"statement": "¿Hace cuántos días por última vez ha empujado, golpeado o tirado objetos a alguien o utilizado un arma contra alguien?",
-		"order": 14,
+		"order": 25,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3522,7 +3522,7 @@
 	{
 		"special_id": "P13A",
 		"statement": "Desde que cumplió los 18 años ¿Ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
-		"order": 13,
+		"order": 20,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3546,7 +3546,7 @@
 	{
 		"special_id": "P13B",
 		"statement": "Desde que cumplió los 18 años, y en los últimos 30 días ¿Ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
-		"order": 13,
+		"order": 21,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3570,7 +3570,7 @@
 	{
 		"special_id": "P13C",
 		"statement": "Hace cuántos días ha tenido dificultad para controlar su caracter o implulsos de pegar o hacer daño a alguien?",
-		"order": 13,
+		"order": 22,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3584,7 +3584,7 @@
 	{
 		"special_id": "P12A",
 		"statement": "A lo largo de su vida ¿Ha tenido dificultad para pensar, concentrarse, comprender o recordar hasta el punto de causarle problemas?",
-		"order": 12,
+		"order": 18,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3608,7 +3608,7 @@
 	{
 		"special_id": "P12B",
 		"statement": "En los últimos 30 días ¿Ha tenido dificultad para pensar, concentrarse, comprender o recordar hasta el punto de causarle problemas?",
-		"order": 12,
+		"order": 19,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3632,7 +3632,7 @@
 	{
 		"special_id": "P11A",
 		"statement": "A lo largo de su vida ¿Ha tenido alucinaciones?",
-		"order": 11,
+		"order": 15,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3656,7 +3656,7 @@
 	{
 		"special_id": "P11B",
 		"statement": "En los últimos 30 días ¿Ha tenido alucinaciones?",
-		"order": 11,
+		"order": 16,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3680,7 +3680,7 @@
 	{
 		"special_id": "P11C",
 		"statement": "¿Hace cuántos días por última vez tuvo alucinaciones?",
-		"order": 11,
+		"order": 17,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
@@ -3694,7 +3694,7 @@
 	{
 		"special_id": "P10A",
 		"statement": "A lo largo de su vida ¿Se ha sentido ansioso, nervioso o preocupado la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
-		"order": 10,
+		"order": 13,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3718,7 +3718,7 @@
 	{
 		"special_id": "P10B",
 		"statement": "En los últimos 30 días ¿Se ha sentido ansioso, nervioso o preocupado la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
-		"order": 10,
+		"order": 14,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3742,7 +3742,7 @@
 	{
 		"special_id": "P9A",
 		"statement": "A lo largo de su vida ¿Se ha sentido deprimido o bajo de ánimo la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
-		"order": 9,
+		"order": 11,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3766,7 +3766,7 @@
 	{
 		"special_id": "P9B",
 		"statement": "En los últimos 30 días ¿Se ha sentido deprimido o bajo de ánimo la mayor parte del día (Casi cada día durante al menos 2 semanas seguidas)?",
-		"order": 9,
+		"order": 12,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3790,7 +3790,7 @@
 	{
 		"special_id": "P8B",
 		"statement": "En los últimos 30 días ¿Ha tenido problemas para dormirse, permanecer dormido o despertarse demasiado temprano?",
-		"order": 8,
+		"order": 10,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3814,7 +3814,7 @@
 	{
 		"special_id": "P7",
 		"statement": "¿Actualmente recibe una pensión por discapacidad psicológica?",
-		"order": 7,
+		"order": 9,
 		"type": "BQ",
 		"category": "PSY",
 		"options": [
@@ -3833,7 +3833,7 @@
 	{
 		"special_id": "P6",
 		"statement": "¿Qué edad tenía la primera vez que recibió un tratamiento o fue evaluado por problemas emocionales o psicológicos?",
-		"order": 6,
+		"order": 8,
 		"type": "YNQ",
 		"category": "PSY",
 		"options": [
@@ -3847,7 +3847,7 @@
 	{
 		"special_id": "P5A",
 		"statement": "En los últimos 6 meses ¿Cuántas consultas ambulatorias ha tenido?",
-		"order": 5,
+		"order": 6,
 		"type": "TNQ",
 		"category": "PSY",
 		"options": [
@@ -3861,7 +3861,7 @@
 	{
 		"special_id": "P5B",
 		"statement": "En los últimos 30 días ¿Cuántas consultas ambulatorias ha tenido?",
-		"order": 5,
+		"order": 7,
 		"type": "TNQ",
 		"category": "PSY",
 		"options": [
@@ -3875,7 +3875,7 @@
 	{
 		"special_id": "P4",
 		"statement": "En su vida ¿A cuántas consultas ambulatorias ha acudido problemas emocionales/psicológicos?",
-		"order": 4,
+		"order": 5,
 		"type": "SAMCQN",
 		"category": "PSY",
 		"options": [
@@ -3923,7 +3923,7 @@
 	{
 		"special_id": "P3B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha tomado medicación para tratar problemas emocionales o psicológicos?",
-		"order": 3,
+		"order": 4,
 		"type": "DNQ",
 		"category": "PSY",
 		"options": [
