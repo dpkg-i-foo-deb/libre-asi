@@ -1012,7 +1012,7 @@
 	{
 		"special_id": "SF26B",
 		"statement": "En los últimos 30 días ¿Cuántas veces ha acudido a un servicio de urgencias por cualquier problema de salud fisíca?",
-		"order": 26,
+		"order": 27,
 		"type": "TNQ",
 		"category": "MED",
 		"options": [
@@ -1026,7 +1026,7 @@
 	{
 		"special_id": "SF27A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
-		"order": 27,
+		"order": 28,
 		"type": "DNQ",
 		"category": "MED",
 		"options": [
@@ -1040,7 +1040,7 @@
 	{
 		"special_id": "SF27B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha tomado la medicación prescrita para una enfermedad física?",
-		"order": 27,
+		"order": 29,
 		"type": "DNQ",
 		"category": "MED",
 		"options": [
@@ -1054,7 +1054,7 @@
 	{
 		"special_id": "SF28A",
 		"statement": "En los últimos 6 meses ¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
-		"order": 28,
+		"order": 30,
 		"type": "TNQ",
 		"category": "MED",
 		"options": [
@@ -1068,7 +1068,7 @@
 	{
 		"special_id": "SF28B",
 		"statement": "En los últimos 30 días ¿Cuántas consultas ambulatorias ha realizado con un médico u otro profesional sanitario?",
-		"order": 28,
+		"order": 31,
 		"type": "TNQ",
 		"category": "MED",
 		"options": [
