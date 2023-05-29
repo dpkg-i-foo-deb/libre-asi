@@ -1973,9 +1973,47 @@
 		]
 	},
 	{
+		"special_id": "E32",
+		"statement": "¿Alguna vez se ha declarado legalmente en bancarrota?",
+		"order": 38,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
+		"special_id": "E33",
+		"statement": "¿Alguna vez ha sido moroso en la devolución de un préstamo del Estado?",
+		"order": 39,
+		"type": "BQ",
+		"category": "EMP",
+		"options": [
+			{
+				"description": "Sí",
+				"order": 1,
+				"value": 1
+			},
+			{
+				"description": "No",
+				"order": 2,
+				"value": 0
+			}
+		]
+	},
+	{
 		"special_id": "E34",
 		"statement": "¿Lleva más de un mes de retraso en alguno de sus pagos habituales?",
-		"order": 38,
+		"order": 40,
 		"type": "BQ",
 		"category": "EMP",
 		"options": [
@@ -1994,7 +2032,7 @@
 	{
 		"special_id": "E35",
 		"statement": "¿Cuántas personas (excluyéndose) dependen actualmente de usted económicamente?",
-		"order": 39,
+		"order": 41,
 		"type": "TNQ",
 		"category": "EMP",
 		"options": [
@@ -2008,7 +2046,7 @@
 	{
 		"special_id": "E36",
 		"statement": "¿Tiene suficientes ingresos para pagar sus necesidades básicas como vivienda, alimentación y vestido, y las de las personas a su cargo?",
-		"order": 40,
+		"order": 42,
 		"type": "BQ",
 		"category": "EMP",
 		"options": [
