@@ -48,7 +48,6 @@ func RegisterPatient(newPatient view.Patient) (*view.Patient, error) {
 	person.Age = newPatient.Age
 	person.PersonalID = newPatient.PersonalID
 
-	//TODO race and religious preference
 	patient = models.Patient{}
 	patient.SocialSecurityNumber = newPatient.SocialSecurityNumber
 	patient.Interviews = []models.Interview{}
@@ -122,8 +121,6 @@ func GetPatient(id uint) (*view.Patient, error) {
 }
 
 func UpdatePatient(updatedPatient view.Patient) error {
-
-	//TODO improve
 
 	var found models.Patient
 	var person models.Person
