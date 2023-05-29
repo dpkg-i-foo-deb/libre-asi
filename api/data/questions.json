@@ -2121,7 +2121,7 @@
 	{
 		"special_id": "D4B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha acudido a un programa ambulatorio o a consulta(para tratamientos de alcohol/drogas)",
-		"order": 4,
+		"order": 5,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2135,7 +2135,7 @@
 	{
 		"special_id": "D5A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
-		"order": 5,
+		"order": 6,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2149,7 +2149,7 @@
 	{
 		"special_id": "D5B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha tomado medicación prescrita para tratar su uso de alcohol/drogas?",
-		"order": 5,
+		"order": 7,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2163,7 +2163,7 @@
 	{
 		"special_id": "D6A",
 		"statement": "En los últimos 6 meses ¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
-		"order": 6,
+		"order": 8,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2177,7 +2177,7 @@
 	{
 		"special_id": "D6B",
 		"statement": "En los últimos 30 días ¿Cuántos días ha acudido a grupos de autoayuda como AA, NA?",
-		"order": 6,
+		"order": 9,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2191,7 +2191,7 @@
 	{
 		"special_id": "D7",
 		"statement": "¿Cuánto duró el período de tiempo continuado más largo que estuvo acudiendo a grupos de autoayuda al menos 2 días por semana? ",
-		"order": 7,
+		"order": 10,
 		"type": "OEYMQ",
 		"category": "DRU",
 		"options": [
@@ -2210,7 +2210,7 @@
 	{
 		"special_id": "D8",
 		"statement": "¿Cuántos años ha bebido alcohol de forma regular, 3 o más días a la semana? ",
-		"order": 8,
+		"order": 11,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2224,7 +2224,7 @@
 	{
 		"special_id": "D9",
 		"statement": "¿Cuántos años ha bebido al menos (5-hombres, 4-muejeres) bebidas al día de forma regular, 3 o más días a la semana? ",
-		"order": 9,
+		"order": 12,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2238,7 +2238,7 @@
 	{
 		"special_id": "D10",
 		"statement": "¿Ha bebido al menos (5-hombres. 4-mujeres) bebidas en un día, 50 o más días de su vida? ",
-		"order": 10,
+		"order": 13,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2257,7 +2257,7 @@
 	{
 		"special_id": "D11",
 		"statement": "¿Qué edad tenía la primera vez que bebió alcohol y notó sus efectos? ",
-		"order": 11,
+		"order": 14,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2271,7 +2271,7 @@
 	{
 		"special_id": "D12",
 		"statement": "En los últimos 6 meses, durante el mes que mas bebía, ¿con qué fecuencia bebía? ",
-		"order": 12,
+		"order": 15,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -2305,7 +2305,7 @@
 	{
 		"special_id": "D13",
 		"statement": "En los últimos 30 días, ¿cuántos días ha bebido alcohol? ",
-		"order": 13,
+		"order": 16,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2319,7 +2319,7 @@
 	{
 		"special_id": "D14",
 		"statement": "¿cuándo bebío por última vez? ",
-		"order": 14,
+		"order": 17,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2333,7 +2333,7 @@
 	{
 		"special_id": "D15",
 		"statement": "En los últimos 30 días, ¿cuántos días ha tomado al menos (5-hombres, 4-mujeres) bebidas en un día? ",
-		"order": 15,
+		"order": 18,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2347,7 +2347,7 @@
 	{
 		"special_id": "D16",
 		"statement": "En los últimos 30 días, ¿cuánto dinero ha gastado en alcohol para usted mismo? ",
-		"order": 16,
+		"order": 19,
 		"type": "SMA",
 		"category": "DRU",
 		"options": [
@@ -2361,7 +2361,7 @@
 	{
 		"special_id": "D17",
 		"statement": "¿Ha experimentado síntomas de abstinencia (se ha sentido enfermo) tras disminuir el consumo o dejar de beber? ",
-		"order": 17,
+		"order": 20,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2380,7 +2380,7 @@
 	{
 		"special_id": "D18",
 		"statement": "¿Ha tenido algún problema para controlar, disminuir o abstenerse de beber alcohol; o ha empleado la mayor parte del día bebiendo? ",
-		"order": 18,
+		"order": 21,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2399,7 +2399,7 @@
 	{
 		"special_id": "D19",
 		"statement": "Debido a la bebida ¿Ha tenido problemas médicos o psicológicos; o en el trabajo (colegio) o en el hogar, o se ha visto envuelto en discusiones o problemas con la ley? ",
-		"order": 19,
+		"order": 22,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2418,7 +2418,7 @@
 	{
 		"special_id": "D20",
 		"statement": "¿El ansia o los impulsos de beber han supuesto un problema para usted? ",
-		"order": 20,
+		"order": 23,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2437,7 +2437,7 @@
 	{
 		"special_id": "D21",
 		"statement": "¿Cuántos días ha tenido estas u otras dificultades debido al consumo de alcohol? ",
-		"order": 21,
+		"order": 24,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2451,7 +2451,7 @@
 	{
 		"special_id": "D22",
 		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido por estos problemas relacionados con el alcohol? ",
-		"order": 22,
+		"order": 25,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -2485,7 +2485,7 @@
 	{
 		"special_id": "D23",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para dejar de beber?",
-		"order": 23,
+		"order": 26,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -2519,7 +2519,7 @@
 	{
 		"special_id": "D24",
 		"statement": "¿Cuánta importancia tiene para usted lograr/mantener la abstinencia total del alcohol (es decir, no beber nada)?",
-		"order": 24,
+		"order": 27,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -2553,7 +2553,7 @@
 	{
 		"special_id": "D25A",
 		"statement": "¿Qué edad tenía la primera vez que consumió marihuna?",
-		"order": 25,
+		"order": 28,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2567,7 +2567,7 @@
 	{
 		"special_id": "D25B",
 		"statement": "¿Cuántos años en su vida ha consumido marihuna?",
-		"order": 25,
+		"order": 29,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2581,7 +2581,7 @@
 	{
 		"special_id": "D25C",
 		"statement": "¿Ha consumido marihuana durante 50 o más días de su vida?",
-		"order": 25,
+		"order": 30,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2600,7 +2600,7 @@
 	{
 		"special_id": "D25D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió marihuana?",
-		"order": 25,
+		"order": 31,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2614,7 +2614,7 @@
 	{
 		"special_id": "D25E",
 		"statement": "En los últimos 30 días,¿consumió marihuana?",
-		"order": 25,
+		"order": 32,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2633,7 +2633,7 @@
 	{
 		"special_id": "D26A",
 		"statement": "¿Qué edad tenía la primera vez que consumió sedantes?",
-		"order": 26,
+		"order": 33,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2647,7 +2647,7 @@
 	{
 		"special_id": "D26B",
 		"statement": "¿Cuántos años en su vida ha consumido sedantes?",
-		"order": 26,
+		"order": 34,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2661,7 +2661,7 @@
 	{
 		"special_id": "D26C",
 		"statement": "¿Ha consumido sedantes durante 50 o más días de su vida?",
-		"order": 26,
+		"order": 35,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2680,7 +2680,7 @@
 	{
 		"special_id": "D26D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió sedantes?",
-		"order": 26,
+		"order": 36,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2694,7 +2694,7 @@
 	{
 		"special_id": "D26E",
 		"statement": "En los últimos 30 días,¿consumió sedantes?",
-		"order": 25,
+		"order": 37,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2713,7 +2713,7 @@
 	{
 		"special_id": "D27A",
 		"statement": "¿Qué edad tenía la primera vez que consumió cocaina?",
-		"order": 27,
+		"order": 38,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2727,7 +2727,7 @@
 	{
 		"special_id": "D27B",
 		"statement": "¿Cuántos años en su vida ha consumido cocaina?",
-		"order": 27,
+		"order": 39,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2741,7 +2741,7 @@
 	{
 		"special_id": "D27C",
 		"statement": "¿Ha consumido cocaina durante 50 o más días de su vida?",
-		"order": 27,
+		"order": 40,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2760,7 +2760,7 @@
 	{
 		"special_id": "D27D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió cocaina?",
-		"order": 27,
+		"order": 41,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2774,7 +2774,7 @@
 	{
 		"special_id": "D28A",
 		"statement": "¿Qué edad tenía la primera vez que consumió estimulantes?",
-		"order": 28,
+		"order": 42,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2788,7 +2788,7 @@
 	{
 		"special_id": "D28B",
 		"statement": "¿Cuántos años en su vida ha consumido estimulantes?",
-		"order": 28,
+		"order": 43,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2802,7 +2802,7 @@
 	{
 		"special_id": "D28C",
 		"statement": "¿Ha consumido estimulantes durante 50 o más días de su vida?",
-		"order": 28,
+		"order": 44,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2821,7 +2821,7 @@
 	{
 		"special_id": "D28D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió estimulantes?",
-		"order": 28,
+		"order": 45,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2835,7 +2835,7 @@
 	{
 		"special_id": "D28E",
 		"statement": "En los últimos 30 días,¿consumió estimulantes?",
-		"order": 28,
+		"order": 46,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2854,7 +2854,7 @@
 	{
 		"special_id": "D29A",
 		"statement": "¿Qué edad tenía la primera vez que consumió alucinógenos?",
-		"order": 29,
+		"order": 47,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2868,7 +2868,7 @@
 	{
 		"special_id": "D29B",
 		"statement": "¿Cuántos años en su vida ha consumido alucinógenos?",
-		"order": 29,
+		"order": 48,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2882,7 +2882,7 @@
 	{
 		"special_id": "D29C",
 		"statement": "¿Ha consumido alucinógenos durante 50 o más días de su vida?",
-		"order": 29,
+		"order": 49,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2901,7 +2901,7 @@
 	{
 		"special_id": "D29D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió alucinógenos?",
-		"order": 29,
+		"order": 50,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2915,7 +2915,7 @@
 	{
 		"special_id": "D30A",
 		"statement": "¿Qué edad tenía la primera vez que consumió heroína?",
-		"order": 30,
+		"order": 51,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2929,7 +2929,7 @@
 	{
 		"special_id": "D30B",
 		"statement": "¿Cuántos años en su vida ha consumido heroína?",
-		"order": 30,
+		"order": 52,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -2943,7 +2943,7 @@
 	{
 		"special_id": "D30C",
 		"statement": "¿Ha consumido heroína durante 50 o más días de su vida?",
-		"order": 30,
+		"order": 53,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -2962,7 +2962,7 @@
 	{
 		"special_id": "D30D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió heroína?",
-		"order": 30,
+		"order": 54,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -2976,7 +2976,7 @@
 	{
 		"special_id": "D31A",
 		"statement": "¿Qué edad tenía la primera vez que consumió metadona?",
-		"order": 31,
+		"order": 55,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -2990,7 +2990,7 @@
 	{
 		"special_id": "D31B",
 		"statement": "¿Cuántos años en su vida ha consumido metadona?",
-		"order": 31,
+		"order": 56,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -3004,7 +3004,7 @@
 	{
 		"special_id": "D31C",
 		"statement": "¿Ha consumido metadona durante 50 o más días de su vida?",
-		"order": 31,
+		"order": 57,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3023,7 +3023,7 @@
 	{
 		"special_id": "D31D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió metadona?",
-		"order": 31,
+		"order": 58,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -3037,7 +3037,7 @@
 	{
 		"special_id": "D31E",
 		"statement": "En los últimos 30 días,¿consumió metadona?",
-		"order": 31,
+		"order": 59,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3056,7 +3056,7 @@
 	{
 		"special_id": "D32A",
 		"statement": "¿Qué edad tenía la primera vez que consumió otros opiáceos?",
-		"order": 32,
+		"order": 60,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -3070,7 +3070,7 @@
 	{
 		"special_id": "D32B",
 		"statement": "¿Cuántos años en su vida ha consumido otros opiáceos?",
-		"order": 32,
+		"order": 61,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -3084,7 +3084,7 @@
 	{
 		"special_id": "D32C",
 		"statement": "¿Ha consumido otros opiáceos durante 50 o más días de su vida?",
-		"order": 32,
+		"order": 62,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3103,7 +3103,7 @@
 	{
 		"special_id": "D32D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió otros opiáceos?",
-		"order": 32,
+		"order": 63,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -3117,7 +3117,7 @@
 	{
 		"special_id": "D32E",
 		"statement": "En los últimos 30 días,¿consumió otros opiáceos?",
-		"order": 32,
+		"order": 64,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3136,7 +3136,7 @@
 	{
 		"special_id": "D33A",
 		"statement": "¿Qué edad tenía la primera vez que consumió inhalantes",
-		"order": 33,
+		"order": 65,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -3150,7 +3150,7 @@
 	{
 		"special_id": "D33B",
 		"statement": "¿Cuántos años en su vida ha consumido inhalantes?",
-		"order": 33,
+		"order": 66,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -3164,7 +3164,7 @@
 	{
 		"special_id": "D33C",
 		"statement": "¿Ha consumido inhalantes durante 50 o más días de su vida?",
-		"order": 33,
+		"order": 67,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -3183,7 +3183,7 @@
 	{
 		"special_id": "D33D",
 		"statement": "En los últimos 30 días,¿cuántos días consumió inhalantes?",
-		"order": 33,
+		"order": 68,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -3197,7 +3197,7 @@
 	{
 		"special_id": "D33E",
 		"statement": "En los últimos 30 días,¿consumió inhalantes?",
-		"order": 33,
+		"order": 69,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6364,7 +6364,7 @@
 	{
 		"special_id": "D60",
 		"statement": "¿En los últimos 30 días ¿Cuántos días ha jugado a cualquier tipo de juego como lotería, cupón, quiniela, máquinas tragaperras, bingo, apuestas en las carreras, casinos... O a cualquier tipo de juego ilegal?",
-		"order": 60,
+		"order": 102,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -6378,7 +6378,7 @@
 	{
 		"special_id": "D59",
 		"statement": "¿Alguna vez ha sufrido algún problema económico debido al juego?",
-		"order": 59,
+		"order": 101,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6397,7 +6397,7 @@
 	{
 		"special_id": "D58",
 		"statement": "En los últimos 30 días ¿Cuántos días ha fumado cigarrillos (O consumió tabaco de otras formas)?",
-		"order": 58,
+		"order": 100,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -6411,7 +6411,7 @@
 	{
 		"special_id": "D57",
 		"statement": "¿Cuántos años ha fumado cigarrillos (O consumido tabaco de otras formas) diariamente?",
-		"order": 57,
+		"order": 99,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -6425,7 +6425,7 @@
 	{
 		"special_id": "D56",
 		"statement": "¿Qué edad tenía la primera vez que fumó cigarrillos o consumió tabaco de otras formas?",
-		"order": 56,
+		"order": 98,
 		"type": "SAQ",
 		"category": "DRU",
 		"options": [
@@ -6439,7 +6439,7 @@
 	{
 		"special_id": "D55",
 		"statement": "¿Cuándo fue la última vez que se hizo la prueba del VIH/SIDA?",
-		"order": 55,
+		"order": 97,
 		"type": "OEYMQ",
 		"category": "DRU",
 		"options": [
@@ -6458,7 +6458,7 @@
 	{
 		"special_id": "D54",
 		"statement": "En los últimos 6 meses ¿Con cuántas personas distintas ha mantenido relaciones sexuales orales, anales o vaginales?",
-		"order": 54,
+		"order": 96,
 		"type": "TNQ",
 		"category": "DRU",
 		"options": [
@@ -6472,7 +6472,7 @@
 	{
 		"special_id": "D53",
 		"statement": "¿Cuándo fue la última vez que compartió jeringuillas o material para inyectarse?",
-		"order": 53,
+		"order": 95,
 		"type": "OEYMQ",
 		"category": "DRU",
 		"options": [
@@ -6491,7 +6491,7 @@
 	{
 		"special_id": "D52",
 		"statement": "¿Alguna vez se ha inyectado drogas?",
-		"order": 52,
+		"order": 94,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6510,7 +6510,7 @@
 	{
 		"special_id": "D51",
 		"statement": "¿Hace cuánto tiempo terminó este periodo de abstinencia?",
-		"order": 51,
+		"order": 93,
 		"type": "OEYMQ",
 		"category": "DRU",
 		"options": [
@@ -6529,7 +6529,7 @@
 	{
 		"special_id": "D50",
 		"statement": "En los últimos 30 días. Desde que empezó a consumir ¿Ha estado alguna vez completamente abstinente de drogas y alcohol durante al menos un año?",
-		"order": 50,
+		"order": 92,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6548,7 +6548,7 @@
 	{
 		"special_id": "D49",
 		"statement": "¿Cuánta importancia tiene para usted lograr/mantener la abstinencia total de drogas?",
-		"order": 49,
+		"order": 91,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6582,7 +6582,7 @@
 	{
 		"special_id": "D48",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento (actual o adicional) para dejar de consumir drogas?",
-		"order": 48,
+		"order": 90,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6616,7 +6616,7 @@
 	{
 		"special_id": "D47",
 		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido por culpa de estos problemas relacionados con las drogas?",
-		"order": 47,
+		"order": 89,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6650,7 +6650,7 @@
 	{
 		"special_id": "D46",
 		"statement": "¿Cuántos días ha tenido estas u otras dificultades debido al consumo de drogas?",
-		"order": 46,
+		"order": 88,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -6664,7 +6664,7 @@
 	{
 		"special_id": "D45",
 		"statement": "¿El ansia o los impulsos de consumir drogas han supuesto un problema para usted?",
-		"order": 45,
+		"order": 87,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6683,7 +6683,7 @@
 	{
 		"special_id": "D44",
 		"statement": "Debido a las drogas ¿Ha tenido problemas médicos o psicológicos; O en el trabajo (colegio) o en el hogar, o se ha visto envuelto en discusiones o problemas con la ley?",
-		"order": 44,
+		"order": 86,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6702,7 +6702,7 @@
 	{
 		"special_id": "D43",
 		"statement": "¿Ha tenido algún problema para controlar, disminuir o dejar de consumir alguna droga; o ha empleado la mayor parte del día consumiendo alguna droga, recuperándose de sus efectos o intentando conseguirla?",
-		"order": 43,
+		"order": 85,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6721,7 +6721,7 @@
 	{
 		"special_id": "D42",
 		"statement": "¿Ha experimentado síntomas de abstinencia (se ha sentido enfermo) tras disminuir o dejar de consumir alguna droga?",
-		"order": 42,
+		"order": 84,
 		"type": "BQ",
 		"category": "DRU",
 		"options": [
@@ -6740,7 +6740,7 @@
 	{
 		"special_id": "D41",
 		"statement": "En los últimos 30 días ¿Cuánto dinero gastó en drogas?",
-		"order": 41,
+		"order": 83,
 		"type": "SMA",
 		"category": "DRU",
 		"options": [
@@ -6754,7 +6754,7 @@
 	{
 		"special_id": "D40",
 		"statement": "¿Cuándo consumió por última vez drogas ilegales o abusó de la medicación prescrita?",
-		"order": 40,
+		"order": 82,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -6768,7 +6768,7 @@
 	{
 		"special_id": "D39",
 		"statement": "En los últimos 30 días ¿Cuántos días ha consumido drogas ilegales o ha abusado de la medicación prescrita?",
-		"order": 39,
+		"order": 81,
 		"type": "DNQ",
 		"category": "DRU",
 		"options": [
@@ -6782,7 +6782,7 @@
 	{
 		"special_id": "D38",
 		"statement": "En los últimos 6 meses, en el mes de máximo consumo de drogas ilegales (y/o abuso de la medicación prescrita) ¿Con qué frecuencia estuvo consumiendo drogas?",
-		"order": 38,
+		"order": 80,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6816,7 +6816,7 @@
 	{
 		"special_id": "D37",
 		"statement": "¿Cuántos años ha consumido 3 o más días a la semana drogas ilegales (excluyendo alcohol) o ha abusado de la medicación prescrita?",
-		"order": 37,
+		"order": 79,
 		"type": "YNQ",
 		"category": "DRU",
 		"options": [
@@ -6830,7 +6830,7 @@
 	{
 		"special_id": "D36",
 		"statement": "¿Cuál de las siguientes sustancias es para usted la tercera más problemática y puede haberle llevado a iniciar el tratamiento?",
-		"order": 36,
+		"order": 76,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6899,7 +6899,7 @@
 	{
 		"special_id": "D36B",
 		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
-		"order": 36,
+		"order": 77,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6933,7 +6933,7 @@
 	{
 		"special_id": "D36C",
 		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
-		"order": 36,
+		"order": 78,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
@@ -6967,7 +6967,7 @@
 	{
 		"special_id": "D35",
 		"statement": "¿Cuál de las siguientes sustancias es para usted la segunda más problemática y puede haberle llevado a iniciar el tratamiento?",
-		"order": 35,
+		"order": 73,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -7036,7 +7036,7 @@
 	{
 		"special_id": "D35B",
 		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
-		"order": 35,
+		"order": 74,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
@@ -7070,7 +7070,7 @@
 	{
 		"special_id": "D35C",
 		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
-		"order": 35,
+		"order": 75,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
@@ -7104,7 +7104,7 @@
 	{
 		"special_id": "D34",
 		"statement": "¿Cuál de las siguientes sustancias es para usted la más problemática y puede haberle llevado a iniciar el tratamiento?",
-		"order": 34,
+		"order": 70,
 		"type": "SAMCQN",
 		"category": "DRU",
 		"options": [
@@ -7173,7 +7173,7 @@
 	{
 		"special_id": "D34B",
 		"statement": "¿De qué forma ha consumido dicha sustancia a lo largo de su vida?",
-		"order": 34,
+		"order": 71,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
@@ -7207,7 +7207,7 @@
 	{
 		"special_id": "D34C",
 		"statement": "¿De qué forma ha consumido esta sustancia en los últimos 30 días?",
-		"order": 34,
+		"order": 72,
 		"type": "MAMCQN",
 		"category": "DRU",
 		"options": [
