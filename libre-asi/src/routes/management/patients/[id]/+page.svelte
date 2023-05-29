@@ -54,13 +54,19 @@
 
 			const patientDate = new Date(patient.birthdate ?? '');
 
-			date = patientDate.toString();
+			date = patientDate.toLocaleDateString('en-US', {
+				day: '2-digit',
+				month: '2-digit',
+				year: 'numeric'
+			});
 		}
 
 		handleResponse(response.status, false);
 	}
 
 	async function handleSave() {
+		patient.birthdate = new Date(date);
+
 		const response = await fetchWithRefresh(API_URL + EDIT_PATIENT, {
 			method: 'PATCH',
 			body: JSON.stringify(patient)
@@ -72,8 +78,6 @@
 
 		handleResponse(response.status, false);
 	}
-
-	//TODO implement patient pictures
 </script>
 
 <main>
