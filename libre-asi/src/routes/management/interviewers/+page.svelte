@@ -245,6 +245,8 @@
 							if (newInterviewer.email == '') {
 								invalidEmail = true;
 							}
+						}}
+						on:input={function () {
 							validateForm();
 						}}
 					/>
@@ -262,9 +264,11 @@
 							if (newInterviewer.username == '') {
 								invalidUsername = true;
 							}
-							validateForm();
 						}}
 						bind:value={newInterviewer.username}
+						on:input={function () {
+							validateForm();
+						}}
 					/>
 				</div>
 
@@ -280,9 +284,11 @@
 							if (newInterviewer.personalID == '') {
 								invalidPersonalId = true;
 							}
-							validateForm();
 						}}
 						bind:value={newInterviewer.personalID}
+						on:input={function () {
+							validateForm();
+						}}
 					/>
 				</div>
 
@@ -299,9 +305,11 @@
 							if (newInterviewer.firstName == '') {
 								invalidFirstname = true;
 							}
-							validateForm();
 						}}
 						bind:value={newInterviewer.firstName}
+						on:input={function () {
+							validateForm();
+						}}
 					/>
 				</div>
 			</form>
