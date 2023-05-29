@@ -23,8 +23,7 @@
 		font-weight: 400;
 	}
 
-	.subtitle,
-	h7 {
+	.subtitle {
 		margin-top: 20px;
 		margin-bottom: 20px;
 		font-size: 18pt;

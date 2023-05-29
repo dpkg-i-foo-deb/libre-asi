@@ -49,8 +49,8 @@ export function handleResponse(code: number, allow401: boolean): boolean {
 			goto('/password-reset');
 			break;
 		case 504:
-			sendInfo('Se esperó demasiado', 'Intenta más tarde')
-			goto('/try-again-later')
+			sendInfo('Se esperó demasiado', 'Intenta más tarde');
+			goto('/try-again-later');
 			break;
 		default:
 			shouldNavigate = false;

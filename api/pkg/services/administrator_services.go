@@ -48,7 +48,6 @@ func LoginAdmin(a view.Administrator) (*models.JWTPair, *models.PasswordResetTk,
 	return &token, nil, nil
 }
 
-// TODO test this
 func GetAdministrators() ([]view.Administrator, error) {
 
 	var admins []view.Administrator
