@@ -164,7 +164,7 @@
 												multiple={false}
 												labelTitle="Upload files"
 												buttonLabel="Add Picture"
-												labelDescription="Only JPEG files are accepted."
+												labelDescription="Sólo son aceptados archivos JPEG."
 												accept={['.jpg', '.jpeg']}
 												status="complete"
 												style="font-size: 10px;"
