@@ -4434,7 +4434,7 @@
 	},
 	{
 		"special_id": "F32",
-		"statement": "¿Alguna vez ha estaado envuelto en cualquier otra situación amenazante para su vida?",
+		"statement": "¿Alguna vez ha estado envuelto en cualquier otra situación amenazante para su vida?",
 		"order": 32,
 		"type": "BQ",
 		"category": "FAM",
@@ -4590,7 +4590,7 @@
 	},
 	{
 		"special_id": "F23",
-		"statement": "¿Alguna vez algún conocido le ha agresido o ha abusado de usted físicamente?",
+		"statement": "¿Alguna vez algún conocido le ha agredido o ha abusado de usted físicamente?",
 		"order": 23,
 		"type": "BQ",
 		"category": "FAM",
