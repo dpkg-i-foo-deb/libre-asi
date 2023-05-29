@@ -3970,7 +3970,7 @@
 	{
 		"special_id": "F54",
 		"statement": "¿Actualmente se halla envuelto en un caso de custodia o está siendo investigado o tutelado por los servicios de protección del menor?",
-		"order": 54,
+		"order": 68,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -3989,7 +3989,7 @@
 	{
 		"special_id": "F53",
 		"statement": "¿Alguna vez le han quitado la patria potestad?",
-		"order": 53,
+		"order": 67,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4008,7 +4008,7 @@
 	{
 		"special_id": "F52",
 		"statement": "¿Alguna vez los servicios de protección al menor se han llevado a alguno de sus hijos del domicilio familiar?",
-		"order": 52,
+		"order": 66,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4027,7 +4027,7 @@
 	{
 		"special_id": "F51",
 		"statement": "¿Alguna vez ha sido investigado o ha estado tutelado por los servicios de protección del menor?",
-		"order": 51,
+		"order": 65,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4046,7 +4046,7 @@
 	{
 		"special_id": "F50",
 		"statement": "Actualmente ¿Necesita ayuda adicional en el cuidado de los niños para que usted pueda acudir al tratamiento de su abuso de sustancias, al trabajo/estudios o a buscar trabajo?",
-		"order": 50,
+		"order": 64,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4065,7 +4065,7 @@
 	{
 		"special_id": "F49",
 		"statement": "¿Cuánta importancia tiene ahora para usted el asesoramiento (p.e claves de padres) para ayudarle en la relación con estos niños? (menores de 18)",
-		"order": 49,
+		"order": 63,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4099,7 +4099,7 @@
 	{
 		"special_id": "F48",
 		"statement": "En los últimos 30 días ¿Cuánta dificultad ha tenido en la relación con los niños que han vivido con usted al menos un tiempo?",
-		"order": 48,
+		"order": 62,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4133,7 +4133,7 @@
 	{
 		"special_id": "F47",
 		"statement": "Actualmente ¿Cuánta necesidad tiene de servicios para tratar estos problemas de los niños?",
-		"order": 47,
+		"order": 61,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4167,7 +4167,7 @@
 	{
 		"special_id": "F46",
 		"statement": "¿Cuántos de los niños (que han vivido con usted) tienen un problema médico, de conducta o de aprendizaje grave y requieren cuidados, tratamiento o servicios especializados?",
-		"order": 46,
+		"order": 60,
 		"type": "TNQ",
 		"category": "FAM",
 		"options": [
@@ -4181,7 +4181,7 @@
 	{
 		"special_id": "F45",
 		"statement": "En los últimos 30 días ¿Algún niño (nietos, sobrinos, etc) menos de 18 años ha vivido con usted al menos un tiempo?",
-		"order": 45,
+		"order": 59,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4200,7 +4200,7 @@
 	{
 		"special_id": "F44",
 		"statement": "En los últimos 30 días ¿Cuántos de sus hijos (menores de 18 años) han vivido con usted al menos un tiempo?",
-		"order": 44,
+		"order": 58,
 		"type": "TNQ",
 		"category": "FAM",
 		"options": [
@@ -4214,7 +4214,7 @@
 	{
 		"special_id": "F43",
 		"statement": "¿Cuántos de sus hijos se hayan actualmente en régimen de acogimiento por orden judicial?",
-		"order": 43,
+		"order": 57,
 		"type": "TNQ",
 		"category": "FAM",
 		"options": [
@@ -4228,7 +4228,7 @@
 	{
 		"special_id": "F42",
 		"statement": "¿Tiene algún proceso de custodia abierto con la madre, padre o cualquier otro familiar?",
-		"order": 42,
+		"order": 56,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4247,7 +4247,7 @@
 	{
 		"special_id": "F41",
 		"statement": "¿Qué edades tienen sus hijos vivos, comenzando por el mayor?",
-		"order": 41,
+		"order": 55,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4306,7 +4306,7 @@
 	{
 		"special_id": "F40",
 		"statement": "¿Cuántos hijos ha tenido o ha adoptado?",
-		"order": 40,
+		"order": 54,
 		"type": "TNQ",
 		"category": "FAM",
 		"options": [
@@ -4320,7 +4320,7 @@
 	{
 		"special_id": "F39",
 		"statement": "¿Cuánta importante tiene ahora para usted el tratamiento o asesoramiento (actual o adicional) para los sentimientos, pensamientos u otras reacciones relacionadas con estos sucesos?",
-		"order": 39,
+		"order": 53,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4354,7 +4354,7 @@
 	{
 		"special_id": "F38",
 		"statement": "En los últimos 30 días ¿Cuánta molestia o preocupación ha tenido por sentimientos, pensamientos u otras reacciones relacionadas con estos acontecimientos?",
-		"order": 38,
+		"order": 52,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4388,7 +4388,7 @@
 	{
 		"special_id": "F37",
 		"statement": "¿Cuándo sucedió por última vez?",
-		"order": 37,
+		"order": 51,
 		"type": "OEYMQ",
 		"category": "FAM",
 		"options": [
@@ -4407,7 +4407,7 @@
 	{
 		"special_id": "F36",
 		"statement": "¿Qué edad tenía la primera vez que sucedió?",
-		"order": 36,
+		"order": 50,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4421,7 +4421,7 @@
 	{
 		"special_id": "F35",
 		"statement": "¿Alguna vez ha visto cómo mataban, atracaban, agredían o herían gravemente a alguien?",
-		"order": 35,
+		"order": 49,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4440,7 +4440,7 @@
 	{
 		"special_id": "F34",
 		"statement": "¿Cuándo sucedió por última vez?",
-		"order": 34,
+		"order": 48,
 		"type": "OEYMQ",
 		"category": "FAM",
 		"options": [
@@ -4459,7 +4459,7 @@
 	{
 		"special_id": "F33",
 		"statement": "¿Qué edad tenía la primera vez que sucedió?",
-		"order": 33,
+		"order": 47,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4473,7 +4473,7 @@
 	{
 		"special_id": "F32",
 		"statement": "¿Alguna vez ha estado envuelto en cualquier otra situación amenazante para su vida?",
-		"order": 32,
+		"order": 46,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4492,7 +4492,7 @@
 	{
 		"special_id": "F31",
 		"statement": "¿Cuándo sucedió por última vez?",
-		"order": 31,
+		"order": 45,
 		"type": "OEYMQ",
 		"category": "FAM",
 		"options": [
@@ -4511,7 +4511,7 @@
 	{
 		"special_id": "F30",
 		"statement": "¿Qué edad tenía la primera vez que sucedió?",
-		"order": 30,
+		"order": 44,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4525,7 +4525,7 @@
 	{
 		"special_id": "F29",
 		"statement": "¿Alguna vez ha sido víctima de un crimen violento como un atraco o agresión?",
-		"order": 29,
+		"order": 43,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4544,7 +4544,7 @@
 	{
 		"special_id": "F28",
 		"statement": "¿Cuándo sucedió por última vez?",
-		"order": 28,
+		"order": 42,
 		"type": "OEYMQ",
 		"category": "FAM",
 		"options": [
@@ -4563,7 +4563,7 @@
 	{
 		"special_id": "F27",
 		"statement": "¿Qué edad tenía la primera vez que sucedió?",
-		"order": 27,
+		"order": 41,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4577,7 +4577,7 @@
 	{
 		"special_id": "F26",
 		"statement": "¿Alguna vez un conocido le ha agresido o ha abusado de usted sexualmente?",
-		"order": 26,
+		"order": 40,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4596,7 +4596,7 @@
 	{
 		"special_id": "F25",
 		"statement": "¿Cuándo sucedió por última vez?",
-		"order": 25,
+		"order": 39,
 		"type": "OEYMQ",
 		"category": "FAM",
 		"options": [
@@ -4615,7 +4615,7 @@
 	{
 		"special_id": "F24",
 		"statement": "¿Qué edad tenía la primera vez que sucedió?",
-		"order": 24,
+		"order": 38,
 		"type": "SAQ",
 		"category": "FAM",
 		"options": [
@@ -4629,7 +4629,7 @@
 	{
 		"special_id": "F23",
 		"statement": "¿Alguna vez algún conocido le ha agredido o ha abusado de usted físicamente?",
-		"order": 23,
+		"order": 37,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4648,7 +4648,7 @@
 	{
 		"special_id": "F22",
 		"statement": "¿Cuánta satisfacción le ha producido su forma de emplear el tiempo libre?",
-		"order": 22,
+		"order": 36,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4682,7 +4682,7 @@
 	{
 		"special_id": "F21",
 		"statement": "¿A menudo, ha estado aburrido o ha tenido dificultades para pasar simplemente el rato?",
-		"order": 21,
+		"order": 35,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4701,7 +4701,7 @@
 	{
 		"special_id": "F20",
 		"statement": "¿Ha realizado algún trabajo voluntariado?",
-		"order": 20,
+		"order": 34,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4720,7 +4720,7 @@
 	{
 		"special_id": "F19",
 		"statement": "¿Ha acudido a servicios religiosos o a actividades promovidas por su comunidad religiosa?",
-		"order": 19,
+		"order": 33,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4739,7 +4739,7 @@
 	{
 		"special_id": "F18",
 		"statement": "¿Es importante para usted tener relaciones cercanas con alguien?",
-		"order": 18,
+		"order": 32,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4758,7 +4758,7 @@
 	{
 		"special_id": "F17",
 		"statement": "¿Se siente nervioso o incómodo cuando está con otras personas?",
-		"order": 17,
+		"order": 31,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4777,7 +4777,7 @@
 	{
 		"special_id": "F16",
 		"statement": "¿Le resulta difícil hablar de sus sentimientos o problemas incluso con las personas más cercanas?",
-		"order": 16,
+		"order": 30,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4796,7 +4796,7 @@
 	{
 		"special_id": "F15",
 		"statement": "¿Cuánta importancia tiene ahora para usted el tratamiento o asesoramiento (actual o adicional) para sus problemas de relación con otros adultos?",
-		"order": 15,
+		"order": 29,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4830,7 +4830,7 @@
 	{
 		"special_id": "F14",
 		"statement": "En los últimos 30 días ¿Cuánta preocupación ha tenido debido a problemas en sus relaciones con otros adultos?",
-		"order": 14,
+		"order": 28,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4864,7 +4864,7 @@
 	{
 		"special_id": "F13",
 		"statement": "En global en los últimos 30 días ¿Cuánta satisfacción le han proporcionado sus relaciones con otros adultos?",
-		"order": 13,
+		"order": 27,
 		"type": "SAMCQN",
 		"category": "FAM",
 		"options": [
@@ -4898,7 +4898,7 @@
 	{
 		"special_id": "F12",
 		"statement": "Aparte de su pareja, familiares adultos y amigos íntimos ¿Hay otras personas con las que realmente puede contar si necesita ayuda?",
-		"order": 12,
+		"order": 26,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4917,7 +4917,7 @@
 	{
 		"special_id": "F11",
 		"statement": "En los últimos 30 días ¿Alguna de las relaciones con su pareja, parientes o amigos acabó en empujones/golpes, o arrojando objetos?",
-		"order": 11,
+		"order": 25,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4936,7 +4936,7 @@
 	{
 		"special_id": "F10",
 		"statement": "¿Tiene actualmente una orden de alejamiento de alguna persona?",
-		"order": 10,
+		"order": 24,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4955,7 +4955,7 @@
 	{
 		"special_id": "F9A",
 		"statement": "En los últimos 30 días. Si necesita ayuda ¿Puede contar con su pareja?",
-		"order": 9,
+		"order": 21,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4974,7 +4974,7 @@
 	{
 		"special_id": "F9B",
 		"statement": "En los últimos 30 días. Si necesita ayuda ¿Puede contar con familiares adultos?",
-		"order": 9,
+		"order": 22,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -4993,7 +4993,7 @@
 	{
 		"special_id": "F9C",
 		"statement": "En los últimos 30 días. Si necesita ayuda ¿Puede contar con amigos íntimos?",
-		"order": 9,
+		"order": 23,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5012,7 +5012,7 @@
 	{
 		"special_id": "F8A",
 		"statement": "En los últimos 30 días. Tiene su pareja algún problema con alcohol o las drogas actualmente?",
-		"order": 8,
+		"order": 18,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5031,7 +5031,7 @@
 	{
 		"special_id": "F8B",
 		"statement": "¿En los últimos 30 días. Tienen sus familiares adultos algún problema con el alcohol o las drogas actualmente?",
-		"order": 8,
+		"order": 19,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5050,7 +5050,7 @@
 	{
 		"special_id": "F8C",
 		"statement": "¿En los últimos 30 días. Tienen sus amigos íntimos algún problema con el alcohol o las drogas actualmente?",
-		"order": 8,
+		"order": 20,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5069,7 +5069,7 @@
 	{
 		"special_id": "F7A",
 		"statement": "En los últimos 30 días ¿Ha tenido discusiones con su pareja?",
-		"order": 7,
+		"order": 15,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5088,7 +5088,7 @@
 	{
 		"special_id": "F7B",
 		"statement": "En los últimos 30 días ¿Ha tenido discusiones con familiares adultos?",
-		"order": 7,
+		"order": 16,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5107,7 +5107,7 @@
 	{
 		"special_id": "F7C",
 		"statement": "En los últimos 30 días ¿Ha tenido discusiones con amigos íntimos?",
-		"order": 7,
+		"order": 17,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5126,7 +5126,7 @@
 	{
 		"special_id": "F6A",
 		"statement": "En los últimos 30 días ¿Ha tenido problemas de relación con su pareja?",
-		"order": 6,
+		"order": 12,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5145,7 +5145,7 @@
 	{
 		"special_id": "F6B",
 		"statement": "En los últimos 30 días ¿Ha tenido problemas de relación con familiares adultos?",
-		"order": 6,
+		"order": 13,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5164,7 +5164,7 @@
 	{
 		"special_id": "F6C",
 		"statement": "En los últimos 30 días ¿Ha tenido problemas de relación con sus amigos íntimos?",
-		"order": 6,
+		"order": 14,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5183,7 +5183,7 @@
 	{
 		"special_id": "F5A",
 		"statement": "En los últimos 30 días ¿Ha hablado con su pareja sobre sentimientos o problemas?",
-		"order": 5,
+		"order": 9,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5202,7 +5202,7 @@
 	{
 		"special_id": "F5B",
 		"statement": "En los últimos 30 días ¿Ha hablado con familiares adultos sobre sentimientos o problemas?",
-		"order": 5,
+		"order": 10,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5221,7 +5221,7 @@
 	{
 		"special_id": "F5C",
 		"statement": "En los últimos 30 días ¿Ha hablado con amigos íntimos sobre sentimientos o problemas?",
-		"order": 5,
+		"order": 11,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5240,7 +5240,7 @@
 	{
 		"special_id": "F4A",
 		"statement": "En los últimos 30 días ¿Ha tenido algún contacto como llamadas telefónicas con su pareja?",
-		"order": 4,
+		"order": 6,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5259,7 +5259,7 @@
 	{
 		"special_id": "F4B",
 		"statement": "En los últimos 30 días ¿Ha tenido algún contacto como llamadas telefónicas con familiares adultos?",
-		"order": 4,
+		"order": 7,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5278,7 +5278,7 @@
 	{
 		"special_id": "F4C",
 		"statement": "En los últimos 30 días ¿Ha tenido algún contacto como llamadas telefónicas con sus amigos íntimos?",
-		"order": 4,
+		"order": 8,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5316,7 +5316,7 @@
 	{
 		"special_id": "F3B",
 		"statement": "En los últimos 30 días ¿Ha pasado tiempo (en persona) con cualquier familiar adulto?",
-		"order": 3,
+		"order": 4,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
@@ -5335,7 +5335,7 @@
 	{
 		"special_id": "F3C",
 		"statement": "En los últimos 30 días ¿Ha pasado tiempo (en persona) con cualquier amigo íntimo?",
-		"order": 3,
+		"order": 5,
 		"type": "BQ",
 		"category": "FAM",
 		"options": [
