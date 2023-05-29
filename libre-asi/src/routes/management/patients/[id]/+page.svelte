@@ -162,8 +162,8 @@
 											<FileUploader
 												bind:files
 												multiple={false}
-												labelTitle="Upload files"
-												buttonLabel="Add Picture"
+												labelTitle="Subir archivos"
+												buttonLabel="Agregar fotos"
 												labelDescription="Sólo son aceptados archivos JPEG."
 												accept={['.jpg', '.jpeg']}
 												status="complete"
