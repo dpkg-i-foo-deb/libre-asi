@@ -288,11 +288,6 @@
 		height: 50px;
 	}
 
-	.button-container {
-		padding-top: 10px;
-		float: left;
-	}
-
 	.invalid-credentials {
 		padding-bottom: 10px;
 	}
@@ -302,6 +297,8 @@
 	}
 
 	.button-container {
+		padding-top: 10px;
+		float: left;
 		display: flex;
 		margin-top: 25px;
 		flex-direction: row;
