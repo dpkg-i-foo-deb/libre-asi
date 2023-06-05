@@ -1,3 +1,7 @@
+# This project has been archived
+
+A new implementation will be developed aiming for a more stable design as well as making sure most parts of the architecture are testable and modular
+
 # Context
 The addiction severity index. Created by Thomas McLellan, Ph. D. and colleagues at the University of Pennsylvania in 1980. It is an instrument used to realise a multidimensional analysis of a patient, this is done through a semi structured interview where multiple areas are evaluated. It is a very useful tool when it comes to addiction treatment planification
 
